@@ -7,10 +7,16 @@ import {
   UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import { Button } from '@/app/ui/button';
-
+import { createInvoice } from '@/app/lib/actions';
+/*
+Server Action提供有效的安全解決方案，
+防止不同類型的攻擊、保護您的資料並確保授權存取。
+伺服器操作透過 POST 請求、加密閉包、嚴格輸入檢查、錯誤訊息雜湊和主機限制等技術來實現這一點，
+所有這些技術一起工作可以顯著增強應用程式的安全性。
+ */
 export default function Form({ customers }: { customers: CustomerField[] }) {
   return (
-    <form>
+    <form action={createInvoice}>
       <div className="rounded-md bg-gray-50 p-4 md:p-6">
         {/* Customer Name */}
         <div className="mb-4">
