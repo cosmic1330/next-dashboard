@@ -8,4 +8,7 @@ For more information, see the [course curriculum](https://nextjs.org/learn) on t
 https://oldmo860617.medium.com/%E5%BE%9E-next-js-13-%E8%AA%8D%E8%AD%98-react-server-components-37c2bad96d90
 
 ## Current Progress
-https://nextjs.org/learn/dashboard-app/fetching-data
+https://nextjs.org/learn/dashboard-app/improving-accessibility
+
+## test
+https://web.dev/learn/accessibility/
