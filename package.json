@@ -7,7 +7,8 @@
     "prettier:check": "prettier --check --ignore-unknown .",
     "start": "next start",
     "lint": "next lint",
-    "seed": "node -r dotenv/config ./scripts/seed.js"
+    "seed": "node -r dotenv/config ./scripts/seed.js",
+    "turbo": "next dev --turbo --port 3001"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",

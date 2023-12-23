@@ -12,3 +12,6 @@ https://nextjs.org/learn/dashboard-app/improving-accessibility
 
 ## test
 https://web.dev/learn/accessibility/
+
+## IT 邦幫忙鐵人賽 Next13
+https://ithelp.ithome.com.tw/articles/10316587
