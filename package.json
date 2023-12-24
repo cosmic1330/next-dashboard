@@ -5,13 +5,14 @@
     "dev": "next dev",
     "prettier": "prettier --write --ignore-unknown .",
     "prettier:check": "prettier --check --ignore-unknown .",
-    "start": "next start",
+    "start": "next start --port 8080",
     "lint": "next lint",
     "seed": "node -r dotenv/config ./scripts/seed.js",
     "turbo": "next dev --turbo --port 3001"
   },
   "dependencies": {
     "@heroicons/react": "^2.0.18",
+    "@splinetool/runtime": "^1.0.16",
     "@tailwindcss/forms": "^0.5.7",
     "@types/node": "20.5.7",
     "@vercel/postgres": "^0.5.0",
@@ -23,6 +24,7 @@
     "postcss": "8.4.31",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "swr": "^2.2.4",
     "tailwindcss": "3.3.3",
     "typescript": "5.2.2",
     "use-debounce": "^10.0.0",
@@ -38,7 +40,8 @@
     "eslint-config-next": "^14.0.0",
     "eslint-config-prettier": "9.0.0",
     "prettier": "^3.0.3",
-    "prettier-plugin-tailwindcss": "0.5.4"
+    "prettier-plugin-tailwindcss": "0.5.4",
+    "prisma": "^5.7.1"
   },
   "engines": {
     "node": ">=18.17.0"
