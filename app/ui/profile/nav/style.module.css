@@ -1,0 +1,28 @@
+.link:before {
+  @apply lg:absolute
+    lg:right-0 
+    lg:top-1/2
+    lg:block
+    lg:h-5
+    lg:w-5
+    lg:translate-x-7
+    lg:translate-y-[-50%]
+    lg:rotate-45
+    lg:rounded-md
+    lg:bg-white
+    lg:content-[''];
+}
+
+.link:after {
+  @apply lg:absolute
+    lg:right-0 
+    lg:top-1/2
+    lg:block
+    lg:h-1.5
+    lg:w-1.5
+    lg:translate-x-6
+    lg:translate-y-[-50%]
+    lg:rounded-xl
+    lg:bg-[#3b82f6]
+    lg:content-[''];
+}
