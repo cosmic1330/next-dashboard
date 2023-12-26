@@ -15,3 +15,6 @@ https://web.dev/learn/accessibility/
 
 ## IT 邦幫忙鐵人賽 Next13
 https://ithelp.ithome.com.tw/articles/10316587
+
+## Google OAuth2.0
+https://tw.video.search.yahoo.com/search/video?fr=mcafee&ei=UTF-8&p=Google+next-auth+demo&type=E210TW91215G0#id=4&vid=b906a1c2fcf4e388f261442d1ed121d4&action=click
