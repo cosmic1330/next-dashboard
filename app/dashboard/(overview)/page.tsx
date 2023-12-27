@@ -2,6 +2,7 @@ import { fetchCardData, fetchLatestInvoices } from '@/app/lib/data';
 import { Card } from '@/app/ui/dashboard/cards';
 import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
 import RevenueChart from '@/app/ui/dashboard/revenue-chart';
+import SessionDataProvider from '@/app/ui/session/provider';
 import { lusitana } from '@/app/ui/fonts';
 import { RevenueChartSkeleton } from '@/app/ui/skeletons';
 import { Suspense } from 'react';
@@ -45,6 +46,7 @@ export default async function Page() {
         </Suspense>
         <LatestInvoices latestInvoices={latestInvoices} />
       </div>
+      <SessionDataProvider />
     </main>
   );
 }
