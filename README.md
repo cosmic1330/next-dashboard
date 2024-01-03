@@ -23,5 +23,11 @@ https://tw.video.search.yahoo.com/search/video?fr=mcafee&ei=UTF-8&p=Google+next-
 
 ## SWR
 https://dev.to/skipperhoa/create-a-example-handling-data-fetching-with-swr-in-nextjs-13-1997
+https://swr.vercel.app/docs/with-nextjs
 
 ## 比較jason server與radis作為持久的記憶體資料庫服務
+
+## Next.js、Prisma 和 Vercel Postgres
+https://vercel.com/guides/nextjs-prisma-postgres
+https://docs.hanko.io/tutorials/nextjs-todo
+
