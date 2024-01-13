@@ -1,4 +1,4 @@
-import SideNav from '@/app/ui/dashboard/sidenav';
+import SideNav from '@/app/dashboard/(ui)/dashboard/sidenav';
 // on navigation, only the page components update, the layout won't re-render.
 export default function Layout({ children }: { children: React.ReactNode }) {
   return (
