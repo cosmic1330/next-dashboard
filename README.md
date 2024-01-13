@@ -31,3 +31,5 @@ https://swr.vercel.app/docs/with-nextjs
 https://vercel.com/guides/nextjs-prisma-postgres
 https://docs.hanko.io/tutorials/nextjs-todo
 
+## Restful API
+https://www.youtube.com/watch?v=-MFiza7ZRzs
