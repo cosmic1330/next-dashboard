@@ -33,7 +33,7 @@ function createRedisInstance({ port, host } = getRedisConfiguration()) {
     redis.on('error', (error: unknown) => {
       console.warn('[Redis] Error connecting', error);
     });
-
+    console.log('[Redis] Redis instance created');
     return redis;
   } catch (e) {
     throw new Error(`[Redis] Could not create a Redis instance`);
