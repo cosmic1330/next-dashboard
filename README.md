@@ -16,5 +16,20 @@ https://web.dev/learn/accessibility/
 ## IT 邦幫忙鐵人賽 Next13
 https://ithelp.ithome.com.tw/articles/10316587
 
+
+
 ## Google OAuth2.0
 https://tw.video.search.yahoo.com/search/video?fr=mcafee&ei=UTF-8&p=Google+next-auth+demo&type=E210TW91215G0#id=4&vid=b906a1c2fcf4e388f261442d1ed121d4&action=click
+
+## SWR
+https://dev.to/skipperhoa/create-a-example-handling-data-fetching-with-swr-in-nextjs-13-1997
+https://swr.vercel.app/docs/with-nextjs
+
+## 比較jason server與radis作為持久的記憶體資料庫服務
+
+## Next.js、Prisma 和 Vercel Postgres
+https://vercel.com/guides/nextjs-prisma-postgres
+https://docs.hanko.io/tutorials/nextjs-todo
+
+## Restful API
+https://www.youtube.com/watch?v=-MFiza7ZRzs

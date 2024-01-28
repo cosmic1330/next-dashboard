@@ -1,12 +1,11 @@
-import Pagination from '@/app/ui/invoices/pagination';
-import Search from '@/app/ui/search';
-import Table from '@/app/ui/invoices/table';
-import { CreateInvoice } from '@/app/ui/invoices/buttons';
-import { lusitana } from '@/app/ui/fonts';
-import { Suspense } from 'react';
-import { InvoicesTableSkeleton } from '@/app/ui/skeletons';
+import { lusitana } from '@/app/(ui)/fonts';
+import { CreateInvoice } from '@/app/dashboard/(ui)/invoices/buttons';
+import Table from '@/app/dashboard/(ui)/invoices/table';
+import Search from '@/app/dashboard/(ui)/search';
+import { InvoicesTableSkeleton } from '@/app/dashboard/(ui)/skeletons';
 import { Metadata } from 'next';
- 
+import { Suspense } from 'react';
+
 export const metadata: Metadata = {
   title: 'Invoices',
 };
@@ -30,7 +29,7 @@ export default async function Page({
         <Search placeholder="Search invoices..." />
         <CreateInvoice />
       </div>
-       <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
+      <Suspense key={query + currentPage} fallback={<InvoicesTableSkeleton />}>
         <Table query={query} currentPage={currentPage} />
       </Suspense>
       <div className="mt-5 flex w-full justify-center">

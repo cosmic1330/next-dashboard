@@ -1,6 +1,6 @@
-import AcmeLogo from '@/app/ui/acme-logo';
-import LoginForm from '@/app/ui/login-form';
-import { SignIn } from '../ui/login/SinginOtherButton';
+import AcmeLogo from '@/app/(ui)/acme-logo';
+import LoginForm from '@/app/login/(ui)/login-form';
+import { SignIn } from './(ui)/SinginOtherButton';
 
 export default function LoginPage() {
   return (

@@ -1,10 +1,10 @@
-import { fetchCardData, fetchLatestInvoices } from '@/app/lib/data';
-import { Card } from '@/app/ui/dashboard/cards';
-import LatestInvoices from '@/app/ui/dashboard/latest-invoices';
-import RevenueChart from '@/app/ui/dashboard/revenue-chart';
-import SessionDataProvider from '@/app/ui/session/provider';
-import { lusitana } from '@/app/ui/fonts';
-import { RevenueChartSkeleton } from '@/app/ui/skeletons';
+import { lusitana } from '@/app/(ui)/fonts';
+import { fetchCardData, fetchLatestInvoices } from '@/app/dashboard/(lib)/data';
+import { Card } from '@/app/dashboard/(ui)/dashboard/cards';
+import LatestInvoices from '@/app/dashboard/(ui)/dashboard/latest-invoices';
+import RevenueChart from '@/app/dashboard/(ui)/dashboard/revenue-chart';
+import SessionDataProvider from '@/app/dashboard/(ui)/session/provider';
+import { RevenueChartSkeleton } from '@/app/dashboard/(ui)/skeletons';
 import { Suspense } from 'react';
 /*
 Server Components 無法使用 props、state、event listeners 

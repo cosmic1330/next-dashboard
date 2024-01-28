@@ -1,7 +1,7 @@
-import { inter, lusitana } from '@/app/ui/fonts';
-import '@/app/ui/global.css';
+import { inter, lusitana } from '@/app/(ui)/fonts';
+import '@/app/(ui)/global.css';
 import { Metadata } from 'next';
- 
+
 export const metadata: Metadata = {
   title: {
     template: '%s | Acme Dashboard',
@@ -18,7 +18,9 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} ${lusitana.className} antialiased`}>{children}</body>
+      <body className={`${inter.className} ${lusitana.className} antialiased`}>
+        {children}
+      </body>
     </html>
   );
 }
