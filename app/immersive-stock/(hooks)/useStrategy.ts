@@ -97,6 +97,8 @@ export default function useStrategy() {
     1. 找趨勢往上
     2. obv破低 價沒破低
     3. k沒破低
+    4. 滿足條件做多: 整體趨勢向上，前段為盤整，為做多位置 
+    5. 滿足條件做空: 看趨勢向下，且觀察日後未站上月線為做空位置
    */
   const strategy3 = useCallback((data: FinialDataType[]) => {
     const lastIndex = data.length - 1;
@@ -105,12 +107,11 @@ export default function useStrategy() {
       data[lastIndex]?.v > 2000 &&
       data[lastIndex]?.l > data[lastIndex - 1]?.l &&
       data[lastIndex]?.h > data[lastIndex - 1]?.h &&
-      data[lastIndex]?.c > data[lastIndex]?.o &&
       data[lastIndex]?.c > data[lastIndex - 1]?.h &&
+      data[lastIndex]?.c > data[lastIndex]?.o &&
       // Boll
       // 1. 昨日K棒穿過布林底線
-      (data[lastIndex - 1]?.l < data[lastIndex - 1]?.bollLb ||
-        data[lastIndex - 2]?.l < data[lastIndex - 2]?.bollLb) &&
+      data[lastIndex - 1]?.l < data[lastIndex - 1]?.bollLb &&
       // 2. 今日K棒在完整布林底線上方
       data[lastIndex]?.c > data[lastIndex]?.bollLb &&
       data[lastIndex]?.l > data[lastIndex]?.bollLb &&

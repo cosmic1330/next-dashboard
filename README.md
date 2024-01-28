@@ -33,3 +33,6 @@ https://docs.hanko.io/tutorials/nextjs-todo
 
 ## Restful API
 https://www.youtube.com/watch?v=-MFiza7ZRzs
+
+## TradingView
+https://www.tradingview.com/widget/advanced-chart/
