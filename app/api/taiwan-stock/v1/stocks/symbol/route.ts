@@ -25,36 +25,31 @@ export type FinialDataType = {
   ma5: number;
   ma10: number;
   ma20: number;
+  ma60: number;
   bollMa: number;
   bollUb: number;
   bollLb: number;
 };
 
 export const GET = async (req: Request) => {
+  const { searchParams } = new URL(req.url);
+  const stockId = searchParams.get('stockId');
+  if (!stockId)
+    return NextResponse.json({ error: 'stockId is required' }, { status: 400 });
   try {
-    const id = req.url.split('/')[req.url.split('/').length - 1];
-
-    const { searchParams } = new URL(req.url);
-    const stockId = searchParams.get('stockId');
-    if (!stockId)
-      return NextResponse.json(
-        { error: 'stockId is required' },
-        { status: 400 },
-      );
-    // build a key (it does not matter how)
+    // const id = req.url.split('/')[req.url.split('/').length - 1];
     const key = `yahoo-${stockId}`;
-
-    // try fetch cached data
-    let cached = await redis.get(key);
-
-    // if cached, we're good!
-    if (cached) {
-      cached = JSON.parse(cached);
-      return NextResponse.json(cached, {
-        headers: { 'x-cache': 'HIT' },
-      });
+    if (redis) {
+      // try fetch cached data
+      let cached = await redis?.get(key);
+      // if cached, we're good!
+      if (cached) {
+        cached = JSON.parse(cached);
+        return NextResponse.json(cached, {
+          headers: { 'x-cache': 'HIT' },
+        });
+      }
     }
-
     // fetch fresh data from the DB
     let res = await fetch(
       `https://tw.quote.finance.yahoo.net/quote/q?type=ta&perd=d&mkt=10&sym=${stockId}&v=1&callback=`,
@@ -63,7 +58,7 @@ export const GET = async (req: Request) => {
     let parse = JSON.parse(res);
     let ta = parse.ta as ItemType;
 
-    // 需要回測請註解cache，填入要回測的天數
+    // test:需要回測請註解cache，填入要回測的天數
     // ta = ta.slice(0, -50);
 
     // calculate technical analysis
@@ -78,6 +73,7 @@ export const GET = async (req: Request) => {
     let ma5Data = ma.init(ta[0], 5);
     let ma10Data = ma.init(ta[0], 10);
     let ma20Data = ma.init(ta[0], 20);
+    let ma60Data = ma.init(ta[0], 60);
     let bollData = boll.init(ta[0]);
     let finallyData = [
       {
@@ -95,6 +91,7 @@ export const GET = async (req: Request) => {
         ma5: ma5Data.ma,
         ma10: ma10Data.ma,
         ma20: ma20Data.ma,
+        ma60: ma60Data.ma,
         bollMa: bollData.bollMa,
         bollUb: bollData.bollUb,
         bollLb: bollData.bollLb,
@@ -123,27 +120,24 @@ export const GET = async (req: Request) => {
         ma5: ma5Data.ma,
         ma10: ma10Data.ma,
         ma20: ma20Data.ma,
+        ma60: ma60Data.ma,
         bollMa: bollData.bollMa,
         bollUb: bollData.bollUb,
         bollLb: bollData.bollLb,
       });
     }
 
-    // cache data setting an expiry of 1 hour
-    // this means that the cached data will remain alive for 60 minutes
-    // after that, we'll get fresh data from the DB
-    const MAX_AGE = 60_000 * 60; // 1 hour
-    const EXPIRY_MS = `PX`; // milliseconds
+    if (redis) {
+      const MAX_AGE = 60_000 * 60; // 1 hour
+      const EXPIRY_MS = `PX`; // milliseconds
+      await redis?.set(key, JSON.stringify(finallyData), EXPIRY_MS, MAX_AGE);
+    }
 
-    // cache data
-    await redis.set(key, JSON.stringify(finallyData), EXPIRY_MS, MAX_AGE);
-
-    // return data to client
     return NextResponse.json(finallyData, {
       headers: { 'x-cache': 'MISS' },
     });
   } catch (error) {
-    console.error('Database Error:', error);
+    console.error('Symbol API Error:', error);
     return NextResponse.json(
       { error: 'Failed to fetch stock data.' },
       { status: 500 },

@@ -125,38 +125,43 @@ export default function useStrategy() {
     }
   }, []);
 
-  // 空:趨勢向下跌破五日線挑戰布林中線
+  // KD選股
   /* 
-    1. 找趨勢往下
+    日線
+    1. 近期KD黃金交叉
+    2. 20MA趨勢往上
+    3. 大於60MA
+    4. 站上5MA
+    5. 吞噬前日低價
    */
   const strategy4 = useCallback((data: FinialDataType[]) => {
     const lastIndex = data.length - 1;
     if (
       // EMA
-      data[lastIndex]?.v > 3000 &&
-      data[lastIndex]?.l < data[lastIndex - 1]?.l &&
-      data[lastIndex]?.h > data[lastIndex]?.ma20 &&
-      data[lastIndex]?.c < data[lastIndex]?.ma20 &&
-      data[lastIndex]?.c < data[lastIndex]?.o &&
-      // OBV
-      slope([
-        data[lastIndex - 2].obv,
-        data[lastIndex - 1].obv,
-        data[lastIndex].obv,
-      ]) < 0 &&
-      // MACD
-      data[lastIndex]?.osc < data[lastIndex - 1]?.osc &&
-      data[lastIndex]?.dif < data[lastIndex - 1]?.dif &&
-      data[lastIndex]?.osc < 0 &&
+      data[lastIndex]?.v > 1000 &&
+      data[lastIndex]?.c > data[lastIndex - 2]?.l &&
+      data[lastIndex]?.l > data[lastIndex - 1]?.l &&
+      data[lastIndex]?.c > data[lastIndex - 1]?.h &&
+      data[lastIndex]?.c > data[lastIndex]?.ma60 &&
+      data[lastIndex]?.c > data[lastIndex]?.ma20 &&
+      data[lastIndex]?.c > data[lastIndex]?.ma5 &&
+      // MACD 黃金交叉
+      // data[lastIndex]?.dif > data[lastIndex]?.macd &&
+      // data[lastIndex - 1]?.dif < data[lastIndex - 1]?.macd &&
+      // data[lastIndex]?.osc > 0 &&
       // KD
-      data[lastIndex]?.k < data[lastIndex - 1]?.k &&
-      data[lastIndex]?.d < data[lastIndex - 1]?.d &&
-      data[lastIndex]?.k > 20
+      ((data[lastIndex]?.k > data[lastIndex]?.d &&
+        data[lastIndex - 1]?.k < data[lastIndex - 1]?.d)||
+        (data[lastIndex-1]?.k > data[lastIndex-1]?.d &&
+          data[lastIndex - 2]?.k < data[lastIndex - 2]?.d)||
+          (data[lastIndex-2]?.k > data[lastIndex-2]?.d &&
+            data[lastIndex - 3]?.k < data[lastIndex - 3]?.d))
     ) {
       return true;
     }
   }, []);
 
+  // ToDo 短空:趨勢向下大量跌破日線5MA挑戰布林中線
   return {
     strategy1,
     strategy2,

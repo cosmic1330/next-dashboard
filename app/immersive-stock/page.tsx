@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
 import { fetchStockList } from './(lib)/data';
-import Content from './(ui)/content';
+import Controller from './(ui)/controller';
 
 export default async function Page() {
   const stocks = await fetchStockList();
@@ -8,7 +8,7 @@ export default async function Page() {
     <main>
       <p>Immersive Stock Page</p>
       <Suspense fallback={'loading'}>
-        <Content stocks={stocks} />
+        <Controller stocks={stocks} />
       </Suspense>
     </main>
   );

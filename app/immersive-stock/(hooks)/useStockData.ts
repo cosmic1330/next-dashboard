@@ -25,10 +25,14 @@ export default function useStockData(item: StocksType) {
     }
   };
 
-  const { data, error, isLoading, isValidating, mutate } = useSWR(
+  const { data, error, isLoading, isValidating } = useSWR(
     `http://localhost:3000/api/taiwan-stock/v1/stocks/symbol?stockId=${item[0]}`,
     fetcherWithCancel,
-    { revalidateOnFocus: false, revalidateOnReconnect: false },
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
+    },
   );
 
   useEffect(() => {
