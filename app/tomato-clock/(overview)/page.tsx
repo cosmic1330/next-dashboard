@@ -63,7 +63,7 @@ function Page2({ date }: { date: Date }) {
         </div>
         <AppWrapper>
           <div className="app-icon">
-            <Link href="/tomato-clock/create" passHref>
+            <Link href="/tomato-clock/home" passHref>
               <div className="rounded-lg bg-blue-200 p-2">
                 <FireIcon className="text-white" />
               </div>

@@ -7,11 +7,11 @@ import Range from './range';
 
 export default memo(function Controller({ stocks }: { stocks: StocksType[] }) {
   // 本益比
-  const [peRatio, setPeRatio] = useState(false);
+  const [peRatio, setPeRatio] = useState(true);
   // 殖利率
-  const [dividendYield, setDividendYield] = useState(false);
+  const [dividendYield, setDividendYield] = useState(true);
   // 股價淨值比
-  const [pbRatio, setPbRatio] = useState(false);
+  const [pbRatio, setPbRatio] = useState(true);
 
   const filterStocks = useMemo(() => {
     return stocks.filter((stock) => {
