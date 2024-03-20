@@ -1,10 +1,10 @@
 'use client';
 import { FinialDataType } from '@/app/api/taiwan-stock/v1/stocks/symbol/route';
+import { Button } from '@mui/material';
+import Link from 'next/link';
 import { memo, useMemo } from 'react';
 import useStrategy from '../(hooks)/useStrategy';
 import { StocksType } from '../type';
-import Link from 'next/link';
-import { Button } from '@mui/material';
 
 export default memo(function Strategy({
   stocksData,
@@ -13,17 +13,19 @@ export default memo(function Strategy({
   item: StocksType;
   stocksData: FinialDataType[];
 }) {
-  const { strategy1, strategy2, strategy3, strategy4 } = useStrategy();
+  const { strategy1, strategy2, strategy3, strategy4, strategy5 } =
+    useStrategy();
 
-  const [strategy1Res, strategy2Res, strategy3Res, strategy4Res] =
+  const [strategy1Res, strategy2Res, strategy3Res, strategy4Res, strategy5Res] =
     useMemo(() => {
-      const res = [false, false, false, false];
-      // if (stocksData && strategy1(stocksData)) res[0] = true;
-      // if (stocksData && strategy2(stocksData)) res[1] = true;
+      const res = [false, false, false, false, false];
+      if (stocksData && strategy1(stocksData)) res[0] = true;
+      if (stocksData && strategy2(stocksData)) res[1] = true;
       if (stocksData && strategy3(stocksData)) res[2] = true;
       if (stocksData && strategy4(stocksData)) res[3] = true;
+      if (stocksData && strategy5(stocksData)) res[4] = true;
       return res;
-    }, [stocksData, strategy1, strategy2, strategy3, strategy4]);
+    }, [stocksData, strategy1, strategy2, strategy3, strategy4, strategy5]);
 
   return (
     (strategy1Res || strategy2Res || strategy3Res || strategy4Res) && (
@@ -34,11 +36,11 @@ export default memo(function Strategy({
         <div className="rounded-lg p-6 shadow-md">
           {item[0]} {item[1]}
         </div>
-        <div className="rounded-lg p-6 shadow-md flex">
+        <div className="flex rounded-lg p-6 shadow-md">
           {strategy1Res && '1'}, {strategy2Res && '2'}, {strategy3Res && '3'},
-          {strategy4Res && 'KD'}
+          {strategy4Res && 'KD'}, {strategy5Res && 'V轉'}
         </div>
-        <div className="rounded-lg shadow-md flex flex-nowrap">
+        <div className="flex flex-nowrap rounded-lg shadow-md">
           <Link
             href={`https://www.wantgoo.com/stock/${item[0]}/major-investors/main-trend#main-trend`}
             target="_blank"

@@ -22,6 +22,9 @@ export default function useStrategy() {
           data[lastIndex - 1].obv,
           data[lastIndex].obv,
         ]) > 0 &&
+        // 多頭排列
+        data[lastIndex]?.ma5 > data[lastIndex]?.ma10 &&
+        data[lastIndex]?.ma10 > data[lastIndex]?.ma20 &&
         // Boll
         data[lastIndex]?.bollUb > data[lastIndex - 1]?.bollUb &&
         data[lastIndex]?.bollLb < data[lastIndex - 1]?.bollLb &&
@@ -55,22 +58,18 @@ export default function useStrategy() {
   /* 
     1. 找趨勢往上
     2. 明日K棒不破前低且收紅
+    3. 紅二兵
    */
   const strategy2 = useCallback((data: FinialDataType[]) => {
     try {
       const lastIndex = data.length - 1;
       if (
         // EMA
-        data[lastIndex]?.v > 2000 &&
+        data[lastIndex]?.v > 1000 &&
         data[lastIndex]?.c > data[lastIndex]?.ma5 &&
         data[lastIndex]?.l > data[lastIndex - 1]?.l &&
         data[lastIndex]?.c > data[lastIndex]?.o &&
-        // OBV
-        slope([
-          data[lastIndex - 2].obv,
-          data[lastIndex - 1].obv,
-          data[lastIndex].obv,
-        ]) > 0 &&
+        data[lastIndex-1]?.c > data[lastIndex-1]?.o &&
         // Boll
         // 1. 昨日K棒穿過布林中線
         data[lastIndex - 1]?.c > data[lastIndex - 1]?.bollMa &&
@@ -79,11 +78,8 @@ export default function useStrategy() {
         data[lastIndex]?.c > data[lastIndex]?.bollMa &&
         data[lastIndex]?.l > data[lastIndex]?.bollMa &&
         // KD
-        data[lastIndex]?.k < 80 &&
-        data[lastIndex]?.d < 80 &&
         data[lastIndex]?.k > data[lastIndex]?.d &&
-        // MACD
-        data[lastIndex]?.dif > data[lastIndex - 1]?.dif
+        data[lastIndex - 1]?.k < data[lastIndex - 1]?.d
       ) {
         return true;
       }
@@ -148,12 +144,30 @@ export default function useStrategy() {
       // MACD 黃金交叉
       // data[lastIndex]?.dif > data[lastIndex]?.macd &&
       // data[lastIndex - 1]?.dif < data[lastIndex - 1]?.macd &&
-      // data[lastIndex]?.osc > 0 &&
+      data[lastIndex]?.osc > data[lastIndex-1]?.osc &&
       // KD
       ((data[lastIndex]?.k > data[lastIndex]?.d &&
-        data[lastIndex - 1]?.k < data[lastIndex - 1]?.d)||
-        (data[lastIndex-1]?.k > data[lastIndex-1]?.d &&
+        data[lastIndex - 1]?.k < data[lastIndex - 1]?.d) ||
+        (data[lastIndex - 1]?.k > data[lastIndex - 1]?.d &&
           data[lastIndex - 2]?.k < data[lastIndex - 2]?.d))
+    ) {
+      return true;
+    }
+  }, []);
+
+  // V轉
+  /*
+   */
+  const strategy5 = useCallback((data: FinialDataType[]) => {
+    const lastIndex = data.length - 1;
+    if (
+      // EMA
+      data[lastIndex]?.v > 1000 &&
+      data[lastIndex]?.c > data[lastIndex - 1]?.h &&
+      data[lastIndex]?.v > data[lastIndex - 1]?.v &&
+      data[lastIndex]?.c > data[lastIndex]?.ma20 &&
+      data[lastIndex]?.l > data[lastIndex - 1]?.l &&
+      data[lastIndex - 2]?.l > data[lastIndex - 1]?.l
     ) {
       return true;
     }
@@ -165,5 +179,6 @@ export default function useStrategy() {
     strategy2,
     strategy3,
     strategy4,
+    strategy5,
   };
 }
