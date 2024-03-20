@@ -151,7 +151,7 @@ export default function useStrategy() {
         (data[lastIndex - 1]?.k > data[lastIndex - 1]?.d &&
           data[lastIndex - 2]?.k < data[lastIndex - 2]?.d))
     ) {
-      return true;
+      return true; 
     }
   }, []);
 
