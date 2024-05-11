@@ -1,6 +1,6 @@
-import { fetchCustomers } from '@/app/dashboard/(lib)/data';
-import Breadcrumbs from '@/app/dashboard/(ui)/invoices/breadcrumbs';
-import Form from '@/app/dashboard/(ui)/invoices/create-form';
+import { fetchCustomers } from '@/app/dashboard/(api)/data';
+import Breadcrumbs from '@/app/dashboard/(components)/invoices/breadcrumbs';
+import Form from '@/app/dashboard/(components)/invoices/create-form';
 
 export default async function Page() {
   const customers = await fetchCustomers();

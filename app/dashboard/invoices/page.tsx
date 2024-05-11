@@ -1,8 +1,8 @@
 import { lusitana } from '@/app/(ui)/fonts';
-import { CreateInvoice } from '@/app/dashboard/(ui)/invoices/buttons';
-import Table from '@/app/dashboard/(ui)/invoices/table';
-import Search from '@/app/dashboard/(ui)/search';
-import { InvoicesTableSkeleton } from '@/app/dashboard/(ui)/skeletons';
+import { CreateInvoice } from '@/app/dashboard/(components)/invoices/buttons';
+import Table from '@/app/dashboard/(components)/invoices/table';
+import Search from '@/app/dashboard/(components)/search';
+import { InvoicesTableSkeleton } from '@/app/dashboard/(components)/skeletons';
 import { Metadata } from 'next';
 import { Suspense } from 'react';
 

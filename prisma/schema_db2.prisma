@@ -1,0 +1,83 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = "postgresql://root:secret@localhost:5432/postgres"
+}
+
+model daily_deal {
+  transaction_date DateTime       @db.Date
+  stock_id         String         @db.VarChar(10)
+  stock_name       String         @db.VarChar(30)
+  volume           Int
+  open_price       Decimal        @db.Decimal(10, 2)
+  close_price      Decimal        @db.Decimal(10, 2)
+  high_price       Decimal        @db.Decimal(10, 2)
+  low_price        Decimal        @db.Decimal(10, 2)
+  stock            stock          @relation(fields: [stock_id], references: [stock_id], onDelete: NoAction, onUpdate: NoAction)
+  legal_person     legal_person[]
+
+  @@id([transaction_date, stock_id])
+}
+
+model deal_date {
+  transaction_date DateTime       @id @db.Date
+  legal_person     legal_person[]
+}
+
+model eps {
+  season     String  @db.VarChar(10)
+  stock_id   String  @db.VarChar(10)
+  stock_name String  @db.VarChar(30)
+  eps_data   Decimal @db.Decimal(10, 3)
+  stock      stock   @relation(fields: [stock_id], references: [stock_id], onDelete: NoAction, onUpdate: NoAction)
+
+  @@id([season, stock_id])
+}
+
+model legal_person {
+  transaction_date  DateTime   @db.Date
+  stock_id          String     @db.VarChar(10)
+  stock_name        String     @db.VarChar(30)
+  foreign_investors Int
+  investment_trust  Int
+  dealer            Int
+  stock             stock      @relation(fields: [stock_id], references: [stock_id], onDelete: NoAction, onUpdate: NoAction)
+  deal_date         deal_date  @relation(fields: [transaction_date], references: [transaction_date], onDelete: NoAction, onUpdate: NoAction)
+  daily_deal        daily_deal @relation(fields: [transaction_date, stock_id], references: [transaction_date, stock_id])
+
+  @@id([transaction_date, stock_id])
+}
+
+model monthly_revenue {
+  year                             Int
+  month                            Int
+  stock_id                         String   @db.VarChar(10)
+  current_month_revenue            BigInt?
+  previous_month_revenue           BigInt?
+  previous_year_same_month_revenue BigInt?
+  month_over_month_revenue         Decimal? @db.Decimal(15, 3)
+  year_over_year_revenue           Decimal? @db.Decimal(15, 3)
+  current_year_cumulative_revenue  BigInt?
+  previous_year_cumulative_revenue BigInt?
+  compare_cumulative_revenue       Decimal? @db.Decimal(15, 3)
+
+  @@id([year, month, stock_id])
+}
+
+model stock {
+  stock_id     String         @id @db.VarChar(10)
+  stock_name   String         @unique @db.VarChar(30)
+  enabled      Boolean?
+  daily_deal   daily_deal[]
+  eps          eps[]
+  legal_person legal_person[]
+}
+
+model users {
+  id   Int     @id @default(autoincrement())
+  name String? @db.VarChar
+  age  Int?
+}

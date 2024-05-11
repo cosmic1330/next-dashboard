@@ -15,9 +15,9 @@ export const useStockStore = create<StockStore>((set) => ({
   change: (day: string) => set(() => ({ retrospect: day })),
 }));
 
-/**********
- *  Task  *
- **********/
+/*******************
+ *  Tomato's Task  *
+ *******************/
 
 type TaskStore = {
   loop: number;
@@ -50,8 +50,7 @@ export const useTaskStore = create<TaskStore>((set) => ({
     },
   ],
   currentTask: undefined,
-  setCurrentTask: (task: Task) =>
-    set(() => ({ currentTask: task })),
+  setCurrentTask: (task: Task) => set(() => ({ currentTask: task })),
   clearCurrentTask: () => set(() => ({ currentTask: undefined })),
 
   increment: (task: Omit<Task, 'id'>) => {
@@ -65,5 +64,17 @@ export const useTaskStore = create<TaskStore>((set) => ({
       tasks: state.tasks.filter((task) => task.id !== id),
       loop: state.loop + 1,
     }));
-  }
+  },
+}));
+
+/************************
+ *  SelectStock's Plan  *
+ ************************/
+type Plan = {
+  plan: number;
+  change: (plan: number) => void;
+};
+export const useSelectPlan = create<Plan>((set) => ({
+  plan: 0,
+  change: (plan: number) => set(() => ({ plan })),
 }));
