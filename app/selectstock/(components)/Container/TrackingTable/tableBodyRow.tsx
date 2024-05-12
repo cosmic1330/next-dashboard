@@ -1,0 +1,158 @@
+'use client';
+import { useTrackingList } from '@/store/zustand';
+import CancelIcon from '@mui/icons-material/Cancel';
+import { IconButton, Typography } from '@mui/material';
+import Link from '@mui/material/Link';
+import TableCell from '@mui/material/TableCell';
+import TableRow from '@mui/material/TableRow';
+import useQueryPrice from './(hooks)/useQueryPrice';
+import { error } from 'console';
+
+export default function TableBodyRow({ str }: { str: string }) {
+  const { data: stock } = useQueryPrice(str);
+  console.log(stock);
+  const { remove } = useTrackingList();
+
+  const handleRemove = () => {
+    if (stock) remove(stock.id);
+  };
+
+  return (
+    <TableRow hover>
+      <TableCell align="left">
+        <Typography variant="body2">Plan: {stock && stock.plan}</Typography>
+        <Typography variant="body2">Date: {stock && stock.date}</Typography>
+      </TableCell>
+      <TableCell>
+        <Typography align="center">
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={`https://pchome.megatime.com.tw/stock/sto0/ock1/sid${
+              stock && stock.id
+            }.html`}
+          >
+            {stock && stock.id}
+          </Link>{' '}
+          (
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={`https://tw.stock.yahoo.com/q/ta?s=${stock && stock.id}`}
+          >
+            {stock && stock.name}
+          </Link>
+          )
+        </Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Link
+          target="_blank"
+          rel="noreferrer"
+          href={`https://www.wantgoo.com/stock/${
+            stock && stock.id
+          }/major-investors/main-trend#main-trend`}
+        >
+          {stock && stock.data[stock.data.length - 1].c}
+
+        </Link>
+        <Typography align="center">買進價格: {stock && stock.c}</Typography>
+      </TableCell>
+
+      <TableCell align="center">
+        <IconButton color="success" onClick={handleRemove}>
+          <CancelIcon />
+        </IconButton>
+      </TableCell>
+      <TableCell align="center">
+        <Typography align="center">
+          {stock &&
+            stock.data[stock.data.length - 1].ma5 >
+              stock.data[stock.data.length - 1].ma10 &&
+            stock.data[stock.data.length - 1].ma10 >
+              stock.data[stock.data.length - 1].ma20 &&
+            '正向排列'}
+        </Typography>
+        <Typography align="center">
+          {stock &&
+            stock.data[stock.data.length - 1].c >
+              stock.data[stock.data.length - 1].ma20 &&
+            '月線之上'}
+        </Typography>
+        <Typography align="center">
+          {stock &&
+            stock.data[stock.data.length - 1].c >
+              stock.data[stock.data.length - 1].ma5 &&
+            '五均之上'}
+        </Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Typography align="center" color={"error"}>
+          {stock &&
+            stock.data[stock.data.length - 1].l <
+              stock.data[stock.data.length - 1].ma20 &&
+            '盤中跌破月線'}
+        </Typography>
+        <Typography align="center" color={"error"}>
+          {stock &&
+            stock.data[stock.data.length - 1].l <
+              stock.data[stock.data.length - 1].ma5 &&
+            '盤中跌破五均'}
+        </Typography>
+        <Typography align="center" color={"error"}>
+          {stock &&
+            stock.data[stock.data.length - 1].l <
+              stock.data[stock.data.length - 1].ma10 &&
+            '盤中跌破十均'}
+        </Typography>
+        <Typography align="center" color={"error"}>
+          {stock &&
+            stock.data[stock.data.length - 1].l <
+              stock.data[stock.data.length - 2].l &&
+            stock.data[stock.data.length - 1].h <=
+              stock.data[stock.data.length - 2].h &&
+            '跌破前低且未突破前高'}
+        </Typography>
+        <Typography align="center" color={"error"}>
+          {stock &&
+            stock.data[stock.data.length - 1].k <
+              stock.data[stock.data.length - 1].d &&
+            stock.data[stock.data.length - 2].k >
+              stock.data[stock.data.length - 2].d &&
+            'KD死叉'}
+          ｀
+        </Typography>
+        <Typography align="center" color={"error"}>
+          {stock &&
+            stock.data[stock.data.length - 1].v >
+              stock.data[stock.data.length - 2].v &&
+            stock.data[stock.data.length - 1].c <
+              stock.data[stock.data.length - 1].o &&
+            '爆量綠K'}
+        </Typography>
+        <Typography align="center" color={"error"}>
+          {stock &&
+            stock.data[stock.data.length - 1].c <
+              stock.data[stock.data.length - 1].o &&
+            stock.data[stock.data.length - 1].l <
+              stock.data[stock.data.length - 2].l &&
+            ((stock.data[stock.data.length - 1].h -
+              stock.data[stock.data.length - 1].l) /
+              stock.data[stock.data.length - 1].l) *
+              100 <
+              5 &&
+            '趨勢反轉長綠K'}
+        </Typography>
+        <Typography align="center" color={"error"}>
+          {stock &&
+            ((stock.data[stock.data.length - 1].ma20 -
+              stock.data[stock.data.length - 1].ma60) /
+              stock.data[stock.data.length - 1].ma60) *
+              100 <
+              10 &&
+            '季線乖離過大'}
+        </Typography>
+      </TableCell>
+    </TableRow>
+  );
+}

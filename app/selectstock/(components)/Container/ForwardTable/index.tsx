@@ -10,13 +10,13 @@ import { Fragment, Suspense, lazy } from 'react';
 import useQueryStock from './(hooks)/useQueryStock';
 
 const TableBodyRow = lazy(() => import('./tableBodyRow'));
-export default function PythonTable() {
-  const { stocks, mutate } = useQueryStock();
+export default function ForwardTable() {
+  const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        技術線轉多頭標的
+        多頭排列穩定成長標的
       </Typography>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data

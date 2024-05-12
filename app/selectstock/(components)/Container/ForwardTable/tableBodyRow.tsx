@@ -14,13 +14,14 @@ export default function TableBodyRow({
 }: {
   stock: V2StocksResponseRow;
 }) {
-  const { planData } = useQueryDeal(stock.stock_id);
   const { add } = useTrackingList();
+  const { planData } = useQueryDeal(stock.stock_id);
+
   const handleAdd = () => {
     add({
       id: stock.stock_id,
       date: planData?.t || 0,
-      plan: 'Python Plan',
+      plan: 'Forward Plan',
       name: stock.stock_name,
       c: planData?.c || 0,
     });

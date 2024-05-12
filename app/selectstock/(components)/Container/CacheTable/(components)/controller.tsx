@@ -8,16 +8,11 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormGroup from '@mui/material/FormGroup';
-import { ReactElement, memo, useMemo, useState } from 'react';
+import { memo, useMemo, useState } from 'react';
 import { StocksType } from '../type';
-import Range from './range';
 import Table from './table';
 
-export default memo(function Controller({
-  stocks,
-}: {
-  stocks: StocksType[];
-}) {
+export default memo(function Controller({ stocks }: { stocks: StocksType[] }) {
   // 本益比
   const [peRatio, setPeRatio] = useState(true);
   // 殖利率
@@ -35,7 +30,7 @@ export default memo(function Controller({
   }, [stocks, peRatio, dividendYield, pbRatio]);
 
   return (
-    <Grid container spacing={2}>
+    <Grid container spacing={2} mt={2}>
       <Grid item xs={6}>
         <Typography variant="h6">選擇條件</Typography>
         <Typography variant="button">
@@ -73,9 +68,6 @@ export default memo(function Controller({
         </FormGroup>
       </Grid>
       <Grid item xs={6}>
-        <Range />
-      </Grid>
-      <Grid item xs={12}>
         <Accordion>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             策略１注意事項:
@@ -96,9 +88,8 @@ export default memo(function Controller({
           </AccordionDetails>
         </Accordion>
       </Grid>
-
-      <Grid item xs={12} >
-        <Table stocks={filterStocks}/>
+      <Grid item xs={12}>
+        <Table stocks={filterStocks} />
       </Grid>
     </Grid>
   );

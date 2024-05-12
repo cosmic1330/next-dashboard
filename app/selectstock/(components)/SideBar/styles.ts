@@ -44,15 +44,15 @@ export const StyledHeader = styled(Stack)`
   font-weight: 500;
 `;
 export const ListItemButton = styled(MuiListItemButton)`
-  padding-top: 1px;
-  padding-bottom: 1px;
+  padding-top: 2px;
+  padding-bottom: 2px;
   .MuiBox-root {
     width: 100%;
     border-radius: 5px;
     margin: auto;
     background-color: ${(props) =>
       props.selected && props.theme.palette.primary.dark};
-    padding: 5px 10px;
+    padding: 2px;
     display: flex;
     align-items: center;
     color: ${(props) => (props.selected ? yellow[500] : '#fff')};

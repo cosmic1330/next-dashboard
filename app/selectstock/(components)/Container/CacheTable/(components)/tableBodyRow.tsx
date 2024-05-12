@@ -1,11 +1,13 @@
 'use client';
-import { useStockStore } from '@/store/zustand';
+import { RollbackDateContext } from '@/app/selectstock/(context)/rollback';
+import { useTrackingList } from '@/store/zustand';
 import CheckIcon from '@mui/icons-material/Check';
-import { Typography } from '@mui/material';
+import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
+import { IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { Fragment, useMemo } from 'react';
+import { Fragment, useContext, useMemo } from 'react';
 import useDayStockData from '../(hooks)/useDayStockData';
 import useStrategy from '../(hooks)/useStrategy';
 import { StocksType } from '../type';
@@ -17,25 +19,37 @@ export default function TableBodyRow({
   stock: StocksType;
   index: number;
 }) {
+  const { add } = useTrackingList();
   const { isLoading, data } = useDayStockData(stock);
-  const { retrospect } = useStockStore();
+  const { rollback_date } = useContext(RollbackDateContext);
 
   const { stockDayData } = useMemo(() => {
     try {
-      if (retrospect !== '0') {
-        const stockDayData = data?.slice(0, parseInt(retrospect));
-        return { stockDayData };
-      } else {
-        return { stockDayData: data };
-      }
+      if(rollback_date === 0) return { stockDayData: data };
+      const stockDayData = data?.slice(0, -rollback_date);
+      return { stockDayData };
     } catch (error) {
       console.log(data);
       return { stockDayData: [], stockWeekData: [] };
     }
-  }, [data, retrospect]);
+  }, [data, rollback_date]);
 
   const { strategy1, strategy2, strategy3, strategy4, strategy5, strategy6 } =
     useStrategy();
+
+  const handleAdd = () => {
+    add({
+      id: stock[0],
+      date: stockDayData?.[stockDayData.length - 1].t || 0,
+      plan: `Cache Plan@${strategy1Res ? '[strategy1]' : ''}${
+        strategy2Res ? '[strategy2]' : ''
+      }
+      ${strategy3Res ? '[strategy3]' : ''}
+      ${strategy4Res ? '[strategy4]' : ''}${strategy5Res ? '[strategy5]' : ''}`,
+      name: stock[1],
+      c: stockDayData?.[stockDayData.length - 1].c || 0,
+    });
+  };
 
   const [strategy1Res, strategy2Res, strategy3Res, strategy4Res, strategy5Res] =
     useMemo(() => {
@@ -83,6 +97,11 @@ export default function TableBodyRow({
             {stock[0]}
           </Link>
           )
+        </TableCell>
+        <TableCell align="center">
+          <IconButton color="success" onClick={handleAdd}>
+            <NoteAddOutlinedIcon />
+          </IconButton>
         </TableCell>
         <TableCell align="center">
           <Typography align="center" hidden={!strategy1Res}>

@@ -23,6 +23,7 @@ export default function Table({ stocks }: { stocks: StocksType[] }) {
             <TableRow>
               <TableCell>Date</TableCell>
               <TableCell align="center">股票</TableCell>
+              <TableCell align="center">Action</TableCell>
               <TableCell align="center">
                 <Typography align="center">Strategy1</Typography>
                 <Typography align="center">布林軌道縮口變開口</Typography>

@@ -7,6 +7,7 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
 import { useSelectPlan } from '@/store/zustand';
+import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 
 
 export default function ListCentent() {
@@ -53,7 +54,19 @@ export default function ListCentent() {
           <ListItemIcon>
             <StarRoundedIcon />
           </ListItemIcon>
-          <ListItemText primary="Drafts" />
+          <ListItemText primary="Forward Plan" />
+        </Box>
+      </ListItemButton>
+
+      <ListItemButton
+        selected={plan === 3}
+        onClick={(event) => handleListItemClick(event, 3)}
+      >
+        <Box>
+          <ListItemIcon>
+            <NoteAddOutlinedIcon />
+          </ListItemIcon>
+          <ListItemText primary="Tracking Table" />
         </Box>
       </ListItemButton>
     </List>

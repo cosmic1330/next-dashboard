@@ -2,19 +2,6 @@ import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 import { CurrentTask, Task } from './types';
 
-/***********
- *  Stock  *
- ***********/
-type StockStore = {
-  retrospect: string;
-  change: (day: string) => void;
-};
-
-export const useStockStore = create<StockStore>((set) => ({
-  retrospect: '0',
-  change: (day: string) => set(() => ({ retrospect: day })),
-}));
-
 /*******************
  *  Tomato's Task  *
  *******************/
@@ -75,6 +62,63 @@ type Plan = {
   change: (plan: number) => void;
 };
 export const useSelectPlan = create<Plan>((set) => ({
-  plan: 0,
+  plan: 3,
   change: (plan: number) => set(() => ({ plan })),
+}));
+
+/**********************************
+ *  SelectStock's Tracking Table  *
+ **********************************/
+const localStorageKey = 'nextdashboard.selectstock.tracking';
+type Tracking = {
+  list: string[];
+  add: ({
+    id,
+    plan,
+    date,
+    name,
+    c,
+  }: {
+    id: string;
+    date: number;
+    plan: string;
+    name: string;
+    c: number;
+  }) => void;
+  remove: (id: string) => void;
+};
+export const useTrackingList = create<Tracking>((set) => ({
+  list: window.localStorage.getItem(localStorageKey)
+    ? JSON.parse(<string>window.localStorage.getItem(localStorageKey))
+    : [],
+  add: ({
+    id,
+    plan,
+    date,
+    name,
+    c,
+  }: {
+    id: string;
+    date: number;
+    plan: string;
+    name: string;
+    c: number;
+  }) =>
+    set((state) => {
+      const dataString = `${id},${name},${date},${plan},${c}`;
+      if (state.list.length > 0) {
+        const temp = new Set([...state.list, dataString]);
+        state.list = Array.from(temp);
+      } else {
+        state.list = [dataString];
+      }
+      window.localStorage.setItem(localStorageKey, JSON.stringify(state.list));
+      return state;
+    }),
+  remove: (id: string) =>
+    set((state) => {
+      state.list = state.list.filter((item) => item.split(',')[0] !== id);
+      window.localStorage.setItem(localStorageKey, JSON.stringify(state.list));
+      return state;
+    }),
 }));
