@@ -6,11 +6,9 @@ import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import useQueryPrice from './(hooks)/useQueryPrice';
-import { error } from 'console';
 
 export default function TableBodyRow({ str }: { str: string }) {
   const { data: stock } = useQueryPrice(str);
-  console.log(stock);
   const { remove } = useTrackingList();
 
   const handleRemove = () => {

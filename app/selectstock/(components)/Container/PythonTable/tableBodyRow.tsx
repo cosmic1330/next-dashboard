@@ -89,12 +89,12 @@ export default function TableBodyRow({
       </TableCell>
       <TableCell align="center">
         <Typography align="left">
-          外資: {planData['foreign_investors'] || 0}
+          外資: {Math.floor(planData['foreign_investors']/1000) || 0}
         </Typography>
         <Typography align="left">
-          投信: {planData['investment_trust'] || 0}
+          投信: {Math.floor(planData['investment_trust']/1000) || 0}
         </Typography>
-        <Typography align="left">自營: {planData['dealer'] || 0}</Typography>
+        <Typography align="left">自營: {Math.floor(planData['dealer']/1000) || 0}</Typography>
       </TableCell>
     </TableRow>
   );
