@@ -33,3 +33,17 @@ https://docs.hanko.io/tutorials/nextjs-todo
 
 ## Restful API
 https://www.youtube.com/watch?v=-MFiza7ZRzs
+
+## TradingView
+https://www.tradingview.com/widget/advanced-chart/
+
+
+## Use Client-Side Database
+```bash
+# pull schema from db
+npx prisma generate --schema=./prisma/schema_db2.prisma
+# create migration
+npx prisma generate --schema=./prisma/schema_db2.prisma
+# fix migration
+npx prisma format --schema=./prisma/schema_db2.prisma
+```

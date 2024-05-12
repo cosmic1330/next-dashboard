@@ -5,7 +5,7 @@ import GitHub from 'next-auth/providers/github';
 import Gitlab from 'next-auth/providers/gitlab';
 import Google from 'next-auth/providers/google';
 
-import type { User } from '@/app/dashboard/(lib)/definitions';
+import type { User } from '@/app/dashboard/(api)/definitions';
 import { sql } from '@vercel/postgres';
 import bcrypt from 'bcrypt';
 import { z } from 'zod';

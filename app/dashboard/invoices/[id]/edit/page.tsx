@@ -1,6 +1,6 @@
-import { fetchCustomers, fetchInvoiceById } from '@/app/dashboard/(lib)/data';
-import Breadcrumbs from '@/app/dashboard/(ui)/invoices/breadcrumbs';
-import Form from '@/app/dashboard/(ui)/invoices/edit-form';
+import { fetchCustomers, fetchInvoiceById } from '@/app/dashboard/(api)/data';
+import Breadcrumbs from '@/app/dashboard/(components)/invoices/breadcrumbs';
+import Form from '@/app/dashboard/(components)/invoices/edit-form';
 import { notFound } from 'next/navigation';
 
 export default async function Page({ params }: { params: { id: string } }) {

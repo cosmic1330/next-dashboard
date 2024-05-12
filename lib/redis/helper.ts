@@ -1,44 +1,42 @@
 import Redis, { RedisOptions } from 'ioredis';
 
-function getRedisConfiguration() {
-  return {
-    port: process.env.REDIS_PORT as string,
-    host: process.env.REDIS_HOST as string,
+function getRedisConfigurationOptions(host: string, port: number) {
+  const options: RedisOptions = {
+    host,
+    port,
+    lazyConnect: true,
+    showFriendlyErrorStack: true,
+    enableAutoPipelining: true,
+    maxRetriesPerRequest: 3,
+    retryStrategy: (times: number) => {
+      if (times > 3) {
+        console.warn(`[Redis] Could not connect after ${times} attempts`);
+        return null;
+      }
+
+      return Math.min(times * 200, 1000);
+    },
   };
+  return options;
 }
+class RedisHelper {
+  redis: Redis | null;
 
-function createRedisInstance({ port, host } = getRedisConfiguration()) {
-  try {
-    const options: RedisOptions = {
-      host,
-      lazyConnect: true,
-      showFriendlyErrorStack: true,
-      enableAutoPipelining: true,
-      maxRetriesPerRequest: 0,
-      retryStrategy: (times: number) => {
-        if (times > 3) {
-          throw new Error(`[Redis] Could not connect after ${times} attempts`);
-        }
-
-        return Math.min(times * 200, 1000);
-      },
-    };
-
-    if (port) {
-      options.port = parseInt(port, 10);
-    }
-
-    const redis = new Redis(options);
-
-    redis.on('error', (error: unknown) => {
+  constructor(options: RedisOptions) {
+    this.redis = new Redis(options);
+    this.redis.on('error', (error: unknown) => {
       console.warn('[Redis] Error connecting', error);
     });
-
-    return redis;
-  } catch (e) {
-    throw new Error(`[Redis] Could not create a Redis instance`);
   }
 }
 
-const redis = createRedisInstance();
+let redis: Redis | null = null;
+const host = process.env.REDIS_HOST as string;
+const port = parseInt(process.env.REDIS_PORT as string, 10);
+if (host && port) {
+  const options = getRedisConfigurationOptions(host, port);
+  const redisHelper = new RedisHelper(options);
+  redis = redisHelper.redis;
+}
+
 export default redis;
