@@ -39,6 +39,7 @@ export const GET = async (req: Request) => {
     // fetch fresh data from the DB
     let res = await fetch(
       `https://tw.quote.finance.yahoo.net/quote/q?type=ta&perd=d&mkt=10&sym=${stockId}&v=1&callback=`,
+      { cache: 'no-store' },
     ).then((res) => res.text());
     res = res.replace(/^\(|\);$/g, '');
     let parse = JSON.parse(res);

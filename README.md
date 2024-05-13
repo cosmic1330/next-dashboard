@@ -41,7 +41,7 @@ https://www.tradingview.com/widget/advanced-chart/
 ## Use Client-Side Database
 ```bash
 # pull schema from db
-npx prisma generate --schema=./prisma/schema_db2.prisma
+npx prisma db pull --schema=./prisma/schema_db2.prisma
 # create migration
 npx prisma generate --schema=./prisma/schema_db2.prisma
 # fix migration

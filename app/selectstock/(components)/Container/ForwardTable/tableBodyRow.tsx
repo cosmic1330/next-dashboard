@@ -63,16 +63,47 @@ export default function TableBodyRow({
         </IconButton>
       </TableCell>
       <TableCell align="center">
-        <Typography align="left">
+        <Typography align="center" color="success.main">
           {planData.ma5 > planData.ma10 &&
             planData.ma10 > planData.ma20 &&
             '正向排列'}
         </Typography>
-        <Typography align="left">
+        <Typography align="center" color="success.main">
           {planData.c > planData.ma20 && '月線之上'}
         </Typography>
-        <Typography align="left">
+        <Typography align="center" color="success.main">
           {planData.c > planData.ma5 && '五均之上'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData && planData.ma20 > planData.pre.ma20 && '月線向上'}
+        </Typography>
+        <Typography align="center" color="error">
+          {planData && planData.ma20 < planData.pre.ma20 && '月線向下'}
+        </Typography>
+        <Typography align="center">
+          {planData &&
+          (planData.k as number) > (planData.d as number) &&
+          (planData.k as number) > (planData.pre.k as number)
+            ? 'KD趨勢向上'
+            : 'KD趨勢向下'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData &&
+            (planData.osc as number) > (planData.pre.osc as number) &&
+            (planData.macd as number) < (planData.pre.macd as number) &&
+            'Macd負背離(強)'}
+        </Typography>
+        <Typography align="center" color="error">
+          {planData &&
+            (planData.osc as number) < (planData.pre.osc as number) &&
+            (planData.macd as number) > (planData.pre.macd as number) &&
+            'Macd正背離(弱)'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData &&
+            (planData.osc as number) > (planData.pre.osc as number) &&
+            (planData.macd as number) > (planData.pre.macd as number) &&
+            'Macd多方動能漸強'}
         </Typography>
       </TableCell>
       <TableCell align="center">

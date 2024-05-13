@@ -2,12 +2,13 @@ import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/r
 import { RollbackDateContext } from '@/app/selectstock/(context)/rollback';
 import useCancelToken from '@/hooks/useCancelToken';
 import FormateDate from '@/utils/formatedate';
-import { Gold, Kd, Ma, Macd, Rsi } from '@ch20026103/anysis';
+import { Kd, Ma, Macd } from '@ch20026103/anysis';
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
-export default function useQueryDeal(stock_id: string) {
+export default function useQueryTaiex() {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
+
   const { rollback_date } = useContext(RollbackDateContext);
   const fetcherWithCancel = async (url: string) => {
     try {
@@ -29,7 +30,7 @@ export default function useQueryDeal(stock_id: string) {
 
   const { data, error, isLoading, isValidating, mutate } =
     useSWR<V2DailyDealResponse>(
-      `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock_id}`,
+      `http://localhost:3000/api/taiwan-stock/v2/taiex`,
       fetcherWithCancel,
       {
         revalidateOnFocus: false,
@@ -39,31 +40,22 @@ export default function useQueryDeal(stock_id: string) {
     );
 
   const method = useCallback(
-    (rollback_date = 0) => {
+    (rollback_date: number) => {
       if (!data) return;
 
       let ma = new Ma();
       let macd = new Macd();
-      let rsi = new Rsi();
       let kd = new Kd();
       try {
         const stockData = data.map((item) => ({
-          id: stock_id,
           t: FormateDate(item.transaction_date),
           c: parseFloat(item.close_price),
           h: parseFloat(item.high_price),
           l: parseFloat(item.low_price),
           o: parseFloat(item.open_price),
-          v: item.volume,
-          foreign_investors: item.legal_person[0]?.foreign_investors || 0,
-          investment_trust: item.legal_person[0]?.investment_trust || 0,
-          dealer: item.legal_person[0]?.dealer || 0,
-        }));
-
-        const gold = new Gold();
-        const allGold = gold.getGold(stockData);
-        let length = stockData.length - 1;
-
+        })).reverse()
+        if(rollback_date) stockData.splice(0, rollback_date);
+        
         let macdData = macd.init(stockData[0]);
         let kdData = kd.init(stockData[0]);
         let ma5Data = ma.init(stockData[0], 5);
@@ -112,49 +104,15 @@ export default function useQueryDeal(stock_id: string) {
             ma60: ma60Data.ma,
           });
         }
-        if (
-          stockData[length - rollback_date]['v'] > 1500 &&
-          stockData[length - (rollback_date + 1)]['v'] > 1500 &&
-          <number>finallyData[length - rollback_date]['k-d'] > 3 &&
-          <number>finallyData[length - rollback_date]['k'] > 50 &&
-          <number>finallyData[length - rollback_date]['k'] >
-            <number>finallyData[length - rollback_date]['d'] &&
-          (<number>finallyData[length - (rollback_date + 1)]['k'] <
-            <number>finallyData[length - (rollback_date + 1)]['d'] ||
-            <number>finallyData[length - (rollback_date + 2)]['k'] <
-              <number>finallyData[length - (rollback_date + 2)]['d']) &&
-          <number>finallyData[length - rollback_date]['dif'] > 0 &&
-          <number>finallyData[length - rollback_date]['macd'] > 0 &&
-          <number>finallyData[length - rollback_date]['osc'] >
-            <number>finallyData[length - (rollback_date + 1)]['osc'] &&
-          <number>finallyData[length - rollback_date]['osc'] >
-            <number>finallyData[length - (rollback_date + 2)]['osc'] &&
-          <number>finallyData[length - rollback_date]['osc'] >
-            <number>finallyData[length - (rollback_date + 3)]['osc'] &&
-          stockData[length - rollback_date]['c'] >
-            <number>finallyData[length - rollback_date]['ma10'] &&
-          <number>finallyData[length - rollback_date]['ma5'] >
-            <number>finallyData[length - rollback_date]['ma20'] &&
-          <number>finallyData[length - rollback_date]['ma20'] >
-            <number>finallyData[length - rollback_date]['ma60'] &&
-          <number>finallyData[length - rollback_date]['ma5'] >
-            <number>finallyData[length - rollback_date]['ma60']
-        ) {
-          return {
-            ...finallyData[length - rollback_date],
-            pre: finallyData[length - (rollback_date + 1)],
-            ...allGold,
-          };
-        }
-        return null;
+        return finallyData;
       } catch (e) {
-        console.log(stock_id, e);
+        console.log(e);
       }
     },
-    [data, stock_id],
+    [data],
   );
 
-  const planData = useMemo(() => {
+  const taiexData = useMemo(() => {
     return method(rollback_date);
   }, [method, rollback_date]);
 
@@ -162,5 +120,5 @@ export default function useQueryDeal(stock_id: string) {
     return () => handleCancel();
   }, [handleCancel]);
 
-  return { planData };
+  return { taiexData };
 }

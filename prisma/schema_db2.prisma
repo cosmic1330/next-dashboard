@@ -81,3 +81,11 @@ model users {
   name String? @db.VarChar
   age  Int?
 }
+
+model taiex {
+  transaction_date DateTime @id @db.Date
+  open_price       Decimal  @db.Decimal(10, 2)
+  close_price      Decimal  @db.Decimal(10, 2)
+  high_price       Decimal  @db.Decimal(10, 2)
+  low_price        Decimal  @db.Decimal(10, 2)
+}

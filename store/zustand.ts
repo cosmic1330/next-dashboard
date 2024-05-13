@@ -113,12 +113,12 @@ export const useTrackingList = create<Tracking>((set) => ({
         state.list = [dataString];
       }
       window.localStorage.setItem(localStorageKey, JSON.stringify(state.list));
-      return state;
+      return { list: state.list };
     }),
   remove: (id: string) =>
     set((state) => {
       state.list = state.list.filter((item) => item.split(',')[0] !== id);
       window.localStorage.setItem(localStorageKey, JSON.stringify(state.list));
-      return state;
+      return { list: state.list };
     }),
 }));

@@ -1,23 +1,30 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
-export type V2StocksResponseRow = {
+export type V2DailyDealResponseRow = {
+  transaction_date: string;
   stock_id: string;
   stock_name: string;
-  enabled: boolean;
+  volume: number;
+  open_price: string;
+  close_price: string;
+  high_price: string;
+  low_price: string;
 };
-export type V2StocksResponse = V2StocksResponseRow[];
+
+export type V2DailyDealResponse = V2DailyDealResponseRow[];
 
 export const GET = async (req: Request) => {
   try {
+    const id = req.url.split('/')[req.url.split('/').length - 1];
     const prisma = new PrismaClient();
     // last
-    const res = await prisma.stock.findMany({
+    const res = await prisma.daily_deal.findFirst({
       where: {
-        enabled: true,
+        stock_id: id,
       },
       orderBy: {
-        stock_id: 'asc',
+        transaction_date: 'desc',
       },
     });
     await prisma.$disconnect();

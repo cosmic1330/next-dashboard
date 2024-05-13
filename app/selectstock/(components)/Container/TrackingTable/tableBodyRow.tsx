@@ -44,6 +44,9 @@ export default function TableBodyRow({ str }: { str: string }) {
         </Typography>
       </TableCell>
       <TableCell align="center">
+        <Typography align="center">
+          date: {stock && stock.data[stock.data.length - 1].t}
+        </Typography>
         <Link
           target="_blank"
           rel="noreferrer"
@@ -52,7 +55,6 @@ export default function TableBodyRow({ str }: { str: string }) {
           }/major-investors/main-trend#main-trend`}
         >
           {stock && stock.data[stock.data.length - 1].c}
-
         </Link>
         <Typography align="center">買進價格: {stock && stock.c}</Typography>
       </TableCell>
@@ -63,7 +65,7 @@ export default function TableBodyRow({ str }: { str: string }) {
         </IconButton>
       </TableCell>
       <TableCell align="center">
-        <Typography align="center">
+        <Typography align="center" color="success.main">
           {stock &&
             stock.data[stock.data.length - 1].ma5 >
               stock.data[stock.data.length - 1].ma10 &&
@@ -71,39 +73,82 @@ export default function TableBodyRow({ str }: { str: string }) {
               stock.data[stock.data.length - 1].ma20 &&
             '正向排列'}
         </Typography>
-        <Typography align="center">
+        <Typography align="center" color="success.main">
           {stock &&
             stock.data[stock.data.length - 1].c >
               stock.data[stock.data.length - 1].ma20 &&
             '月線之上'}
         </Typography>
-        <Typography align="center">
+        <Typography align="center" color="success.main">
           {stock &&
             stock.data[stock.data.length - 1].c >
               stock.data[stock.data.length - 1].ma5 &&
             '五均之上'}
         </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
+            stock.data[stock?.data.length - 1] &&
+            stock.data[stock?.data.length - 1].ma20 >
+              stock.data[stock?.data.length - 2].ma20 &&
+            stock.data[stock?.data.length - 2].ma20 >
+              stock.data[stock?.data.length - 3].ma20 &&
+            '月線向上'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
+            stock.data[stock?.data.length - 1] &&
+            (stock.data[stock?.data.length - 1].k as number) >
+              (stock.data[stock?.data.length - 1].d as number) &&
+            (stock.data[stock?.data.length - 1].k as number) >
+              (stock.data[stock?.data.length - 2].k as number) &&
+            'KD趨勢向上'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
+            stock.data[stock?.data.length - 1] &&
+            (stock.data[stock?.data.length - 1].osc as number) >
+              (stock.data[stock?.data.length - 2].osc as number) &&
+            (stock.data[stock?.data.length - 2].osc as number) >
+              (stock.data[stock?.data.length - 3].osc as number) &&
+            (stock.data[stock?.data.length - 1].macd as number) <
+              (stock.data[stock?.data.length - 2].macd as number) &&
+            (stock.data[stock?.data.length - 2].macd as number) <
+              (stock.data[stock?.data.length - 3].macd as number) &&
+            'Macd負背離(轉強)'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
+            (stock.data[stock?.data.length - 1].osc as number) >
+              (stock.data[stock?.data.length - 2].osc as number) &&
+            (stock.data[stock?.data.length - 2].osc as number) >
+              (stock.data[stock?.data.length - 3].osc as number) &&
+            (stock.data[stock?.data.length - 1].macd as number) >
+              (stock.data[stock?.data.length - 2].macd as number) &&
+            (stock.data[stock?.data.length - 2].macd as number) >
+              (stock.data[stock?.data.length - 3].macd as number) &&
+            '多方動能漸強'}
+        </Typography>
       </TableCell>
       <TableCell align="center">
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             stock.data[stock.data.length - 1].l <
               stock.data[stock.data.length - 1].ma20 &&
             '盤中跌破月線'}
         </Typography>
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             stock.data[stock.data.length - 1].l <
               stock.data[stock.data.length - 1].ma5 &&
             '盤中跌破五均'}
         </Typography>
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             stock.data[stock.data.length - 1].l <
               stock.data[stock.data.length - 1].ma10 &&
             '盤中跌破十均'}
         </Typography>
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             stock.data[stock.data.length - 1].l <
               stock.data[stock.data.length - 2].l &&
@@ -111,16 +156,15 @@ export default function TableBodyRow({ str }: { str: string }) {
               stock.data[stock.data.length - 2].h &&
             '跌破前低且未突破前高'}
         </Typography>
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             stock.data[stock.data.length - 1].k <
               stock.data[stock.data.length - 1].d &&
             stock.data[stock.data.length - 2].k >
               stock.data[stock.data.length - 2].d &&
             'KD死叉'}
-          ｀
         </Typography>
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             stock.data[stock.data.length - 1].v >
               stock.data[stock.data.length - 2].v &&
@@ -128,7 +172,7 @@ export default function TableBodyRow({ str }: { str: string }) {
               stock.data[stock.data.length - 1].o &&
             '爆量綠K'}
         </Typography>
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             stock.data[stock.data.length - 1].c <
               stock.data[stock.data.length - 1].o &&
@@ -141,7 +185,7 @@ export default function TableBodyRow({ str }: { str: string }) {
               5 &&
             '趨勢反轉長綠K'}
         </Typography>
-        <Typography align="center" color={"error"}>
+        <Typography align="center" color={'error'}>
           {stock &&
             ((stock.data[stock.data.length - 1].ma20 -
               stock.data[stock.data.length - 1].ma60) /
@@ -149,6 +193,49 @@ export default function TableBodyRow({ str }: { str: string }) {
               100 <
               10 &&
             '季線乖離過大'}
+        </Typography>
+        <Typography align="center" color="error">
+          {stock &&
+            stock.data[stock?.data.length - 1] &&
+            stock.data[stock?.data.length - 1].ma20 <
+              stock.data[stock?.data.length - 2].ma20 &&
+            stock.data[stock?.data.length - 2].ma20 <
+              stock.data[stock?.data.length - 3].ma20 &&
+            '月線向下'}
+        </Typography>
+        <Typography align="center" color="error">
+          {stock &&
+            stock.data[stock?.data.length - 1] &&
+            (stock.data[stock?.data.length - 1].k as number) <
+              (stock.data[stock?.data.length - 1].d as number) &&
+            (stock.data[stock?.data.length - 1].k as number) <
+              (stock.data[stock?.data.length - 2].k as number) &&
+            'KD趨勢向下'}
+        </Typography>
+        <Typography align="center" color="error">
+          {stock &&
+            stock.data[stock?.data.length - 1] &&
+            (stock.data[stock?.data.length - 1].osc as number) <
+              (stock.data[stock?.data.length - 2].osc as number) &&
+            (stock.data[stock?.data.length - 2].osc as number) <
+              (stock.data[stock?.data.length - 3].osc as number) &&
+            (stock.data[stock?.data.length - 1].macd as number) >
+              (stock.data[stock?.data.length - 2].macd as number) &&
+            (stock.data[stock?.data.length - 2].macd as number) >
+              (stock.data[stock?.data.length - 3].macd as number) &&
+            'Macd正背離(轉弱)'}
+        </Typography>
+        <Typography align="center" color="error">
+          {stock &&
+            (stock.data[stock?.data.length - 1].osc as number) <
+              (stock.data[stock?.data.length - 2].osc as number) &&
+            (stock.data[stock?.data.length - 2].osc as number) <
+              (stock.data[stock?.data.length - 3].osc as number) &&
+            (stock.data[stock?.data.length - 1].macd as number) <
+              (stock.data[stock?.data.length - 2].macd as number) &&
+            (stock.data[stock?.data.length - 2].macd as number) <
+              (stock.data[stock?.data.length - 3].macd as number) &&
+            '空方動能漸強'}
         </Typography>
       </TableCell>
     </TableRow>

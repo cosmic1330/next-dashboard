@@ -142,7 +142,11 @@ export default function useQueryDeal(stock_id: string) {
             100 <
             3
         ) {
-          return { ...finallyData[length - rollback_date], ...allGold };
+          return {
+            ...finallyData[length - rollback_date],
+            pre: finallyData[length - (rollback_date + 1)],
+            ...allGold,
+          };
         }
         return null;
       } catch (e) {
