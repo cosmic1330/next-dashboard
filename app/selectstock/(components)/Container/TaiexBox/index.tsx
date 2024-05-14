@@ -38,14 +38,46 @@ export default function TaiexBox() {
         <Typography component="span" variant="subtitle2">
           KD趨勢:
         </Typography>
-        <Typography variant="body2" component="span">
-          {taiexData &&
+        {taiexData &&
+        (taiexData[taiexData.length - 1].k as number) >
+          (taiexData[taiexData.length - 1].d as number) &&
+        (taiexData[taiexData.length - 1].k as number) >
+          (taiexData[taiexData.length - 2].k as number) &&
+        (taiexData[taiexData.length - 1].rsv as number) >
+          (taiexData[taiexData.length - 2].rsv as number) ? (
+          <Typography variant="body2" component="span">
+            多頭
+          </Typography>
+        ) : taiexData &&
           (taiexData[taiexData.length - 1].k as number) >
             (taiexData[taiexData.length - 1].d as number) &&
           (taiexData[taiexData.length - 1].k as number) >
-            (taiexData[taiexData.length - 2].k as number)
-            ? '多頭'
-            : '空頭'}
+            (taiexData[taiexData.length - 2].k as number) &&
+          (taiexData[taiexData.length - 1].rsv as number) >
+            (taiexData[taiexData.length - 2].rsv as number) ? (
+          <Typography variant="body2" component="span">
+            空頭
+          </Typography>
+        ) : (
+          <Typography variant="body2" component="span">
+            趨勢不明
+          </Typography>
+        )}
+        <Typography variant="body2" component="span">
+          {taiexData &&
+            (taiexData[taiexData.length - 1].k as number) >
+              (taiexData[taiexData.length - 1].d as number) &&
+            (taiexData[taiexData.length - 2].k as number) <
+              (taiexData[taiexData.length - 2].d as number) &&
+            'KD黃金交叉'}
+        </Typography>
+        <Typography variant="body2" component="span">
+          {taiexData &&
+            (taiexData[taiexData.length - 1].k as number) <
+              (taiexData[taiexData.length - 1].d as number) &&
+            (taiexData[taiexData.length - 2].k as number) >
+              (taiexData[taiexData.length - 2].d as number) &&
+            'KD死亡交叉'}
         </Typography>
       </Box>
       <Box>

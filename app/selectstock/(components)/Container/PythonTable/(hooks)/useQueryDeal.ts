@@ -113,36 +113,47 @@ export default function useQueryDeal(stock_id: string) {
           });
         }
         if (
-          stockData[length - rollback_date]['v'] > 1500 &&
-          stockData[length - (rollback_date + 1)]['v'] > 1500 &&
-          <number>finallyData[length - rollback_date]['k-d'] > 3 &&
-          <number>finallyData[length - rollback_date]['k'] > 50 &&
-          <number>finallyData[length - rollback_date]['k'] >
-            <number>finallyData[length - rollback_date]['d'] &&
-          (<number>finallyData[length - (rollback_date + 1)]['k'] <
-            <number>finallyData[length - (rollback_date + 1)]['d'] ||
-            <number>finallyData[length - (rollback_date + 2)]['k'] <
-              <number>finallyData[length - (rollback_date + 2)]['d']) &&
-          <number>finallyData[length - rollback_date]['dif'] > 0 &&
-          <number>finallyData[length - rollback_date]['macd'] > 0 &&
-          <number>finallyData[length - rollback_date]['osc'] >
-            <number>finallyData[length - (rollback_date + 1)]['osc'] &&
-          <number>finallyData[length - rollback_date]['osc'] >
-            <number>finallyData[length - (rollback_date + 2)]['osc'] &&
-          <number>finallyData[length - rollback_date]['osc'] >
-            <number>finallyData[length - (rollback_date + 3)]['osc'] &&
-          stockData[length - rollback_date]['c'] >
-            <number>finallyData[length - rollback_date]['ma10'] &&
-          <number>finallyData[length - rollback_date]['ma5'] >
-            <number>finallyData[length - rollback_date]['ma20'] &&
-          <number>finallyData[length - rollback_date]['ma20'] >
-            <number>finallyData[length - rollback_date]['ma60'] &&
-          <number>finallyData[length - rollback_date]['ma5'] >
-            <number>finallyData[length - rollback_date]['ma60']
+          stockData[length - rollback_date].v > 1500 &&
+          // 成交量大於前2日
+          (stockData[length - rollback_date].v >
+            stockData[length - (rollback_date + 1)].v ||
+            stockData[length - rollback_date].v >
+              stockData[length - (rollback_date + 2)].v) &&
+          // kd黃金交叉
+          <number>finallyData[length - rollback_date].k >
+            <number>finallyData[length - rollback_date].d &&
+          <number>finallyData[length - (rollback_date + 1)].k <
+            <number>finallyData[length - (rollback_date + 1)].d &&
+          // rsv增加
+          <number>finallyData[length - rollback_date].rsv >
+            <number>finallyData[length - (rollback_date + 1)].rsv &&
+          // macd空方動能減少
+          <number>finallyData[length - rollback_date].macd >
+            <number>finallyData[length - (rollback_date + 1)].macd &&
+          <number>finallyData[length - rollback_date].osc >
+            <number>finallyData[length - (rollback_date + 1)].osc &&
+          // 收盤價大於10日均線
+          (stockData[length - rollback_date].c >
+            <number>finallyData[length - rollback_date].ma10 ||
+            stockData[length - rollback_date].c >
+              <number>finallyData[length - rollback_date].ma5) &&
+          <number>finallyData[length - rollback_date].ma5 >
+            <number>finallyData[length - rollback_date].ma20 &&
+          <number>finallyData[length - rollback_date].ma20 >
+            <number>finallyData[length - rollback_date].ma60 &&
+          // 收盤價及五日均線差距小於3%
+          ((<number>finallyData[length - rollback_date].c -
+            <number>finallyData[length - rollback_date].ma5) /
+            <number>finallyData[length - rollback_date].ma5) *
+            100 <
+            3
         ) {
           return {
             ...finallyData[length - rollback_date],
-            pre: finallyData[length - (rollback_date + 1)],
+            pre: [
+              finallyData[length - (rollback_date + 1)],
+              finallyData[length - (rollback_date + 2)],
+            ],
             ...allGold,
           };
         }

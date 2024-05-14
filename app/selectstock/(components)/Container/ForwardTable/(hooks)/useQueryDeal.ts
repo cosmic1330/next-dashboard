@@ -114,37 +114,37 @@ export default function useQueryDeal(stock_id: string) {
         }
         if (
           // 收盤價持續大於10日均線
-          stockData[length - rollback_date]['c'] >
-            <number>finallyData[length - rollback_date]['ma10'] &&
-          stockData[length - (rollback_date + 1)]['c'] >
-            <number>finallyData[length - rollback_date]['ma10'] &&
-          stockData[length - (rollback_date + 2)]['c'] >
-            <number>finallyData[length - rollback_date]['ma10'] &&
+          stockData[length - rollback_date].c >
+            <number>finallyData[length - rollback_date].ma10 &&
+          stockData[length - (rollback_date + 1)].c >
+            <number>finallyData[length - rollback_date].ma10 &&
+          stockData[length - (rollback_date + 2)].c >
+            <number>finallyData[length - rollback_date].ma10 &&
           // 均線正向排列
-          <number>finallyData[length - rollback_date]['ma5'] >
-            <number>finallyData[length - rollback_date]['ma20'] &&
-          <number>finallyData[length - rollback_date]['ma20'] >
-            <number>finallyData[length - rollback_date]['ma60'] &&
-          <number>finallyData[length - rollback_date]['ma5'] >
-            <number>finallyData[length - rollback_date]['ma60'] &&
+          <number>finallyData[length - rollback_date].ma5 >
+            <number>finallyData[length - rollback_date].ma20 &&
+          <number>finallyData[length - rollback_date].ma20 >
+            <number>finallyData[length - rollback_date].ma60 &&
+          <number>finallyData[length - rollback_date].ma5 >
+            <number>finallyData[length - rollback_date].ma60 &&
           // 月線往上
-          <number>finallyData[length - rollback_date]['ma20'] >
-            <number>finallyData[length - (rollback_date + 1)]['ma20'] &&
-          <number>finallyData[length - (rollback_date + 1)]['ma20'] >
-            <number>finallyData[length - (rollback_date + 2)]['ma20'] &&
+          // <number>finallyData[length - rollback_date].ma20 >
+          //   <number>finallyData[length - (rollback_date + 1)].ma20 &&
+          // <number>finallyData[length - (rollback_date + 1)].ma20 >
+          //   <number>finallyData[length - (rollback_date + 2)].ma20 &&
           // 五日均線往上
-          <number>finallyData[length - rollback_date]['ma5'] >
-            <number>finallyData[length - (rollback_date + 1)]['ma5'] &&
+          <number>finallyData[length - rollback_date].ma5 >
+            <number>finallyData[length - (rollback_date + 1)].ma5 &&
           // 月線及五日均線差距小於3%
-          ((<number>finallyData[length - rollback_date]['ma5'] -
-            <number>finallyData[length - rollback_date]['ma20']) /
-            <number>finallyData[length - rollback_date]['ma20']) *
+          ((<number>finallyData[length - rollback_date].ma5 -
+            <number>finallyData[length - rollback_date].ma20) /
+            <number>finallyData[length - rollback_date].ma20) *
             100 <
             3
         ) {
           return {
             ...finallyData[length - rollback_date],
-            pre: finallyData[length - (rollback_date + 1)],
+            pre: [finallyData[length - (rollback_date + 1)], finallyData[length - (rollback_date + 2)]],
             ...allGold,
           };
         }

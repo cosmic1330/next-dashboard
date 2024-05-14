@@ -1,6 +1,8 @@
 'use client';
 import { useTrackingList } from '@/store/zustand';
 import CancelIcon from '@mui/icons-material/Cancel';
+import NorthIcon from '@mui/icons-material/North';
+import SouthIcon from '@mui/icons-material/South';
 import { IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
@@ -23,6 +25,16 @@ export default function TableBodyRow({ str }: { str: string }) {
       </TableCell>
       <TableCell>
         <Typography align="center">
+          {stock &&
+            stock.data[stock.data.length - 1].c >
+              stock.data[stock.data.length - 2].c && (
+              <NorthIcon fontSize="small" sx={{ color: 'red' }} />
+            )}
+          {stock &&
+            stock.data[stock.data.length - 1].c <
+              stock.data[stock.data.length - 2].c && (
+              <SouthIcon fontSize="small" sx={{ color: 'green' }} />
+            )}
           <Link
             target="_blank"
             rel="noreferrer"
@@ -41,6 +53,17 @@ export default function TableBodyRow({ str }: { str: string }) {
             {stock && stock.name}
           </Link>
           )
+        </Typography>
+        <Typography align="center">
+          {stock &&
+            Math.round(
+              ((stock.data[stock.data.length - 1].c -
+                stock.data[stock.data.length - 2].c) /
+                stock.data[stock.data.length - 2].c) *
+                100 *
+                100,
+            ) / 100}
+          %
         </Typography>
       </TableCell>
       <TableCell align="center">
@@ -101,6 +124,8 @@ export default function TableBodyRow({ str }: { str: string }) {
               (stock.data[stock?.data.length - 1].d as number) &&
             (stock.data[stock?.data.length - 1].k as number) >
               (stock.data[stock?.data.length - 2].k as number) &&
+            (stock.data[stock?.data.length - 1].rsv as number) >
+              (stock.data[stock?.data.length - 2].rsv as number) &&
             'KD趨勢向上'}
         </Typography>
         <Typography align="center" color="success.main">

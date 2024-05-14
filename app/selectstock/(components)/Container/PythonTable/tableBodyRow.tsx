@@ -1,7 +1,9 @@
 'use client';
 import { V2StocksResponseRow } from '@/app/api/taiwan-stock/v2/stocks/route';
 import { useTrackingList } from '@/store/zustand';
+import NorthIcon from '@mui/icons-material/North';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
+import SouthIcon from '@mui/icons-material/South';
 import { IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
@@ -38,22 +40,39 @@ export default function TableBodyRow({
         </Link>
       </TableCell>
       <TableCell component="th" scope="row" align="center">
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={`https://pchome.megatime.com.tw/stock/sto0/ock1/sid${stock.stock_id}.html`}
-        >
-          {stock.stock_name}
-        </Link>{' '}
-        (
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={`https://tw.stock.yahoo.com/q/ta?s=${stock.stock_id}`}
-        >
-          {stock.stock_id}
-        </Link>
-        )
+        <Typography align="center">
+          {stock && planData.c > planData.pre[0].c && (
+            <NorthIcon fontSize="small" sx={{ color: 'red' }} />
+          )}
+          {stock && planData.c < planData.pre[0].c && (
+            <SouthIcon fontSize="small" sx={{ color: 'green' }} />
+          )}
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={`https://pchome.megatime.com.tw/stock/sto0/ock1/sid${stock.stock_id}.html`}
+          >
+            {stock.stock_name}
+          </Link>{' '}
+          (
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={`https://tw.stock.yahoo.com/q/ta?s=${stock.stock_id}`}
+          >
+            {stock.stock_id}
+          </Link>
+          )
+        </Typography>
+        <Typography align="center">
+          {stock &&
+            Math.round(
+              ((planData.c - planData.pre[0].c) / planData.pre[0].c) *
+                100 *
+                100,
+            ) / 100}
+          %
+        </Typography>
       </TableCell>
       <TableCell align="center">{planData.c}</TableCell>
       <TableCell align="center">
@@ -74,35 +93,70 @@ export default function TableBodyRow({
           {planData.c > planData.ma5 && '五均之上'}
         </Typography>
         <Typography align="center" color="success.main">
-          {planData && planData.ma20 > planData.pre.ma20 && '月線向上'}
-        </Typography>
-        <Typography align="center"  color="error">
-          {planData && planData.ma20 < planData.pre.ma20 && '月線向下'}
-        </Typography>
-        <Typography align="center">
           {planData &&
-          (planData.k as number) > (planData.d as number) &&
-          (planData.k as number) > (planData.pre.k as number)
-            ? 'KD趨勢向上'
-            : 'KD趨勢向下'}
+            planData.ma20 > planData.pre[0].ma20 &&
+            planData.pre[0].ma20 > planData.pre[1].ma20 &&
+            '月線向上'}
         </Typography>
+        <Typography align="center" color="error">
+          {planData &&
+            planData.ma20 < planData.pre[0].ma20 &&
+            planData.pre[0].ma20 < planData.pre[1].ma20 &&
+            '月線向下'}
+        </Typography>
+
+        {planData &&
+        (planData.k as number) > (planData.d as number) &&
+        (planData.k as number) > (planData.pre[0].k as number) &&
+        (planData.rsv as number) > (planData.pre[0].rsv as number) ? (
+          <Typography align="center" color="success.main">
+            KD趨勢向上
+          </Typography>
+        ) : (planData.k as number) < (planData.d as number) &&
+          (planData.k as number) < (planData.pre[0].k as number) &&
+          (planData.rsv as number) < (planData.pre[0].rsv as number) ? (
+          <Typography align="center" color="error">
+            KD趨勢向下
+          </Typography>
+        ) : (
+          <Typography align="center">KD趨勢不明</Typography>
+        )}
+
         <Typography align="center" color="success.main">
           {planData &&
-            (planData.osc as number) > (planData.pre.osc as number) &&
-            (planData.macd as number) < (planData.pre.macd as number) &&
+            (planData.osc as number) > (planData.pre[0].osc as number) &&
+            (planData.pre[0].osc as number) > (planData.pre[1].osc as number) &&
+            (planData.macd as number) < (planData.pre[0].macd as number) &&
+            (planData.pre[0].macd as number) <
+              (planData.pre[1].macd as number) &&
             'Macd負背離(強)'}
         </Typography>
         <Typography align="center" color="error">
           {planData &&
-            (planData.osc as number) < (planData.pre.osc as number) &&
-            (planData.macd as number) > (planData.pre.macd as number) &&
+            (planData.osc as number) < (planData.pre[0].osc as number) &&
+            (planData.pre[0].osc as number) < (planData.pre[1].osc as number) &&
+            (planData.macd as number) > (planData.pre[0].macd as number) &&
+            (planData.pre[0].macd as number) >
+              (planData.pre[1].macd as number) &&
             'Macd正背離(弱)'}
         </Typography>
         <Typography align="center" color="success.main">
           {planData &&
-            (planData.osc as number) > (planData.pre.osc as number) &&
-            (planData.macd as number) > (planData.pre.macd as number) &&
+            (planData.osc as number) > (planData.pre[0].osc as number) &&
+            (planData.pre[0].osc as number) > (planData.pre[1].osc as number) &&
+            (planData.macd as number) > (planData.pre[0].macd as number) &&
+            (planData.pre[0].macd as number) >
+              (planData.pre[1].macd as number) &&
             'Macd多方動能漸強'}
+        </Typography>
+        <Typography align="center" color="error">
+          {planData &&
+            (planData.osc as number) < (planData.pre[0].osc as number) &&
+            (planData.pre[0].osc as number) < (planData.pre[1].osc as number) &&
+            (planData.macd as number) < (planData.pre[0].macd as number) &&
+            (planData.pre[0].macd as number) <
+              (planData.pre[1].macd as number) &&
+            'Macd空方動能漸強'}
         </Typography>
       </TableCell>
       <TableCell align="center">

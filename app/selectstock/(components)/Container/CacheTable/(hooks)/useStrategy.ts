@@ -1,5 +1,4 @@
 import { FinialDayDataType } from '@/app/api/taiwan-stock/v1/stocks/id/day/route';
-import { FinialWeekDataType } from '@/app/api/taiwan-stock/v1/stocks/id/week/route';
 
 import { Ema, slope } from '@ch20026103/anysis';
 import { useCallback } from 'react';
@@ -38,6 +37,7 @@ export default function useStrategy() {
         data[lastIndex]?.dif > data[lastIndex - 1]?.dif &&
         data[lastIndex]?.osc > 0 &&
         // KD
+        data[lastIndex]?.rsv > data[lastIndex - 1]?.rsv &&
         data[lastIndex]?.k < 80
       ) {
         // emaOBV
@@ -136,64 +136,58 @@ export default function useStrategy() {
     4. 站上5MA
     5. 吞噬前日低價
    */
-  const strategy4 = useCallback(
-    (data: FinialDayDataType[]) => {
-      const lastIndex = data.length - 1;
-      if (
-        data[lastIndex]?.v > 1000 &&
-        data[lastIndex]?.c > data[lastIndex - 2]?.l &&
-        data[lastIndex]?.l > data[lastIndex - 1]?.l &&
-        data[lastIndex]?.c > data[lastIndex - 1]?.h &&
-        data[lastIndex]?.c > data[lastIndex]?.ma60 &&
-        data[lastIndex]?.c > data[lastIndex]?.ma20 &&
-        data[lastIndex]?.c > data[lastIndex]?.ma5 &&
-        // EMA
-        data[lastIndex]?.ma5 > data[lastIndex]?.ma10 &&
-        data[lastIndex]?.ma10 > data[lastIndex]?.ma20 &&
-        data[lastIndex]?.ma5 > data[lastIndex]?.ma20 &&
-        // MACD 黃金交叉
-        // data[lastIndex]?.dif > data[lastIndex]?.macd &&
-        // data[lastIndex - 1]?.dif < data[lastIndex - 1]?.macd &&
-        data[lastIndex]?.osc > data[lastIndex - 1]?.osc &&
-        // KD
-        ((data[lastIndex]?.k > data[lastIndex]?.d &&
-          data[lastIndex - 1]?.k < data[lastIndex - 1]?.d) ||
-          (data[lastIndex - 1]?.k > data[lastIndex - 1]?.d &&
-            data[lastIndex - 2]?.k < data[lastIndex - 2]?.d))
-      ) {
-        return true;
-      }
-    },
-    [],
-  );
+  const strategy4 = useCallback((data: FinialDayDataType[]) => {
+    const lastIndex = data.length - 1;
+    if (
+      data[lastIndex]?.v > 1000 &&
+      data[lastIndex]?.c > data[lastIndex - 2]?.l &&
+      data[lastIndex]?.l > data[lastIndex - 1]?.l &&
+      data[lastIndex]?.c > data[lastIndex - 1]?.h &&
+      data[lastIndex]?.c > data[lastIndex]?.ma60 &&
+      data[lastIndex]?.c > data[lastIndex]?.ma20 &&
+      data[lastIndex]?.c > data[lastIndex]?.ma5 &&
+      // EMA
+      data[lastIndex]?.ma5 > data[lastIndex]?.ma10 &&
+      data[lastIndex]?.ma10 > data[lastIndex]?.ma20 &&
+      data[lastIndex]?.ma5 > data[lastIndex]?.ma20 &&
+      // MACD 黃金交叉
+      // data[lastIndex]?.dif > data[lastIndex]?.macd &&
+      // data[lastIndex - 1]?.dif < data[lastIndex - 1]?.macd &&
+      data[lastIndex]?.osc > data[lastIndex - 1]?.osc &&
+      // KD
+      ((data[lastIndex]?.k > data[lastIndex]?.d &&
+        data[lastIndex - 1]?.k < data[lastIndex - 1]?.d) ||
+        (data[lastIndex - 1]?.k > data[lastIndex - 1]?.d &&
+          data[lastIndex - 2]?.k < data[lastIndex - 2]?.d))
+    ) {
+      return true;
+    }
+  }, []);
 
   // V轉
   /*
    */
-  const strategy5 = useCallback(
-    (data: FinialDayDataType[]) => {
-      const lastIndex = data.length - 1;
-      if (
-        // 正向排列
-        data[lastIndex]?.ma5 > data[lastIndex]?.ma10 &&
-        data[lastIndex]?.ma10 > data[lastIndex]?.ma20 &&
-        data[lastIndex]?.ma5 > data[lastIndex]?.ma20 &&
-        data[lastIndex]?.ma20 > data[lastIndex - 1]?.ma20 &&
-        (data[lastIndex - 1]?.ma5 < data[lastIndex - 1]?.ma10 ||
-          data[lastIndex - 1]?.ma10 < data[lastIndex - 1]?.ma20) &&
-        // EMA
-        data[lastIndex]?.v > 1000 &&
-        data[lastIndex]?.c > data[lastIndex - 1]?.h &&
-        data[lastIndex]?.v > data[lastIndex - 1]?.v &&
-        data[lastIndex]?.c > data[lastIndex]?.ma20 &&
-        data[lastIndex]?.l > data[lastIndex - 1]?.l &&
-        data[lastIndex - 2]?.l > data[lastIndex - 1]?.l
-      ) {
-        return true;
-      }
-    },
-    [],
-  );
+  const strategy5 = useCallback((data: FinialDayDataType[]) => {
+    const lastIndex = data.length - 1;
+    if (
+      // 正向排列
+      data[lastIndex]?.ma5 > data[lastIndex]?.ma10 &&
+      data[lastIndex]?.ma10 > data[lastIndex]?.ma20 &&
+      data[lastIndex]?.ma5 > data[lastIndex]?.ma20 &&
+      data[lastIndex]?.ma20 > data[lastIndex - 1]?.ma20 &&
+      (data[lastIndex - 1]?.ma5 < data[lastIndex - 1]?.ma10 ||
+        data[lastIndex - 1]?.ma10 < data[lastIndex - 1]?.ma20) &&
+      // EMA
+      data[lastIndex]?.v > 1000 &&
+      data[lastIndex]?.c > data[lastIndex - 1]?.h &&
+      data[lastIndex]?.v > data[lastIndex - 1]?.v &&
+      data[lastIndex]?.c > data[lastIndex]?.ma20 &&
+      data[lastIndex]?.l > data[lastIndex - 1]?.l &&
+      data[lastIndex - 2]?.l > data[lastIndex - 1]?.l
+    ) {
+      return true;
+    }
+  }, []);
 
   // 週線正向排列
   /*
