@@ -1,6 +1,6 @@
 'use client';
 
-import { Grid, Stack, TextField, Typography } from '@mui/material';
+import { Button, Grid, Stack, Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import { useContext } from 'react';
 import { RollbackDateContext } from '../../(context)/rollback';
@@ -10,15 +10,16 @@ export default function Range() {
   const handleChange = (e: any) => {
     setRollbackDate(e.target?.value);
   };
+  const add = () => {
+    setRollbackDate(rollback_date + 1);
+  };
   return (
     <Grid container>
       <Grid item xs={6}>
         <Typography variant="h6">回測天數</Typography>
-        <TextField
-          type="number"
-          value={rollback_date}
-          onChange={handleChange}
-        />
+        <Button variant="outlined" onClick={add}>
+          {rollback_date}
+        </Button>
       </Grid>
       <Grid item xs={6}>
         <Stack mt={'20px'}>
