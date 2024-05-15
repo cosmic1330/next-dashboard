@@ -120,11 +120,15 @@ export default function useQueryDeal(stock_id: string) {
             <number>finallyData[length - rollback_date].ma5 &&
           stockData[length - rollback_date].l >
             <number>finallyData[length - rollback_date].ma5 &&
-          // 5日均線往上突破10日均線或20日均線
-          <number>finallyData[length - rollback_date].ma5 >
+          // 5日均線往上突破20日均線或60日均線
+          ((<number>finallyData[length - rollback_date].ma5 >
             <number>finallyData[length - rollback_date].ma20 &&
-          <number>finallyData[length - rollback_date - 1].ma5 <
-            <number>finallyData[length - rollback_date - 1].ma20 &&
+            <number>finallyData[length - rollback_date - 1].ma5 <
+              <number>finallyData[length - rollback_date - 1].ma20) ||
+            (<number>finallyData[length - rollback_date].ma5 >
+              <number>finallyData[length - rollback_date].ma60 &&
+              <number>finallyData[length - rollback_date - 1].ma5 <
+                <number>finallyData[length - rollback_date - 1].ma60)) &&
           // 月線往上
           <number>finallyData[length - rollback_date].ma20 >
             <number>finallyData[length - (rollback_date + 1)].ma20 &&
