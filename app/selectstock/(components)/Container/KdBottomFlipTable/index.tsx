@@ -1,5 +1,4 @@
 'use client';
-import useQueryStock from '@/hooks/useQueryStock';
 import { Button, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -8,15 +7,16 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Fragment, Suspense, lazy } from 'react';
+import useQueryStock from '../../../../../hooks/useQueryStock';
 
 const TableBodyRow = lazy(() => import('./tableBodyRow'));
-export default function PythonTable() {
+export default function KdBottomFlipTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        技術線轉多頭標的
+        KD黃金交叉標的
       </Typography>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data

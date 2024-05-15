@@ -5,6 +5,7 @@ export type V2StocksResponseRow = {
   stock_id: string;
   stock_name: string;
   enabled: boolean;
+  eps: [{ season: string; eps_data: string }];
 };
 export type V2StocksResponse = V2StocksResponseRow[];
 
@@ -18,6 +19,20 @@ export const GET = async (req: Request) => {
       },
       orderBy: {
         stock_id: 'asc',
+      },
+      include: {
+        eps: {
+          where: {},
+          orderBy: {
+            season: 'desc',
+          },
+          distinct: ['season'],
+          select: {
+            season: true,
+            eps_data: true,
+          },
+          take: 1,
+        },
       },
     });
     await prisma.$disconnect();

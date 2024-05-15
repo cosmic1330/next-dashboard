@@ -62,7 +62,7 @@ type Plan = {
   change: (plan: number) => void;
 };
 export const useSelectPlan = create<Plan>((set) => ({
-  plan: 3,
+  plan: 6,
   change: (plan: number) => set(() => ({ plan })),
 }));
 

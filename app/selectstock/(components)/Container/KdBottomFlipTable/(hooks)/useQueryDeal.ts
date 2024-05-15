@@ -2,14 +2,14 @@ import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/r
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
 import FormateDate from '@/utils/formatedate';
-import { Kd, Ma, Macd } from '@ch20026103/anysis';
+import { Gold, Kd, Ma, Macd } from '@ch20026103/anysis';
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
-export default function useQueryTaiex() {
+export default function useQueryDeal(stock_id: string) {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
 
-  const { rollback_date } = useContext(SelectStockContext);
+  const { rollback_date, db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
       const response = await fetch(url, {
@@ -30,7 +30,9 @@ export default function useQueryTaiex() {
 
   const { data, error, isLoading, isValidating, mutate } =
     useSWR<V2DailyDealResponse>(
-      `http://localhost:3000/api/taiwan-stock/v2/taiex`,
+      db_data_set
+        ? `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock_id}`
+        : `http://localhost:3000/api/taiwan-stock/v2/daily_deal/yahoo/${stock_id}`,
       fetcherWithCancel,
       {
         revalidateOnFocus: false,
@@ -47,16 +49,22 @@ export default function useQueryTaiex() {
       let macd = new Macd();
       let kd = new Kd();
       try {
-        const stockData = data
-          .map((item) => ({
-            t: FormateDate(item.transaction_date),
-            c: parseFloat(item.close_price),
-            h: parseFloat(item.high_price),
-            l: parseFloat(item.low_price),
-            o: parseFloat(item.open_price),
-          }))
-          .reverse();
-        if (rollback_date) stockData.splice(0, rollback_date);
+        const stockData = data.map((item) => ({
+          id: stock_id,
+          t: FormateDate(item.transaction_date),
+          c: parseFloat(item.close_price),
+          h: parseFloat(item.high_price),
+          l: parseFloat(item.low_price),
+          o: parseFloat(item.open_price),
+          v: item.volume,
+          foreign_investors: item.legal_person[0]?.foreign_investors || 0,
+          investment_trust: item.legal_person[0]?.investment_trust || 0,
+          dealer: item.legal_person[0]?.dealer || 0,
+        }));
+
+        const gold = new Gold();
+        const allGold = gold.getGold(stockData);
+        let length = stockData.length - 1;
 
         let macdData = macd.init(stockData[0]);
         let kdData = kd.init(stockData[0]);
@@ -106,15 +114,50 @@ export default function useQueryTaiex() {
             ma60: ma60Data.ma,
           });
         }
-        return finallyData;
+        if (
+          // 成交量大於1000張
+          <number>finallyData[length - rollback_date]?.v > 1000 &&
+          <number>finallyData[length - rollback_date]?.c >
+            <number>finallyData[length - (rollback_date + 1)]?.h &&
+          <number>finallyData[length - rollback_date]?.c >
+            <number>finallyData[length - (rollback_date + 2)]?.l &&
+          // EMA
+          <number>finallyData[length - rollback_date]?.ma5 >
+            <number>finallyData[length - rollback_date]?.ma10 &&
+          <number>finallyData[length - rollback_date]?.ma10 >
+            <number>finallyData[length - rollback_date]?.ma20 &&
+          <number>finallyData[length - rollback_date]?.ma20 >
+            <number>finallyData[length - rollback_date]?.ma60 &&
+          // MACD
+          <number>finallyData[length - rollback_date]?.macd >
+            <number>finallyData[length - (rollback_date + 1)]?.macd &&
+          // KD 黃金交叉
+          ((<number>finallyData[length - rollback_date]?.k >
+            <number>finallyData[length - rollback_date]?.d &&
+            <number>finallyData[length - (rollback_date + 1)]?.k <
+              <number>finallyData[length - (rollback_date + 1)]?.d)) &&
+          // rsv
+          <number>finallyData[length - rollback_date].rsv >
+            <number>finallyData[length - (rollback_date + 1)].rsv
+        ) {
+          return {
+            ...finallyData[length - rollback_date],
+            pre: [
+              finallyData[length - (rollback_date + 1)],
+              finallyData[length - (rollback_date + 2)],
+            ],
+            ...allGold,
+          };
+        }
+        return null;
       } catch (e) {
-        console.log(e);
+        console.log(stock_id, e);
       }
     },
-    [data],
+    [data, stock_id],
   );
 
-  const taiexData = useMemo(() => {
+  const planData = useMemo(() => {
     return method(rollback_date);
   }, [method, rollback_date]);
 
@@ -122,5 +165,5 @@ export default function useQueryTaiex() {
     return () => handleCancel();
   }, [handleCancel]);
 
-  return { taiexData };
+  return { planData };
 }

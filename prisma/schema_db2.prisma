@@ -63,17 +63,19 @@ model monthly_revenue {
   current_year_cumulative_revenue  BigInt?
   previous_year_cumulative_revenue BigInt?
   compare_cumulative_revenue       Decimal? @db.Decimal(15, 3)
+  stock                            stock    @relation(fields: [stock_id], references: [stock_id], onDelete: NoAction, onUpdate: NoAction)
 
   @@id([year, month, stock_id])
 }
 
 model stock {
-  stock_id     String         @id @db.VarChar(10)
-  stock_name   String         @unique @db.VarChar(30)
-  enabled      Boolean?
-  daily_deal   daily_deal[]
-  eps          eps[]
-  legal_person legal_person[]
+  stock_id        String            @id @db.VarChar(10)
+  stock_name      String            @unique @db.VarChar(30)
+  enabled         Boolean?
+  daily_deal      daily_deal[]
+  eps             eps[]
+  legal_person    legal_person[]
+  monthly_revenue monthly_revenue[]
 }
 
 model users {

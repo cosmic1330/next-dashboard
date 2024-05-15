@@ -3,10 +3,10 @@
 import { Button, Grid, Stack, Typography } from '@mui/material';
 import Slider from '@mui/material/Slider';
 import { useContext } from 'react';
-import { RollbackDateContext } from '../../(context)/rollback';
+import { SelectStockContext } from '../../(context)/selectStockContext';
 
 export default function Range() {
-  const { rollback_date, setRollbackDate } = useContext(RollbackDateContext);
+  const { rollback_date, setRollbackDate } = useContext(SelectStockContext);
   const handleChange = (e: any) => {
     setRollbackDate(e.target?.value);
   };

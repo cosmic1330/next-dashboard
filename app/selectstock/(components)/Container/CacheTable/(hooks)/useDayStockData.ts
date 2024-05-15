@@ -1,12 +1,14 @@
 import { FinialDayDataType } from '@/app/api/taiwan-stock/v1/stocks/id/day/route';
+import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
-import { useEffect } from 'react';
+import { useContext, useEffect } from 'react';
 import useSWR from 'swr';
 import { StocksType } from '../type';
 // const fetcher = (url: string) => fetch(url).then((r) => r.json());
 
 export default function useDayStockData(item: StocksType) {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
+  const { db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
       const response = await fetch(url, {
@@ -26,7 +28,10 @@ export default function useDayStockData(item: StocksType) {
   };
 
   const { data, error, isLoading, isValidating } = useSWR<FinialDayDataType[]>(
-    `http://localhost:3000/api/taiwan-stock/v1/stocks/id/day?stockId=${item[0]}`,
+    db_data_set
+      ? `http://localhost:3000/api/taiwan-stock/v1/stocks/id/day?stockId=${item[0]}`
+      : `http://localhost:3000/api/taiwan-stock/v1/stocks/id/day/nocache?stockId=${item[0]}`,
+
     fetcherWithCancel,
     {
       revalidateOnFocus: false,

@@ -23,7 +23,7 @@ export default function TableBodyRow({
     add({
       id: stock.stock_id,
       date: planData?.t || 0,
-      plan: 'Forward Plan',
+      plan: 'Breakthrough Pressure Plan',
       name: stock.stock_name,
       c: planData?.c || 0,
     });
@@ -79,7 +79,6 @@ export default function TableBodyRow({
               ) / 100}
             %
           </Link>
-          s
         </Typography>
       </TableCell>
       <TableCell align="center">{planData.c}</TableCell>

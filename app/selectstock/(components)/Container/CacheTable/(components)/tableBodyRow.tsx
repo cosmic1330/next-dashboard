@@ -1,5 +1,5 @@
 'use client';
-import { RollbackDateContext } from '@/app/selectstock/(context)/rollback';
+import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import { useTrackingList } from '@/store/zustand';
 import CheckIcon from '@mui/icons-material/Check';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
@@ -21,11 +21,11 @@ export default function TableBodyRow({
 }) {
   const { add } = useTrackingList();
   const { isLoading, data } = useDayStockData(stock);
-  const { rollback_date } = useContext(RollbackDateContext);
+  const { rollback_date } = useContext(SelectStockContext);
 
   const { stockDayData } = useMemo(() => {
     try {
-      if(rollback_date === 0) return { stockDayData: data };
+      if (rollback_date === 0) return { stockDayData: data };
       const stockDayData = data?.slice(0, -rollback_date);
       return { stockDayData };
     } catch (error) {

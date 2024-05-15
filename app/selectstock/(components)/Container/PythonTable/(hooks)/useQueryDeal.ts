@@ -1,5 +1,5 @@
 import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/route';
-import { RollbackDateContext } from '@/app/selectstock/(context)/rollback';
+import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
 import FormateDate from '@/utils/formatedate';
 import { Gold, Kd, Ma, Macd, Rsi } from '@ch20026103/anysis';
@@ -8,7 +8,7 @@ import useSWR from 'swr';
 
 export default function useQueryDeal(stock_id: string) {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
-  const { rollback_date } = useContext(RollbackDateContext);
+  const { rollback_date, db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
       const response = await fetch(url, {
@@ -29,7 +29,9 @@ export default function useQueryDeal(stock_id: string) {
 
   const { data, error, isLoading, isValidating, mutate } =
     useSWR<V2DailyDealResponse>(
-      `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock_id}`,
+      db_data_set
+        ? `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock_id}`
+        : `http://localhost:3000/api/taiwan-stock/v2/daily_deal/yahoo/${stock_id}`,
       fetcherWithCancel,
       {
         revalidateOnFocus: false,
@@ -39,7 +41,7 @@ export default function useQueryDeal(stock_id: string) {
     );
 
   const method = useCallback(
-    (rollback_date = 0) => {
+    (rollback_date:number) => {
       if (!data) return;
 
       let ma = new Ma();
@@ -119,15 +121,19 @@ export default function useQueryDeal(stock_id: string) {
             stockData[length - (rollback_date + 1)].v ||
             stockData[length - rollback_date].v >
               stockData[length - (rollback_date + 2)].v) &&
-          // kd黃金交叉
+          // kd向上
           <number>finallyData[length - rollback_date].k >
             <number>finallyData[length - rollback_date].d &&
-          <number>finallyData[length - (rollback_date + 1)].k <
+          <number>finallyData[length - rollback_date].k >
+            <number>finallyData[length - (rollback_date + 1)].k &&
+          <number>finallyData[length - rollback_date].d >
             <number>finallyData[length - (rollback_date + 1)].d &&
           // rsv增加
           <number>finallyData[length - rollback_date].rsv >
             <number>finallyData[length - (rollback_date + 1)].rsv &&
           // macd空方動能減少
+          <number>finallyData[length - rollback_date].dif >
+            <number>finallyData[length - (rollback_date + 1)].dif &&
           <number>finallyData[length - rollback_date].macd >
             <number>finallyData[length - (rollback_date + 1)].macd &&
           <number>finallyData[length - rollback_date].osc >

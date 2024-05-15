@@ -1,18 +1,49 @@
-import NotificationImportantSharpIcon from '@mui/icons-material/NotificationImportantSharp';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import { useSelectPlan } from '@/store/zustand';
+import AdsClickIcon from '@mui/icons-material/AdsClick';
+import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing';
+import FileUploadIcon from '@mui/icons-material/FileUpload';
+import InsightsIcon from '@mui/icons-material/Insights';
+import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
-import { useSelectPlan } from '@/store/zustand';
-import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
-
+const li = [
+  {
+    icon: MoreTimeIcon,
+    text: 'Cache Plan',
+  },
+  {
+    icon: LibraryAddCheckIcon,
+    text: 'Python Plan',
+  },
+  {
+    icon: InsightsIcon,
+    text: 'Forward Plan',
+  },
+  {
+    icon: FileUploadIcon,
+    text: 'Breakthrough Pressure Table',
+  },
+  {
+    icon: AdsClickIcon,
+    text: 'KD Bottom Flip Table',
+  },
+  {
+    icon: CallMissedOutgoingIcon,
+    text: 'Back Support Line Table',
+  },
+  {
+    icon: NoteAddOutlinedIcon,
+    text: 'Tracking Table',
+  },
+];
 
 export default function ListCentent() {
   const { change, plan } = useSelectPlan();
-  
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
@@ -23,52 +54,20 @@ export default function ListCentent() {
 
   return (
     <List component="nav" aria-label="main mailbox folders">
-      <ListItemButton
-        selected={plan === 0}
-        onClick={(event) => handleListItemClick(event, 0)}
-      >
-        <Box>
-          <ListItemIcon>
-            <ShoppingCartIcon />
-          </ListItemIcon>
-          <ListItemText primary="Cache Plan" />
-        </Box>
-      </ListItemButton>
-      <ListItemButton
-        selected={plan === 1}
-        onClick={(event) => handleListItemClick(event, 1)}
-      >
-        <Box>
-          <ListItemIcon>
-            <NotificationImportantSharpIcon />
-          </ListItemIcon>
-          <ListItemText primary="Python Plan" />
-        </Box>
-      </ListItemButton>
-
-      <ListItemButton
-        selected={plan === 2}
-        onClick={(event) => handleListItemClick(event, 2)}
-      >
-        <Box>
-          <ListItemIcon>
-            <StarRoundedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Forward Plan" />
-        </Box>
-      </ListItemButton>
-
-      <ListItemButton
-        selected={plan === 3}
-        onClick={(event) => handleListItemClick(event, 3)}
-      >
-        <Box>
-          <ListItemIcon>
-            <NoteAddOutlinedIcon />
-          </ListItemIcon>
-          <ListItemText primary="Tracking Table" />
-        </Box>
-      </ListItemButton>
+      {li.map((item, index) => (
+        <ListItemButton
+          key={index}
+          selected={plan === index}
+          onClick={(event) => handleListItemClick(event, index)}
+        >
+          <Box>
+            <ListItemIcon>
+              <item.icon />
+            </ListItemIcon>
+            <ListItemText primary={item.text} />
+          </Box>
+        </ListItemButton>
+      ))}
     </List>
   );
 }

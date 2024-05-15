@@ -65,13 +65,19 @@ export default function TableBodyRow({
           )
         </Typography>
         <Typography align="center">
-          {stock &&
-            Math.round(
-              ((planData.c - planData.pre[0].c) / planData.pre[0].c) *
-                100 *
-                100,
-            ) / 100}
-          %
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={` https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${stock.stock_id}`}
+          >
+            {stock &&
+              Math.round(
+                ((planData.c - planData.pre[0].c) / planData.pre[0].c) *
+                  100 *
+                  100,
+              ) / 100}
+            %
+          </Link>
         </Typography>
       </TableCell>
       <TableCell align="center">{planData.c}</TableCell>

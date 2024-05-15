@@ -1,4 +1,4 @@
-import { V2EpsPlusResponse } from '@/app/api/taiwan-stock/v2/eps/plus/route';
+import { V2StocksResponse } from '@/app/api/taiwan-stock/v2/stocks/route';
 import useCancelToken from '@/hooks/useCancelToken';
 import { useEffect, useMemo } from 'react';
 import useSWR from 'swr';
@@ -12,7 +12,10 @@ export default function useQueryStock() {
       });
 
       const data = await response.json();
-      return data;
+      const res = data.filter(
+        (stock: { eps: string | any[]; }) => stock.eps.length > 0 && parseFloat(stock.eps[0].eps_data) > 0,
+      );
+      return res;
     } catch (error) {
       if (isAbortError(error)) {
         console.log('Request was canceled.');
@@ -24,8 +27,8 @@ export default function useQueryStock() {
   };
 
   const { data, error, isLoading, isValidating, mutate } =
-    useSWR<V2EpsPlusResponse>(
-      `http://localhost:3000/api/taiwan-stock/v2/eps/plus`,
+    useSWR<V2StocksResponse>(
+      `http://localhost:3000/api/taiwan-stock/v2/stocks`,
       fetcherWithCancel,
       {
         revalidateOnFocus: false,
@@ -35,20 +38,12 @@ export default function useQueryStock() {
       },
     );
 
-  const stocks = useMemo(() => {
-    if (!data) return [];
-    const res = data.filter(
-      (stock) => stock.eps.length > 0 && parseFloat(stock.eps[0].eps_data) > 0,
-    );
-    return res;
-  }, [data]);
-
   useEffect(() => {
     return () => handleCancel();
   }, [handleCancel]);
 
   return {
-    stocks,
+    data,
     error,
     mutate,
   };

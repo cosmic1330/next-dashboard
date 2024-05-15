@@ -1,4 +1,5 @@
 'use client';
+import useQueryStock from '@/hooks/useQueryStock';
 import { Button, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -7,7 +8,6 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Fragment, Suspense, lazy } from 'react';
-import useQueryStock from './(hooks)/useQueryStock';
 
 const TableBodyRow = lazy(() => import('./tableBodyRow'));
 export default function ForwardTable() {

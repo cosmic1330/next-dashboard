@@ -21,7 +21,7 @@ export default function TableBodyRow({ str }: { str: string }) {
     <TableRow hover>
       <TableCell align="left">
         <Typography variant="body2">Plan: {stock && stock.plan}</Typography>
-        <Typography variant="body2">Date: {stock && stock.date}</Typography>
+        <Typography variant="body2">Add Date: {stock && stock.date}</Typography>
       </TableCell>
       <TableCell>
         <Typography align="center">
@@ -55,15 +55,23 @@ export default function TableBodyRow({ str }: { str: string }) {
           )
         </Typography>
         <Typography align="center">
-          {stock &&
-            Math.round(
-              ((stock.data[stock.data.length - 1].c -
-                stock.data[stock.data.length - 2].c) /
-                stock.data[stock.data.length - 2].c) *
-                100 *
-                100,
-            ) / 100}
-          %
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={` https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${
+              stock && stock.id
+            }`}
+          >
+            {stock &&
+              Math.round(
+                ((stock.data[stock.data.length - 1].c -
+                  stock.data[stock.data.length - 2].c) /
+                  stock.data[stock.data.length - 2].c) *
+                  100 *
+                  100,
+              ) / 100}
+            %
+          </Link>
         </Typography>
       </TableCell>
       <TableCell align="center">
