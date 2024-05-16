@@ -18,7 +18,7 @@ const li = [
   },
   {
     icon: LibraryAddCheckIcon,
-    text: 'Python Plan',
+    text: 'Two Red Soldier Plan',
   },
   {
     icon: InsightsIcon,

@@ -124,16 +124,16 @@ export default function useQueryDeal(stock_id: string) {
             <number>finallyData[length - rollback_date].ma10 &&
           // 均線正向排列
           <number>finallyData[length - rollback_date].ma5 >
+            <number>finallyData[length - rollback_date].ma10 &&
+          <number>finallyData[length - rollback_date].ma10 >
             <number>finallyData[length - rollback_date].ma20 &&
           <number>finallyData[length - rollback_date].ma20 >
             <number>finallyData[length - rollback_date].ma60 &&
-          <number>finallyData[length - rollback_date].ma5 >
-            <number>finallyData[length - rollback_date].ma60 &&
-          // 月線往上
-          // <number>finallyData[length - rollback_date].ma20 >
-          //   <number>finallyData[length - (rollback_date + 1)].ma20 &&
-          // <number>finallyData[length - (rollback_date + 1)].ma20 >
-          //   <number>finallyData[length - (rollback_date + 2)].ma20 &&
+          // 10日線往上
+          <number>finallyData[length - rollback_date].ma10 >
+            <number>finallyData[length - (rollback_date + 1)].ma10 &&
+          <number>finallyData[length - (rollback_date + 1)].ma10 >
+            <number>finallyData[length - (rollback_date + 2)].ma10 &&
           // 五日均線往上
           <number>finallyData[length - rollback_date].ma5 >
             <number>finallyData[length - (rollback_date + 1)].ma5 &&
@@ -142,7 +142,7 @@ export default function useQueryDeal(stock_id: string) {
             <number>finallyData[length - rollback_date].ma20) /
             <number>finallyData[length - rollback_date].ma20) *
             100 <
-            3
+            3 
         ) {
           return {
             ...finallyData[length - rollback_date],

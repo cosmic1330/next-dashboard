@@ -10,13 +10,13 @@ import TableRow from '@mui/material/TableRow';
 import { Fragment, Suspense, lazy } from 'react';
 
 const TableBodyRow = lazy(() => import('./tableBodyRow'));
-export default function PythonTable() {
+export default function TwoRedSoldierTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        技術線轉多頭標的
+        紅二兵的標的
       </Typography>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data

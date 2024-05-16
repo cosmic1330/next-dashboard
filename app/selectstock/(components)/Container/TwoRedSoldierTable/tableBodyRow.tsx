@@ -22,7 +22,7 @@ export default function TableBodyRow({
     add({
       id: stock.stock_id,
       date: planData?.t || 0,
-      plan: 'Python Plan',
+      plan: 'Two Red Soldier Plan',
       name: stock.stock_name,
       c: planData?.c || 0,
     });

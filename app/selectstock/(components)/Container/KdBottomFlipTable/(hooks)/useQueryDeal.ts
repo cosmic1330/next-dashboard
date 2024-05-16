@@ -116,29 +116,33 @@ export default function useQueryDeal(stock_id: string) {
         }
         if (
           // 成交量大於1000張
-          <number>finallyData[length - rollback_date]?.v > 1000 &&
+          <number>finallyData[length - rollback_date]?.v > 500 &&
+          <number>finallyData[length - rollback_date]?.c >
+            <number>finallyData[length - (rollback_date + 1)]?.ma5 &&
           <number>finallyData[length - rollback_date]?.c >
             <number>finallyData[length - (rollback_date + 1)]?.h &&
           <number>finallyData[length - rollback_date]?.c >
             <number>finallyData[length - (rollback_date + 2)]?.l &&
           // EMA
           <number>finallyData[length - rollback_date]?.ma5 >
-            <number>finallyData[length - rollback_date]?.ma10 &&
-          <number>finallyData[length - rollback_date]?.ma10 >
             <number>finallyData[length - rollback_date]?.ma20 &&
           <number>finallyData[length - rollback_date]?.ma20 >
             <number>finallyData[length - rollback_date]?.ma60 &&
           // MACD
           <number>finallyData[length - rollback_date]?.macd >
             <number>finallyData[length - (rollback_date + 1)]?.macd &&
+          <number>finallyData[length - rollback_date]?.osc >
+            <number>finallyData[length - (rollback_date + 1)]?.osc &&
           // KD 黃金交叉
-          ((<number>finallyData[length - rollback_date]?.k >
+          <number>finallyData[length - rollback_date]?.k >
             <number>finallyData[length - rollback_date]?.d &&
-            <number>finallyData[length - (rollback_date + 1)]?.k <
-              <number>finallyData[length - (rollback_date + 1)]?.d)) &&
+          <number>finallyData[length - (rollback_date + 1)]?.k <
+            <number>finallyData[length - (rollback_date + 1)]?.d &&
           // rsv
           <number>finallyData[length - rollback_date].rsv >
-            <number>finallyData[length - (rollback_date + 1)].rsv
+            <number>finallyData[length - (rollback_date + 1)].rsv &&
+          <number>finallyData[length - rollback_date].rsv < 75 &&
+          <number>finallyData[length - rollback_date].rsv > 30
         ) {
           return {
             ...finallyData[length - rollback_date],

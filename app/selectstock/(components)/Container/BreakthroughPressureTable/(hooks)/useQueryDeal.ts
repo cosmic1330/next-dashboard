@@ -115,7 +115,6 @@ export default function useQueryDeal(stock_id: string) {
           });
         }
         if (
-          // 收盤價持續大於10日均線
           stockData[length - rollback_date].c >
             <number>finallyData[length - rollback_date].ma5 &&
           stockData[length - rollback_date].l >
@@ -123,12 +122,38 @@ export default function useQueryDeal(stock_id: string) {
           // 5日均線往上突破20日均線或60日均線
           ((<number>finallyData[length - rollback_date].ma5 >
             <number>finallyData[length - rollback_date].ma20 &&
-            <number>finallyData[length - rollback_date - 1].ma5 <
-              <number>finallyData[length - rollback_date - 1].ma20) ||
+            <number>finallyData[length - (rollback_date + 1)].ma5 <
+              <number>finallyData[length - (rollback_date + 1)].ma20) ||
             (<number>finallyData[length - rollback_date].ma5 >
               <number>finallyData[length - rollback_date].ma60 &&
-              <number>finallyData[length - rollback_date - 1].ma5 <
-                <number>finallyData[length - rollback_date - 1].ma60)) &&
+              <number>finallyData[length - (rollback_date + 1)].ma5 <
+                <number>finallyData[length - (rollback_date + 1)].ma60) ||
+            (<number>finallyData[length - rollback_date].ma5 <
+              <number>finallyData[length - rollback_date].ma20 &&
+              <number>finallyData[length - (rollback_date + 1)].ma5 <
+                <number>finallyData[length - (rollback_date + 1)].ma20 &&
+              <number>finallyData[length - rollback_date].ma20 -
+                <number>finallyData[length - rollback_date].ma5 <
+                <number>finallyData[length - (rollback_date + 1)].ma20 -
+                  <number>finallyData[length - (rollback_date + 1)].ma5 &&
+              ((<number>finallyData[length - rollback_date].ma20 -
+                <number>finallyData[length - rollback_date].ma5) /
+                <number>finallyData[length - rollback_date].ma5) *
+                100 <
+                1.5) ||
+            (<number>finallyData[length - rollback_date].ma5 <
+              <number>finallyData[length - rollback_date].ma60 &&
+              <number>finallyData[length - (rollback_date + 1)].ma5 <
+                <number>finallyData[length - (rollback_date + 1)].ma60 &&
+              <number>finallyData[length - rollback_date].ma60 -
+                <number>finallyData[length - rollback_date].ma5 <
+                <number>finallyData[length - (rollback_date + 1)].ma60 -
+                  <number>finallyData[length - (rollback_date + 1)].ma5 &&
+              ((<number>finallyData[length - rollback_date].ma60 -
+                <number>finallyData[length - rollback_date].ma5) /
+                <number>finallyData[length - rollback_date].ma5) *
+                100 <
+                1.5)) &&
           // 月線往上
           <number>finallyData[length - rollback_date].ma20 >
             <number>finallyData[length - (rollback_date + 1)].ma20 &&
@@ -148,7 +173,9 @@ export default function useQueryDeal(stock_id: string) {
             <number>finallyData[length - (rollback_date + 1)].ma5 &&
           // rsv
           <number>finallyData[length - rollback_date].rsv >
-            <number>finallyData[length - (rollback_date + 1)].rsv
+            <number>finallyData[length - (rollback_date + 1)].rsv &&
+          <number>finallyData[length - rollback_date].rsv < 75 &&
+          <number>finallyData[length - rollback_date].rsv > 30
         ) {
           return {
             ...finallyData[length - rollback_date],

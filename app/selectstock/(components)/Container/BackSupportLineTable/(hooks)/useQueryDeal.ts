@@ -116,6 +116,7 @@ export default function useQueryDeal(stock_id: string) {
         }
         if (
           // 股價下跌不跌破均線
+          stockData[length - rollback_date].v > 500 &&
           stockData[length - rollback_date].c <
             stockData[length - rollback_date].o &&
           (stockData[length - rollback_date].c >
@@ -131,8 +132,6 @@ export default function useQueryDeal(stock_id: string) {
           <number>finallyData[length - rollback_date].ma5 >
             <number>finallyData[length - rollback_date].ma20 &&
           <number>finallyData[length - rollback_date].ma20 >
-            <number>finallyData[length - rollback_date].ma60 &&
-          <number>finallyData[length - rollback_date].ma5 >
             <number>finallyData[length - rollback_date].ma60 &&
           // 月線往上
           <number>finallyData[length - rollback_date].ma20 >
@@ -153,9 +152,13 @@ export default function useQueryDeal(stock_id: string) {
             <number>finallyData[length - (rollback_date + 1)].k &&
           <number>finallyData[length - rollback_date].k >
             <number>finallyData[length - rollback_date].d &&
+          <number>finallyData[length - rollback_date].rsv >
+            <number>finallyData[length - (rollback_date + 1)].rsv &&
           // macd 往上
           <number>finallyData[length - rollback_date].macd >
             <number>finallyData[length - (rollback_date + 1)].macd &&
+          <number>finallyData[length - rollback_date].osc >
+            <number>finallyData[length - (rollback_date + 1)].osc &&
           // 月線及五日均線差距小於3%
           ((<number>finallyData[length - rollback_date].ma5 -
             <number>finallyData[length - rollback_date].ma20) /
