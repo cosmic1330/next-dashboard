@@ -122,12 +122,14 @@ export default function useQueryDeal(stock_id: string) {
         if (
           stockData[length - rollback_date].c >
             <number>finallyData[length - rollback_date].ma5 &&
-          stockData[length - rollback_date].c >
-            <number>finallyData[length - rollback_date].bollUb &&
+          stockData[length - (rollback_date + 1)].c >
+            <number>finallyData[length - (rollback_date + 1)].ma5 &&
+          (stockData[length - rollback_date].c >
+            <number>finallyData[length - rollback_date].bollUb ||
+            stockData[length - rollback_date].h >
+              <number>finallyData[length - rollback_date].bollUb) &&
           stockData[length - rollback_date].l >
             <number>finallyData[length - rollback_date].ma5 &&
-          stockData[length - rollback_date].c >
-            stockData[length - rollback_date].o &&
           // 均線正向排列
           <number>finallyData[length - rollback_date].ma5 >
             <number>finallyData[length - rollback_date].ma20 &&
@@ -138,9 +140,9 @@ export default function useQueryDeal(stock_id: string) {
             <number>finallyData[length - (rollback_date + 1)].ma5 &&
           // KD 往上
           <number>finallyData[length - rollback_date].k >
-            <number>finallyData[length - (rollback_date + 1)].k &&
-          <number>finallyData[length - rollback_date].k >
             <number>finallyData[length - rollback_date].d &&
+          <number>finallyData[length - rollback_date].k >
+            <number>finallyData[length - (rollback_date + 1)].k &&
           <number>finallyData[length - rollback_date].rsv >
             <number>finallyData[length - (rollback_date + 1)].rsv &&
           // macd 動能增加
@@ -157,7 +159,12 @@ export default function useQueryDeal(stock_id: string) {
             <number>finallyData[length - (rollback_date + 1)].c) *
             100 <
             6 &&
-          // 未跳高
+          // K棒未跳高
+          ((<number>finallyData[length - rollback_date].l -
+            <number>finallyData[length - rollback_date].ma5) /
+            <number>finallyData[length - rollback_date].ma5) *
+            100 <
+            1 &&
           ((<number>finallyData[length - rollback_date].l -
             <number>finallyData[length - (rollback_date + 1)].ma5) /
             <number>finallyData[length - (rollback_date + 1)].ma5) *
