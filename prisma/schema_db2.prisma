@@ -55,13 +55,13 @@ model monthly_revenue {
   year                             Int
   month                            Int
   stock_id                         String   @db.VarChar(10)
-  current_month_revenue            BigInt?
-  previous_month_revenue           BigInt?
-  previous_year_same_month_revenue BigInt?
+  current_month_revenue            Int
+  previous_month_revenue           Int
+  previous_year_same_month_revenue Int
   month_over_month_revenue         Decimal? @db.Decimal(15, 3)
   year_over_year_revenue           Decimal? @db.Decimal(15, 3)
-  current_year_cumulative_revenue  BigInt?
-  previous_year_cumulative_revenue BigInt?
+  current_year_cumulative_revenue  Int
+  previous_year_cumulative_revenue Int
   compare_cumulative_revenue       Decimal? @db.Decimal(15, 3)
   stock                            stock    @relation(fields: [stock_id], references: [stock_id], onDelete: NoAction, onUpdate: NoAction)
 

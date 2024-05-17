@@ -27,7 +27,14 @@ export default function SideBar() {
       </StyledHeader>
       <Divider />
       <Box textAlign="left">
+        <Typography variant="overline" px={2}>Slope Section 坡段</Typography>
         <ListCentent />
+      </Box>
+      <Box textAlign="left">
+        <Typography variant="overline" px={2}>Day Trading 當沖</Typography>
+      </Box>
+      <Box textAlign="left">
+        <Typography variant="overline" px={2}>Long-term Deposits 存股</Typography>
       </Box>
       <Box textAlign="center"></Box>
     </StyledDrawer>

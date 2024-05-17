@@ -71,12 +71,11 @@ export default function TableBodyRow({
             rel="noreferrer"
             href={` https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${stock.stock_id}`}
           >
-            {stock &&
-              Math.round(
-                ((planData.c - planData.pre[0].c) / planData.pre[0].c) *
-                  100 *
-                  100,
-              ) / 100}
+            {Math.round(
+              ((planData.c - planData.pre[0].c) / planData.pre[0].c) *
+                100 *
+                100,
+            ) / 100}
             %
           </Link>
           s
@@ -189,6 +188,22 @@ export default function TableBodyRow({
         </Typography>
         <Typography align="left">
           自營: {Math.floor(planData['dealer'] / 1000) || 0}
+        </Typography>
+
+        <Typography align="left" variant="subtitle2" color="secondary">
+          營收月份:
+          {`${stock.monthly_revenue[0].year}/${stock.monthly_revenue[0].month}` ||
+            0}
+        </Typography>
+        <Typography align="left">
+          月增率: {stock.monthly_revenue[0].month_over_month_revenue || 0}%
+        </Typography>
+        <Typography align="left">
+          年增率: {stock.monthly_revenue[0].year_over_year_revenue || 0}%
+        </Typography>
+        <Typography align="left">
+          累計營收比較:
+          {stock.monthly_revenue[0].compare_cumulative_revenue || 0}%
         </Typography>
       </TableCell>
     </TableRow>
