@@ -6,6 +6,7 @@ import BreakthroughPressureTable from './BreakthroughPressureTable';
 import CacheTable from './CacheTable';
 import ForwardTable from './ForwardTable';
 import KdBottomFlipTable from './KdBottomFlipTable';
+import NextDayTradingTable from './NextDayTradingTable';
 import TaiexBox from './TaiexBox';
 import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
@@ -40,7 +41,10 @@ export default function Container() {
       {plan === 3 && <BreakthroughPressureTable />}
       {plan === 4 && <KdBottomFlipTable />}
       {plan === 5 && <BackSupportLineTable />}
-      {plan === 6 && <TrackingTable />}
+
+      {plan === 100 && <NextDayTradingTable />}
+
+      {plan === 300 && <TrackingTable />}
     </StyledContainer>
   );
 }

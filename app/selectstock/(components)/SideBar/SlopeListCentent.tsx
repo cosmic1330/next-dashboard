@@ -1,11 +1,10 @@
 import { useSelectPlan } from '@/store/zustand';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
+import CachedIcon from '@mui/icons-material/Cached';
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import InsightsIcon from '@mui/icons-material/Insights';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
-import MoreTimeIcon from '@mui/icons-material/MoreTime';
-import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -13,7 +12,7 @@ import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
 const li = [
   {
-    icon: MoreTimeIcon,
+    icon: CachedIcon,
     text: 'Cache Plan',
   },
   {
@@ -36,13 +35,9 @@ const li = [
     icon: CallMissedOutgoingIcon,
     text: 'Back Support Line Table',
   },
-  {
-    icon: NoteAddOutlinedIcon,
-    text: 'Tracking Table',
-  },
 ];
 
-export default function ListCentent() {
+export default function SlopeListCentent() {
   const { change, plan } = useSelectPlan();
 
   const handleListItemClick = (
