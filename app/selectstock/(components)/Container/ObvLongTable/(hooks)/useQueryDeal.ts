@@ -2,12 +2,14 @@ import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/r
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
 import FormateDate from '@/utils/formateStrDate';
-import { Gold, Kd, Ma, Macd, Obv, Rsi } from '@ch20026103/anysis';
+import { Gold, Kd, Ma, Macd, Obv } from '@ch20026103/anysis';
+
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
 export default function useQueryDeal(stock_id: string) {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
+
   const { rollback_date, db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
@@ -46,7 +48,6 @@ export default function useQueryDeal(stock_id: string) {
 
       let ma = new Ma();
       let macd = new Macd();
-      let rsi = new Rsi();
       let kd = new Kd();
       let obv = new Obv();
       try {
@@ -126,36 +127,53 @@ export default function useQueryDeal(stock_id: string) {
           });
         }
         if (
-          stockData[length - rollback_date].v > 1500 &&
-          // 收紅
-          stockData[length - rollback_date].c >=
-            finallyData[length - rollback_date].o &&
-          // 收盤價高於5ma
-          stockData[length - rollback_date].c >
-            finallyData[length - rollback_date].ma5 &&
-          // 底底高
-          stockData[length - rollback_date].l >=
-            finallyData[length - (rollback_date + 1)].l &&
-          stockData[length - (rollback_date + 1)].l >=
-            finallyData[length - (rollback_date + 2)].l &&
-          // rsv升高
-          <number>finallyData[length - rollback_date].rsv >
-            <number>finallyData[length - (rollback_date + 1)].rsv &&
-          // kd金叉
-          <number>finallyData[length - rollback_date].k >
-            <number>finallyData[length - rollback_date].d &&
-          <number>finallyData[length - (rollback_date + 1)].k <
-            <number>finallyData[length - (rollback_date + 1)].d &&
-          // 5ma > 20ma > 60ma
-          <number>finallyData[length - rollback_date].ma5 >
-            <number>finallyData[length - rollback_date].ma20 &&
+          // 交易量大於 4000 張
+          <number>finallyData[length - rollback_date]?.v > 4000 &&
+          // 五日線上
+          <number>finallyData[length - rollback_date]?.c >
+            <number>finallyData[length - rollback_date]?.ma5 &&
+          // 五日線往上
+          <number>finallyData[length - rollback_date]?.ma5 >
+            <number>finallyData[length - (rollback_date + 1)]?.ma5 &&
+          <number>finallyData[length - (rollback_date + 1)]?.ma5 >
+            <number>finallyData[length - (rollback_date + 2)]?.ma5 &&
+          // KD 往上
+          <number>finallyData[length - rollback_date]?.k >
+            <number>finallyData[length - (rollback_date + 1)]?.k &&
+          <number>finallyData[length - rollback_date]?.k >
+            <number>finallyData[length - rollback_date]?.d &&
+          // 均線正向排列
+          <number>finallyData[length - rollback_date]?.ma5 >
+            <number>finallyData[length - rollback_date]?.ma10 &&
+          <number>finallyData[length - rollback_date]?.ma10 >
+            <number>finallyData[length - rollback_date]?.ma20 &&
+          <number>finallyData[length - rollback_date]?.ma20 >
+            <number>finallyData[length - rollback_date]?.ma60 &&
+          // OBV 正向排列
+          <number>finallyData[length - rollback_date]?.obv >
+            <number>finallyData[length - rollback_date]?.obvMa5 &&
+          <number>finallyData[length - rollback_date]?.obvMa5 >
+            <number>finallyData[length - rollback_date]?.obvMa10 &&
+          // OBV 均線上揚
+          <number>finallyData[length - rollback_date]?.obv >
+            <number>finallyData[length - (rollback_date + 1)]?.obv &&
+          <number>finallyData[length - rollback_date].obvMa5 >
+            <number>finallyData[length - (rollback_date + 1)].obvMa5 &&
+          <number>finallyData[length - rollback_date].obvMa10 >
+            <number>finallyData[length - (rollback_date + 1)].obvMa10 &&
+          // 均線上揚
+          <number>finallyData[length - rollback_date]?.ma5 >
+            <number>finallyData[length - (rollback_date + 1)]?.ma5 &&
           <number>finallyData[length - rollback_date].ma20 >
-            <number>finallyData[length - rollback_date].ma60 &&
-          // 60ma持續上升
+            <number>finallyData[length - (rollback_date + 1)].ma20 &&
           <number>finallyData[length - rollback_date].ma60 >
             <number>finallyData[length - (rollback_date + 1)].ma60 &&
-          <number>finallyData[length - (rollback_date + 1)].ma60 >
-            <number>finallyData[length - (rollback_date + 2)].ma60
+          // K棒未跳高
+          ((<number>finallyData[length - rollback_date].l -
+            <number>finallyData[length - rollback_date].ma5) /
+            <number>finallyData[length - rollback_date].ma5) *
+            100 <
+            1
         ) {
           return {
             ...finallyData[length - rollback_date],

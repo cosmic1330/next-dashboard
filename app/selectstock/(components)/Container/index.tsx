@@ -12,6 +12,7 @@ import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
 import Range from './range';
 import Switch from './switch';
+import ObvLongTable from './ObvLongTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -43,6 +44,8 @@ export default function Container() {
       {plan === 5 && <BackSupportLineTable />}
 
       {plan === 100 && <NextDayTradingTable />}
+
+      {plan === 200 && <ObvLongTable />}
 
       {plan === 300 && <TrackingTable />}
     </StyledContainer>

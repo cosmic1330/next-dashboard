@@ -1,7 +1,7 @@
 import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/route';
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
-import FormateDate from '@/utils/formatedate';
+import FormateDate from '@/utils/formateStrDate';
 import { Gold, Kd, Ma, Macd, Obv } from '@ch20026103/anysis';
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';

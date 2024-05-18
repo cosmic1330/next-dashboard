@@ -171,6 +171,14 @@ export default function TableBodyRow({ str }: { str: string }) {
         </Typography>
         <Typography align="center" color="success.main">
           {stock &&
+            (stock.data[stock?.data.length - 1].obv as number) <
+              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+              (stock.data[stock?.data.length - 1].obvMa5 as number) <
+              (stock.data[stock?.data.length - 1].obvMa10 as number) &&
+            'Obv空頭排列'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
             (stock.data[stock?.data.length - 1].obv as number) >
               (stock.data[stock?.data.length - 1].obvMa5 as number) &&
             'Obv多頭'}

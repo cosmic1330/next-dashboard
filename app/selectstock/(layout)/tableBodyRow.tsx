@@ -177,6 +177,11 @@ export default function TableBodyRow({
             planData.obvMa5 > planData.obvMa10 &&
             'Obv正向排列'}
         </Typography>
+        <Typography align="center" color="error">
+          {planData.obv < planData.obvMa5 &&
+            planData.obvMa5 < planData.obvMa10 &&
+            'Obv空頭排列'}
+        </Typography>
         <Typography align="center" color="success.main">
           {planData.obv > planData.obvMa5 && 'Obv多頭'}
         </Typography>

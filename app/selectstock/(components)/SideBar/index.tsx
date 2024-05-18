@@ -9,6 +9,7 @@ import NextDayListCentent from './NextDayListCentent';
 import OthersListCentent from './OthersListCentent';
 import SlopeListCentent from './SlopeListCentent';
 import { Divider, StyledDrawer, StyledHeader } from './styles';
+import DayTradingListCentent from './DayTradingListCentent';
 
 export default function SideBar() {
   const [open, setOpen] = useState<boolean>(true);
@@ -44,6 +45,7 @@ export default function SideBar() {
         <Typography variant="overline" px={2}>
           Day Trading 當沖
         </Typography>
+        <DayTradingListCentent />
       </Box>
       <Box textAlign="left">
         <Typography variant="overline" px={2}>
