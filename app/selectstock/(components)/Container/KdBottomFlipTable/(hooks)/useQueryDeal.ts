@@ -2,7 +2,8 @@ import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/r
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
 import FormateDate from '@/utils/formatedate';
-import { Gold, Kd, Ma, Macd } from '@ch20026103/anysis';
+import { Gold, Kd, Ma, Macd, Obv } from '@ch20026103/anysis';
+
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -48,6 +49,7 @@ export default function useQueryDeal(stock_id: string) {
       let ma = new Ma();
       let macd = new Macd();
       let kd = new Kd();
+      let obv = new Obv();
       try {
         const stockData = data.map((item) => ({
           id: stock_id,
@@ -72,6 +74,8 @@ export default function useQueryDeal(stock_id: string) {
         let ma10Data = ma.init(stockData[0], 10);
         let ma20Data = ma.init(stockData[0], 20);
         let ma60Data = ma.init(stockData[0], 60);
+        let obv5Data = obv.init(stockData[0], 5);
+        let obv10Data = obv.init(stockData[0], 10);
         let finallyData = [
           {
             ...stockData[0],
@@ -88,6 +92,9 @@ export default function useQueryDeal(stock_id: string) {
             ma10: ma10Data.ma,
             ma20: ma20Data.ma,
             ma60: ma60Data.ma,
+            obv: obv5Data.obv,
+            obvMa5: obv5Data.obvMa,
+            obvMa10: obv10Data.obvMa,
           },
         ];
         for (let i = 1; i < stockData.length; i++) {
@@ -97,6 +104,8 @@ export default function useQueryDeal(stock_id: string) {
           ma10Data = ma.next(stockData[i], ma10Data, 10);
           ma20Data = ma.next(stockData[i], ma20Data, 20);
           ma60Data = ma.next(stockData[i], ma60Data, 60);
+          obv5Data = obv.next(stockData[i], obv5Data, 5);
+          obv10Data = obv.next(stockData[i], obv10Data, 10);
           finallyData.push({
             ...stockData[i],
             ema12: macdData.ema12,
@@ -112,6 +121,9 @@ export default function useQueryDeal(stock_id: string) {
             ma10: ma10Data.ma,
             ma20: ma20Data.ma,
             ma60: ma60Data.ma,
+            obv: obv5Data.obv,
+            obvMa5: obv5Data.obvMa,
+            obvMa10: obv10Data.obvMa,
           });
         }
         if (

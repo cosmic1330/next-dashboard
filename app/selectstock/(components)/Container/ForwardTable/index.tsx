@@ -9,7 +9,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Fragment, Suspense, lazy } from 'react';
 
-const TableBodyRow = lazy(() => import('./tableBodyRow'));
+const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
 export default function ForwardTable() {
   const { data: stocks, mutate } = useQueryStock();
 
@@ -43,7 +43,7 @@ export default function ForwardTable() {
             {stocks &&
               stocks.map((stock, index) => (
                 <Suspense fallback={<></>} key={index}>
-                  <TableBodyRow {...{ stock }} />
+                  <TableBodyProvider {...{ stock }} />
                 </Suspense>
               ))}
           </TableBody>

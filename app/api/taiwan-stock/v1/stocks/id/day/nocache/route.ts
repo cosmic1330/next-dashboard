@@ -28,6 +28,8 @@ export type FinialDayDataType = {
   bollMa: number;
   bollUb: number;
   bollLb: number;
+  obvMa5: number;
+  obvMa10: number;
 };
 
 export const GET = async (req: Request) => {
@@ -51,7 +53,8 @@ export const GET = async (req: Request) => {
     const kd = new Kd();
     const ma = new Ma();
     const boll = new Boll();
-    let obvData = obv.init(ta[0]);
+    let obv5Data = obv.init(ta[0], 5);
+    let obv10Data = obv.init(ta[0], 10);
     let macdData = macd.init(ta[0]);
     let kdData = kd.init(ta[0]);
     let ma5Data = ma.init(ta[0], 5);
@@ -67,7 +70,9 @@ export const GET = async (req: Request) => {
         macd: macdData.macd,
         osc: macdData.osc,
         dif: macdData.dif[macdData.dif.length - 1],
-        obv: obvData.obv,
+        obv: obv5Data.obv,
+        obvMa5: obv5Data.obvMa,
+        obvMa10: obv10Data.obvMa,
         rsv: kdData.rsv,
         k: kdData.k,
         d: kdData.d,
@@ -82,7 +87,8 @@ export const GET = async (req: Request) => {
       },
     ];
     for (let i = 1; i < ta.length; i++) {
-      obvData = obv.next(ta[i], obvData);
+      obv5Data = obv.next(ta[i], obv5Data, 5);
+      obv10Data = obv.next(ta[i], obv10Data, 10);
       macdData = macd.next(ta[i], macdData);
       kdData = kd.next(ta[i], kdData, 9);
       ma5Data = ma.next(ta[i], ma5Data, 5);
@@ -96,7 +102,9 @@ export const GET = async (req: Request) => {
         macd: macdData.macd,
         osc: macdData.osc,
         dif: macdData.dif[macdData.dif.length - 1],
-        obv: obvData.obv,
+        obv: obv5Data.obv,
+        obvMa5: obv5Data.obvMa,
+        obvMa10: obv10Data.obvMa,
         rsv: kdData.rsv,
         k: kdData.k,
         d: kdData.d,

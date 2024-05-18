@@ -161,6 +161,28 @@ export default function TableBodyRow({ str }: { str: string }) {
               (stock.data[stock?.data.length - 3].macd as number) &&
             '多方動能漸強'}
         </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
+            (stock.data[stock?.data.length - 1].obv as number) >
+              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+              (stock.data[stock?.data.length - 1].obvMa5 as number) >
+              (stock.data[stock?.data.length - 1].obvMa10 as number) &&
+            'Obv正向排列'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
+            (stock.data[stock?.data.length - 1].obv as number) >
+              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+            'Obv多頭'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {stock &&
+            (stock.data[stock?.data.length - 1].obv as number) >
+              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+            (stock.data[stock?.data.length - 2].obv as number) <
+              (stock.data[stock?.data.length - 2].obvMa5 as number) &&
+            'Obv黃金交叉'}
+        </Typography>
       </TableCell>
       <TableCell align="center">
         <Typography align="center" color={'error'}>
@@ -269,6 +291,20 @@ export default function TableBodyRow({ str }: { str: string }) {
             (stock.data[stock?.data.length - 2].macd as number) <
               (stock.data[stock?.data.length - 3].macd as number) &&
             '空方動能漸強'}
+        </Typography>
+        <Typography align="center" color="error">
+          {stock &&
+            (stock.data[stock?.data.length - 1].obv as number) <
+              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+            'Obv空頭'}
+        </Typography>
+        <Typography align="center" color="error">
+          {stock &&
+            (stock.data[stock?.data.length - 1].obv as number) <
+              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+            (stock.data[stock?.data.length - 2].obv as number) >
+              (stock.data[stock?.data.length - 2].obvMa5 as number) &&
+            'Obv死亡交叉'}
         </Typography>
       </TableCell>
     </TableRow>

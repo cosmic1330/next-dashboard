@@ -9,21 +9,23 @@ import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { Fragment } from 'react';
-import useQueryDeal from './(hooks)/useQueryDeal';
 
 export default function TableBodyRow({
   stock,
+  plan,
+  planData,
 }: {
   stock: V2StocksResponseRow;
+  plan: string;
+  planData: any;
 }) {
   const { add } = useTrackingList();
-  const { planData } = useQueryDeal(stock.stock_id);
 
   const handleAdd = () => {
     add({
       id: stock.stock_id,
       date: planData?.t || 0,
-      plan: 'Next DayT rading Plan',
+      plan,
       name: stock.stock_name,
       c: planData?.c || 0,
     });
@@ -104,6 +106,12 @@ export default function TableBodyRow({
             planData.pre[0].ma20 > planData.pre[1].ma20 &&
             '月線向上'}
         </Typography>
+        <Typography align="center" color="success.main">
+          {planData &&
+            planData.ma20 > planData.pre[0].ma20 &&
+            planData.pre[0].ma20 > planData.pre[1].ma20 &&
+            '月線向上'}
+        </Typography>
         <Typography align="center" color="error">
           {planData &&
             planData.ma20 < planData.pre[0].ma20 &&
@@ -163,6 +171,27 @@ export default function TableBodyRow({
             (planData.pre[0].macd as number) <
               (planData.pre[1].macd as number) &&
             'Macd空方動能漸強'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData.obv > planData.obvMa5 &&
+            planData.obvMa5 > planData.obvMa10 &&
+            'Obv正向排列'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData.obv > planData.obvMa5 && 'Obv多頭'}
+        </Typography>
+        <Typography align="center" color="error">
+          {planData.obv < planData.obvMa5 && 'Obv空頭'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData.obv > planData.obvMa5 &&
+            planData.pre[0].obv < planData.pre[0].obvMa5 &&
+            'Obv黃金交叉'}
+        </Typography>
+        <Typography align="center" color="error">
+          {planData.obv < planData.obvMa5 &&
+            planData.pre[0].obv > planData.pre[0].obvMa5 &&
+            'Obv死亡交叉'}
         </Typography>
       </TableCell>
       <TableCell align="center">
