@@ -1,10 +1,16 @@
-import { V2StocksResponse } from '@/app/api/taiwan-stock/v2/stocks/route';
+import {
+  V2StocksResponse,
+  V2StocksResponseRow,
+} from '@/app/api/taiwan-stock/v2/stocks/route';
+import { StocksType } from '@/app/selectstock/(components)/Container/CacheTable/type';
+import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
-import { useEffect, useMemo } from 'react';
+import { useContext, useEffect } from 'react';
 import useSWR from 'swr';
 
 export default function useQueryStock() {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
+  const { db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
       const response = await fetch(url, {
@@ -12,10 +18,23 @@ export default function useQueryStock() {
       });
 
       const data = await response.json();
-      const res = data.filter(
-        (stock: { eps: string | any[]; }) => stock.eps.length > 0 && parseFloat(stock.eps[0].eps_data) > 0,
-      );
-      return res;
+      if (db_data_set) {
+        const res = data.filter(
+          (stock: V2StocksResponseRow) =>
+            stock.eps.length > 0 && parseFloat(stock.eps[0].eps_data) > 0,
+        );
+        return res;
+      } else {
+        const stockList: StocksType[] = data.data;
+        const res = stockList.map((stock) => {
+          const [stock_id, stock_name] = stock;
+          return {
+            stock_id,
+            stock_name,
+          };
+        });
+        return res;
+      }
     } catch (error) {
       if (isAbortError(error)) {
         console.log('Request was canceled.');
@@ -28,7 +47,9 @@ export default function useQueryStock() {
 
   const { data, error, isLoading, isValidating, mutate } =
     useSWR<V2StocksResponse>(
-      `http://localhost:3000/api/taiwan-stock/v2/stocks`,
+      db_data_set
+        ? `http://localhost:3000/api/taiwan-stock/v2/stocks`
+        : `http://localhost:3000/api/taiwan-stock/v1/stocks`,
       fetcherWithCancel,
       {
         revalidateOnFocus: false,

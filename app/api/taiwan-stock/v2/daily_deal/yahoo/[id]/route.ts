@@ -39,45 +39,56 @@ export const GET = async (req: Request) => {
     let parse = JSON.parse(res1);
     let ta = parse.ta as ItemType;
 
-    const prisma = new PrismaClient();
-    // last
-    const res2 = await prisma.legal_person.findMany({
-      where: {
-        stock_id: id,
-        transaction_date: {
-          gte: new Date(formateIsoDate(ta[0].t)), // 大於等於起始日期
-          lte: new Date(formateIsoDate(ta[ta.length - 1].t)), // 小於等於結束日期
+    try {
+      const prisma = new PrismaClient();
+      // last
+      const res2 = await prisma.legal_person.findMany({
+        where: {
+          stock_id: id,
+          transaction_date: {
+            gte: new Date(formateIsoDate(ta[0].t)), // 大於等於起始日期
+            lte: new Date(formateIsoDate(ta[ta.length - 1].t)), // 小於等於結束日期
+          },
         },
-      },
-    });
+      });
 
-    await prisma.$disconnect();
+      await prisma.$disconnect();
+      const arr = ta.map((item, index) => {
+        if (res2[index]) {
+          return {
+            transaction_date: formateIsoDate(item.t),
+            stock_id: res2[0].stock_id,
+            stock_name: res2[0].stock_name,
+            volume: item.v,
+            open_price: item.o,
+            close_price: item.c,
+            high_price: item.h,
+            low_price: item.l,
+            legal_person: [
+              {
+                transaction_date: formateIsoDate(item.t),
+                foreign_investors: res2[index].foreign_investors || 0,
+                investment_trust: res2[index].investment_trust || 0,
+                dealer: res2[index].dealer || 0,
+              },
+            ],
+          };
+        }
+      });
 
+      return NextResponse.json(arr, {
+        headers: { 'x-cache': 'MISS' },
+      });
+    } catch (error) {
+      console.log(error);
+    }
+
+    // unable to fetch data from DB, return data from Yahoo
     const arr = ta.map((item, index) => {
-      if (res2[index]) {
-        return {
-          transaction_date: formateIsoDate(item.t),
-          stock_id: res2[0].stock_id,
-          stock_name: res2[0].stock_name,
-          volume: item.v,
-          open_price: item.o,
-          close_price: item.c,
-          high_price: item.h,
-          low_price: item.l,
-          legal_person: [
-            {
-              transaction_date: formateIsoDate(item.t),
-              foreign_investors: res2[index].foreign_investors,
-              investment_trust: res2[index].investment_trust,
-              dealer: res2[index].dealer,
-            },
-          ],
-        };
-      }
       return {
         transaction_date: formateIsoDate(item.t),
-        stock_id: res2[0].stock_id,
-        stock_name: res2[0].stock_name,
+        stock_id: parse.mem.id,
+        stock_name: parse.mem.name,
         volume: item.v,
         open_price: item.o,
         close_price: item.c,
@@ -93,7 +104,6 @@ export const GET = async (req: Request) => {
         ],
       };
     });
-
     return NextResponse.json(arr, {
       headers: { 'x-cache': 'MISS' },
     });

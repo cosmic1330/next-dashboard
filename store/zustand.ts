@@ -88,10 +88,9 @@ type Tracking = {
   remove: (id: string) => void;
 };
 export const useTrackingList = create<Tracking>((set) => ({
-  list:
-    window && window.localStorage.getItem(localStorageKey)
-      ? JSON.parse(<string>window.localStorage.getItem(localStorageKey))
-      : [],
+  list: window.localStorage.getItem(localStorageKey)
+    ? JSON.parse(<string>window.localStorage.getItem(localStorageKey))
+    : [],
   add: ({
     id,
     plan,

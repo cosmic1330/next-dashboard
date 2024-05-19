@@ -3,14 +3,18 @@ import { NextResponse } from 'next/server';
 
 export const GET = async (req: Request) => {
   const key = `stocks`;
-  if (redis) {
-    let cached = await redis?.get(key);
-    if (cached) {
-      cached = JSON.parse(cached);
-      return NextResponse.json(cached, {
-        headers: { 'x-cache': 'HIT' },
-      });
+  try {
+    if (redis) {
+      let cached = await redis?.get(key);
+      if (cached) {
+        cached = JSON.parse(cached);
+        return NextResponse.json(cached, {
+          headers: { 'x-cache': 'HIT' },
+        });
+      }
     }
+  } catch (error) {
+    console.error('Error getting from Redis:', error);
   }
 
   let res = await fetch(
@@ -18,10 +22,14 @@ export const GET = async (req: Request) => {
   );
   res = await res.json();
 
-  if (redis) {
-    const MAX_AGE = 60_000 * 60; // 1 hour
-    const EXPIRY_MS = `PX`; // milliseconds
-    await redis?.set(key, JSON.stringify(res), EXPIRY_MS, MAX_AGE);
+  try {
+    if (redis) {
+      const MAX_AGE = 60_000 * 60; // 1 hour
+      const EXPIRY_MS = `PX`; // milliseconds
+      await redis?.set(key, JSON.stringify(res), EXPIRY_MS, MAX_AGE);
+    }
+  } catch (error) {
+    console.error('Error setting to Redis:', error);
   }
 
   // return data to client

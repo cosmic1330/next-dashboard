@@ -34,24 +34,29 @@ export type FinialDayDataType = {
 };
 
 export const GET = async (req: Request) => {
-  const { searchParams } = new URL(req.url);
-  const stockId = searchParams.get('stockId');
-  if (!stockId)
-    return NextResponse.json({ error: 'stockId is required' }, { status: 400 });
   try {
-    // const id = req.url.split('/')[req.url.split('/').length - 1];
+    const { searchParams } = new URL(req.url);
+    const stockId = searchParams.get('stockId');
+    if (!stockId)
+      return NextResponse.json(
+        { error: 'stockId is required' },
+        { status: 400 },
+      );
     const key = `yahoo-${stockId}`;
-    if (redis) {
-      // try fetch cached data
-      let cached = await redis?.get(key);
-      // if cached, we're good!
-      if (cached) {
-        cached = JSON.parse(cached);
-        return NextResponse.json(cached, {
-          headers: { 'x-cache': 'HIT' },
-        });
+    try {
+      if (redis) {
+        let cached = await redis?.get(key);
+        if (cached) {
+          cached = JSON.parse(cached);
+          return NextResponse.json(cached, {
+            headers: { 'x-cache': 'HIT' },
+          });
+        }
       }
+    } catch (error) {
+      console.error('Error getting from Redis:', error);
     }
+
     // fetch fresh data from the DB
     let res = await fetch(
       `https://tw.quote.finance.yahoo.net/quote/q?type=ta&perd=d&mkt=10&sym=${stockId}&v=1&callback=`,
@@ -59,10 +64,6 @@ export const GET = async (req: Request) => {
     res = res.replace(/^\(|\);$/g, '');
     let parse = JSON.parse(res);
     let ta = parse.ta as ItemType;
-
-    // test:需要回測請註解cache，填入要回測的天數
-    // ta = ta.slice(0, -50);
-
     // calculate technical analysis
     const obv = new Obv();
     const macd = new Macd();
@@ -134,11 +135,14 @@ export const GET = async (req: Request) => {
         bollLb: bollData.bollLb,
       });
     }
-
-    if (redis) {
-      const MAX_AGE = 60_000 * 60; // 1 hour
-      const EXPIRY_MS = `PX`; // milliseconds
-      await redis?.set(key, JSON.stringify(finallyData), EXPIRY_MS, MAX_AGE);
+    try {
+      if (redis) {
+        const MAX_AGE = 60_000 * 60; // 1 hour
+        const EXPIRY_MS = `PX`; // milliseconds
+        await redis?.set(key, JSON.stringify(finallyData), EXPIRY_MS, MAX_AGE);
+      }
+    } catch (error) {
+      console.error('Error setting to Redis:', error);
     }
 
     return NextResponse.json(finallyData, {

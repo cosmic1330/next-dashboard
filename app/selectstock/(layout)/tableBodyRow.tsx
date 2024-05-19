@@ -225,18 +225,30 @@ export default function TableBodyRow({
 
         <Typography align="left" variant="subtitle2" color="secondary">
           營收月份:
-          {`${stock.monthly_revenue[0].year}/${stock.monthly_revenue[0].month}` ||
-            0}
+          {stock.monthly_revenue
+            ? `${stock.monthly_revenue[0].year}/${stock.monthly_revenue[0].month}`
+            : `無資料`}
         </Typography>
         <Typography align="left">
-          月增率: {stock.monthly_revenue[0].month_over_month_revenue || 0}%
+          月增率:{' '}
+          {stock.monthly_revenue
+            ? stock.monthly_revenue[0].month_over_month_revenue
+            : 0}
+          %
         </Typography>
         <Typography align="left">
-          年增率: {stock.monthly_revenue[0].year_over_year_revenue || 0}%
+          年增率:{' '}
+          {stock.monthly_revenue
+            ? stock.monthly_revenue[0].year_over_year_revenue
+            : 0}
+          %
         </Typography>
         <Typography align="left">
           累計營收比較:
-          {stock.monthly_revenue[0].compare_cumulative_revenue || 0}%
+          {stock.monthly_revenue
+            ? stock.monthly_revenue[0].compare_cumulative_revenue
+            : 0}
+          %
         </Typography>
       </TableCell>
     </TableRow>
