@@ -94,6 +94,7 @@ export const GET = async (req: Request) => {
       ma5Data = ma.next(ta[i], ma5Data, 5);
       ma10Data = ma.next(ta[i], ma10Data, 10);
       ma20Data = ma.next(ta[i], ma20Data, 20);
+      ma60Data = ma.next(ta[i], ma60Data, 60);
       bollData = boll.next(ta[i], bollData, 20);
       finallyData.push({
         ...ta[i],

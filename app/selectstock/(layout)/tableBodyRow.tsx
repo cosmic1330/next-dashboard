@@ -89,6 +89,7 @@ export default function TableBodyRow({
         </IconButton>
       </TableCell>
       <TableCell align="center">
+        {/* Ma */}
         <Typography align="center" color="success.main">
           {planData.ma5 > planData.ma10 &&
             planData.ma10 > planData.ma20 &&
@@ -96,15 +97,6 @@ export default function TableBodyRow({
         </Typography>
         <Typography align="center" color="success.main">
           {planData.c > planData.ma20 && '月線之上'}
-        </Typography>
-        <Typography align="center" color="success.main">
-          {planData.c > planData.ma5 && '五均之上'}
-        </Typography>
-        <Typography align="center" color="success.main">
-          {planData &&
-            planData.ma20 > planData.pre[0].ma20 &&
-            planData.pre[0].ma20 > planData.pre[1].ma20 &&
-            '月線向上'}
         </Typography>
         <Typography align="center" color="success.main">
           {planData &&
@@ -118,7 +110,16 @@ export default function TableBodyRow({
             planData.pre[0].ma20 < planData.pre[1].ma20 &&
             '月線向下'}
         </Typography>
-
+        <Typography align="center" color="success.main">
+          {planData.c > planData.ma5 && '5日均之上'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData &&
+            planData.ma5 > planData.pre[0].ma5 &&
+            planData.pre[0].ma5 > planData.pre[1].ma5 &&
+            '5日均向上'}
+        </Typography>
+        {/* KD */}
         {planData &&
         (planData.k as number) > (planData.d as number) &&
         (planData.k as number) > (planData.pre[0].k as number) &&
@@ -135,7 +136,17 @@ export default function TableBodyRow({
         ) : (
           <Typography align="center">KD趨勢不明</Typography>
         )}
-
+        <Typography align="center" color="success.main">
+          {planData.k > planData.d &&
+            planData.pre[0].k < planData.pre[0].d &&
+            'KD黃金交叉'}
+        </Typography>
+        <Typography align="center" color="error">
+          {planData.k < planData.d &&
+            planData.pre[0].k > planData.pre[0].d &&
+            'KD死亡交叉'}
+        </Typography>
+        {/* Macd */}
         <Typography align="center" color="success.main">
           {planData &&
             (planData.osc as number) > (planData.pre[0].osc as number) &&
@@ -172,6 +183,7 @@ export default function TableBodyRow({
               (planData.pre[1].macd as number) &&
             'Macd空方動能漸強'}
         </Typography>
+        {/* Obv */}
         <Typography align="center" color="success.main">
           {planData.obv > planData.obvMa5 &&
             planData.obvMa5 > planData.obvMa10 &&
@@ -230,14 +242,14 @@ export default function TableBodyRow({
             : `無資料`}
         </Typography>
         <Typography align="left">
-          月增率:{' '}
+          月增率:
           {stock.monthly_revenue
             ? stock.monthly_revenue[0].month_over_month_revenue
             : 0}
           %
         </Typography>
         <Typography align="left">
-          年增率:{' '}
+          年增率:
           {stock.monthly_revenue
             ? stock.monthly_revenue[0].year_over_year_revenue
             : 0}

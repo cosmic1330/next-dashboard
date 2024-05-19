@@ -138,6 +138,8 @@ export default function useQueryDeal(stock_id: string) {
             finallyData[length - (rollback_date + 1)].l &&
           stockData[length - (rollback_date + 1)].l >=
             finallyData[length - (rollback_date + 2)].l &&
+          stockData[length - (rollback_date + 2)].l <=
+            stockData[length - (rollback_date + 3)].l &&
           // rsv升高
           <number>finallyData[length - rollback_date].rsv >
             <number>finallyData[length - (rollback_date + 1)].rsv &&
