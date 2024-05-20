@@ -365,9 +365,9 @@ export default function TableBodyRow({ str }: { str: string }) {
         <Typography align="center" color="error">
           {stock &&
             (stock.data[stock?.data.length - 1].obv as number) <
-              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+              (stock.data[stock?.data.length - 1].obvMa10 as number) &&
             (stock.data[stock?.data.length - 2].obv as number) >
-              (stock.data[stock?.data.length - 2].obvMa5 as number) &&
+              (stock.data[stock?.data.length - 2].obvMa10 as number) &&
             'Obv死亡交叉'}
         </Typography>
       </TableCell>

@@ -206,8 +206,8 @@ export default function TableBodyRow({
             'Obv黃金交叉'}
         </Typography>
         <Typography align="center" color="error">
-          {planData.obv < planData.obvMa5 &&
-            planData.pre[0].obv > planData.pre[0].obvMa5 &&
+          {planData.obv < planData.obvMa10 &&
+            planData.pre[0].obv > planData.pre[0].obvMa10 &&
             'Obv死亡交叉'}
         </Typography>
       </TableCell>
