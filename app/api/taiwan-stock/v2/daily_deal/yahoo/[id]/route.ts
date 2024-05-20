@@ -1,6 +1,5 @@
 import { ItemType } from '@/app/selectstock/(components)/Container/CacheTable/type';
 import formateIsoDate from '@/utils/formateIsoDate';
-import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
 export type V2DailyDealYahooResponseRow = {
@@ -32,61 +31,18 @@ export const GET = async (req: Request) => {
 
     // fetch fresh data from the DB
     let res1 = await fetch(
-      `https://tw.quote.finance.yahoo.net/quote/q?type=ta&perd=d&mkt=10&sym=${id}&v=1&callback=`,
-      { cache: 'no-store' },
+      `https://tw.quote.finance.yahoo.net/quote/q?type=ta&perd=d&mkt=10&sym=${id}&v=1&callback=`,{
+        cache: 'no-store',
+      }
     ).then((res1) => res1.text());
     res1 = res1.replace(/^\(|\);$/g, '');
     let parse = JSON.parse(res1);
     let ta = parse.ta as ItemType;
 
-    try {
-      const prisma = new PrismaClient();
-      // last
-      const res2 = await prisma.legal_person.findMany({
-        where: {
-          stock_id: id,
-          transaction_date: {
-            gte: new Date(formateIsoDate(ta[0].t)), // 大於等於起始日期
-            lte: new Date(formateIsoDate(ta[ta.length - 1].t)), // 小於等於結束日期
-          },
-        },
-      });
-
-      await prisma.$disconnect();
-      const arr = ta.map((item, index) => {
-        if (res2[index]) {
-          return {
-            transaction_date: formateIsoDate(item.t),
-            stock_id: res2[0].stock_id,
-            stock_name: res2[0].stock_name,
-            volume: item.v,
-            open_price: item.o,
-            close_price: item.c,
-            high_price: item.h,
-            low_price: item.l,
-            legal_person: [
-              {
-                transaction_date: formateIsoDate(item.t),
-                foreign_investors: res2[index].foreign_investors || 0,
-                investment_trust: res2[index].investment_trust || 0,
-                dealer: res2[index].dealer || 0,
-              },
-            ],
-          };
-        }
-      });
-
-      return NextResponse.json(arr, {
-        headers: { 'x-cache': 'MISS' },
-      });
-    } catch (error) {
-      console.log(error);
-    }
-
     // unable to fetch data from DB, return data from Yahoo
     const arr = ta.map((item, index) => {
       return {
-        transaction_date: formateIsoDate(item.t),
+        transaction_date: formateIsoDate(item.t) + 'T00:00:00.000Z',
         stock_id: parse.mem.id,
         stock_name: parse.mem.name,
         volume: item.v,
@@ -96,7 +52,7 @@ export const GET = async (req: Request) => {
         low_price: item.l,
         legal_person: [
           {
-            transaction_date: formateIsoDate(item.t),
+            transaction_date: formateIsoDate(item.t) + 'T00:00:00.000Z',
             foreign_investors: 0,
             investment_trust: 0,
             dealer: 0,
