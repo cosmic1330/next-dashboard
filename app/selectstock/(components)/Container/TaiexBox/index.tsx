@@ -47,6 +47,11 @@ export default function TaiexBox() {
               taiexData[taiexData.length - 1].ma5 &&
             '5Ma支撐上'}
         </Typography>
+        <Typography variant="subtitle2">
+          {`大盤扣抵值:${
+            taiexData && taiexData[taiexData.length - 1].exclusionValueMa5.d
+          }`}
+        </Typography>
       </Box>
       <Box>
         <Typography component="span" variant="subtitle2">
