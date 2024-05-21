@@ -1,11 +1,15 @@
 'use client';
-import { ChangeEvent, createContext, useState } from 'react';
+import { createContext, useState } from 'react';
 
 export const SelectStockContext = createContext({
   rollback_date: 0,
   setRollbackDate: (date: number) => {},
-  db_data_set: true,
-  setDbDateSet: (state: boolean) => {},
+  stock_db_data_set: true,
+  setStockDbDateSet: (state: boolean) => {},
+  daily_db_data_set: true,
+  setDailyDbDateSet: (state: boolean) => {},
+  useDExclusionValue: true,
+  setUseDExclusionValue: (state: boolean) => {},
 });
 
 export function SelectStockContextProvider({
@@ -14,11 +18,22 @@ export function SelectStockContextProvider({
   children: React.ReactNode;
 }) {
   const [rollback_date, setRollbackDate] = useState(0);
-  const [db_data_set, setDbDateSet] = useState(true);
+  const [stock_db_data_set, setStockDbDateSet] = useState(true);
+  const [daily_db_data_set, setDailyDbDateSet] = useState(true);
+  const [useDExclusionValue, setUseDExclusionValue] = useState(true);
 
   return (
     <SelectStockContext.Provider
-      value={{ rollback_date, setRollbackDate, db_data_set, setDbDateSet }}
+      value={{
+        rollback_date,
+        setRollbackDate,
+        stock_db_data_set,
+        setStockDbDateSet,
+        daily_db_data_set,
+        setDailyDbDateSet,
+        useDExclusionValue,
+        setUseDExclusionValue,
+      }}
     >
       {children}
     </SelectStockContext.Provider>

@@ -19,7 +19,7 @@ export default function OthersListCentent() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    change(index + 300);
+    change(index + 301);
   };
 
   return (
@@ -27,7 +27,7 @@ export default function OthersListCentent() {
       {li.map((item, index) => (
         <ListItemButton
           key={index}
-          selected={plan === index}
+          selected={plan === index+ 301}
           onClick={(event) => handleListItemClick(event, index)}
         >
           <Box>

@@ -6,8 +6,8 @@ settings:
 
 dependencies:
   '@ch20026103/anysis':
-    specifier: ^0.0.9-alpha
-    version: 0.0.9-alpha
+    specifier: 0.0.10-alpha
+    version: 0.0.10-alpha
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.11.4(@types/react@18.2.21)(react@18.2.0)
@@ -368,8 +368,8 @@ packages:
       '@babel/helper-validator-identifier': 7.24.5
       to-fast-properties: 2.0.0
 
-  /@ch20026103/anysis@0.0.9-alpha:
-    resolution: {integrity: sha512-u/VmIQ7a2gXkAhx/xvKAiiqeVkA2lFAzaxBOVD6NOGUU9qyYWP9p5BhgddNNNLJkLOVloRFpOENDXzaY0xvRTw==}
+  /@ch20026103/anysis@0.0.10-alpha:
+    resolution: {integrity: sha512-vEVB1DwtF27Q05AS5GusLKmB0tBVrdFjB2CLADYh6SAg07lbFH45orN60Wc0gNUd5jNjRxP2lXwCNvkne7jIQw==}
     dev: false
 
   /@emotion/babel-plugin@11.11.0:

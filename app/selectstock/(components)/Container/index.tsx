@@ -36,18 +36,18 @@ export default function Container() {
           <Switch />
         </Grid>
       </Grid>
-      {plan === 0 && <CacheTable />}
-      {plan === 1 && <TwoRedSoldierTable />}
-      {plan === 2 && <ForwardTable />}
-      {plan === 3 && <BreakthroughPressureTable />}
-      {plan === 4 && <KdBottomFlipTable />}
-      {plan === 5 && <BackSupportLineTable />}
+      {plan === 1 && <CacheTable />}
+      {plan === 2 && <TwoRedSoldierTable />}
+      {plan === 3 && <ForwardTable />}
+      {plan === 4 && <BreakthroughPressureTable />}
+      {plan === 5 && <KdBottomFlipTable />}
+      {plan === 6 && <BackSupportLineTable />}
 
-      {plan === 100 && <NextDayTradingTable />}
+      {plan === 101 && <NextDayTradingTable />}
 
-      {plan === 200 && <ObvLongTable />}
+      {plan === 201 && <ObvLongTable />}
 
-      {plan === 300 && <TrackingTable />}
+      {plan === 301 && <TrackingTable />}
     </StyledContainer>
   );
 }

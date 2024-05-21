@@ -8,7 +8,7 @@ import { StocksType } from '../type';
 
 export default function useDayStockData(item: StocksType) {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
-  const { db_data_set } = useContext(SelectStockContext);
+  const { daily_db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
       const response = await fetch(url, {
@@ -28,7 +28,7 @@ export default function useDayStockData(item: StocksType) {
   };
 
   const { data, error, isLoading, isValidating } = useSWR<FinialDayDataType[]>(
-    db_data_set
+    daily_db_data_set
       ? `http://localhost:3000/api/taiwan-stock/v1/stocks/id/day?stockId=${item[0]}`
       : `http://localhost:3000/api/taiwan-stock/v1/stocks/id/day/nocache?stockId=${item[0]}`,
 

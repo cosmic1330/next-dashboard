@@ -4,11 +4,12 @@ import { useTrackingList } from '@/store/zustand';
 import NorthIcon from '@mui/icons-material/North';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import SouthIcon from '@mui/icons-material/South';
-import { IconButton, Typography } from '@mui/material';
+import { Divider, IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { Fragment } from 'react';
+import ExclusionValue from './exclusionValue';
 
 export default function TableBodyRow({
   stock,
@@ -56,8 +57,8 @@ export default function TableBodyRow({
             href={`https://pchome.megatime.com.tw/stock/sto0/ock1/sid${stock.stock_id}.html`}
           >
             {stock.stock_name}
-          </Link>{' '}
-          (
+          </Link>
+          {'('}
           <Link
             target="_blank"
             rel="noreferrer"
@@ -65,7 +66,7 @@ export default function TableBodyRow({
           >
             {stock.stock_id}
           </Link>
-          )
+          {')'}
         </Typography>
         <Typography align="center">
           <Link
@@ -82,7 +83,11 @@ export default function TableBodyRow({
           </Link>
         </Typography>
       </TableCell>
-      <TableCell align="center">{planData.c}</TableCell>
+      <TableCell align="center">
+        {planData.c}
+        <Divider />
+        <ExclusionValue planData={planData} />
+      </TableCell>
       <TableCell align="center">
         <IconButton color="success" onClick={handleAdd}>
           <NoteAddOutlinedIcon />

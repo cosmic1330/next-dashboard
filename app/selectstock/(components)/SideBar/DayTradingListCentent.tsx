@@ -19,7 +19,7 @@ export default function DayTradingListCentent() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    change(index + 200);
+    change(index + 201);
   };
 
   return (
@@ -27,7 +27,7 @@ export default function DayTradingListCentent() {
       {li.map((item, index) => (
         <ListItemButton
           key={index}
-          selected={plan === index}
+          selected={plan === index+ 201}
           onClick={(event) => handleListItemClick(event, index)}
         >
           <Box>

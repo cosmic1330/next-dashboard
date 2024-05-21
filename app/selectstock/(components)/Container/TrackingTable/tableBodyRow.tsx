@@ -3,11 +3,12 @@ import { useTrackingList } from '@/store/zustand';
 import CancelIcon from '@mui/icons-material/Cancel';
 import NorthIcon from '@mui/icons-material/North';
 import SouthIcon from '@mui/icons-material/South';
-import { IconButton, Typography } from '@mui/material';
+import { Divider, IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import useQueryPrice from './(hooks)/useQueryPrice';
+import ExclusionValue from './exclusionValue';
 
 export default function TableBodyRow({ str }: { str: string }) {
   const { data: stock } = useQueryPrice(str);
@@ -43,8 +44,9 @@ export default function TableBodyRow({ str }: { str: string }) {
             }.html`}
           >
             {stock && stock.id}
-          </Link>{' '}
-          (
+          </Link>
+
+          {'('}
           <Link
             target="_blank"
             rel="noreferrer"
@@ -52,7 +54,7 @@ export default function TableBodyRow({ str }: { str: string }) {
           >
             {stock && stock.name}
           </Link>
-          )
+          {')'}
         </Typography>
         <Typography align="center">
           <Link
@@ -75,19 +77,25 @@ export default function TableBodyRow({ str }: { str: string }) {
         </Typography>
       </TableCell>
       <TableCell align="center">
-        <Typography align="center">
+        <Typography align="center" variant="body2">
           date: {stock && stock.data[stock.data.length - 1].t}
         </Typography>
-        <Link
-          target="_blank"
-          rel="noreferrer"
-          href={`https://www.wantgoo.com/stock/${
-            stock && stock.id
-          }/major-investors/main-trend#main-trend`}
-        >
-          {stock && stock.data[stock.data.length - 1].c}
-        </Link>
-        <Typography align="center">買進價格: {stock && stock.c}</Typography>
+        <Typography align="center" variant="body1">
+          <Link
+            target="_blank"
+            rel="noreferrer"
+            href={`https://www.wantgoo.com/stock/${
+              stock && stock.id
+            }/major-investors/main-trend#main-trend`}
+          >
+            現在價格: {stock && stock.data[stock.data.length - 1].c}
+          </Link>
+        </Typography>
+        <Typography align="center" variant="body2">
+          買進價格: {stock && stock.c}
+        </Typography>
+        <Divider />
+        <ExclusionValue stock={stock} />
       </TableCell>
 
       <TableCell align="center">
@@ -189,14 +197,6 @@ export default function TableBodyRow({ str }: { str: string }) {
             (stock.data[stock?.data.length - 1].obvMa5 as number) >
               (stock.data[stock?.data.length - 1].obvMa10 as number) &&
             'Obv正向排列'}
-        </Typography>
-        <Typography align="center" color="success.main">
-          {stock &&
-            (stock.data[stock?.data.length - 1].obv as number) <
-              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
-            (stock.data[stock?.data.length - 1].obvMa5 as number) <
-              (stock.data[stock?.data.length - 1].obvMa10 as number) &&
-            'Obv空頭排列'}
         </Typography>
         <Typography align="center" color="success.main">
           {stock &&
@@ -361,6 +361,14 @@ export default function TableBodyRow({ str }: { str: string }) {
             (stock.data[stock?.data.length - 1].obv as number) <
               (stock.data[stock?.data.length - 1].obvMa5 as number) &&
             'Obv空頭'}
+        </Typography>
+        <Typography align="center" color="error">
+          {stock &&
+            (stock.data[stock?.data.length - 1].obv as number) <
+              (stock.data[stock?.data.length - 1].obvMa5 as number) &&
+            (stock.data[stock?.data.length - 1].obvMa5 as number) <
+              (stock.data[stock?.data.length - 1].obvMa10 as number) &&
+            'Obv空頭排列'}
         </Typography>
         <Typography align="center" color="error">
           {stock &&

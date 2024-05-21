@@ -10,7 +10,7 @@ import useSWR from 'swr';
 export default function useQueryDeal(stock_id: string) {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
 
-  const { rollback_date, db_data_set } = useContext(SelectStockContext);
+  const { rollback_date, daily_db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
       const response = await fetch(url, {
@@ -31,7 +31,7 @@ export default function useQueryDeal(stock_id: string) {
 
   const { data, error, isLoading, isValidating, mutate } =
     useSWR<V2DailyDealResponse>(
-      db_data_set
+      daily_db_data_set
         ? `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock_id}`
         : `http://localhost:3000/api/taiwan-stock/v2/daily_deal/yahoo/${stock_id}`,
       fetcherWithCancel,
@@ -89,9 +89,13 @@ export default function useQueryDeal(stock_id: string) {
             d: kdData.d,
             'k-d': kdData['k-d'],
             ma5: ma5Data.ma,
+            exclusionValueMa5: ma5Data.exclusionValue,
             ma10: ma10Data.ma,
+            exclusionValueMa10: ma10Data.exclusionValue,
             ma20: ma20Data.ma,
+            exclusionValueMa20: ma20Data.exclusionValue,
             ma60: ma60Data.ma,
+            exclusionValueMa60: ma60Data.exclusionValue,
             obv: obv5Data.obv,
             obvMa5: obv5Data.obvMa,
             obvMa10: obv10Data.obvMa,
@@ -118,9 +122,13 @@ export default function useQueryDeal(stock_id: string) {
             d: kdData.d,
             'k-d': kdData['k-d'],
             ma5: ma5Data.ma,
+            exclusionValueMa5: ma5Data.exclusionValue,
             ma10: ma10Data.ma,
+            exclusionValueMa10: ma10Data.exclusionValue,
             ma20: ma20Data.ma,
+            exclusionValueMa20: ma20Data.exclusionValue,
             ma60: ma60Data.ma,
+            exclusionValueMa60: ma60Data.exclusionValue,
             obv: obv5Data.obv,
             obvMa5: obv5Data.obvMa,
             obvMa10: obv10Data.obvMa,

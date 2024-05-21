@@ -44,7 +44,7 @@ export default function SlopeListCentent() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    change(index);
+    change(index+1);
   };
 
   return (
@@ -52,7 +52,7 @@ export default function SlopeListCentent() {
       {li.map((item, index) => (
         <ListItemButton
           key={index}
-          selected={plan === index}
+          selected={plan === index+1}
           onClick={(event) => handleListItemClick(event, index)}
         >
           <Box>

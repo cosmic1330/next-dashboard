@@ -19,7 +19,7 @@ export default function NextDayListCentent() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    change(index + 100);
+    change(index + 101);
   };
 
   return (
@@ -27,7 +27,7 @@ export default function NextDayListCentent() {
       {li.map((item, index) => (
         <ListItemButton
           key={index}
-          selected={plan === index}
+          selected={plan === index + 101}
           onClick={(event) => handleListItemClick(event, index)}
         >
           <Box>

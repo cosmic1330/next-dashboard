@@ -54,7 +54,7 @@ export default memo(function Controller({ stocks }: { stocks: StocksType[] }) {
                 onChange={() => setDividendYield(!dividendYield)}
               />
             }
-            label=" 有殖利率"
+            label="有殖利率"
           />
           <FormControlLabel
             control={

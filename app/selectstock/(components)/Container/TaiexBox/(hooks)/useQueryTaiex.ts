@@ -77,9 +77,13 @@ export default function useQueryTaiex() {
             d: kdData.d,
             'k-d': kdData['k-d'],
             ma5: ma5Data.ma,
+            exclusionValueMa5: ma5Data.exclusionValue,
             ma10: ma10Data.ma,
+            exclusionValueMa10: ma10Data.exclusionValue,
             ma20: ma20Data.ma,
+            exclusionValueMa20: ma20Data.exclusionValue,
             ma60: ma60Data.ma,
+            exclusionValueMa60: ma60Data.exclusionValue,
           },
         ];
         for (let i = 1; i < stockData.length; i++) {
@@ -101,9 +105,13 @@ export default function useQueryTaiex() {
             d: kdData.d,
             'k-d': kdData['k-d'],
             ma5: ma5Data.ma,
+            exclusionValueMa5: ma5Data.exclusionValue,
             ma10: ma10Data.ma,
+            exclusionValueMa10: ma10Data.exclusionValue,
             ma20: ma20Data.ma,
+            exclusionValueMa20: ma20Data.exclusionValue,
             ma60: ma60Data.ma,
+            exclusionValueMa60: ma60Data.exclusionValue,
           });
         }
         return finallyData;

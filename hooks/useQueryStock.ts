@@ -10,7 +10,7 @@ import useSWR from 'swr';
 
 export default function useQueryStock() {
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
-  const { db_data_set } = useContext(SelectStockContext);
+  const { stock_db_data_set } = useContext(SelectStockContext);
   const fetcherWithCancel = async (url: string) => {
     try {
       const response = await fetch(url, {
@@ -18,7 +18,7 @@ export default function useQueryStock() {
       });
 
       const data = await response.json();
-      if (db_data_set) {
+      if (stock_db_data_set) {
         const res = data.filter(
           (stock: V2StocksResponseRow) =>
             stock.eps.length > 0 && parseFloat(stock.eps[0].eps_data) > 0,
@@ -47,7 +47,7 @@ export default function useQueryStock() {
 
   const { data, error, isLoading, isValidating, mutate } =
     useSWR<V2StocksResponse>(
-      db_data_set
+      stock_db_data_set
         ? `http://localhost:3000/api/taiwan-stock/v2/stocks`
         : `http://localhost:3000/api/taiwan-stock/v1/stocks`,
       fetcherWithCancel,

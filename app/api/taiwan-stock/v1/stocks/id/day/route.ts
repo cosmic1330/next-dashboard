@@ -22,9 +22,13 @@ export type FinialDayDataType = {
   d: number;
   'k-d': number;
   ma5: number;
+  exclusionValueMa5: {d: number; 'd-1': number};
   ma10: number;
+  exclusionValueMa10: {d: number; 'd-1': number};
   ma20: number;
+  exclusionValueMa20: {d: number; 'd-1': number};
   ma60: number;
+  exclusionValueMa60: {d: number; 'd-1': number};
   bollMa: number;
   bollUb: number;
   bollLb: number;
@@ -95,9 +99,13 @@ export const GET = async (req: Request) => {
         d: kdData.d,
         'k-d': kdData['k-d'],
         ma5: ma5Data.ma,
+        exclusionValueMa5: ma5Data.exclusionValue,
         ma10: ma10Data.ma,
+        exclusionValueMa10: ma10Data.exclusionValue,
         ma20: ma20Data.ma,
+        exclusionValueMa20: ma20Data.exclusionValue,
         ma60: ma60Data.ma,
+        exclusionValueMa60: ma60Data.exclusionValue,
         bollMa: bollData.bollMa,
         bollUb: bollData.bollUb,
         bollLb: bollData.bollLb,
@@ -128,9 +136,13 @@ export const GET = async (req: Request) => {
         d: kdData.d,
         'k-d': kdData['k-d'],
         ma5: ma5Data.ma,
+        exclusionValueMa5: ma5Data.exclusionValue,
         ma10: ma10Data.ma,
+        exclusionValueMa10: ma10Data.exclusionValue,
         ma20: ma20Data.ma,
+        exclusionValueMa20: ma20Data.exclusionValue,
         ma60: ma60Data.ma,
+        exclusionValueMa60: ma60Data.exclusionValue,
         bollMa: bollData.bollMa,
         bollUb: bollData.bollUb,
         bollLb: bollData.bollLb,
