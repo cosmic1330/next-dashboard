@@ -7,11 +7,12 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Fragment } from 'react';
-import TableBodyRow from './tableBodyRow';
 import TrackingForm from './form';
+import TableBodyRow from './tableBodyRow';
 
 export default function TrackingTable() {
   const { list } = useTrackingList();
+
   return (
     <Fragment>
       <TrackingForm />

@@ -1,18 +1,20 @@
 'use client';
 import { useSelectPlan } from '@/store/zustand';
-import { Grid, Container as MuiContainer, styled } from '@mui/material';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import { Fab, Grid, Container as MuiContainer, styled } from '@mui/material';
+import { useRef } from 'react';
 import BackSupportLineTable from './BackSupportLineTable';
 import BreakthroughPressureTable from './BreakthroughPressureTable';
 import CacheTable from './CacheTable';
 import ForwardTable from './ForwardTable';
 import KdBottomFlipTable from './KdBottomFlipTable';
 import NextDayTradingTable from './NextDayTradingTable';
+import ObvLongTable from './ObvLongTable';
 import TaiexBox from './TaiexBox';
 import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
 import Range from './range';
 import Switch from './switch';
-import ObvLongTable from './ObvLongTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -23,10 +25,14 @@ const StyledContainer = styled(MuiContainer)`
   }
 `;
 export default function Container() {
+  const ref = useRef(null);
   const { plan } = useSelectPlan();
+  const scrollTop = () => {
+    (ref.current as any)?.scrollTo({ top: 0, behavior: 'smooth' });
+  };
 
   return (
-    <StyledContainer>
+    <StyledContainer ref={ref}>
       <Grid container spacing={3} mb={3}>
         <Grid item xs={6}>
           <TaiexBox />
@@ -48,6 +54,14 @@ export default function Container() {
       {plan === 201 && <ObvLongTable />}
 
       {plan === 301 && <TrackingTable />}
+      <Fab
+        color="info"
+        size="medium"
+        onClick={scrollTop}
+        sx={{ position: 'fixed', right: '28px', bottom: '28px' }}
+      >
+        <KeyboardArrowUpIcon />
+      </Fab>
     </StyledContainer>
   );
 }

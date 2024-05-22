@@ -20,6 +20,9 @@ export const StyledDrawer = styled(Drawer)`
     color: #fff;
     box-shadow: 3px 0px 10px #ccc;
     position: unset;
+    ::-webkit-scrollbar {
+      display: none;
+    }
   }
 `;
 
