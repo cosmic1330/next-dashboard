@@ -16,42 +16,42 @@ export default function ExclusionValue({ stock }: { stock: any }) {
             variant="body2"
             color={
               stock &&
-              stock.data[stock.data.length - 1].c >=
-                stock.data[stock.data.length - 1].exclusionValueMa5.d
+              stock?.data[stock.data.length - 1]?.c >=
+                stock?.data[stock.data.length - 1]?.exclusionValueMa5.d
                 ? 'success.main'
                 : 'error'
             }
           >
             ma5:{' '}
-            {stock && stock.data[stock.data.length - 1].exclusionValueMa5.d}
+            {stock && stock?.data[stock.data.length - 1]?.exclusionValueMa5.d}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
               stock &&
-              stock.data[stock.data.length - 1].c >=
-                stock.data[stock.data.length - 1].exclusionValueMa10.d
+              stock?.data[stock.data.length - 1]?.c >=
+                stock?.data[stock.data.length - 1]?.exclusionValueMa10.d
                 ? 'success.main'
                 : 'error'
             }
           >
             ma10:{' '}
-            {stock && stock.data[stock.data.length - 1].exclusionValueMa10.d}
+            {stock && stock?.data[stock.data.length - 1]?.exclusionValueMa10.d}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
               stock &&
-              stock.data[stock.data.length - 1].c >=
-                stock.data[stock.data.length - 1].exclusionValueMa20.d
+              stock?.data[stock.data.length - 1]?.c >=
+                stock?.data[stock.data.length - 1]?.exclusionValueMa20.d
                 ? 'success.main'
                 : 'error'
             }
           >
             ma20:{' '}
-            {stock && stock.data[stock.data.length - 1].exclusionValueMa20.d}
+            {stock && stock?.data[stock.data.length - 1]?.exclusionValueMa20.d}
           </Typography>
         </Fragment>
       ) : (
@@ -64,45 +64,45 @@ export default function ExclusionValue({ stock }: { stock: any }) {
             variant="body2"
             color={
               stock &&
-              stock.data[stock.data.length - 1].c >=
-                stock.data[stock.data.length - 1].exclusionValueMa5['d-1']
+              stock?.data[stock.data.length - 1]?.c >=
+                stock?.data[stock.data.length - 1]?.exclusionValueMa5['d-1']
                 ? 'success.main'
                 : 'error'
             }
           >
             ma5:
             {stock &&
-              stock.data[stock.data.length - 1].exclusionValueMa5['d-1']}
+              stock?.data[stock.data.length - 1]?.exclusionValueMa5['d-1']}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
               stock &&
-              stock.data[stock.data.length - 1].c >=
-                stock.data[stock.data.length - 1].exclusionValueMa10['d-1']
+              stock?.data[stock.data.length - 1]?.c >=
+                stock?.data[stock.data.length - 1]?.exclusionValueMa10['d-1']
                 ? 'success.main'
                 : 'error'
             }
           >
             ma10:
             {stock &&
-              stock.data[stock.data.length - 1].exclusionValueMa10['d-1']}
+              stock?.data[stock.data.length - 1]?.exclusionValueMa10['d-1']}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
               stock &&
-              stock.data[stock.data.length - 1].c >=
-                stock.data[stock.data.length - 1].exclusionValueMa20['d-1']
+              stock?.data[stock.data.length - 1]?.c >=
+                stock?.data[stock.data.length - 1]?.exclusionValueMa20['d-1']
                 ? 'success.main'
                 : 'error'
             }
           >
             ma20:
             {stock &&
-              stock.data[stock.data.length - 1].exclusionValueMa20['d-1']}
+              stock?.data[stock.data.length - 1]?.exclusionValueMa20['d-1']}
           </Typography>
         </Fragment>
       )}

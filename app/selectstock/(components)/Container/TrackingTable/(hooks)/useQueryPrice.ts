@@ -44,7 +44,7 @@ export default function useQueryPrice(str: string) {
       revalidateOnFocus: false,
       revalidateOnReconnect: false,
       revalidateIfStale: false,
-      refreshInterval: 1000 * 60 * 3,
+      refreshInterval: 1000 * 60 * 5,
     },
   );
 

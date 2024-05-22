@@ -1,39 +1,71 @@
-import { Button } from '@/app/dashboard/(components)/button';
+'use client';
+import { V2StocksMinimalResponseRow } from '@/app/api/taiwan-stock/v2/stocks/minimal/route';
 import { useTrackingList } from '@/store/zustand';
-import { Stack, TextField } from '@mui/material';
-import { useRef } from 'react';
+import convertFullWidthToHalfWidth from '@/utils/convertFullWidthToHalfWidth';
+import { Autocomplete, Button, Stack, TextField } from '@mui/material';
+import { useState } from 'react';
+import { toast } from 'react-toastify';
+import useQueryOptions from './(hooks)/useQueryOptions';
 
 export default function TrackingForm() {
-  const textRef = useRef(null);
+  const { options } = useQueryOptions();
+  const [value, setValue] = useState<V2StocksMinimalResponseRow | null>(null);
+  const [inputValue, setInputValue] = useState<string>('');
   const { add } = useTrackingList();
 
   const onClick = async () => {
-    const input = (textRef.current as any).value;
-    const response = await fetch(
-      `http://localhost:3000/api/taiwan-stock/v2/daily_deal/last/${input}`,
-    );
-    const data = await response.json();
+    if (!value) {
+      toast.error('Stock Id is required');
+      return;
+    }
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/taiwan-stock/v2/daily_deal/last/${value.stock_id}`,
+      );
+      const data = await response.json();
 
-    let dateObject = new Date();
-    let year = dateObject.getFullYear().toString();
-    let month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
-    let day = dateObject.getDate().toString().padStart(2, '0');
-    let formattedDateString = year + month + day;
-    const date = parseInt(formattedDateString);
+      let dateObject = new Date();
+      let year = dateObject.getFullYear().toString();
+      let month = (dateObject.getMonth() + 1).toString().padStart(2, '0');
+      let day = dateObject.getDate().toString().padStart(2, '0');
+      let formattedDateString = year + month + day;
+      const date = parseInt(formattedDateString);
 
-    add({
-      id: input,
-      date: date || 0,
-      plan: '---',
-      name: data['stock_name'],
-      c: data['close_price'],
-    });
+      add({
+        id: value.stock_id,
+        date: date || 0,
+        plan: '---',
+        name: data['stock_name'],
+        c: data['close_price'],
+      });
+      toast.success(`${value.stock_id} ${value.stock_name} added!`);
+    } catch (e) {
+      console.error(e);
+      toast.error('Stock not found');
+    }
+    setValue(null);
+    setInputValue('');
   };
 
   return (
     <Stack mb={2} direction={'row'} gap={2} alignItems={'center'}>
-      <TextField required label="Stock Id" inputRef={textRef} />
-      <Button onClick={onClick}>Add</Button>
+      <Autocomplete
+        onChange={(event: any, newValue: V2StocksMinimalResponseRow | null) => {
+          setValue(newValue);
+        }}
+        inputValue={inputValue}
+        onInputChange={(event, newInputValue) => {
+          const id = convertFullWidthToHalfWidth(newInputValue);
+          setInputValue(id);
+        }}
+        disablePortal
+        options={options}
+        autoHighlight
+        sx={{ width: 300 }}
+        getOptionLabel={(option) => `${option.stock_id} ${option.stock_name}`}
+        renderInput={(params) => <TextField {...params} label="Stock Id" />}
+      />
+      <Button onClick={onClick} variant="contained">Add</Button>
     </Stack>
   );
 }
