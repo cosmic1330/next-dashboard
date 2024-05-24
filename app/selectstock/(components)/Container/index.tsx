@@ -15,6 +15,7 @@ import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
 import Range from './range';
 import Switch from './switch';
+import WideRangingTable from './WideRanging';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -52,6 +53,7 @@ export default function Container() {
       {plan === 101 && <NextDayTradingTable />}
 
       {plan === 201 && <ObvLongTable />}
+      {plan === 202 && <WideRangingTable />}
 
       {plan === 301 && <TrackingTable />}
       <Fab

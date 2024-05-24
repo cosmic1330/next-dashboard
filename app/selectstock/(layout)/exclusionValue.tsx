@@ -8,6 +8,7 @@ export default function ExclusionValue({ planData }: { planData: any }) {
     <Box>
       {useDExclusionValue ? (
         <Fragment>
+          {/* 均線維持上揚的價格 */}
           <Typography align="center" variant="caption">
             d 扣抵值
           </Typography>

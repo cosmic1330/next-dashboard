@@ -3,6 +3,7 @@ import { SelectStockContext } from '@/app/selectstock/(context)/selectStockConte
 import useCancelToken from '@/hooks/useCancelToken';
 import FormateDate from '@/utils/formateStrDate';
 import { Gold, Kd, Ma, Macd, Obv } from '@ch20026103/anysis';
+
 import { useCallback, useContext, useEffect, useMemo } from 'react';
 import useSWR from 'swr';
 
@@ -134,77 +135,39 @@ export default function useQueryDeal(stock_id: string) {
           });
         }
         if (
-          stockData[length - rollback_date].c >
-            <number>finallyData[length - rollback_date].ma5 &&
-          stockData[length - rollback_date].l >
-            <number>finallyData[length - rollback_date].ma5 &&
-          // 5日均線往上突破10日、20日或60日均線
-          <number>finallyData[length - rollback_date].ma5 >
-            <number>finallyData[length - rollback_date].ma10 &&
-          <number>finallyData[length - (rollback_date + 1)].ma5 <
-            <number>finallyData[length - (rollback_date + 1)].ma10 &&
-          <number>finallyData[length - (rollback_date + 2)].ma5 <
-            <number>finallyData[length - (rollback_date + 2)].ma10 &&
-          <number>finallyData[length - (rollback_date + 1)].ma10 -
-            <number>finallyData[length - (rollback_date + 1)].ma5 <
-            <number>finallyData[length - (rollback_date + 2)].ma10 -
-              <number>finallyData[length - (rollback_date + 2)].ma5 &&
-          ((<number>finallyData[length - (rollback_date + 1)].ma10 -
-            <number>finallyData[length - (rollback_date + 1)].ma5) /
-            <number>finallyData[length - (rollback_date + 1)].ma5) *
-            100 <
-            2 &&
-          // (<number>finallyData[length - rollback_date].ma5 >
-          //   <number>finallyData[length - rollback_date].ma20 &&
-          //   <number>finallyData[length - (rollback_date + 1)].ma5 <
-          //     <number>finallyData[length - (rollback_date + 1)].ma20 &&
-          //   <number>finallyData[length - (rollback_date + 2)].ma5 <
-          //   <number>finallyData[length - (rollback_date + 2)].ma20 &&
-          //   <number>finallyData[length -  (rollback_date + 1)].ma20 -
-          //     <number>finallyData[length -  (rollback_date + 1)].ma5 <
-          //     <number>finallyData[length - (rollback_date + 2)].ma20 -
-          //       <number>finallyData[length - (rollback_date + 2)].ma5 &&
-          //   ((<number>finallyData[length -  (rollback_date + 1)].ma20 -
-          //     <number>finallyData[length -  (rollback_date + 1)].ma5) /
-          //     <number>finallyData[length -  (rollback_date + 1)].ma5) *
-          //     100 <
-          //     2) || (<number>finallyData[length - rollback_date].ma5 >
-          //       <number>finallyData[length - rollback_date].ma60 &&
-          //       <number>finallyData[length - (rollback_date + 1)].ma5 <
-          //         <number>finallyData[length - (rollback_date + 1)].ma60 &&
-          //       <number>finallyData[length - (rollback_date + 2)].ma5 <
-          //       <number>finallyData[length - (rollback_date + 2)].ma60 &&
-          //       <number>finallyData[length -  (rollback_date + 1)].ma60 -
-          //         <number>finallyData[length -  (rollback_date + 1)].ma5 <
-          //         <number>finallyData[length - (rollback_date + 2)].ma60 -
-          //           <number>finallyData[length - (rollback_date + 2)].ma5 &&
-          //       ((<number>finallyData[length -  (rollback_date + 1)].ma60 -
-          //         <number>finallyData[length -  (rollback_date + 1)].ma5) /
-          //         <number>finallyData[length -  (rollback_date + 1)].ma5) *
-          //         100 <
-          //         2)
-          // 月線往上
-          <number>finallyData[length - rollback_date].ma20 >
-            <number>finallyData[length - (rollback_date + 1)].ma20 &&
-          <number>finallyData[length - (rollback_date + 1)].ma20 >
-            <number>finallyData[length - (rollback_date + 2)].ma20 &&
-          <number>finallyData[length - (rollback_date + 2)].ma20 >
-            <number>finallyData[length - (rollback_date + 3)].ma20 &&
-          // 季線往上
-          <number>finallyData[length - rollback_date].ma60 >
-            <number>finallyData[length - (rollback_date + 1)].ma60 &&
-          <number>finallyData[length - (rollback_date + 1)].ma60 >
-            <number>finallyData[length - (rollback_date + 2)].ma60 &&
-          <number>finallyData[length - (rollback_date + 2)].ma60 >
-            <number>finallyData[length - (rollback_date + 3)].ma60 &&
-          // 五日均線往上
-          <number>finallyData[length - rollback_date].ma5 >
-            <number>finallyData[length - (rollback_date + 1)].ma5 &&
-          // rsv
-          <number>finallyData[length - rollback_date].rsv >
-            <number>finallyData[length - (rollback_date + 1)].rsv &&
-          <number>finallyData[length - rollback_date].rsv < 75 &&
-          <number>finallyData[length - rollback_date].rsv > 30
+          // 十日線上
+          <number>finallyData[length - rollback_date]?.c >
+            <number>finallyData[length - rollback_date]?.ma10 &&
+          // 不破前低
+          <number>finallyData[length - rollback_date]?.l >=
+            <number>finallyData[length - (rollback_date + 1)]?.l &&
+          // 均線正向排列或五日線即將突破十日線
+          (<number>finallyData[length - rollback_date]?.ma5 >
+            <number>finallyData[length - rollback_date]?.ma10 ||
+            (<number>finallyData[length - rollback_date]?.ma5 <
+              <number>finallyData[length - rollback_date]?.ma10 &&
+              ((<number>finallyData[length - rollback_date].ma10 -
+                <number>finallyData[length - rollback_date].ma5) /
+                <number>finallyData[length - rollback_date].ma5) *
+                100 <
+                1)) &&
+          <number>finallyData[length - rollback_date]?.ma10 >
+            <number>finallyData[length - rollback_date]?.ma20 &&
+          <number>finallyData[length - rollback_date]?.ma20 >
+            <number>finallyData[length - rollback_date]?.ma60 &&
+          // 均線上揚
+          <number>finallyData[length - rollback_date]?.ma5 >
+            <number>finallyData[length - (rollback_date + 1)]?.ma5 &&
+          <number>finallyData[length - (rollback_date + 1)]?.ma5 >=
+            <number>finallyData[length - (rollback_date + 2)]?.ma5 &&
+          <number>finallyData[length - rollback_date]?.ma10 >
+            <number>finallyData[length - (rollback_date + 1)]?.ma10 &&
+          <number>finallyData[length - (rollback_date + 1)]?.ma10 >=
+            <number>finallyData[length - (rollback_date + 2)]?.ma10 &&
+          // KD低檔位置
+          <number>finallyData[length - rollback_date]?.k >
+            <number>finallyData[length - (rollback_date + 1)].k &&
+          <number>finallyData[length - rollback_date]?.k < 65
         ) {
           return {
             ...finallyData[length - rollback_date],
