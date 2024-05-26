@@ -59,13 +59,15 @@ export default function TrackingForm() {
           setInputValue(id);
         }}
         disablePortal
-        options={options}
+        options={options ? options : []}
         autoHighlight
         sx={{ width: 300 }}
         getOptionLabel={(option) => `${option.stock_id} ${option.stock_name}`}
         renderInput={(params) => <TextField {...params} label="Stock Id" />}
       />
-      <Button onClick={onClick} variant="contained">Add</Button>
+      <Button onClick={onClick} variant="contained">
+        Add
+      </Button>
     </Stack>
   );
 }

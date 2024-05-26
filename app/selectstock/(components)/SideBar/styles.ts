@@ -43,7 +43,7 @@ export const Divider = styled(MuiDivider)`
 export const StyledHeader = styled(Stack)`
   white-space: nowrap;
   font-size: 24px;
-  margin-top: 30px;
+  margin-top: 20px;
   font-weight: 500;
 `;
 export const ListItemButton = styled(MuiListItemButton)`

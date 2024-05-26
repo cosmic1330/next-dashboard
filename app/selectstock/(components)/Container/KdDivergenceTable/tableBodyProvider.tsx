@@ -13,7 +13,7 @@ export default function TableBodyRowProvider({
     <TableBodyRow
       stock={stock}
       planData={planData}
-      plan="Kd Bottom Flip Plan"
+      plan="Kd Divergence Plan"
     />
   );
 }

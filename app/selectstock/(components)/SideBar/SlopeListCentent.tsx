@@ -5,6 +5,7 @@ import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import InsightsIcon from '@mui/icons-material/Insights';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
+import UnfoldMoreDoubleIcon from '@mui/icons-material/UnfoldMoreDouble';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -29,11 +30,15 @@ const li = [
   },
   {
     icon: AdsClickIcon,
-    text: 'KD Bottom Flip Table',
+    text: 'KD Golden Cross Table',
   },
   {
     icon: CallMissedOutgoingIcon,
     text: 'Back Support Line Table',
+  },
+  {
+    icon: UnfoldMoreDoubleIcon,
+    text: 'Open Bolling Table',
   },
 ];
 
@@ -44,7 +49,7 @@ export default function SlopeListCentent() {
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    change(index+1);
+    change(index + 1);
   };
 
   return (
@@ -52,7 +57,7 @@ export default function SlopeListCentent() {
       {li.map((item, index) => (
         <ListItemButton
           key={index}
-          selected={plan === index+1}
+          selected={plan === index + 1}
           onClick={(event) => handleListItemClick(event, index)}
         >
           <Box>

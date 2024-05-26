@@ -13,7 +13,7 @@ export default function TableBodyRowProvider({
     <TableBodyRow
       stock={stock}
       planData={planData}
-      plan="Next DayT rading Plan"
+      plan="Kd Golden Cross Plan"
     />
   );
 }

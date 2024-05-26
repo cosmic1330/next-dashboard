@@ -7,15 +7,16 @@ import BackSupportLineTable from './BackSupportLineTable';
 import BreakthroughPressureTable from './BreakthroughPressureTable';
 import CacheTable from './CacheTable';
 import ForwardTable from './ForwardTable';
-import KdBottomFlipTable from './KdBottomFlipTable';
-import NextDayTradingTable from './NextDayTradingTable';
+import KdDivergenceTable from './KdDivergenceTable';
+import KdGoldenCrossTable from './KdGoldenCrossTable';
 import ObvLongTable from './ObvLongTable';
+import OpenBollingTable from './OpenBollingTable';
 import TaiexBox from './TaiexBox';
 import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
+import WideRangingTable from './WideRanging';
 import Range from './range';
 import Switch from './switch';
-import WideRangingTable from './WideRanging';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -47,10 +48,11 @@ export default function Container() {
       {plan === 2 && <TwoRedSoldierTable />}
       {plan === 3 && <ForwardTable />}
       {plan === 4 && <BreakthroughPressureTable />}
-      {plan === 5 && <KdBottomFlipTable />}
+      {plan === 5 && <KdGoldenCrossTable />}
       {plan === 6 && <BackSupportLineTable />}
+      {plan === 7 && <OpenBollingTable />}
 
-      {plan === 101 && <NextDayTradingTable />}
+      {plan === 101 && <KdDivergenceTable />}
 
       {plan === 201 && <ObvLongTable />}
       {plan === 202 && <WideRangingTable />}

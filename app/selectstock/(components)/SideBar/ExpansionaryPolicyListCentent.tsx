@@ -1,5 +1,7 @@
+
 import { useSelectPlan } from '@/store/zustand';
-import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import DeblurIcon from '@mui/icons-material/Deblur';
+import WidthWideIcon from '@mui/icons-material/WidthWide';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -7,19 +9,23 @@ import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
 const li = [
   {
-    icon: MoreTimeIcon,
-    text: 'Next Day Trading Plan',
+    icon: DeblurIcon,
+    text: 'Obv Long Plan',
+  },
+  {
+    icon: WidthWideIcon,
+    text: 'Wide Ranging Plan',
   },
 ];
 
-export default function NextDayListCentent() {
+export default function ExpansionaryPolicyListCentent() {
   const { change, plan } = useSelectPlan();
 
   const handleListItemClick = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>,
     index: number,
   ) => {
-    change(index + 101);
+    change(index + 201);
   };
 
   return (
@@ -27,7 +33,7 @@ export default function NextDayListCentent() {
       {li.map((item, index) => (
         <ListItemButton
           key={index}
-          selected={plan === index + 101}
+          selected={plan === index + 201}
           onClick={(event) => handleListItemClick(event, index)}
         >
           <Box>

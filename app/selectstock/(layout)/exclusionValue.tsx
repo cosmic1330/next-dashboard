@@ -22,6 +22,20 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             }
           >
             ma5:
+            {/* 箭頭向下代表未來扣抵值下降ma5較容易往上揚 */}
+            <Typography
+              component={'span'}
+              color={
+                planData.exclusionValueMa5.d > planData.exclusionValueMa5['d+1']
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {planData.exclusionValueMa5.d > planData.exclusionValueMa5['d+1']
+                ? '↓'
+                : '↑'}
+            </Typography>
+            {/* 數值代表均線上揚必須高過此價位 */}
             {planData.exclusionValueMa5.d}
           </Typography>
           <Typography
@@ -34,6 +48,20 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             }
           >
             ma10:
+            <Typography
+              component={'span'}
+              color={
+                planData.exclusionValueMa10.d >
+                planData.exclusionValueMa10['d+1']
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {planData.exclusionValueMa10.d >
+              planData.exclusionValueMa10['d+1']
+                ? '↓'
+                : '↑'}
+            </Typography>
             {planData.exclusionValueMa10.d}
           </Typography>
           <Typography
@@ -46,6 +74,20 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             }
           >
             ma20:
+            <Typography
+              component={'span'}
+              color={
+                planData.exclusionValueMa20.d >
+                planData.exclusionValueMa20['d+1']
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {planData.exclusionValueMa20.d >
+              planData.exclusionValueMa20['d+1']
+                ? '↓'
+                : '↑'}
+            </Typography>
             {planData.exclusionValueMa20.d}
           </Typography>
         </Fragment>
@@ -64,6 +106,18 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             }
           >
             ma5:
+            <Typography
+              component={'span'}
+              color={
+                planData.exclusionValueMa5['d-1'] > planData.exclusionValueMa5.d
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {planData.exclusionValueMa5['d-1'] > planData.exclusionValueMa5.d
+                ? '↓'
+                : '↑'}
+            </Typography>
             {planData.exclusionValueMa5['d-1']}
           </Typography>
           <Typography
@@ -76,6 +130,20 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             }
           >
             ma10:
+            <Typography
+              component={'span'}
+              color={
+                planData.exclusionValueMa10['d-1'] >
+                planData.exclusionValueMa10.d
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {planData.exclusionValueMa10['d-1'] >
+              planData.exclusionValueMa10.d
+                ? '↓'
+                : '↑'}
+            </Typography>
             {planData.exclusionValueMa10['d-1']}
           </Typography>
           <Typography
@@ -88,6 +156,20 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             }
           >
             ma20:
+            <Typography
+              component={'span'}
+              color={
+                planData.exclusionValueMa20['d-1'] >
+                planData.exclusionValueMa20.d
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {planData.exclusionValueMa20['d-1'] >
+              planData.exclusionValueMa20.d
+                ? '↓'
+                : '↑'}
+            </Typography>
             {planData.exclusionValueMa20['d-1']}
           </Typography>
         </Fragment>

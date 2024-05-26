@@ -5,11 +5,11 @@ import { Box } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
-import NextDayListCentent from './NextDayListCentent';
+import ExpansionaryPolicyListCentent from './ExpansionaryPolicyListCentent';
+import LongTermObservationListCentent from './LongTermObservationListCentent';
 import OthersListCentent from './OthersListCentent';
 import SlopeListCentent from './SlopeListCentent';
 import { Divider, StyledDrawer, StyledHeader } from './styles';
-import DayTradingListCentent from './DayTradingListCentent';
 
 export default function SideBar() {
   const [open, setOpen] = useState<boolean>(true);
@@ -30,25 +30,26 @@ export default function SideBar() {
       </StyledHeader>
       <Divider />
       <Box textAlign="left">
-        <Typography variant="overline" px={2}>
+        <Typography variant="caption" px={2}>
           Slope Section 坡段
         </Typography>
         <SlopeListCentent />
       </Box>
       <Box textAlign="left">
-        <Typography variant="overline" px={2}>
-          Next Day Trading 隔日沖
+        <Typography variant="caption" px={2}>
+          Long-term Observation 長期觀察
         </Typography>
-        <NextDayListCentent />
+        <LongTermObservationListCentent />
       </Box>
       <Box textAlign="left">
-        <Typography variant="overline" px={2}>
-          Day Trading 當沖
+        <Typography variant="caption" px={2} >
+          Expansionary Policy 寬鬆政策
         </Typography>
-        <DayTradingListCentent />
+        <ExpansionaryPolicyListCentent />
       </Box>
+
       <Box textAlign="left">
-        <Typography variant="overline" px={2}>
+        <Typography variant="caption" px={2}>
           Others 其他
         </Typography>
         <OthersListCentent />

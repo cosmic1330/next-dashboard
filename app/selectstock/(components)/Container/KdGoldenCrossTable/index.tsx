@@ -1,6 +1,9 @@
 'use client';
-import useQueryStock from '@/hooks/useQueryStock';
-import { Button, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { Box, Button, Typography } from '@mui/material';
+import Accordion from '@mui/material/Accordion';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import AccordionSummary from '@mui/material/AccordionSummary';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -8,16 +11,27 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Fragment, Suspense, lazy } from 'react';
+import useQueryStock from '../../../../../hooks/useQueryStock';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
-export default function NextDayTradingTable() {
+export default function KdGoldenCrossTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        布林擴張標的
+        KD黃金交叉標的
       </Typography>
+      <Box my={2}>
+        <Accordion>
+          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            注意一：找KD交叉強勢突破的股票
+          </AccordionSummary>
+          <AccordionDetails>
+            突破越強勢越好，並且要有量能配合。
+          </AccordionDetails>
+        </Accordion>
+      </Box>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data
       </Button>

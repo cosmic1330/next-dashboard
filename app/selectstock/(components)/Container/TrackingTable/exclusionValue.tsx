@@ -23,7 +23,21 @@ export default function ExclusionValue({ stock }: { stock: any }) {
                 : 'error'
             }
           >
-            ma5:{' '}
+            ma5:
+            <Typography
+              component={'span'}
+              color={
+                stock?.data[stock.data.length - 1]?.exclusionValueMa5.d >
+                stock?.data[stock.data.length - 1]?.exclusionValueMa5['d+1']
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {stock?.data[stock.data.length - 1]?.exclusionValueMa5.d >
+              stock?.data[stock.data.length - 1]?.exclusionValueMa5['d+1']
+                ? '↓'
+                : '↑'}
+            </Typography>
             {stock && stock?.data[stock.data.length - 1]?.exclusionValueMa5.d}
           </Typography>
           <Typography
@@ -37,7 +51,21 @@ export default function ExclusionValue({ stock }: { stock: any }) {
                 : 'error'
             }
           >
-            ma10:{' '}
+            ma10:
+            <Typography
+              component={'span'}
+              color={
+                stock?.data[stock.data.length - 1]?.exclusionValueMa10.d >
+                stock?.data[stock.data.length - 1]?.exclusionValueMa10['d+1']
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {stock?.data[stock.data.length - 1]?.exclusionValueMa10.d >
+              stock?.data[stock.data.length - 1]?.exclusionValueMa10['d+1']
+                ? '↓'
+                : '↑'}
+            </Typography>
             {stock && stock?.data[stock.data.length - 1]?.exclusionValueMa10.d}
           </Typography>
           <Typography
@@ -51,7 +79,21 @@ export default function ExclusionValue({ stock }: { stock: any }) {
                 : 'error'
             }
           >
-            ma20:{' '}
+            ma20:
+            <Typography
+              component={'span'}
+              color={
+                stock?.data[stock.data.length - 1]?.exclusionValueMa20.d >
+                stock?.data[stock.data.length - 1]?.exclusionValueMa20['d+1']
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {stock?.data[stock.data.length - 1]?.exclusionValueMa20.d >
+              stock?.data[stock.data.length - 1]?.exclusionValueMa20['d+1']
+                ? '↓'
+                : '↑'}
+            </Typography>
             {stock && stock?.data[stock.data.length - 1]?.exclusionValueMa20.d}
           </Typography>
         </Fragment>
@@ -72,6 +114,20 @@ export default function ExclusionValue({ stock }: { stock: any }) {
             }
           >
             ma5:
+            <Typography
+              component={'span'}
+              color={
+                stock?.data[stock.data.length - 1]?.exclusionValueMa5['d-1'] >
+                stock?.data[stock.data.length - 1]?.exclusionValueMa5.d
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {stock?.data[stock.data.length - 1]?.exclusionValueMa5['d-1'] >
+              stock?.data[stock.data.length - 1]?.exclusionValueMa5.d
+                ? '↓'
+                : '↑'}
+            </Typography>
             {stock &&
               stock?.data[stock.data.length - 1]?.exclusionValueMa5['d-1']}
           </Typography>
@@ -87,6 +143,20 @@ export default function ExclusionValue({ stock }: { stock: any }) {
             }
           >
             ma10:
+            <Typography
+              component={'span'}
+              color={
+                stock?.data[stock.data.length - 1]?.exclusionValueMa10['d-1'] >
+                stock?.data[stock.data.length - 1]?.exclusionValueMa10.d
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {stock?.data[stock.data.length - 1]?.exclusionValueMa10['d-1'] >
+              stock?.data[stock.data.length - 1]?.exclusionValueMa10.d
+                ? '↓'
+                : '↑'}
+            </Typography>
             {stock &&
               stock?.data[stock.data.length - 1]?.exclusionValueMa10['d-1']}
           </Typography>
@@ -102,6 +172,20 @@ export default function ExclusionValue({ stock }: { stock: any }) {
             }
           >
             ma20:
+            <Typography
+              component={'span'}
+              color={
+                stock?.data[stock.data.length - 1]?.exclusionValueMa20['d-1'] >
+                stock?.data[stock.data.length - 1]?.exclusionValueMa20.d
+                  ? 'success.main'
+                  : 'error'
+              }
+            >
+              {stock?.data[stock.data.length - 1]?.exclusionValueMa20['d-1'] >
+              stock?.data[stock.data.length - 1]?.exclusionValueMa20.d
+                ? '↓'
+                : '↑'}
+            </Typography>
             {stock &&
               stock?.data[stock.data.length - 1]?.exclusionValueMa20['d-1']}
           </Typography>
