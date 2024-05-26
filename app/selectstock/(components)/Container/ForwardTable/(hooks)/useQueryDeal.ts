@@ -134,6 +134,7 @@ export default function useQueryDeal(stock_id: string) {
           });
         }
         if (
+          stockData[length - rollback_date].v > 500 &&
           // 收盤價持續大於10日均線
           stockData[length - rollback_date].c >
             <number>finallyData[length - rollback_date].ma10 &&
