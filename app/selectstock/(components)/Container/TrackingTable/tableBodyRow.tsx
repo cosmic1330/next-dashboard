@@ -62,9 +62,11 @@ export default function TableBodyRow({ str }: { str: string }) {
           <Link
             target="_blank"
             rel="noreferrer"
-            href={` https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${
-              stock && stock.id
-            }`}
+            href={
+              stock && stock.listed
+                ? `https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${stock.id}`
+                : `https://tw.tradingview.com/chart/8TP8jY00/?symbol=TPEX%3A${stock.id}`
+            }
           >
             {stock &&
               Math.round(

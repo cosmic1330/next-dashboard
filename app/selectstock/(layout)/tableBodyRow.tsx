@@ -26,6 +26,7 @@ export default function TableBodyRow({
     add({
       id: stock.stock_id,
       date: planData?.t || 0,
+      listed: stock.listed,
       plan,
       name: stock.stock_name,
       c: planData?.c || 0,
@@ -72,7 +73,11 @@ export default function TableBodyRow({
           <Link
             target="_blank"
             rel="noreferrer"
-            href={` https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${stock.stock_id}`}
+            href={
+              stock.listed
+                ? `https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${stock.stock_id}`
+                : `https://tw.tradingview.com/chart/8TP8jY00/?symbol=TPEX%3A${stock.stock_id}`
+            }
           >
             {Math.round(
               ((planData.c - planData.pre[0].c) / planData.pre[0].c) *

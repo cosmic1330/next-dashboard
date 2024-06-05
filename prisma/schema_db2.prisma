@@ -72,6 +72,8 @@ model stock {
   stock_id        String            @id @db.VarChar(10)
   stock_name      String            @unique @db.VarChar(30)
   enabled         Boolean?
+  listed          Boolean
+
   daily_deal      daily_deal[]
   eps             eps[]
   legal_person    legal_person[]

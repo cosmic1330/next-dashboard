@@ -5,6 +5,7 @@ export type V2StocksMinimalResponseRow = {
   stock_id: string;
   stock_name: string;
   enabled: boolean;
+  listed: boolean;
 };
 export type V2StocksMinimalResponse = V2StocksMinimalResponseRow[];
 

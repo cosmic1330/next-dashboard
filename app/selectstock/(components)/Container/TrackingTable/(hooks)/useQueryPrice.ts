@@ -14,10 +14,11 @@ export default function useQueryPrice(str: string) {
           plan: string;
           name: string;
           c: string;
+          listed: boolean;
         }
       | undefined = undefined;
     try {
-      const [id, name, date, plan, c] = str.split(',');
+      const [id, name, date, plan, c, listed] = str.split(',');
       const r = await fetch(
         `http://localhost:3000/api/taiwan-stock/v1/stocks/id/day/nocache?stockId=${id}`,
         {
@@ -25,7 +26,7 @@ export default function useQueryPrice(str: string) {
         },
       );
       const data = await r.json();
-      result = { id, data, plan, date, name, c };
+      result = { id, data, plan, date, name, c, listed: listed === 'true' };
       return result;
     } catch (error) {
       if (isAbortError(error)) {

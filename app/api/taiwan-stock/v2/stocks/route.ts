@@ -5,6 +5,7 @@ export type V2StocksResponseRow = {
   stock_id: string;
   stock_name: string;
   enabled: boolean;
+  listed: boolean;
   eps: [{ season: string; eps_data: string }];
   monthly_revenue: [
     {

@@ -75,12 +75,14 @@ type Tracking = {
   add: ({
     id,
     plan,
+    listed,
     date,
     name,
     c,
   }: {
     id: string;
     date: number;
+    listed: boolean;
     plan: string;
     name: string;
     c: number;
@@ -94,18 +96,20 @@ export const useTrackingList = create<Tracking>((set) => ({
   add: ({
     id,
     plan,
+    listed,
     date,
     name,
     c,
   }: {
     id: string;
     date: number;
+    listed: boolean;
     plan: string;
     name: string;
     c: number;
   }) =>
     set((state) => {
-      const dataString = `${id},${name},${date},${plan},${c}`;
+      const dataString = `${id},${name},${date},${plan},${c},${listed}`;
       if (state.list.length > 0) {
         const temp = new Set([...state.list, dataString]);
         state.list = Array.from(temp);

@@ -37,6 +37,7 @@ export default function TrackingForm() {
         plan: '---',
         name: data['stock_name'],
         c: data['close_price'],
+        listed: value.listed,
       });
       toast.success(`${value.stock_id} ${value.stock_name} added!`);
     } catch (e) {
