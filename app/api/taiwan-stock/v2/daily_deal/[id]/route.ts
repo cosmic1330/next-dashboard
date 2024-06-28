@@ -32,7 +32,9 @@ export const GET = async (req: Request) => {
     const res = await prisma.daily_deal.findMany({
       where: {
         stock_id: id,
+        
       },
+      take: 365,
       include: {
         legal_person: {
           select: {

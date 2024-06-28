@@ -24,9 +24,8 @@ export const GET = async (req: Request) => {
 
   try {
     if (redis) {
-      const MAX_AGE = 60_000 * 60; // 1 hour
-      const EXPIRY_MS = `PX`; // milliseconds
-      await redis?.set(key, JSON.stringify(res), EXPIRY_MS, MAX_AGE);
+      await redis?.set(key, JSON.stringify(res));
+      await redis?.expire(key, 60*30);
     }
   } catch (error) {
     console.error('Error setting to Redis:', error);
