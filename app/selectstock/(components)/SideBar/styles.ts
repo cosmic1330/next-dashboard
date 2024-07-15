@@ -15,10 +15,9 @@ export const StyledDrawer = styled(Drawer)`
     border-radius: 10px;
     transition: 0.5s;
     width: ${(props) => (props.open ? '240px' : '60px')};
-    background-color: ${(props) => props.theme.palette.primary.main};
+    background-color: ${(props) => props.theme.palette.primary.dark};
     padding: ${(props) => (props.open ? '20px 10pxx' : '0')};
     color: #fff;
-    box-shadow: 3px 0px 10px #ccc;
     position: unset;
     ::-webkit-scrollbar {
       display: none;

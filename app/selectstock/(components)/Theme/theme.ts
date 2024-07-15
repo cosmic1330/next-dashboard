@@ -2,6 +2,7 @@
 
 import { red } from '@mui/material/colors';
 import { createTheme } from '@mui/material/styles';
+import { darkPalette, lightPalette } from './palette';
 
 type DeepPartial<T> = {
   [P in keyof T]?: T[P] extends object ? DeepPartial<T[P]> : T[P];
@@ -15,24 +16,13 @@ type CustomType = {
 
 declare module '@mui/material/styles' {
   interface Theme {
-    mode: string;
     custom: CustomType;
   }
   interface ThemeOptions extends DeepPartial<Theme> {}
 }
 // Create a theme instance.
 const theme = createTheme({
-  palette: {
-    primary: {
-      main: '#4cb5f5',
-    },
-    secondary: {
-      main: '#60a6da',
-    },
-    error: {
-      main: red.A400,
-    },
-  },
+  palette: darkPalette,
   custom: {
     secound: '#e6e6e6',
     text1: '#fff',
