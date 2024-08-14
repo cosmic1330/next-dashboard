@@ -1,4 +1,4 @@
-import { ItemType } from '@/app/selectstock/(components)/Container/CacheTable/type';
+import { ItemType } from './type';
 import redis from '@/lib/redis/helper';
 import { Boll, Kd, Ma, Macd, Obv } from '@ch20026103/anysis';
 import { NextResponse } from 'next/server';
@@ -22,13 +22,13 @@ export type FinialDayDataType = {
   d: number;
   'k-d': number;
   ma5: number;
-  exclusionValueMa5: {d: number; 'd-1': number};
+  exclusionValueMa5: { d: number; 'd-1': number };
   ma10: number;
-  exclusionValueMa10: {d: number; 'd-1': number};
+  exclusionValueMa10: { d: number; 'd-1': number };
   ma20: number;
-  exclusionValueMa20: {d: number; 'd-1': number};
+  exclusionValueMa20: { d: number; 'd-1': number };
   ma60: number;
-  exclusionValueMa60: {d: number; 'd-1': number};
+  exclusionValueMa60: { d: number; 'd-1': number };
   bollMa: number;
   bollUb: number;
   bollLb: number;
@@ -151,7 +151,7 @@ export const GET = async (req: Request) => {
     try {
       if (redis) {
         await redis?.set(key, JSON.stringify(finallyData));
-        await redis?.expire(key, 60*30);
+        await redis?.expire(key, 60 * 30);
       }
     } catch (error) {
       console.error('Error setting to Redis:', error);

@@ -216,6 +216,13 @@ export default function TableBodyRow({ str }: { str: string }) {
               (stock?.data[stock?.data.length - 2]?.obvMa5 as number) &&
             'Obv黃金交叉'}
         </Typography>
+        <Typography align="center" color="success.main">
+          {stock?.data[stock?.data.length - 1].h > stock?.data[stock?.data.length - 2].h &&
+            stock?.data[stock?.data.length - 1].l < stock?.data[stock?.data.length - 2].l &&
+            stock?.data[stock?.data.length - 1].o < stock?.data[stock?.data.length - 2].c &&
+            stock?.data[stock?.data.length - 2].o > stock?.data[stock?.data.length - 2].c &&
+            '陽吞噬'}
+        </Typography>
       </TableCell>
       <TableCell align="center">
         {/* K棒 */}
@@ -276,7 +283,7 @@ export default function TableBodyRow({ str }: { str: string }) {
               stock?.data[stock.data.length - 1]?.ma20) *
               100 >
               15 &&
-            `5日均乖離過大 ${Math.round(
+            `5日均/月線乖離過大 ${Math.round(
               ((stock?.data[stock.data.length - 1]?.ma5 -
                 stock?.data[stock.data.length - 1]?.ma20) /
                 stock?.data[stock.data.length - 1]?.ma20) *
@@ -292,7 +299,7 @@ export default function TableBodyRow({ str }: { str: string }) {
               stock?.data[stock.data.length - 1]?.ma60) *
               100 >
               15 &&
-            `月線乖離過大 ${Math.round(
+            `月/季線乖離過大 ${Math.round(
               ((stock?.data[stock.data.length - 1]?.ma20 -
                 stock?.data[stock.data.length - 1]?.ma60) /
                 stock?.data[stock.data.length - 1]?.ma60) *
@@ -381,6 +388,13 @@ export default function TableBodyRow({ str }: { str: string }) {
             (stock?.data[stock?.data.length - 2]?.obv as number) >
               (stock?.data[stock?.data.length - 2]?.obvMa10 as number) &&
             'Obv死亡交叉'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {stock?.data[stock?.data.length - 1].h > stock?.data[stock?.data.length - 2].h &&
+            stock?.data[stock?.data.length - 1].l < stock?.data[stock?.data.length - 2].l &&
+            stock?.data[stock?.data.length - 1].o > stock?.data[stock?.data.length - 2].c &&
+            stock?.data[stock?.data.length - 2].o < stock?.data[stock?.data.length - 2].c &&
+            '陰吞噬'}
         </Typography>
       </TableCell>
     </TableRow>

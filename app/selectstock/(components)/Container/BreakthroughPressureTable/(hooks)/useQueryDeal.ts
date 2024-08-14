@@ -1,140 +1,54 @@
-import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/route';
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
-import useCancelToken from '@/hooks/useCancelToken';
-import FormateDate from '@/utils/formateStrDate';
-import { Gold, Kd, Ma, Macd, Obv } from '@ch20026103/anysis';
-import { useCallback, useContext, useEffect, useMemo } from 'react';
-import useSWR from 'swr';
+import useSwrFetchDeal from '@/app/selectstock/(hooks)/useSwrFetchDeal';
+import { isMovingAverageTrendUp, isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
+import { MaType } from '@/app/selectstock/(utils)/conditions/types';
+import { createSelectedIndicators } from '@/app/selectstock/(utils)/indicator';
+import BollGenerate from '@/app/selectstock/(utils)/indicator/classes/boll';
+import KdGenerate from '@/app/selectstock/(utils)/indicator/classes/kd';
+import Ma10Generate from '@/app/selectstock/(utils)/indicator/classes/ma10';
+import Ma120Generate from '@/app/selectstock/(utils)/indicator/classes/ma120';
+import Ma20Generate from '@/app/selectstock/(utils)/indicator/classes/ma20';
+import Ma240Generate from '@/app/selectstock/(utils)/indicator/classes/ma240';
+import Ma5Generate from '@/app/selectstock/(utils)/indicator/classes/ma5';
+import Ma60Generate from '@/app/selectstock/(utils)/indicator/classes/ma60';
+import MacdGenerate from '@/app/selectstock/(utils)/indicator/classes/macd';
+import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
+import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
+import formatStockdata from '@/app/selectstock/(utils)/indicator/formatStockdata';
+import { Gold } from '@ch20026103/anysis';
+import { useCallback, useContext, useMemo } from 'react';
 
 export default function useQueryDeal(stock_id: string) {
-  const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
-
-  const { rollback_date, daily_db_data_set } = useContext(SelectStockContext);
-  const fetcherWithCancel = async (url: string) => {
-    try {
-      const response = await fetch(url, {
-        signal: newCancelToken().signal,
-      });
-
-      const data = await response.json();
-      return data;
-    } catch (error) {
-      if (isAbortError(error)) {
-        console.log('Request was canceled.');
-      } else {
-        console.error('Error:', error);
-      }
-      throw error;
-    }
-  };
-
-  const { data, error, isLoading, isValidating, mutate } =
-    useSWR<V2DailyDealResponse>(
-      daily_db_data_set
-        ? `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock_id}`
-        : `http://localhost:3000/api/taiwan-stock/v2/daily_deal/yahoo/${stock_id}`,
-      fetcherWithCancel,
-      {
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-        revalidateIfStale: false,
-      },
-    );
+  const { rollback_date } = useContext(SelectStockContext);
+  const data = useSwrFetchDeal(stock_id);
 
   const method = useCallback(
     (rollback_date: number) => {
       if (!data) return;
 
-      let ma = new Ma();
-      let macd = new Macd();
-      let kd = new Kd();
-      let obv = new Obv();
       try {
-        const stockData = data.map((item) => ({
-          id: stock_id,
-          t: FormateDate(item.transaction_date),
-          c: parseFloat(item.close_price),
-          h: parseFloat(item.high_price),
-          l: parseFloat(item.low_price),
-          o: parseFloat(item.open_price),
-          v: item.volume,
-          foreign_investors: item.legal_person[0]?.foreign_investors || 0,
-          investment_trust: item.legal_person[0]?.investment_trust || 0,
-          dealer: item.legal_person[0]?.dealer || 0,
-        }));
-
+        const stockData = formatStockdata(data, stock_id);
         const gold = new Gold();
         const allGold = gold.getGold(stockData);
         let length = stockData.length - 1;
-
-        let macdData = macd.init(stockData[0]);
-        let kdData = kd.init(stockData[0]);
-        let ma5Data = ma.init(stockData[0], 5);
-        let ma10Data = ma.init(stockData[0], 10);
-        let ma20Data = ma.init(stockData[0], 20);
-        let ma60Data = ma.init(stockData[0], 60);
-        let obv5Data = obv.init(stockData[0], 5);
-        let obv10Data = obv.init(stockData[0], 10);
-        let finallyData = [
-          {
-            ...stockData[0],
-            ema12: macdData.ema12,
-            ema26: macdData.ema26,
-            macd: macdData.macd,
-            osc: macdData.osc,
-            dif: macdData.dif[macdData.dif.length - 1],
-            rsv: kdData.rsv,
-            k: kdData.k,
-            d: kdData.d,
-            'k-d': kdData['k-d'],
-            ma5: ma5Data.ma,
-            exclusionValueMa5: ma5Data.exclusionValue,
-            ma10: ma10Data.ma,
-            exclusionValueMa10: ma10Data.exclusionValue,
-            ma20: ma20Data.ma,
-            exclusionValueMa20: ma20Data.exclusionValue,
-            ma60: ma60Data.ma,
-            exclusionValueMa60: ma60Data.exclusionValue,
-            obv: obv5Data.obv,
-            obvMa5: obv5Data.obvMa,
-            obvMa10: obv10Data.obvMa,
-          },
-        ];
-        for (let i = 1; i < stockData.length; i++) {
-          macdData = macd.next(stockData[i], macdData);
-          kdData = kd.next(stockData[i], kdData, 9);
-          ma5Data = ma.next(stockData[i], ma5Data, 5);
-          ma10Data = ma.next(stockData[i], ma10Data, 10);
-          ma20Data = ma.next(stockData[i], ma20Data, 20);
-          ma60Data = ma.next(stockData[i], ma60Data, 60);
-          obv5Data = obv.next(stockData[i], obv5Data, 5);
-          obv10Data = obv.next(stockData[i], obv10Data, 10);
-          finallyData.push({
-            ...stockData[i],
-            ema12: macdData.ema12,
-            ema26: macdData.ema26,
-            macd: macdData.macd,
-            osc: macdData.osc,
-            dif: macdData.dif[macdData.dif.length - 1],
-            rsv: kdData.rsv,
-            k: kdData.k,
-            d: kdData.d,
-            'k-d': kdData['k-d'],
-            ma5: ma5Data.ma,
-            exclusionValueMa5: ma5Data.exclusionValue,
-            ma10: ma10Data.ma,
-            exclusionValueMa10: ma10Data.exclusionValue,
-            ma20: ma20Data.ma,
-            exclusionValueMa20: ma20Data.exclusionValue,
-            ma60: ma60Data.ma,
-            exclusionValueMa60: ma60Data.exclusionValue,
-            obv: obv5Data.obv,
-            obvMa5: obv5Data.obvMa,
-            obvMa10: obv10Data.obvMa,
-          });
-        }
+        const finallyData = createSelectedIndicators(
+          [
+            Ma5Generate,
+            Ma10Generate,
+            Ma20Generate,
+            Ma60Generate,
+            Ma120Generate,
+            Ma240Generate,
+            MacdGenerate,
+            Obv5Generate,
+            Obv10Generate,
+            KdGenerate,
+            BollGenerate,
+          ],
+          stockData,
+        );
         if (
-          stockData[length - rollback_date].v > 500 &&
+          isSufficientTradingVolume(finallyData, rollback_date, 500) &&
           stockData[length - rollback_date].c >
             <number>finallyData[length - rollback_date].ma5 &&
           stockData[length - rollback_date].l >
@@ -185,19 +99,9 @@ export default function useQueryDeal(stock_id: string) {
           //         100 <
           //         2)
           // 月線往上
-          <number>finallyData[length - rollback_date].ma20 >
-            <number>finallyData[length - (rollback_date + 1)].ma20 &&
-          <number>finallyData[length - (rollback_date + 1)].ma20 >
-            <number>finallyData[length - (rollback_date + 2)].ma20 &&
-          <number>finallyData[length - (rollback_date + 2)].ma20 >
-            <number>finallyData[length - (rollback_date + 3)].ma20 &&
+          isMovingAverageTrendUp(finallyData, rollback_date, MaType.MA20) &&
           // 季線往上
-          <number>finallyData[length - rollback_date].ma60 >
-            <number>finallyData[length - (rollback_date + 1)].ma60 &&
-          <number>finallyData[length - (rollback_date + 1)].ma60 >
-            <number>finallyData[length - (rollback_date + 2)].ma60 &&
-          <number>finallyData[length - (rollback_date + 2)].ma60 >
-            <number>finallyData[length - (rollback_date + 3)].ma60 &&
+          isMovingAverageTrendUp(finallyData, rollback_date, MaType.MA60) &&
           // 五日均線往上
           <number>finallyData[length - rollback_date].ma5 >
             <number>finallyData[length - (rollback_date + 1)].ma5 &&
@@ -227,10 +131,6 @@ export default function useQueryDeal(stock_id: string) {
   const planData = useMemo(() => {
     return method(rollback_date);
   }, [method, rollback_date]);
-
-  useEffect(() => {
-    return () => handleCancel();
-  }, [handleCancel]);
 
   return { planData };
 }

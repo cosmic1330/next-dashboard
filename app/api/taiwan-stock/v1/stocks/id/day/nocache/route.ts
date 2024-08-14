@@ -1,4 +1,4 @@
-import { ItemType } from '@/app/selectstock/(components)/Container/CacheTable/type';
+import { ItemType } from '../type';
 import { Boll, Kd, Ma, Macd, Obv } from '@ch20026103/anysis';
 import { NextResponse } from 'next/server';
 

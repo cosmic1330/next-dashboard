@@ -1,6 +1,6 @@
-
 import { useSelectPlan } from '@/store/zustand';
 import DeblurIcon from '@mui/icons-material/Deblur';
+import ScienceIcon from '@mui/icons-material/Science';
 import WidthWideIcon from '@mui/icons-material/WidthWide';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
@@ -15,6 +15,10 @@ const li = [
   {
     icon: WidthWideIcon,
     text: 'Wide Ranging Plan',
+  },
+  {
+    icon: ScienceIcon,
+    text: 'Experiment Plan',
   },
 ];
 

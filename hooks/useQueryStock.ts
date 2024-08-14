@@ -1,8 +1,9 @@
+import { StocksType } from '@/app/api/taiwan-stock/v1/stocks/id/day/type';
+import { V1StocksResponse } from '@/app/api/taiwan-stock/v1/stocks/route';
 import {
   V2StocksResponse,
   V2StocksResponseRow,
 } from '@/app/api/taiwan-stock/v2/stocks/route';
-import { StocksType } from '@/app/selectstock/(components)/Container/CacheTable/type';
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
 import { useContext, useEffect } from 'react';
@@ -25,7 +26,7 @@ export default function useQueryStock() {
         );
         return res;
       } else {
-        const stockList: StocksType[] = data.data;
+        const stockList: V1StocksResponse = data.data;
         const res = stockList.map((stock) => {
           const [stock_id, stock_name] = stock;
           return {

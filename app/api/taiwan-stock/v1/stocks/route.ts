@@ -1,6 +1,8 @@
 import redis from '@/lib/redis/helper';
 import { NextResponse } from 'next/server';
+import { StocksType } from './id/day/type';
 
+export type V1StocksResponse = StocksType[];
 export const GET = async (req: Request) => {
   const key = `stocks`;
   try {
@@ -25,7 +27,7 @@ export const GET = async (req: Request) => {
   try {
     if (redis) {
       await redis?.set(key, JSON.stringify(res));
-      await redis?.expire(key, 60*30);
+      await redis?.expire(key, 60 * 30);
     }
   } catch (error) {
     console.error('Error setting to Redis:', error);

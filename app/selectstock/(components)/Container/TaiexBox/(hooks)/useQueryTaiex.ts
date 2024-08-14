@@ -1,4 +1,4 @@
-import { V2DailyDealResponse } from '@/app/api/taiwan-stock/v2/daily_deal/[id]/route';
+import { PrismaDailyDealResponseResponse } from '@/app/api/taiwan-stock/v2/daily_deal/types';
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import useCancelToken from '@/hooks/useCancelToken';
 import FormateDate from '@/utils/formateStrDate';
@@ -29,7 +29,7 @@ export default function useQueryTaiex() {
   };
 
   const { data, error, isLoading, isValidating, mutate } =
-    useSWR<V2DailyDealResponse>(
+    useSWR<PrismaDailyDealResponseResponse>(
       `http://localhost:3000/api/taiwan-stock/v2/taiex`,
       fetcherWithCancel,
       {

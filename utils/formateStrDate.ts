@@ -1,4 +1,4 @@
-export default function FormateDate(dateString: string) {
+export default function FormateDate(dateString: Date | string) {
   let dateObject = new Date(dateString);
 
   let year = dateObject.getFullYear().toString();

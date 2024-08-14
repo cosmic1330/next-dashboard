@@ -220,6 +220,20 @@ export default function TableBodyRow({
             planData.pre[0].obv > planData.pre[0].obvMa10 &&
             'Obv死亡交叉'}
         </Typography>
+        <Typography align="center" color="success.main">
+          {planData.h > planData.pre[0].h &&
+            planData.l < planData.pre[0].l &&
+            planData.o < planData.pre[0].c &&
+            planData.pre[0].o > planData.pre[0].c &&
+            '陽吞噬'}
+        </Typography>
+        <Typography align="center" color="success.main">
+          {planData.h > planData.pre[0].h &&
+            planData.l < planData.pre[0].l &&
+            planData.o > planData.pre[0].c &&
+            planData.pre[0].o < planData.pre[0].c &&
+            '陰吞噬'}
+        </Typography>
       </TableCell>
       <TableCell align="center">
         <Typography align="left">超強勢 : {planData['superStrong']}</Typography>

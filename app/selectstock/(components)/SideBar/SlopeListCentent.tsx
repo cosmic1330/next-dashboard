@@ -13,10 +13,6 @@ import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
 const li = [
   {
-    icon: CachedIcon,
-    text: 'Cache Plan',
-  },
-  {
     icon: LibraryAddCheckIcon,
     text: 'Two Red Soldier Plan',
   },
