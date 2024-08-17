@@ -7,12 +7,3 @@ export type StocksType = [
   string, // '股價淨值比',
   string, // '財報年/季',
 ];
-
-export type ItemType = {
-  h: number;
-  l: number;
-  c: number;
-  v: number;
-  t: number;
-  o: number;
-}[];

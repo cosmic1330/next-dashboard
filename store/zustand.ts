@@ -1,20 +1,10 @@
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
-import { CurrentTask, Task } from './types';
+import { LocalStorageValueType, Task, TaskStore } from './types';
 
 /*******************
  *  Tomato's Task  *
  *******************/
-
-type TaskStore = {
-  loop: number;
-  tasks: Task[];
-  currentTask: CurrentTask;
-  setCurrentTask: (task: Task) => void;
-  clearCurrentTask: () => void;
-  increment: (task: Omit<Task, 'id'>) => void;
-  decrement: (id: string) => void;
-};
 
 export const useTaskStore = create<TaskStore>((set) => ({
   loop: 0,
@@ -71,58 +61,42 @@ export const useSelectPlan = create<Plan>((set) => ({
  **********************************/
 const localStorageKey = 'nextdashboard.selectstock.tracking';
 type Tracking = {
-  list: string[];
-  add: ({
-    id,
-    plan,
-    listed,
-    date,
-    name,
-    c,
-  }: {
-    id: string;
-    date: number;
-    listed: boolean;
-    plan: string;
-    name: string;
-    c: number;
-  }) => void;
+  list: Map<string, LocalStorageValueType>;
+  init: () => void;
+  add: ({ id, plan, listed, date, name, c }: LocalStorageValueType) => void;
   remove: (id: string) => void;
 };
+export type TrackingJsonType = [string, LocalStorageValueType];
 export const useTrackingList = create<Tracking>((set) => ({
-  list: window.localStorage.getItem(localStorageKey)
-    ? JSON.parse(<string>window.localStorage.getItem(localStorageKey))
-    : [],
-  add: ({
-    id,
-    plan,
-    listed,
-    date,
-    name,
-    c,
-  }: {
-    id: string;
-    date: number;
-    listed: boolean;
-    plan: string;
-    name: string;
-    c: number;
-  }) =>
-    set((state) => {
-      const dataString = `${id},${name},${date},${plan},${c},${listed}`;
-      if (state.list.length > 0) {
-        const temp = new Set([...state.list, dataString]);
-        state.list = Array.from(temp);
-      } else {
-        state.list = [dataString];
+  list: new Map(),
+  init: () =>
+    set(() => {
+      const str = window.localStorage.getItem(localStorageKey);
+      if (str !== null) {
+        const arr: TrackingJsonType[] = JSON.parse(str);
+        const dataMap = new Map();
+        arr.forEach(([id, data]: TrackingJsonType) => {
+          dataMap.set(id, data);
+        });
+        return { list: dataMap };
       }
-      window.localStorage.setItem(localStorageKey, JSON.stringify(state.list));
-      return { list: state.list };
+      const dataMap = new Map();
+      return { list: dataMap };
     }),
+  add: (data: LocalStorageValueType) => {
+    set((state) => {
+      const { id } = data;
+      state.list.set(id, data);
+      const mapArray = Array.from(state.list.entries());
+      window.localStorage.setItem(localStorageKey, JSON.stringify(mapArray));
+      return { list: state.list };
+    });
+  },
   remove: (id: string) =>
     set((state) => {
-      state.list = state.list.filter((item) => item.split(',')[0] !== id);
-      window.localStorage.setItem(localStorageKey, JSON.stringify(state.list));
+      state.list.delete(id);
+      const mapArray = Array.from(state.list.entries());
+      window.localStorage.setItem(localStorageKey, JSON.stringify(mapArray));
       return { list: state.list };
     }),
 }));

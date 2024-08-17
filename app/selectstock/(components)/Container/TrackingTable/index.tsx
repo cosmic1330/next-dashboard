@@ -6,12 +6,13 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Fragment } from 'react';
+import { Fragment, useEffect } from 'react';
 import TrackingForm from './form';
 import TableBodyRow from './tableBodyRow';
 
 export default function TrackingTable() {
-  const { list } = useTrackingList();
+  const { list, init } = useTrackingList();
+  useEffect(() => init(), [init]);
 
   return (
     <Fragment>
@@ -29,8 +30,8 @@ export default function TrackingTable() {
             </TableRow>
           </TableHead>
           <TableBody>
-            {list.map((str) => (
-              <TableBodyRow {...{ str }} key={str} />
+            {Array.from(list.values()).map((data, index) => (
+              <TableBodyRow key={index} data={data} />
             ))}
           </TableBody>
         </Table>

@@ -17,13 +17,11 @@ export default function isNoBreakBelowBullishCandleMidpoint(
   const [index1, index2] = indices;
 
   if (
-    datas[index1].l > (datas[index2].h+datas[index2].l)/2 &&
-    ((datas[index1].h - datas[index1].c) / datas[index1].c) * 100 <= 2 &&
-    datas[index2].h >= datas[index2].c &&
+    datas[index1].c > datas[index1].o &&
+    datas[index1].l > (datas[index2].h + datas[index2].l) / 2 &&
     datas[index2].c > datas[index2].o &&
-    datas[index2].o >= datas[index2].l &&
     ((datas[index2].h - datas[index2].c) / datas[index2].c) * 100 <= 1 &&
-    ((datas[index2].c - datas[index2].l) / datas[index2].l) * 100 >= 4 &&
+    ((datas[index2].h - datas[index2].l) / datas[index2].l) * 100 >= 4 &&
     ((datas[index2].o - datas[index2].l) / datas[index2].l) * 100 <= 1
   )
     return true;

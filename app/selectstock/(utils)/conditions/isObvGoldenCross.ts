@@ -1,6 +1,6 @@
 import { StockData } from '../../types';
 
-export default function isObvTrendHigherLows(
+export default function isObvGoldenCross(
   datas: StockData[],
   rollback_date = 0,
 ) {
@@ -14,12 +14,12 @@ export default function isObvTrendHigherLows(
     datas[index1].obv !== undefined &&
     datas[index2].obv !== undefined &&
     datas[index1].obv5Ma !== undefined &&
-    datas[index1].obv10Ma !== undefined
+    datas[index2].obv5Ma !== undefined
   )
     return (
       datas[index1].obv > datas[index2].obv &&
       datas[index1].obv > datas[index1].obv5Ma &&
-      datas[index1].obv > datas[index1].obv10Ma
+      datas[index2].obv < datas[index2].obv5Ma
     );
   return false;
 }

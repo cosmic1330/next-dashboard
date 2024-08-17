@@ -5,18 +5,20 @@ import { Fab, Grid, Container as MuiContainer, styled } from '@mui/material';
 import { useRef } from 'react';
 import BackSupportLineTable from './BackSupportLineTable';
 import BreakthroughPressureTable from './BreakthroughPressureTable';
-import ForwardTable from './ForwardTable';
-import KdDivergenceTable from './KdDivergenceTable';
+import ExperimentTable from './ExperimentTable';
+import MacdTrendReversalTable from './MacdTrendReversalTable';
 import KdGoldenCrossTable from './KdGoldenCrossTable';
-import ObvLongTable from './ObvLongTable';
+import MutiConditionTable from './MutiConditionTable';
+import SteadyGradualRiseTable from './SteadyGradualRiseTable';
 import OpenBollingTable from './OpenBollingTable';
 import Range from './range';
+import StableGrowthBullishTable from './StableGrowthBullishTable';
 import Switch from './switch';
 import TaiexBox from './TaiexBox';
 import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
-import WideRangingTable from './WideRangingTable';
-import ExperimentTable from './ExperimentTable';
+import UptrendContinuationTable from './UptrendContinuationTable';
+import HeldSupportLineTable from './HeldSupportLineTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -45,17 +47,19 @@ export default function Container() {
         </Grid>
       </Grid>
       {plan === 1 && <TwoRedSoldierTable />}
-      {plan === 2 && <ForwardTable />}
-      {plan === 3 && <BreakthroughPressureTable />}
+      {plan === 2 && <StableGrowthBullishTable />}
+      {plan === 3 && <BackSupportLineTable />}
       {plan === 4 && <KdGoldenCrossTable />}
-      {plan === 5 && <BackSupportLineTable />}
+      {plan === 5 && <BreakthroughPressureTable />}
       {plan === 6 && <OpenBollingTable />}
+      {plan === 7 && <SteadyGradualRiseTable />}
 
-      {plan === 101 && <KdDivergenceTable />}
+      {plan === 101 && <MacdTrendReversalTable />}
+      {plan === 102 && <UptrendContinuationTable />}
+      {plan === 103 && <HeldSupportLineTable />}
 
-      {plan === 201 && <ObvLongTable />}
-      {plan === 202 && <WideRangingTable />}
-      {plan === 203 && <ExperimentTable />}
+      {plan === 201 && <ExperimentTable />}
+      {plan === 202 && <MutiConditionTable />}
 
       {plan === 301 && <TrackingTable />}
       <Fab

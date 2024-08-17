@@ -2,8 +2,8 @@
 import { V2StocksResponseRow } from '@/app/api/taiwan-stock/v2/stocks/route';
 import useQueryDeal from '@/app/selectstock/(hooks)/useQueryDeal';
 import TableBodyRow from '@/app/selectstock/(layout)/tableBodyRow';
-import { Fragment } from 'react';
 import useConform from './(hooks)/useConform';
+import { Fragment } from 'react';
 
 export default function TableBodyRowProvider({
   stock,
@@ -26,7 +26,7 @@ export default function TableBodyRowProvider({
         conform,
         rollback_date,
       }}
-      plan="Forward Plan"
+      plan="Experiment Plan"
     />
   );
 }

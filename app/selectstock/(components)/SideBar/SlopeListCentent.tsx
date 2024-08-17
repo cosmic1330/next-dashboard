@@ -1,11 +1,11 @@
 import { useSelectPlan } from '@/store/zustand';
 import AdsClickIcon from '@mui/icons-material/AdsClick';
-import CachedIcon from '@mui/icons-material/Cached';
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing';
 import FileUploadIcon from '@mui/icons-material/FileUpload';
 import InsightsIcon from '@mui/icons-material/Insights';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import UnfoldMoreDoubleIcon from '@mui/icons-material/UnfoldMoreDouble';
+import WidthWideIcon from '@mui/icons-material/WidthWide';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -18,23 +18,27 @@ const li = [
   },
   {
     icon: InsightsIcon,
-    text: 'Forward Plan',
-  },
-  {
-    icon: FileUploadIcon,
-    text: 'Breakthrough Pressure Table',
-  },
-  {
-    icon: AdsClickIcon,
-    text: 'KD Golden Cross Table',
+    text: 'Stable Growth Bullish Plan',
   },
   {
     icon: CallMissedOutgoingIcon,
     text: 'Back Support Line Table',
   },
   {
+    icon: AdsClickIcon,
+    text: 'KD Golden Cross Table',
+  },
+  {
+    icon: FileUploadIcon,
+    text: 'Breakthrough Pressure Table',
+  },
+  {
     icon: UnfoldMoreDoubleIcon,
     text: 'Open Bolling Table',
+  },
+  {
+    icon: WidthWideIcon,
+    text: 'Steady Gradual Rise Plan',
   },
 ];
 

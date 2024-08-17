@@ -8,6 +8,7 @@ import { Divider, IconButton, Tooltip, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import { toast } from 'react-toastify';
 import { ResGoldType, StockData } from '../types';
 import ExclusionValue from './exclusionValue';
 
@@ -30,9 +31,13 @@ export default function TableBodyRow({
 }) {
   const current = stockData[stockData.length - 1 - rollback_date];
   const before1 = stockData[stockData.length - 2 - rollback_date];
-  const { add } = useTrackingList();
+  const { add, list } = useTrackingList();
 
   const handleAdd = () => {
+    if (list.has(stock.stock_id)) {
+      toast.info(`${stock.stock_id} ${stock.stock_name} has exist!`);
+      return;
+    }
     add({
       id: stock.stock_id,
       date: current.t,
@@ -41,6 +46,7 @@ export default function TableBodyRow({
       name: stock.stock_name,
       c: current.c,
     });
+    toast.success(`${stock.stock_id} ${stock.stock_name} added!`);
   };
 
   return (
@@ -102,7 +108,7 @@ export default function TableBodyRow({
       <TableCell align="center">
         {current.c}
         <Divider />
-        <ExclusionValue stockData={stockData} rollback_date={rollback_date}/>
+        <ExclusionValue stockData={stockData} rollback_date={rollback_date} />
       </TableCell>
       <TableCell align="center">
         <IconButton color="success" onClick={handleAdd}>

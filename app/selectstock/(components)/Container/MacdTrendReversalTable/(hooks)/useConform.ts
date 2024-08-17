@@ -1,11 +1,9 @@
 import {
   isBearishEngulfing,
-  isMovingAveragesPositiveOrder,
-  isMovingAverageTrendUp,
+  isMacdPositiveWithDecreasingGreenBars,
   isOscHistogramTurningPositive,
   isSufficientTradingVolume,
 } from '@/app/selectstock/(utils)/conditions';
-import { MaType } from '@/app/selectstock/(utils)/conditions/types';
 import { useMemo } from 'react';
 
 import { StockData } from '@/app/selectstock/types';
@@ -15,17 +13,12 @@ export default function useConform(
   rollback_date: number,
 ) {
   const conform = useMemo(() => {
+    let length = stockData.length - 1;
     if (
       isSufficientTradingVolume(stockData, rollback_date, 300) &&
-      isMovingAveragesPositiveOrder(stockData, rollback_date, [
-        MaType.MA5,
-        MaType.MA10,
-        MaType.MA20,
-        MaType.MA60,
-      ]) &&
-      isBearishEngulfing(stockData, rollback_date) &&
-      isOscHistogramTurningPositive(stockData, rollback_date) &&
-      isMovingAverageTrendUp(stockData, rollback_date, MaType.MA5)
+      (isBearishEngulfing(stockData, rollback_date) ||
+        (isOscHistogramTurningPositive(stockData, rollback_date) &&
+          isMacdPositiveWithDecreasingGreenBars(stockData, rollback_date)))
     ) {
       return true;
     }

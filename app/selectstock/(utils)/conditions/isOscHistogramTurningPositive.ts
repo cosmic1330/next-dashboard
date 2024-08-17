@@ -1,5 +1,7 @@
+import { StockData } from '../../types';
+
 export default function isOscHistogramTurningPositive(
-  datas: { osc: number | null }[],
+  datas: StockData[],
   rollback_date = 0,
 ) {
   let length = datas.length - 1;
@@ -17,7 +19,10 @@ export default function isOscHistogramTurningPositive(
   if (
     datas[index1].osc !== null &&
     datas[index2].osc !== null &&
-    datas[index3].osc !== null
+    datas[index3].osc !== null &&
+    datas[index1].osc !== undefined &&
+    datas[index2].osc !== undefined &&
+    datas[index3].osc !== undefined
   )
     return (
       datas[index1].osc > datas[index2].osc &&

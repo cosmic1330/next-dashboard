@@ -1,5 +1,13 @@
 'use client';
-import { Button, Typography } from '@mui/material';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import {
+  Accordion,
+  AccordionSummary,
+  Box,
+  Button,
+  Typography,
+} from '@mui/material';
+import AccordionDetails from '@mui/material/AccordionDetails';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -10,13 +18,13 @@ import { Fragment, Suspense, lazy } from 'react';
 import useQueryStock from '../../../../../hooks/useQueryStock';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
-export default function ObvLongTable() {
+export default function MacdTrendReversalTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        Obv能量潮均線上揚標的
+        Macd趨勢反轉
       </Typography>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data

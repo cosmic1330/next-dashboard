@@ -66,7 +66,7 @@ export default function TrackingForm() {
         getOptionLabel={(option) => `${option.stock_id} ${option.stock_name}`}
         renderInput={(params) => <TextField {...params} label="Stock Id" />}
       />
-      <Button onClick={onClick} variant="contained">
+      <Button onClick={onClick} variant="contained" color="success">
         Add
       </Button>
     </Stack>

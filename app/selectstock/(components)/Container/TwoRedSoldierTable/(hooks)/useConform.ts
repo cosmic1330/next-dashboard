@@ -3,6 +3,7 @@ import {
   isMovingAveragesPositiveOrder,
   isMovingAverageTrendUp,
   isSufficientTradingVolume,
+  isTwoRedSoldiersHigherLows,
 } from '@/app/selectstock/(utils)/conditions';
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
 import { StockData } from '@/app/selectstock/types';
@@ -15,7 +16,7 @@ export default function useConform(
   const conform = useMemo(() => {
     let length = stockData.length - 1;
     if (
-      isSufficientTradingVolume(stockData, rollback_date, 1500) &&
+      isSufficientTradingVolume(stockData, rollback_date, 300) &&
       // 收紅
       stockData[length - rollback_date].c >=
         stockData[length - rollback_date].o &&
@@ -23,15 +24,7 @@ export default function useConform(
       stockData[length - rollback_date].c >
         <number>stockData[length - rollback_date].ma5 &&
       // 底底高
-      stockData[length - rollback_date].l >=
-        stockData[length - (rollback_date + 1)].l &&
-      stockData[length - (rollback_date + 1)].l >=
-        stockData[length - (rollback_date + 2)].l &&
-      stockData[length - (rollback_date + 2)].l <=
-        stockData[length - (rollback_date + 3)].l &&
-      // rsv升高
-      <number>stockData[length - rollback_date].rsv >
-        <number>stockData[length - (rollback_date + 1)].rsv &&
+      isTwoRedSoldiersHigherLows(stockData, rollback_date) &&
       // kd金叉
       isKDGoldenCross(stockData, rollback_date) &&
       // 5ma > 20ma > 60ma

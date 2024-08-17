@@ -1,5 +1,7 @@
+import { StockData } from '../../types';
+
 export default function isMacdGoldenCross(
-  datas: { dif: number | null; macd: number | null }[],
+  datas: StockData[],
   rollback_date = 0,
 ) {
   let length = datas.length - 1;
@@ -21,7 +23,13 @@ export default function isMacdGoldenCross(
     datas[index2].macd !== null &&
     datas[index2].dif !== null &&
     datas[index3].macd !== null &&
-    datas[index3].dif !== null
+    datas[index3].dif !== null &&
+    datas[index1].macd !== undefined &&
+    datas[index1].dif !== undefined &&
+    datas[index2].macd !== undefined &&
+    datas[index2].dif !== undefined &&
+    datas[index3].macd !== undefined &&
+    datas[index3].dif !== undefined
   ) {
     return (
       datas[index1].macd < datas[index1].dif &&

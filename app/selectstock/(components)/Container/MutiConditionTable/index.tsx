@@ -35,7 +35,7 @@ export default function MutiConditionTable() {
               <TableCell align="center">股價</TableCell>
               <TableCell align="center">Action</TableCell>
               <TableCell align="center">評估</TableCell>
-              <TableCell align="left">黃金分割率</TableCell>
+              <TableCell align="left">分數</TableCell>
               <TableCell align="left">其他</TableCell>
             </TableRow>
           </TableHead>

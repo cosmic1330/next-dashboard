@@ -2,11 +2,14 @@ import { useMemo } from 'react';
 import { StockData } from '../types';
 
 import {
+  isBreaksPreviousLowWithoutNewHigh,
   isCloseBelowMa10,
   isCloseBelowMa20,
   isCloseBelowMa5,
+  isIncreasingVolumeGreenK,
   isKdDeathCross,
   isKdNegativeTrend,
+  isLongGreenK,
   isMa10NegativeTrend,
   isMa20NegativeTrend,
   isMa5NegativeTrend,
@@ -38,6 +41,9 @@ export default function useNegativeAssessment(
       isNegativeEngulfing,
       isObvDeathCross,
       isObvNegativeOrder,
+      isBreaksPreviousLowWithoutNewHigh,
+      isIncreasingVolumeGreenK,
+      isLongGreenK,
     ];
     const res = AssessmentArray.map((fn) => fn(datas, rollback_date)).filter(
       (item) => item !== false,

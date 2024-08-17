@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import useSWR from 'swr';
 
 export default function useQueryOptions() {
-  const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
+  const { newCancelToken, handleCancel } = useCancelToken();
   const fetcherWithCancel = async (url: string) => {
     try {
       const r = await fetch(url, {
@@ -17,16 +17,15 @@ export default function useQueryOptions() {
     }
   };
 
-  const { data, error, isLoading, isValidating } =
-    useSWR<V2StocksMinimalResponse>(
-      `http://localhost:3000/api/taiwan-stock/v2/stocks`,
-      fetcherWithCancel,
-      {
-        revalidateOnFocus: false,
-        revalidateOnReconnect: false,
-        revalidateIfStale: false,
-      },
-    );
+  const { data } = useSWR<V2StocksMinimalResponse>(
+    `http://localhost:3000/api/taiwan-stock/v2/stocks`,
+    fetcherWithCancel,
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+      revalidateIfStale: false,
+    },
+  );
 
   useEffect(() => {
     return () => handleCancel();

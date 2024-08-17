@@ -10,7 +10,7 @@ import TableRow from '@mui/material/TableRow';
 import { Fragment, Suspense, lazy } from 'react';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
-export default function ForwardTable() {
+export default function StableGrowthBullishTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (

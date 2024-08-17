@@ -5,14 +5,25 @@ import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
+import DeblurIcon from '@mui/icons-material/Deblur';
+import Upcoming from '@mui/icons-material/Upcoming';
+
 const li = [
   {
     icon: MoreTimeIcon,
-    text: 'Kd Divergence Plan',
+    text: 'Macd Trend Reversal Plan',
+  },
+  {
+    icon: DeblurIcon,
+    text: 'Uptrend Continuation Plan',
+  },
+  {
+    icon: Upcoming,
+    text: 'Held Support Line Plan',
   },
 ];
 
-export default function LongTermObservationListCentent() {
+export default function BearishToBullishListCentent() {
   const { change, plan } = useSelectPlan();
 
   const handleListItemClick = (

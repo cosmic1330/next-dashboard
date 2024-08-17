@@ -1,8 +1,11 @@
+export { default as isBreaksPreviousLowWithoutNewHigh } from './isBreaksPreviousLowWithoutNewHigh';
 export { default as isCloseBelowMa10 } from './isCloseBelowMa10';
 export { default as isCloseBelowMa20 } from './isCloseBelowMa20';
 export { default as isCloseBelowMa5 } from './isCloseBelowMa5';
+export { default as isIncreasingVolumeGreenK } from './isIncreasingVolumeGreenK';
 export { default as isKdDeathCross } from './isKdDeathCross';
 export { default as isKdNegativeTrend } from './isKdNegativeTrend';
+export { default as isLongGreenK } from './isLongGreenK';
 export { default as isMa10NegativeTrend } from './isMa10NegativeTrend';
 export { default as isMa20NegativeTrend } from './isMa20NegativeTrend';
 export { default as isMa5NegativeTrend } from './isMa5NegativeTrend';

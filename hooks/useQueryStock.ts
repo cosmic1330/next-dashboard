@@ -1,4 +1,3 @@
-import { StocksType } from '@/app/api/taiwan-stock/v1/stocks/id/day/type';
 import { V1StocksResponse } from '@/app/api/taiwan-stock/v1/stocks/route';
 import {
   V2StocksResponse,

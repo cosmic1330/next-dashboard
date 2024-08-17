@@ -1,57 +1,53 @@
-import { FinialDayDataType } from '@/app/api/taiwan-stock/v1/stocks/id/day/route';
-import useCancelToken from '@/hooks/useCancelToken';
-import { useEffect } from 'react';
-import useSWR from 'swr';
+import useTrackingFetchDeal from '@/app/selectstock/(hooks)/useTrackingFetchDeal';
+import formatStockdata from '@/app/selectstock/(utils)/indicator/formatStockdata';
+import { useMemo } from 'react';
 
-export default function useQueryPrice(str: string) {
-  const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
-  const fetcherWithCancel = async (str: string) => {
-    let result:
-      | {
-          id: string;
-          data: FinialDayDataType[];
-          date: string;
-          plan: string;
-          name: string;
-          c: string;
-          listed: boolean;
-        }
-      | undefined = undefined;
-    try {
-      const [id, name, date, plan, c, listed] = str.split(',');
-      const r = await fetch(
-        `http://localhost:3000/api/taiwan-stock/v1/stocks/id/day/nocache?stockId=${id}`,
-        {
-          signal: newCancelToken().signal,
-        },
-      );
-      const data = await r.json();
-      result = { id, data, plan, date, name, c, listed: listed === 'true' };
-      return result;
-    } catch (error) {
-      if (isAbortError(error)) {
-        console.log('Request was canceled.');
-      } else {
-        console.error('Error:', error);
-      }
-      throw error;
-    }
-  };
+import useNegativeAssessment from '@/app/selectstock/(hooks)/useNegativeAssessment';
+import usePositiveAssessment from '@/app/selectstock/(hooks)/usePositiveAssessment';
+import { createSelectedIndicators } from '@/app/selectstock/(utils)/indicator';
+import BollGenerate from '@/app/selectstock/(utils)/indicator/classes/boll';
+import KdGenerate from '@/app/selectstock/(utils)/indicator/classes/kd';
+import Ma10Generate from '@/app/selectstock/(utils)/indicator/classes/ma10';
+import Ma120Generate from '@/app/selectstock/(utils)/indicator/classes/ma120';
+import Ma20Generate from '@/app/selectstock/(utils)/indicator/classes/ma20';
+import Ma240Generate from '@/app/selectstock/(utils)/indicator/classes/ma240';
+import Ma5Generate from '@/app/selectstock/(utils)/indicator/classes/ma5';
+import Ma60Generate from '@/app/selectstock/(utils)/indicator/classes/ma60';
+import MacdGenerate from '@/app/selectstock/(utils)/indicator/classes/macd';
+import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
+import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
 
-  const { data, error, isLoading, isValidating } = useSWR(
-    str,
-    fetcherWithCancel,
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
-      revalidateIfStale: false,
-      refreshInterval: 1000 * 60 * 5,
-    },
+export default function useQueryPrice(stock_id: string) {
+  const fetchData = useTrackingFetchDeal(stock_id);
+
+  const baseData = useMemo(() => {
+    if (!fetchData) return [];
+    return formatStockdata(fetchData, stock_id);
+  }, [fetchData, stock_id]);
+
+  const stockData = useMemo(
+    () =>
+      createSelectedIndicators(
+        [
+          Ma5Generate,
+          Ma10Generate,
+          Ma20Generate,
+          Ma60Generate,
+          Ma120Generate,
+          Ma240Generate,
+          MacdGenerate,
+          Obv5Generate,
+          Obv10Generate,
+          KdGenerate,
+          BollGenerate,
+        ],
+        baseData,
+      ),
+    [baseData],
   );
 
-  useEffect(() => {
-    return () => handleCancel();
-  }, [handleCancel]);
+  const positives = usePositiveAssessment(stockData, 0);
+  const negatives = useNegativeAssessment(stockData, 0);
 
-  return { data, error, isLoading };
+  return { stockData, positives, negatives };
 }

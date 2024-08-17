@@ -1,13 +1,5 @@
 'use client';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {
-  Accordion,
-  AccordionSummary,
-  Box,
-  Button,
-  Typography,
-} from '@mui/material';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import { Button, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -18,24 +10,14 @@ import { Fragment, Suspense, lazy } from 'react';
 import useQueryStock from '../../../../../hooks/useQueryStock';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
-export default function KdDivergenceTable() {
+export default function UptrendContinuationTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        KD負背離的標的
+        漲勢持續的多頭標的
       </Typography>
-      <Box my={2}>
-        <Accordion>
-          <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-            注意一：找KD破低但股價未破低的股票
-          </AccordionSummary>
-          <AccordionDetails>
-            破低以實棒低點為主，不能用引線低點。
-          </AccordionDetails>
-        </Accordion>
-      </Box>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data
       </Button>

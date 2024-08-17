@@ -1,6 +1,6 @@
 import redis from '@/lib/redis/helper';
 import { NextResponse } from 'next/server';
-import { StocksType } from './id/day/type';
+import { StocksType } from './types';
 
 export type V1StocksResponse = StocksType[];
 export const GET = async (req: Request) => {

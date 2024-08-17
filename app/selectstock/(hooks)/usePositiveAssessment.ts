@@ -5,8 +5,11 @@ import {
   isCloseAboveMa10,
   isCloseAboveMa20,
   isCloseAboveMa5,
+  isHoldsPreviousLowAndMakesNewHigh,
+  isIncreasingVolumeRedK,
   isKdGoldenCross,
   isKdPositiveTrend,
+  isLongRedK,
   isMa10PositiveTrend,
   isMa20PositiveTrend,
   isMa5PositiveTrend,
@@ -38,6 +41,9 @@ export default function usePositiveAssessment(
       isObvGoldenCross,
       isObvPositiveOrder,
       isPositiveEngulfing,
+      isHoldsPreviousLowAndMakesNewHigh,
+      isIncreasingVolumeRedK,
+      isLongRedK,
     ];
     const res = AssessmentArray.map((fn) => fn(datas, rollback_date)).filter(
       (item) => item !== false,

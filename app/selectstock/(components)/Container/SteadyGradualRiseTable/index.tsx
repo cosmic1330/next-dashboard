@@ -10,13 +10,13 @@ import { Fragment, Suspense, lazy } from 'react';
 import useQueryStock from '../../../../../hooks/useQueryStock';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
-export default function WideRangingTable() {
+export default function SteadyGradualRiseTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        廣義的多頭標的
+        小碎步上升的標的
       </Typography>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data

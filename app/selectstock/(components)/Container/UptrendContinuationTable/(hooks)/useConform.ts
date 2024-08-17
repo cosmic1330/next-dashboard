@@ -1,6 +1,6 @@
 import {
-  isMaSlopePositive,
   isMovingAveragesPositiveOrder,
+  isNoBreakBelowBullishCandleMidpoint,
   isSufficientTradingVolume,
 } from '@/app/selectstock/(utils)/conditions';
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
@@ -13,8 +13,8 @@ export default function useConform(
 ) {
   const conform = useMemo(() => {
     if (
-      isSufficientTradingVolume(stockData, rollback_date, 500) &&
-      isMaSlopePositive(stockData, rollback_date) &&
+      isSufficientTradingVolume(stockData, rollback_date, 300) &&
+      isNoBreakBelowBullishCandleMidpoint(stockData, rollback_date) &&
       isMovingAveragesPositiveOrder(stockData, rollback_date, [
         MaType.MA5,
         MaType.MA10,

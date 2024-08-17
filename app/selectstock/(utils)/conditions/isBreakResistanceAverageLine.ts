@@ -1,10 +1,10 @@
 import { StockData } from '../../types';
 import { MaType } from './types';
 
-export default function isThreeConsecutiveDaysAboveMovingAverage(
+export default function isBreakResistanceAverageLine(
   datas: StockData[],
   rollback_date = 0,
-  type: MaType = MaType.MA5,
+  type: MaType = MaType.MA20,
 ) {
   let length = datas.length - 1;
 
@@ -21,18 +21,13 @@ export default function isThreeConsecutiveDaysAboveMovingAverage(
   if (
     datas[index1][type] !== undefined &&
     datas[index2][type] !== undefined &&
-    datas[index3][type] !== undefined &&
-    datas[index1][MaType.MA5] !== undefined &&
-    datas[index2][MaType.MA5] !== undefined &&
-    datas[index1][MaType.MA10] !== undefined &&
-    datas[index2][MaType.MA10] !== undefined
+    datas[index3][type] !== undefined
   )
     return (
       datas[index1].c > datas[index1][type] &&
-      datas[index2].c > datas[index2][type] &&
-      datas[index3].c > datas[index3][type] &&
-      datas[index1][MaType.MA5] > datas[index2][MaType.MA5] &&
-      datas[index1][MaType.MA10] > datas[index2][MaType.MA10]
+      datas[index2].h > datas[index2][type] &&
+      datas[index2].c < datas[index2][type] &&
+      datas[index3].c < datas[index3][type]
     );
   return false;
 }

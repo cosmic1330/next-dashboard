@@ -1,7 +1,7 @@
 import { StockData } from '../../types';
 import { MaType } from './types';
 
-export default function isPriceDroppedAndRecoveredAboveMA(
+export default function isNotBreakBelowMovingAverage(
   datas: StockData[],
   rollback_date = 0,
   type: MaType = MaType.MA5,
@@ -11,25 +11,21 @@ export default function isPriceDroppedAndRecoveredAboveMA(
   const indices = [
     length - rollback_date,
     length - (rollback_date + 1),
-    length - (rollback_date + 2),
   ];
   if (indices.some((index) => index < 0 || index >= datas.length)) {
     return false;
   }
-  const [index1, index2, index3] = indices;
+  const [index1, index2] = indices;
 
   if (
     datas[index1][type] !== undefined &&
-    datas[index2][type] !== undefined &&
-    datas[index3][type] !== undefined
+    datas[index2][type] !== undefined
   )
     return (
-      datas[index1].h > datas[index2].h &&
-      datas[index1].l > datas[index2].l &&
-      datas[index1].c > datas[index2].c &&
       datas[index1].c > datas[index1][type] &&
       datas[index2].c > datas[index2][type] &&
-      datas[index3].c < datas[index3][type]
+      datas[index2].c < datas[index2].o &&
+      datas[index1][type] > datas[index2][type]
     );
   return false;
 }

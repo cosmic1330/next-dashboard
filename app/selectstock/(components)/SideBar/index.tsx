@@ -5,8 +5,8 @@ import { Box } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import { useState } from 'react';
+import LongTermObservationListCentent from './BearishToBullishListCentent';
 import ExpansionaryPolicyListCentent from './ExpansionaryPolicyListCentent';
-import LongTermObservationListCentent from './LongTermObservationListCentent';
 import OthersListCentent from './OthersListCentent';
 import SlopeListCentent from './SlopeListCentent';
 import { Divider, StyledDrawer, StyledHeader } from './styles';
@@ -37,12 +37,12 @@ export default function SideBar() {
       </Box>
       <Box textAlign="left">
         <Typography variant="caption" px={2}>
-          Long-term Observation 長期觀察
+          Bearish to Bullish 趨勢空轉多
         </Typography>
         <LongTermObservationListCentent />
       </Box>
       <Box textAlign="left">
-        <Typography variant="caption" px={2} >
+        <Typography variant="caption" px={2}>
           Expansionary Policy 寬鬆政策
         </Typography>
         <ExpansionaryPolicyListCentent />

@@ -29,8 +29,9 @@ export default function isKbarSmallDeviationFromMA(
       datas[index1].c > datas[index1][type] &&
       datas[index2].c > datas[index2][type] &&
       datas[index1].l > datas[index1][type] &&
-      ((datas[index1].l - datas[index1][type]) / datas[index1][type]) * 100 <
-        percent // K-bar與均線差距小於%
+      Math.abs(
+        ((datas[index1].l - datas[index1][type]) / datas[index1][type]) * 100,
+      ) < percent // K-bar與均線差距小於%
     );
   }
   return false;
