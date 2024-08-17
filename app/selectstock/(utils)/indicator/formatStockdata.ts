@@ -1,11 +1,11 @@
 import { PrismaDailyDealResponseResponse, YahooDailyDealResponseResponse } from '@/app/api/taiwan-stock/v2/daily_deal/types';
 import FormateDate from '@/utils/formateStrDate';
-import { StockData } from '../../types';
+import { BaseStockData } from '../../types';
 
 export default function formatStockdata(
   data: PrismaDailyDealResponseResponse | YahooDailyDealResponseResponse,
   stock_id: string,
-): StockData[] {
+): BaseStockData[] {
   return data.map((item) => ({
     id: stock_id,
     t: FormateDate(item.transaction_date),

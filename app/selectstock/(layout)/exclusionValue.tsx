@@ -1,9 +1,23 @@
 import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import { Box, Typography } from '@mui/material';
 import { Fragment, useContext } from 'react';
+import { StockData } from '../types';
 
-export default function ExclusionValue({ planData }: { planData: any }) {
+export default function ExclusionValue({
+  stockData,
+  rollback_date,
+}: {
+  stockData: StockData[];
+  rollback_date: number;
+}) {
   const { useDExclusionValue } = useContext(SelectStockContext);
+  const current = stockData[stockData.length - 1 - rollback_date];
+  if (
+    current.exclusionValueMa5 === undefined ||
+    current.exclusionValueMa10 === undefined ||
+    current.exclusionValueMa20 === undefined
+  )
+    return <Fragment />;
   return (
     <Box>
       {useDExclusionValue ? (
@@ -16,7 +30,7 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             align="center"
             variant="body2"
             color={
-              planData.c >= planData.exclusionValueMa5.d
+              current.c >= current.exclusionValueMa5.d
                 ? 'success.main'
                 : 'error'
             }
@@ -26,23 +40,23 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             <Typography
               component={'span'}
               color={
-                planData.exclusionValueMa5.d > planData.exclusionValueMa5['d+1']
+                current.exclusionValueMa5.d > current.exclusionValueMa5['d+1']
                   ? 'success.main'
                   : 'error'
               }
             >
-              {planData.exclusionValueMa5.d > planData.exclusionValueMa5['d+1']
+              {current.exclusionValueMa5.d > current.exclusionValueMa5['d+1']
                 ? '↓'
                 : '↑'}
             </Typography>
             {/* 數值代表均線上揚必須高過此價位 */}
-            {planData.exclusionValueMa5.d}
+            {current.exclusionValueMa5.d}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
-              planData.c >= planData.exclusionValueMa10.d
+              current.c >= current.exclusionValueMa10.d
                 ? 'success.main'
                 : 'error'
             }
@@ -51,24 +65,22 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             <Typography
               component={'span'}
               color={
-                planData.exclusionValueMa10.d >
-                planData.exclusionValueMa10['d+1']
+                current.exclusionValueMa10.d > current.exclusionValueMa10['d+1']
                   ? 'success.main'
                   : 'error'
               }
             >
-              {planData.exclusionValueMa10.d >
-              planData.exclusionValueMa10['d+1']
+              {current.exclusionValueMa10.d > current.exclusionValueMa10['d+1']
                 ? '↓'
                 : '↑'}
             </Typography>
-            {planData.exclusionValueMa10.d}
+            {current.exclusionValueMa10.d}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
-              planData.c >= planData.exclusionValueMa20.d
+              current.c >= current.exclusionValueMa20.d
                 ? 'success.main'
                 : 'error'
             }
@@ -77,18 +89,16 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             <Typography
               component={'span'}
               color={
-                planData.exclusionValueMa20.d >
-                planData.exclusionValueMa20['d+1']
+                current.exclusionValueMa20.d > current.exclusionValueMa20['d+1']
                   ? 'success.main'
                   : 'error'
               }
             >
-              {planData.exclusionValueMa20.d >
-              planData.exclusionValueMa20['d+1']
+              {current.exclusionValueMa20.d > current.exclusionValueMa20['d+1']
                 ? '↓'
                 : '↑'}
             </Typography>
-            {planData.exclusionValueMa20.d}
+            {current.exclusionValueMa20.d}
           </Typography>
         </Fragment>
       ) : (
@@ -100,7 +110,7 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             align="center"
             variant="body2"
             color={
-              planData.c >= planData.exclusionValueMa5['d-1']
+              current.c >= current.exclusionValueMa5['d-1']
                 ? 'success.main'
                 : 'error'
             }
@@ -109,22 +119,22 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             <Typography
               component={'span'}
               color={
-                planData.exclusionValueMa5['d-1'] > planData.exclusionValueMa5.d
+                current.exclusionValueMa5['d-1'] > current.exclusionValueMa5.d
                   ? 'success.main'
                   : 'error'
               }
             >
-              {planData.exclusionValueMa5['d-1'] > planData.exclusionValueMa5.d
+              {current.exclusionValueMa5['d-1'] > current.exclusionValueMa5.d
                 ? '↓'
                 : '↑'}
             </Typography>
-            {planData.exclusionValueMa5['d-1']}
+            {current.exclusionValueMa5['d-1']}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
-              planData.c >= planData.exclusionValueMa10['d-1']
+              current.c >= current.exclusionValueMa10['d-1']
                 ? 'success.main'
                 : 'error'
             }
@@ -133,24 +143,22 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             <Typography
               component={'span'}
               color={
-                planData.exclusionValueMa10['d-1'] >
-                planData.exclusionValueMa10.d
+                current.exclusionValueMa10['d-1'] > current.exclusionValueMa10.d
                   ? 'success.main'
                   : 'error'
               }
             >
-              {planData.exclusionValueMa10['d-1'] >
-              planData.exclusionValueMa10.d
+              {current.exclusionValueMa10['d-1'] > current.exclusionValueMa10.d
                 ? '↓'
                 : '↑'}
             </Typography>
-            {planData.exclusionValueMa10['d-1']}
+            {current.exclusionValueMa10['d-1']}
           </Typography>
           <Typography
             align="center"
             variant="body2"
             color={
-              planData.c >= planData.exclusionValueMa20['d-1']
+              current.c >= current.exclusionValueMa20['d-1']
                 ? 'success.main'
                 : 'error'
             }
@@ -159,18 +167,16 @@ export default function ExclusionValue({ planData }: { planData: any }) {
             <Typography
               component={'span'}
               color={
-                planData.exclusionValueMa20['d-1'] >
-                planData.exclusionValueMa20.d
+                current.exclusionValueMa20['d-1'] > current.exclusionValueMa20.d
                   ? 'success.main'
                   : 'error'
               }
             >
-              {planData.exclusionValueMa20['d-1'] >
-              planData.exclusionValueMa20.d
+              {current.exclusionValueMa20['d-1'] > current.exclusionValueMa20.d
                 ? '↓'
                 : '↑'}
             </Typography>
-            {planData.exclusionValueMa20['d-1']}
+            {current.exclusionValueMa20['d-1']}
           </Typography>
         </Fragment>
       )}

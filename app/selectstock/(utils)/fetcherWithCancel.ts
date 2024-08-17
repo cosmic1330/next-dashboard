@@ -12,9 +12,7 @@ export default async function fetcherWithCancel(
     return data;
   } catch (error) {
     if (isAbortError(error)) {
-      console.log('Request was canceled.');
-    } else {
-      console.error('Error:', error);
+      console.log(`aborted:${url}`);
     }
   }
 }

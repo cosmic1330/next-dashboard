@@ -24,7 +24,7 @@ export default function TrackingTable() {
               <TableCell align="center">股票</TableCell>
               <TableCell align="center">股價</TableCell>
               <TableCell align="center">Action</TableCell>
-              <TableCell align="center">正向</TableCell>
+              <TableCell align="center">評估</TableCell>
               <TableCell align="center">注意</TableCell>
             </TableRow>
           </TableHead>
