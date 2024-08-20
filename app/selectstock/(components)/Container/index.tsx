@@ -6,19 +6,20 @@ import { useRef } from 'react';
 import BackSupportLineTable from './BackSupportLineTable';
 import BreakthroughPressureTable from './BreakthroughPressureTable';
 import ExperimentTable from './ExperimentTable';
-import MacdTrendReversalTable from './MacdTrendReversalTable';
+import HeldSupportLineTable from './HeldSupportLineTable';
 import KdGoldenCrossTable from './KdGoldenCrossTable';
+import MacdTrendReversalTable from './MacdTrendReversalTable';
 import MutiConditionTable from './MutiConditionTable';
-import SteadyGradualRiseTable from './SteadyGradualRiseTable';
 import OpenBollingTable from './OpenBollingTable';
 import Range from './range';
 import StableGrowthBullishTable from './StableGrowthBullishTable';
+import SteadyGradualRiseTable from './SteadyGradualRiseTable';
 import Switch from './switch';
 import TaiexBox from './TaiexBox';
 import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
 import UptrendContinuationTable from './UptrendContinuationTable';
-import HeldSupportLineTable from './HeldSupportLineTable';
+import V1PlansTable from './V1PlansTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -58,8 +59,9 @@ export default function Container() {
       {plan === 102 && <UptrendContinuationTable />}
       {plan === 103 && <HeldSupportLineTable />}
 
-      {plan === 201 && <ExperimentTable />}
-      {plan === 202 && <MutiConditionTable />}
+      {plan === 201 && <V1PlansTable />}
+      {plan === 202 && <ExperimentTable />}
+      {plan === 203 && <MutiConditionTable />}
 
       {plan === 301 && <TrackingTable />}
       <Fab

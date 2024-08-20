@@ -59,7 +59,7 @@ export const useSelectPlan = create<Plan>((set) => ({
 /**********************************
  *  SelectStock's Tracking Table  *
  **********************************/
-const localStorageKey = 'nextdashboard.selectstock.tracking';
+const localStorageKey = 'nextdashboard.selectstock.tracking.v2';
 type Tracking = {
   list: Map<string, LocalStorageValueType>;
   init: () => void;
