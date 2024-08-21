@@ -14,8 +14,9 @@ export default function TableBodyRowProvider({
     stock.stock_id,
   );
   const conform = useConform(stockData, rollback_date);
-  if (!conform) return <Fragment />;
-  return (
+  return !conform ? (
+    <Fragment />
+  ) : (
     <TableBodyRow
       {...{
         stock,

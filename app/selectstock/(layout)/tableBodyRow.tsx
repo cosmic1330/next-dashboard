@@ -4,13 +4,15 @@ import { useTrackingList } from '@/store/zustand';
 import NorthIcon from '@mui/icons-material/North';
 import NoteAddOutlinedIcon from '@mui/icons-material/NoteAddOutlined';
 import SouthIcon from '@mui/icons-material/South';
-import { Divider, IconButton, Tooltip, Typography } from '@mui/material';
+import { Divider, IconButton, Stack, Tooltip, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { toast } from 'react-toastify';
 import { ResGoldType, StockData } from '../types';
+import Eps from './eps';
 import ExclusionValue from './exclusionValue';
+import Monthly from './monthly';
 
 export default function TableBodyRow({
   stock,
@@ -134,10 +136,14 @@ export default function TableBodyRow({
         <Typography align="left">---弱勢 : {gold.weak}</Typography>
         <Typography align="left">超弱勢 : {gold.superWeak}</Typography>
         <Typography align="left">
-          前高:{gold.highestPointDate} {gold.highestPoint}
+          前高:
+          <br />
+          {gold.highestPointDate} {gold.highestPoint}
         </Typography>
         <Typography align="left">
-          前低:{gold.lowestPointDate} {gold.lowestPoint}
+          前低:
+          <br />
+          {gold.lowestPointDate} {gold.lowestPoint}
         </Typography>
       </TableCell>
       <TableCell align="center">
@@ -150,34 +156,12 @@ export default function TableBodyRow({
         <Typography align="left">
           自營: {Math.floor(current.dealer / 1000) || 0}
         </Typography>
-
-        <Typography align="left" variant="subtitle2" color="secondary">
-          營收月份:
-          {stock.monthly_revenue.length > 0
-            ? `${stock.monthly_revenue[0]?.year}/${stock.monthly_revenue[0]?.month}`
-            : `無資料`}
-        </Typography>
-        <Typography align="left">
-          月增率:
-          {stock.monthly_revenue.length > 0
-            ? stock.monthly_revenue[0]?.month_over_month_revenue
-            : 0}
-          %
-        </Typography>
-        <Typography align="left">
-          年增率:
-          {stock.monthly_revenue.length > 0
-            ? stock.monthly_revenue[0]?.year_over_year_revenue
-            : 0}
-          %
-        </Typography>
-        <Typography align="left">
-          累計營收比較:
-          {stock.monthly_revenue.length > 0
-            ? stock.monthly_revenue[0]?.compare_cumulative_revenue
-            : 0}
-          %
-        </Typography>
+      </TableCell>
+      <TableCell align="center">
+        <Stack spacing={2}>
+          <Eps stock={stock} />
+          <Monthly stock={stock} />
+        </Stack>
       </TableCell>
     </TableRow>
   );

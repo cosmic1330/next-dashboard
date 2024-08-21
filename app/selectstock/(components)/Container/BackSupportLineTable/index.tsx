@@ -36,7 +36,9 @@ export default function BackSupportLineTable() {
               <TableCell align="center">Action</TableCell>
               <TableCell align="center">評估</TableCell>
               <TableCell align="left">黃金分割率</TableCell>
-              <TableCell align="left">其他</TableCell>
+              <TableCell align="left" colSpan={2}>
+                其他
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

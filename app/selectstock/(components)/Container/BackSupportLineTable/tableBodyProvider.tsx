@@ -10,11 +10,11 @@ export default function TableBodyRowProvider({
 }: {
   stock: V2StocksResponseRow;
 }) {
-  const { gold, stockData, positives, rollback_date, negatives } =
-    useQueryDeal(stock.stock_id);
+  const { gold, stockData, positives, rollback_date, negatives } = useQueryDeal(
+    stock.stock_id,
+  );
   const conform = useConform(stockData, rollback_date);
-  if (!conform) return <Fragment />;
-  return (
+  return !conform ? <Fragment />:
     <TableBodyRow
       {...{
         stock,
@@ -27,5 +27,5 @@ export default function TableBodyRowProvider({
       }}
       plan="Back Support Line Plan"
     />
-  );
+  
 }

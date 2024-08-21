@@ -17,8 +17,9 @@ export default function TableBodyRowProvider({
     stock.stock_id,
   );
   const conform = useConform(stockData, rollback_date, plan);
-  if (!conform) return <Fragment />;
-  return (
+  return !conform ? (
+    <Fragment />
+  ) : (
     <TableBodyRow
       {...{
         stock,
@@ -29,7 +30,7 @@ export default function TableBodyRowProvider({
         conform,
         rollback_date,
       }}
-      plan="Two Red Soldier Plan"
+      plan={`V1Plans_${plan}`}
     />
   );
 }

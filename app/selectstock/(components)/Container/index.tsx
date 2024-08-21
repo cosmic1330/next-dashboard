@@ -37,7 +37,7 @@ export default function Container() {
   };
 
   return (
-    <StyledContainer ref={ref}>
+    <StyledContainer ref={ref} maxWidth="xl">
       <Grid container spacing={3} mb={3}>
         <Grid item xs={6}>
           <TaiexBox />

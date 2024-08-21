@@ -1,13 +1,5 @@
 'use client';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import {
-  Accordion,
-  AccordionSummary,
-  Box,
-  Button,
-  Typography,
-} from '@mui/material';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import { Button, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -44,7 +36,9 @@ export default function MacdTrendReversalTable() {
               <TableCell align="center">Action</TableCell>
               <TableCell align="center">評估</TableCell>
               <TableCell align="left">黃金分割率</TableCell>
-              <TableCell align="left">其他</TableCell>
+              <TableCell align="left" colSpan={2}>
+                其他
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>

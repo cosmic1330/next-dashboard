@@ -36,7 +36,9 @@ export default function MutiConditionTable() {
               <TableCell align="center">Action</TableCell>
               <TableCell align="center">評估</TableCell>
               <TableCell align="left">分數</TableCell>
-              <TableCell align="left">其他</TableCell>
+              <TableCell align="left" colSpan={2}>
+                其他
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
