@@ -11,12 +11,13 @@ export default function isCloseAboveMa20(
     return false;
   }
   const [index1] = indices;
-  if (datas[index1].ma20 === undefined || datas[index1].ma20 === null) {
-    return false;
-  }
-
-  if (datas[index1].c > datas[index1].ma20) {
+  if (
+    datas[index1].ma20 !== undefined &&
+    datas[index1].ma20 !== null &&
+    datas[index1].c > (datas[index1].ma20 as number)
+  ) {
     return '20日線上';
   }
+
   return false;
 }

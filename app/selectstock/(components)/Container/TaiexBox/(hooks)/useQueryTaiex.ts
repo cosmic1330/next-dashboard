@@ -50,10 +50,10 @@ export default function useQueryTaiex() {
         const stockData = data
           .map((item) => ({
             t: FormateDate(item.transaction_date),
-            c: parseFloat(item.close_price),
-            h: parseFloat(item.high_price),
-            l: parseFloat(item.low_price),
-            o: parseFloat(item.open_price),
+            c: parseFloat(`${item.close_price}`),
+            h: parseFloat(`${item.high_price}`),
+            l: parseFloat(`${item.low_price}`),
+            o: parseFloat(`${item.open_price}`),
           }))
           .reverse();
         if (rollback_date) stockData.splice(0, rollback_date);

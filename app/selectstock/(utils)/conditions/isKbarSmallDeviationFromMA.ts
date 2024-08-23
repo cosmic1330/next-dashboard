@@ -26,11 +26,13 @@ export default function isKbarSmallDeviationFromMA(
   if (datas[index1][type] !== undefined && datas[index2][type] !== undefined) {
     return (
       datas[index1].c > datas[index1].o &&
-      datas[index1].c > datas[index1][type] &&
-      datas[index2].c > datas[index2][type] &&
-      datas[index1].l > datas[index1][type] &&
+      datas[index1].c > <number>datas[index1][type] &&
+      datas[index2].c > <number>datas[index2][type] &&
+      datas[index1].l > <number>datas[index1][type] &&
       Math.abs(
-        ((datas[index1].l - datas[index1][type]) / datas[index1][type]) * 100,
+        ((datas[index1].l - <number>datas[index1][type]) /
+          <number>datas[index1][type]) *
+          100,
       ) < percent // K-bar與均線差距小於%
     );
   }

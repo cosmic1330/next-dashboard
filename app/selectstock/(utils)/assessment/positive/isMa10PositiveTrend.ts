@@ -13,21 +13,17 @@ export default function isMa10PositiveTrend(
   }
   const [index1, index2, index3] = indices;
   if (
-    datas[index1].ma10 === undefined ||
-    datas[index1].ma10 === null ||
-    datas[index2].ma10 === undefined ||
-    datas[index2].ma10 === null ||
-    datas[index3].ma10 === undefined ||
-    datas[index3].ma10 === null
-  ) {
-    return false;
-  }
-
-  if (
-    datas[index1].ma10 > datas[index2].ma10 &&
-    datas[index2].ma10 > datas[index3].ma10 
+    datas[index1].ma10 !== undefined &&
+    datas[index1].ma10 !== null &&
+    datas[index2].ma10 !== undefined &&
+    datas[index2].ma10 !== null &&
+    datas[index3].ma10 !== undefined &&
+    datas[index3].ma10 !== null &&
+    <number>datas[index1].ma10 > (datas[index2].ma10 as number) &&
+    <number>datas[index2].ma10 > (datas[index3].ma10 as number) 
   ) {
     return '10日均線向上';
   }
+
   return false;
 }

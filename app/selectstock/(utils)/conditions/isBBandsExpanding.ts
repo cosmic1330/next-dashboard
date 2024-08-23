@@ -42,13 +42,13 @@ export default function isBBandsExpanding(
     datas[index3].bollLb !== undefined
   )
     return (
-      datas[index1].c > datas[index1].bollUb &&
-      datas[index2].c > datas[index2][MaType.MA20] &&
-      datas[index3].c < datas[index3][MaType.MA20] &&
-      datas[index1].bollUb > datas[index2].bollUb &&
-      datas[index1].bollLb < datas[index2].bollLb &&
-      datas[index2].bollUb < datas[index3].bollUb &&
-      datas[index2].bollLb > datas[index3].bollLb
+      datas[index1].c > (datas[index1].bollUb as number) &&
+      datas[index2].c > (datas[index2][MaType.MA20] as number) &&
+      datas[index3].c < (datas[index3][MaType.MA20] as number) &&
+      <number>datas[index1].bollUb > (datas[index2].bollUb as number) &&
+      <number>datas[index1].bollLb < (datas[index2].bollLb as number) &&
+      <number>datas[index2].bollUb < (datas[index3].bollUb as number) &&
+      <number>datas[index2].bollLb > (datas[index3].bollLb as number)
     );
   return false;
 }

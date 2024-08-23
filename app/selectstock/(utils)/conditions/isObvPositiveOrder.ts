@@ -1,4 +1,4 @@
-import { StockData } from "../../types";
+import { StockData } from '../../types';
 
 export default function isObvPositiveOrder(
   datas: StockData[],
@@ -16,8 +16,8 @@ export default function isObvPositiveOrder(
     datas[index1].obv10Ma !== undefined
   )
     return (
-      datas[index1].obv > datas[index1].obv5Ma &&
-      datas[index1].obv5Ma > datas[index1].obv10Ma
+      <number>datas[index1].obv > <number>datas[index1].obv5Ma &&
+      <number>datas[index1].obv5Ma > <number>datas[index1].obv10Ma
     );
   return false;
 }

@@ -29,9 +29,9 @@ export default function isKDGoldenCross(datas: StockData[], rollback_date = 0) {
     datas[index3].d !== undefined
   ) {
     return (
-      datas[index1].k > datas[index1].d &&
-      datas[index2].k < datas[index2].d &&
-      datas[index3].k < datas[index3].d
+      <number>datas[index1].k > <number>datas[index1].d &&
+      <number>datas[index2].k < (datas[index2].d as number) &&
+      <number>datas[index3].k < (datas[index3].d as number)
     );
   }
 

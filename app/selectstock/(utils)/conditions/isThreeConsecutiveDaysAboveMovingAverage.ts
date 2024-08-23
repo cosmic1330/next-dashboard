@@ -28,11 +28,11 @@ export default function isThreeConsecutiveDaysAboveMovingAverage(
     datas[index2][MaType.MA10] !== undefined
   )
     return (
-      datas[index1].c > datas[index1][type] &&
-      datas[index2].c > datas[index2][type] &&
-      datas[index3].c > datas[index3][type] &&
-      datas[index1][MaType.MA5] > datas[index2][MaType.MA5] &&
-      datas[index1][MaType.MA10] > datas[index2][MaType.MA10]
+      datas[index1].c > <number>datas[index1][type] &&
+      datas[index2].c > <number>datas[index2][type] &&
+      datas[index3].c > <number>datas[index3][type] &&
+      <number>datas[index1][MaType.MA5] > <number>datas[index2][MaType.MA5] &&
+      <number>datas[index1][MaType.MA10] > <number>datas[index2][MaType.MA10]
     );
   return false;
 }

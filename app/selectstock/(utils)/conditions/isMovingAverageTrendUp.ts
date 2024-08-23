@@ -27,8 +27,8 @@ export default function isMovingAverageTrendUp(
     datas[index3][type] !== undefined
   )
     return (
-      datas[index1][type] > datas[index2][type] &&
-      datas[index2][type] > datas[index3][type]
+      <number>datas[index1][type] > <number>datas[index2][type] &&
+      <number>datas[index2][type] > <number>datas[index3][type]
     );
   return false;
 }

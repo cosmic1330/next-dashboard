@@ -35,7 +35,6 @@ function DialogComponent({
       description: descriptionRef.current?.value  as string,
       finish: false,
     };
-    increment(newTask);
     handleCloseDialog();
   };
 

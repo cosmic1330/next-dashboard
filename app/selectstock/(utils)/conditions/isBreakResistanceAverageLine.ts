@@ -24,10 +24,10 @@ export default function isBreakResistanceAverageLine(
     datas[index3][type] !== undefined
   )
     return (
-      datas[index1].c > datas[index1][type] &&
-      datas[index2].h > datas[index2][type] &&
-      datas[index2].c < datas[index2][type] &&
-      datas[index3].c < datas[index3][type]
+      datas[index1].c > (datas[index1][type] as number) &&
+      datas[index2].h > (datas[index2][type] as number) &&
+      datas[index2].c < (datas[index2][type] as number) &&
+      datas[index3].c < (datas[index3][type] as number)
     );
   return false;
 }

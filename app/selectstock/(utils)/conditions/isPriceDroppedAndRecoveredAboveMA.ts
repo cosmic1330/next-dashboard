@@ -27,9 +27,9 @@ export default function isPriceDroppedAndRecoveredAboveMA(
       datas[index1].h > datas[index2].h &&
       datas[index1].l > datas[index2].l &&
       datas[index1].c > datas[index2].c &&
-      datas[index1].c > datas[index1][type] &&
-      datas[index2].c > datas[index2][type] &&
-      datas[index3].c < datas[index3][type]
+      datas[index1].c > <number>datas[index1][type] &&
+      datas[index2].c > <number>datas[index2][type] &&
+      <number>datas[index3][type] > datas[index3].c
     );
   return false;
 }

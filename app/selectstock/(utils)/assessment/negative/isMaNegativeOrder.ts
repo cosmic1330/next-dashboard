@@ -12,21 +12,17 @@ export default function isMaNegativeOrder(
   }
   const [index1] = indices;
   if (
-    datas[index1].ma5 === undefined ||
-    datas[index1].ma5 === null ||
-    datas[index1].ma10 === undefined ||
-    datas[index1].ma10 === null ||
-    datas[index1].ma20 === undefined ||
-    datas[index1].ma20 === null
-  ) {
-    return false;
-  }
-
-  if (
-    datas[index1].ma5 < datas[index1].ma10 &&
-    datas[index1].ma10 < datas[index1].ma20
+    datas[index1].ma5 !== undefined &&
+    datas[index1].ma5 !== null &&
+    datas[index1].ma10 !== undefined &&
+    datas[index1].ma10 !== null &&
+    datas[index1].ma20 !== undefined &&
+    datas[index1].ma20 !== null &&
+    <number>datas[index1].ma5 < (datas[index1].ma10 as number) &&
+    <number>datas[index1].ma10 < (datas[index1].ma20 as number)
   ) {
     return '均線空頭排列';
   }
+
   return false;
 }

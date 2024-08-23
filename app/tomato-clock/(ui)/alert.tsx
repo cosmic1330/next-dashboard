@@ -78,7 +78,7 @@ export default function Alert() {
             任務： <Item>{currentTask?.name}</Item>
           </div>
           <div>
-            時間：<Item>{format(currentTask?.remainingTime || 0)}</Item>
+            時間：<Item>{0}</Item>
           </div>
         </Stack>
       </ButtonArea>

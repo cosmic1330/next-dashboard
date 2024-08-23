@@ -31,11 +31,11 @@ export default function isSlowStepwiseIncrease(
     return (
       datas[index1].h > datas[index2].h &&
       datas[index1].h > datas[index3].h &&
-      datas[index1].c > datas[index1].ma5 &&
+      datas[index1].c > <number>datas[index1].ma5 &&
       datas[index1].c > datas[index2].c &&
-      datas[index1].ma5 > datas[index1].ma10 &&
-      datas[index1].ma10 > datas[index1].ma20 &&
-      datas[index1].ma20 > datas[index1].ma60
+      <number>datas[index1].ma5 > <number>datas[index1].ma10 &&
+      <number>datas[index1].ma10 > <number>datas[index1].ma20 &&
+      <number>datas[index1].ma20 > <number>datas[index1].ma60
     );
   return false;
 }

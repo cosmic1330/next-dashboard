@@ -25,10 +25,10 @@ export default function isOscHistogramTurningPositive(
     datas[index3].osc !== undefined
   )
     return (
-      datas[index1].osc > datas[index2].osc &&
-      datas[index2].osc >= datas[index3].osc &&
-      datas[index1].osc > 0 &&
-      datas[index2].osc < 0
+      <number>datas[index1].osc > <number>datas[index2].osc &&
+      <number>datas[index2].osc >= <number>datas[index3].osc &&
+      <number>datas[index1].osc > 0 &&
+      <number>datas[index2].osc < 0
     );
   return false;
 }

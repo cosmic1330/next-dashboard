@@ -17,9 +17,9 @@ export default function isObvGoldenCross(
     datas[index2].obv5Ma !== undefined
   )
     return (
-      datas[index1].obv > datas[index2].obv &&
-      datas[index1].obv > datas[index1].obv5Ma &&
-      datas[index2].obv < datas[index2].obv5Ma
+      <number>datas[index1].obv > <number>datas[index2].obv &&
+      <number>datas[index1].obv > <number>datas[index1].obv5Ma &&
+      <number>datas[index2].obv5Ma > <number>datas[index2].obv
     );
   return false;
 }

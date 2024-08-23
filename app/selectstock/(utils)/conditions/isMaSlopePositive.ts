@@ -34,22 +34,22 @@ export default function isMaSlopePositive(
     return false;
 
   const ma5Slope = slope([
-    datas[index1].ma5,
-    datas[index2].ma5,
-    datas[index3].ma5,
-    datas[index4].ma5,
+    <number>datas[index1].ma5,
+    <number>datas[index2].ma5,
+    <number>datas[index3].ma5,
+    <number>datas[index4].ma5,
   ]);
   const ma10Slope = slope([
-    datas[index1].ma10,
-    datas[index2].ma10,
-    datas[index3].ma10,
-    datas[index4].ma10,
+    <number>datas[index1].ma10,
+    <number>datas[index2].ma10,
+    <number>datas[index3].ma10,
+    <number>datas[index4].ma10,
   ]);
   const ma20Slope = slope([
-    datas[index1].ma20,
-    datas[index2].ma20,
-    datas[index3].ma20,
-    datas[index4].ma20,
+    <number>datas[index1].ma20,
+    <number>datas[index2].ma20,
+    <number>datas[index3].ma20,
+    <number>datas[index4].ma20,
   ]);
 
   if (ma5Slope > 0.3 && ma10Slope > 0.3 && ma20Slope > 0.3) return true;

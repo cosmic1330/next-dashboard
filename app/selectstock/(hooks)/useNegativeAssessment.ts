@@ -48,7 +48,7 @@ export default function useNegativeAssessment(
     const res = AssessmentArray.map((fn) => fn(datas, rollback_date)).filter(
       (item) => item !== false,
     );
-    return res;
+    return res as string[];
   }, [datas, rollback_date]);
 
   return stringArray;

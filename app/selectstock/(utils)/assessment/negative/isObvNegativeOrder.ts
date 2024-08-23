@@ -12,21 +12,17 @@ export default function isObvNegativeOrder(
   }
   const [index1] = indices;
   if (
-    datas[index1].obv === undefined ||
-    datas[index1].obv === null ||
-    datas[index1].obv5Ma === undefined ||
-    datas[index1].obv5Ma === null ||
-    datas[index1].obv10Ma === undefined ||
-    datas[index1].obv10Ma === null
-  ) {
-    return false;
-  }
-
-  if (
-    datas[index1].obv < datas[index1].obv5Ma &&
-    datas[index1].obv5Ma < datas[index1].obv10Ma
+    datas[index1].obv !== undefined &&
+    datas[index1].obv !== null &&
+    datas[index1].obv5Ma !== undefined &&
+    datas[index1].obv5Ma !== null &&
+    datas[index1].obv10Ma !== undefined &&
+    datas[index1].obv10Ma !== null &&
+    <number>datas[index1].obv < (datas[index1].obv5Ma as number) &&
+    <number>datas[index1].obv5Ma < (datas[index1].obv10Ma as number)
   ) {
     return 'Obv空頭排列';
   }
+
   return false;
 }

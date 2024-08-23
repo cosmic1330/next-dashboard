@@ -29,7 +29,7 @@ export default function isMovingAveragesPositiveOrder(
       if (
         datas[index1][currentMa] &&
         datas[index1][nextMa] &&
-        datas[index1][currentMa] < datas[index1][nextMa]
+        <number>datas[index1][nextMa] > <number>datas[index1][currentMa]
       ) {
         return false;
       }

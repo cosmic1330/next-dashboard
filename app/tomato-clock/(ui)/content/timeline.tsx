@@ -1,18 +1,18 @@
 'use client';
-import { styled } from '@mui/system';
-import { Paper, Typography } from '@mui/material';
+import { Task } from '@/store/types';
+import { useTaskStore } from '@/store/zustand';
+import AssignmentIcon from '@mui/icons-material/AcUnit';
 import {
   Timeline,
-  TimelineItem,
-  TimelineOppositeContent,
-  TimelineSeparator,
   TimelineConnector,
   TimelineContent,
   TimelineDot,
+  TimelineItem,
+  TimelineOppositeContent,
+  TimelineSeparator,
 } from '@mui/lab';
-import { useTaskStore } from '@/store/zustand';
-import { Task } from '@/store/types';
-import AssignmentIcon from '@mui/icons-material/AcUnit';
+import { Paper, Typography } from '@mui/material';
+import { styled } from '@mui/system';
 
 const MuiTimelineDot = styled(TimelineDot)`
   :hover {
@@ -33,11 +33,7 @@ function Item({
   const changeCurrentTask = () => setCurrentTask(task);
   return (
     <TimelineItem>
-      <TimelineOppositeContent>
-        <Typography pl={2} variant="body2" color="textSecondary">
-          {task.time}
-        </Typography>
-      </TimelineOppositeContent>
+      <TimelineOppositeContent>Task</TimelineOppositeContent>
       <TimelineSeparator>
         <MuiTimelineDot
           color={current ? 'primary' : task.finish ? 'success' : 'grey'}
@@ -49,10 +45,10 @@ function Item({
       </TimelineSeparator>
       <TimelineContent>
         <Paper elevation={3}>
-          <Typography pl={2} variant="h6" component="h1">
+          <Typography  variant="h6" component="h1">
             {task.name}
           </Typography>
-          <Typography pl={2}>{task.description}</Typography>
+          <Typography>{task.description}</Typography>
         </Paper>
       </TimelineContent>
     </TimelineItem>

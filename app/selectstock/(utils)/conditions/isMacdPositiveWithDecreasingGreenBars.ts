@@ -36,9 +36,9 @@ export default function isMacdPositiveWithDecreasingGreenBars(
     datas[index3].osc !== undefined
   ) {
     return (
-      datas[index1].c > datas[index1].ma5 &&
-      datas[index1].osc > datas[index2].osc &&
-      datas[index2].osc > datas[index3].osc
+      datas[index1].c > <number>datas[index1].ma5 &&
+      <number>datas[index1].osc > <number>datas[index2].osc &&
+      <number>datas[index2].osc > <number>datas[index3].osc
     );
   }
 

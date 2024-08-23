@@ -22,10 +22,10 @@ export default function isNotBreakBelowMovingAverage(
     datas[index2][type] !== undefined
   )
     return (
-      datas[index1].c > datas[index1][type] &&
-      datas[index2].c > datas[index2][type] &&
+      datas[index1].c > <number>datas[index1][type] &&
+      datas[index2].c > <number>datas[index2][type] &&
       datas[index2].c < datas[index2].o &&
-      datas[index1][type] > datas[index2][type]
+     <number>datas[index1][type] > <number>datas[index2][type]
     );
   return false;
 }

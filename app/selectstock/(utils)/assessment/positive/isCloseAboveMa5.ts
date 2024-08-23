@@ -1,4 +1,3 @@
-
 import { StockData } from '@/app/selectstock/types';
 
 export default function isCloseAboveMa5(
@@ -13,16 +12,12 @@ export default function isCloseAboveMa5(
   }
   const [index1] = indices;
   if (
-    datas[index1].ma5 === undefined ||
-    datas[index1].ma5 === null
-  ) {
-    return false;
-  }
-
-  if (
-    datas[index1].c > datas[index1].ma5 
+    datas[index1].ma5 !== undefined &&
+    datas[index1].ma5 !== null &&
+    datas[index1].c > (datas[index1].ma5 as number)
   ) {
     return '5日線上';
   }
+
   return false;
 }

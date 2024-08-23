@@ -13,16 +13,12 @@ export default function isCloseAboveMa10(
   }
   const [index1] = indices;
   if (
-    datas[index1].ma10 === undefined ||
-    datas[index1].ma10 === null
-  ) {
-    return false;
-  }
-
-  if (
-    datas[index1].c > datas[index1].ma10 
+    datas[index1].ma10 !== undefined &&
+    datas[index1].ma10 !== null&&
+    datas[index1].c > (datas[index1].ma10 as number)
   ) {
     return '10日線上';
   }
+
   return false;
 }
