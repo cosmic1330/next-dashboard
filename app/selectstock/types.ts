@@ -50,6 +50,7 @@ export type IndicatorsType = {
   obv?: number;
   obv5Ma?: number;
   obv10Ma?: number;
+  williams14?: number;
 };
 
 export type BaseTaxieData = {

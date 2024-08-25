@@ -2,6 +2,7 @@ import { useSelectPlan } from '@/store/zustand';
 import MultilineChartRounded from '@mui/icons-material/MultilineChartRounded';
 import ScienceIcon from '@mui/icons-material/Science';
 import PresentToAll from '@mui/icons-material/PresentToAll';
+import WifiCalling3 from '@mui/icons-material/WifiCalling3';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -19,6 +20,10 @@ const li = [
   {
     icon: MultilineChartRounded,
     text: 'Muti Condition Plan',
+  },
+  {
+    icon: WifiCalling3,
+    text: 'Williams Plan',
   },
 ];
 

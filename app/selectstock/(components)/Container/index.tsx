@@ -21,6 +21,7 @@ import TwoRedSoldierTable from './TwoRedSoldierTable';
 import UptrendContinuationTable from './UptrendContinuationTable';
 import V1PlansTable from './V1PlansTable';
 import GoldPlatedSilverTable from './GoldPlatedSilverTable';
+import WilliamsTable from './WilliamsTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -64,6 +65,7 @@ export default function Container() {
       {plan === 201 && <V1PlansTable />}
       {plan === 202 && <ExperimentTable />}
       {plan === 203 && <MutiConditionTable />}
+      {plan === 204 && <WilliamsTable />}
 
       {plan === 301 && <TrackingTable />}
       <Fab

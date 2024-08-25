@@ -1,4 +1,3 @@
-import { SelectStockContext } from '@/app/selectstock/(context)/selectStockContext';
 import { createSelectedIndicators } from '@/app/selectstock/(utils)/indicator';
 import BollGenerate from '@/app/selectstock/(utils)/indicator/classes/boll';
 import KdGenerate from '@/app/selectstock/(utils)/indicator/classes/kd';
@@ -11,6 +10,7 @@ import Ma60Generate from '@/app/selectstock/(utils)/indicator/classes/ma60';
 import MacdGenerate from '@/app/selectstock/(utils)/indicator/classes/macd';
 import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
 import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
+import Williams14Generate from '@/app/selectstock/(utils)/indicator/classes/williams14';
 import formatTaiexdata from '@/app/selectstock/(utils)/indicator/formatTaiexdata';
 import { useMemo } from 'react';
 import useSwrFetchTaiex from './useSwrFetchTaiex';
@@ -37,6 +37,7 @@ export default function useQueryTaiex() {
           Obv10Generate,
           KdGenerate,
           BollGenerate,
+          Williams14Generate,
         ],
         baseData,
       ),

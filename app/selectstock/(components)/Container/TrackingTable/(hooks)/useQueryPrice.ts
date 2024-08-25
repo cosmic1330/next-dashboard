@@ -16,6 +16,7 @@ import Ma60Generate from '@/app/selectstock/(utils)/indicator/classes/ma60';
 import MacdGenerate from '@/app/selectstock/(utils)/indicator/classes/macd';
 import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
 import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
+import Williams14Generate from '@/app/selectstock/(utils)/indicator/classes/williams14';
 
 export default function useQueryPrice(stock_id: string) {
   const fetchData = useTrackingFetchDeal(stock_id);
@@ -40,6 +41,7 @@ export default function useQueryPrice(stock_id: string) {
           Obv10Generate,
           KdGenerate,
           BollGenerate,
+          Williams14Generate,
         ],
         baseData,
       ),

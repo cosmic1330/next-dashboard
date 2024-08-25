@@ -18,6 +18,7 @@ import formatStockdata from '@/app/selectstock/(utils)/indicator/formatStockdata
 import { ResGoldType } from '@/app/selectstock/types';
 import { Gold } from '@ch20026103/anysis';
 import { useContext, useMemo } from 'react';
+import Williams14Generate from '../(utils)/indicator/classes/williams14';
 
 export default function useQueryDeal(stock_id: string) {
   const { rollback_date } = useContext(SelectStockContext);
@@ -61,6 +62,7 @@ export default function useQueryDeal(stock_id: string) {
           Obv10Generate,
           KdGenerate,
           BollGenerate,
+          Williams14Generate,
         ],
         baseData,
       ),
