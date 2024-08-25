@@ -1,7 +1,7 @@
 import { slope } from '@ch20026103/anysis';
-import { StockData } from '../../types';
+import { StockData, TaxieData } from '../../types';
 export default function isMaSlopePositive(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date = 0,
 ) {
   let length = datas.length - 1;

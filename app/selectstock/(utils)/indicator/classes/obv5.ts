@@ -1,4 +1,4 @@
-import { BaseStockData } from '@/app/selectstock/types';
+import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
 import { Obv } from '@ch20026103/anysis';
 
 export default class Obv5Generate {

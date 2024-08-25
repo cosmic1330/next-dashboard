@@ -3,7 +3,7 @@ import { StockData } from '@/app/selectstock/types';
 export default function forward(stockData: StockData[], rollback_date: number) {
   let length = stockData.length - 1;
   if (
-    isSufficientTradingVolume(stockData, rollback_date, 500) &&  
+    isSufficientTradingVolume(stockData, rollback_date, 500) &&
     // 收盤價持續大於10日均線
     stockData[length - rollback_date].c >
       <number>stockData[length - rollback_date].ma10 &&

@@ -1,4 +1,4 @@
-import { BaseStockData } from '@/app/selectstock/types';
+import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
 import { Kd } from '@ch20026103/anysis';
 
 export default class KdGenerate {
@@ -21,7 +21,7 @@ export default class KdGenerate {
     this.data = undefined;
   }
 
-  generate(value: BaseStockData) {
+  generate(value: BaseStockData | BaseTaxieData) {
     if (this.data === undefined) {
       this.pre = this.kd.init(value);
     } else {

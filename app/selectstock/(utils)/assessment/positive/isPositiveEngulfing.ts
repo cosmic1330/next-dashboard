@@ -1,7 +1,7 @@
-import { StockData } from '@/app/selectstock/types';
+import { StockData, TaxieData } from '@/app/selectstock/types';
 
 export default function isPositiveEngulfing(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
   let length = datas.length - 1;

@@ -1,6 +1,9 @@
 import { isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
 import { StockData } from '@/app/selectstock/types';
-export default function tworedsoldier(stockData: StockData[], rollback_date: number) {
+export default function tworedsoldier(
+  stockData: StockData[],
+  rollback_date: number,
+) {
   let length = stockData.length - 1;
   if (
     isSufficientTradingVolume(stockData, rollback_date, 500) &&

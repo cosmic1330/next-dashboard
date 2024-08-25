@@ -6,6 +6,7 @@ import InsightsIcon from '@mui/icons-material/Insights';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 import UnfoldMoreDoubleIcon from '@mui/icons-material/UnfoldMoreDouble';
 import WidthWideIcon from '@mui/icons-material/WidthWide';
+import MoneyIcon from '@mui/icons-material/Money';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -39,6 +40,10 @@ const li = [
   {
     icon: WidthWideIcon,
     text: 'Steady Gradual Rise Plan',
+  },
+  {
+    icon: MoneyIcon,
+    text: 'Gold Plated Silver Plan',
   },
 ];
 

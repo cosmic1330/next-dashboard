@@ -19,7 +19,7 @@ export default class Obv10Generate {
     this.data = undefined;
   }
 
-  generate(value: BaseStockData) {
+  generate(value: BaseStockData ) {
     if (this.data === undefined) {
       this.pre = this.obv.init(value, 10);
     } else {

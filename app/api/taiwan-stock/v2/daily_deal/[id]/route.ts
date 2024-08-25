@@ -1,14 +1,13 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
-import { PrismaDailyDealResponseResponse } from '../types';
-
+import { PrismaDailyDealResponse } from '../types';
 
 export const GET = async (req: Request) => {
   try {
     const id = req.url.split('/')[req.url.split('/').length - 1];
     const prisma = new PrismaClient();
     // last
-    const res: PrismaDailyDealResponseResponse = await prisma.daily_deal.findMany({
+    const res: PrismaDailyDealResponse = await prisma.daily_deal.findMany({
       where: {
         stock_id: id,
       },

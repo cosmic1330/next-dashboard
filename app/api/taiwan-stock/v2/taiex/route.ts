@@ -22,7 +22,7 @@ export const GET = async (req: Request) => {
     });
     await prisma.$disconnect();
     // return data to client
-    return NextResponse.json(res, {
+    return NextResponse.json(res.reverse(), {
       headers: { 'x-cache': 'MISS' },
     });
   } catch (error) {

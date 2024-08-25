@@ -1,8 +1,8 @@
 import { slope } from '@ch20026103/anysis';
-import { StockData } from '../../types';
+import { StockData, TaxieData } from '../../types';
 
 export default function isMovingAveragesConverging(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date = 0,
   days: number = 20,
   threshold: number = 0.2,

@@ -1,7 +1,7 @@
-import { StockData } from "../../types";
+import { StockData, TaxieData } from '../../types';
 
 export default function isBearishEngulfing(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date = 0,
 ) {
   let length = datas.length - 1;

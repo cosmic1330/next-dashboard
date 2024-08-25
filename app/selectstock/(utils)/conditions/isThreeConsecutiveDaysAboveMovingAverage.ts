@@ -1,8 +1,8 @@
-import { StockData } from '../../types';
+import { StockData, TaxieData } from '../../types';
 import { MaType } from './types';
 
 export default function isThreeConsecutiveDaysAboveMovingAverage(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date = 0,
   type: MaType = MaType.MA5,
 ) {

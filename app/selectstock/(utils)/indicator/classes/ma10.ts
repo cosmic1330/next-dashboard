@@ -1,4 +1,4 @@
-import { BaseStockData } from '@/app/selectstock/types';
+import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
 import { Ma } from '@ch20026103/anysis';
 
 export default class Ma10Generate {
@@ -23,7 +23,7 @@ export default class Ma10Generate {
     this.data = undefined;
   }
 
-  generate(value: BaseStockData) {
+  generate(value: BaseStockData | BaseTaxieData) {
     if (this.data === undefined) {
       this.pre = this.ma.init(value, 10);
     } else {

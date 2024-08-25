@@ -20,6 +20,7 @@ import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
 import UptrendContinuationTable from './UptrendContinuationTable';
 import V1PlansTable from './V1PlansTable';
+import GoldPlatedSilverTable from './GoldPlatedSilverTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -54,6 +55,7 @@ export default function Container() {
       {plan === 5 && <BreakthroughPressureTable />}
       {plan === 6 && <OpenBollingTable />}
       {plan === 7 && <SteadyGradualRiseTable />}
+      {plan === 8 && <GoldPlatedSilverTable />}
 
       {plan === 101 && <MacdTrendReversalTable />}
       {plan === 102 && <UptrendContinuationTable />}

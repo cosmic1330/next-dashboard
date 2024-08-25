@@ -1,17 +1,4 @@
-export type BaseStockData = {
-  id: string;
-  t: number;
-  c: number;
-  h: number;
-  l: number;
-  o: number;
-  v: number;
-  foreign_investors: number;
-  investment_trust: number;
-  dealer: number;
-};
-
-export type StockData = BaseStockData & {
+export type IndicatorsType = {
   rsv?: number | null;
   k?: number | null;
   d?: number | null;
@@ -64,6 +51,31 @@ export type StockData = BaseStockData & {
   obv5Ma?: number;
   obv10Ma?: number;
 };
+
+export type BaseTaxieData = {
+  t: number;
+  c: number;
+  h: number;
+  l: number;
+  o: number;
+}
+
+export type TaxieData = BaseTaxieData & IndicatorsType
+
+export type BaseStockData = {
+  id: string;
+  t: number;
+  c: number;
+  h: number;
+  l: number;
+  o: number;
+  v: number;
+  foreign_investors: number;
+  investment_trust: number;
+  dealer: number;
+};
+
+export type StockData = BaseStockData & IndicatorsType;
 
 export type ResGoldType = {
   superStrong: number;

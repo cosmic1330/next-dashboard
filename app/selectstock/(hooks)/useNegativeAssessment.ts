@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { StockData } from '../types';
+import { StockData, TaxieData } from '../types';
 
 import {
   isBreaksPreviousLowWithoutNewHigh,
@@ -22,7 +22,7 @@ import {
 } from '@/app/selectstock/(utils)/assessment/negative';
 
 export default function useNegativeAssessment(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
   const stringArray = useMemo(() => {

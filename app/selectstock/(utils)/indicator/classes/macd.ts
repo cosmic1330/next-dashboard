@@ -1,4 +1,4 @@
-import { BaseStockData } from '@/app/selectstock/types';
+import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
 import { Macd } from '@ch20026103/anysis';
 
 export default class MacdGenerate {
@@ -22,7 +22,7 @@ export default class MacdGenerate {
     this.data = undefined;
   }
 
-  generate(value: BaseStockData) {
+  generate(value: BaseStockData | BaseTaxieData) {
     if (this.data === undefined) {
       this.pre = this.macd.init(value);
     } else {

@@ -1,8 +1,4 @@
-import {
-  isMovingAverageTrendUp,
-  isSufficientTradingVolume,
-} from '@/app/selectstock/(utils)/conditions';
-import { MaType } from '@/app/selectstock/(utils)/conditions/types';
+import { isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
 import { useMemo } from 'react';
 
 import { StockData } from '@/app/selectstock/types';

@@ -1,4 +1,9 @@
-import { BaseStockData, StockData } from '../../types';
+import {
+  BaseStockData,
+  BaseTaxieData,
+  StockData,
+  TaxieData,
+} from '../../types';
 import BollGenerate from './classes/boll';
 import KdGenerate from './classes/kd';
 import Ma10Generate from './classes/ma10';
@@ -24,18 +29,23 @@ type ClassKey =
   | typeof Obv10Generate
   | typeof KdGenerate;
 
-export default function createSelectedIndicators(
+export default function createSelectedIndicators<
+  T extends BaseStockData | BaseTaxieData,
+>(
   classes: ClassKey[],
-  data: BaseStockData[],
-): StockData[] {
-  const finallyData: StockData[] = [...data];
+  data: T[],
+): T extends BaseStockData ? StockData[] : TaxieData[] {
+  const finallyData: (T extends BaseStockData ? StockData : TaxieData)[] = [
+    ...data,
+  ] as any;
+
   const generates = classes.map((key: ClassKey) => {
     const instance = new key();
     return instance;
   });
   data.forEach((value, index) => {
     generates.forEach((generate) => {
-      const result = generate.generate(value);
+      const result = generate.generate(value as any);
       finallyData[index] = {
         ...finallyData[index],
         ...result,
@@ -43,5 +53,5 @@ export default function createSelectedIndicators(
     });
     return;
   });
-  return finallyData;
+  return finallyData as unknown as T extends BaseStockData ? StockData[] : TaxieData[];
 }

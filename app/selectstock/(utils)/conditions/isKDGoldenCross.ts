@@ -1,6 +1,9 @@
-import { StockData } from '../../types';
+import { StockData, TaxieData } from '../../types';
 
-export default function isKDGoldenCross(datas: StockData[], rollback_date = 0) {
+export default function isKDGoldenCross(
+  datas: StockData[] | TaxieData[],
+  rollback_date = 0,
+) {
   let length = datas.length - 1;
 
   const indices = [

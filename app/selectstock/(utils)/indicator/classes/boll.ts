@@ -1,4 +1,4 @@
-import { BaseStockData } from '@/app/selectstock/types';
+import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
 import { Boll } from '@ch20026103/anysis';
 
 export default class BollGenerate {
@@ -20,7 +20,7 @@ export default class BollGenerate {
     this.data = undefined;
   }
 
-  generate(value: BaseStockData) {
+  generate(value: BaseStockData | BaseTaxieData) {
     if (this.data === undefined) {
       this.pre = this.boll.init(value);
     } else {

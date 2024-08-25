@@ -1,9 +1,29 @@
+import {
+  isKdDeathCross,
+  isKdNegativeTrend,
+  isMa20NegativeTrend,
+  isMacdMomentumBuildDown,
+  isMacdNegativeDivergence,
+} from '@/app/selectstock/(utils)/assessment/negative';
+import {
+  isCloseAboveMa10,
+  isCloseAboveMa20,
+  isCloseAboveMa5,
+  isKdGoldenCross,
+  isKdPositiveTrend,
+  isMa20PositiveTrend,
+  isMacdMomentumBuildUp,
+  isMacdPositiveDivergence,
+} from '@/app/selectstock/(utils)/assessment/positive';
 import { Box, Typography } from '@mui/material';
+import { Fragment } from 'react';
 import useQueryTaiex from './(hooks)/useQueryTaiex';
 
 export default function TaiexBox() {
-  const { taiexData } = useQueryTaiex();
-  return (
+  const taiexData = useQueryTaiex();
+  return taiexData.length === 0 ? (
+    <Fragment />
+  ) : (
     <Box>
       <Typography variant="h6">加權指數</Typography>
       <Box>
@@ -11,71 +31,65 @@ export default function TaiexBox() {
           日期:
         </Typography>
         <Typography component="span" variant="body2">
-          {taiexData && taiexData[taiexData.length - 1].t}
+          {taiexData[taiexData.length - 1].t}
         </Typography>
       </Box>
       <Box>
         <Typography component="span" variant="subtitle2">
-          月線方向:
+          Ma5扣抵值:
         </Typography>
-
-        {taiexData &&
-        taiexData[taiexData.length - 1].ma20 >
-          taiexData[taiexData.length - 2].ma20 &&
-        taiexData[taiexData.length - 2].ma20 >
-          taiexData[taiexData.length - 3].ma20 ? (
+        <Typography
+          component={'span'}
+          color={
+            (taiexData[taiexData.length - 1].exclusionValueMa5 as any).d >
+            (taiexData[taiexData.length - 1].exclusionValueMa5 as any)['d+1']
+              ? 'success.main'
+              : 'error'
+          }
+        >
+          {(taiexData[taiexData.length - 1].exclusionValueMa5 as any).d >
+          (taiexData[taiexData.length - 1].exclusionValueMa5 as any)['d+1']
+            ? '↓'
+            : '↑'}
+        </Typography>
+        <Typography component="span" variant="body2">
+          {(taiexData[taiexData.length - 1].exclusionValueMa5 as any).d}
+        </Typography>
+      </Box>
+      <Box>
+        <Typography component="span" variant="subtitle2">
+          月線:
+        </Typography>
+        {isMa20PositiveTrend(taiexData, 0) ? (
           <Typography variant="body2" component="span" color="success.main">
-            向上
+            {isMa20PositiveTrend(taiexData, 0)}
           </Typography>
-        ) : taiexData &&
-          taiexData[taiexData.length - 1].ma20 <
-            taiexData[taiexData.length - 2].ma20 &&
-          taiexData[taiexData.length - 2].ma20 <
-            taiexData[taiexData.length - 3].ma20 ? (
+        ) : isMa20NegativeTrend(taiexData, 0) ? (
           <Typography variant="body2" component="span" color="error">
-            向下
+            {isMa20NegativeTrend(taiexData, 0)}
           </Typography>
         ) : (
           <Typography variant="body2" component="span">
             盤整
           </Typography>
         )}
-
         <Typography variant="body2" component="span" color="success.main">
-          {taiexData &&
-            taiexData[taiexData.length - 1].c >
-              taiexData[taiexData.length - 1].ma5 &&
-            '5Ma支撐上'}
-        </Typography>
-        <Typography variant="subtitle2">
-          {`大盤扣抵值:${
-            taiexData && taiexData[taiexData.length - 1].exclusionValueMa5.d
-          }`}
+          {isCloseAboveMa5(taiexData, 0) ||
+            isCloseAboveMa10(taiexData, 0) ||
+            isCloseAboveMa20(taiexData, 0)}
         </Typography>
       </Box>
       <Box>
         <Typography component="span" variant="subtitle2">
           KD趨勢:
         </Typography>
-        {taiexData &&
-        (taiexData[taiexData.length - 1].k as number) >
-          (taiexData[taiexData.length - 1].d as number) &&
-        (taiexData[taiexData.length - 1].k as number) >
-          (taiexData[taiexData.length - 2].k as number) &&
-        (taiexData[taiexData.length - 1].rsv as number) >
-          (taiexData[taiexData.length - 2].rsv as number) ? (
+        {isKdPositiveTrend(taiexData, 0) ? (
           <Typography variant="body2" component="span" color="success.main">
-            多頭
+            {isKdPositiveTrend(taiexData, 0)}
           </Typography>
-        ) : taiexData &&
-          (taiexData[taiexData.length - 1].k as number) <
-            (taiexData[taiexData.length - 1].d as number) &&
-          (taiexData[taiexData.length - 1].k as number) <
-            (taiexData[taiexData.length - 2].k as number) &&
-          (taiexData[taiexData.length - 1].rsv as number) <
-            (taiexData[taiexData.length - 2].rsv as number) ? (
+        ) : isKdNegativeTrend(taiexData, 0) ? (
           <Typography variant="body2" component="span" color="error">
-            空頭
+            {isKdNegativeTrend(taiexData, 0)}
           </Typography>
         ) : (
           <Typography variant="body2" component="span">
@@ -83,74 +97,38 @@ export default function TaiexBox() {
           </Typography>
         )}
         <Typography variant="body2" component="span" color="success.main">
-          {taiexData &&
-            (taiexData[taiexData.length - 1].k as number) >
-              (taiexData[taiexData.length - 1].d as number) &&
-            (taiexData[taiexData.length - 2].k as number) <
-              (taiexData[taiexData.length - 2].d as number) &&
-            'KD黃金交叉'}
+          {isKdGoldenCross(taiexData, 0)}
         </Typography>
         <Typography variant="body2" component="span" color="error">
-          {taiexData &&
-            (taiexData[taiexData.length - 1].k as number) <
-              (taiexData[taiexData.length - 1].d as number) &&
-            (taiexData[taiexData.length - 2].k as number) >
-              (taiexData[taiexData.length - 2].d as number) &&
-            'KD死亡交叉'}
+          {isKdDeathCross(taiexData, 0)}
         </Typography>
       </Box>
       <Box>
         <Typography component="span" variant="subtitle2">
           Macd趨勢:
         </Typography>
-        <Typography variant="body2" component="span" color="success.main">
-          {taiexData &&
-            (taiexData[taiexData.length - 1].osc as number) >
-              (taiexData[taiexData.length - 2].osc as number) &&
-            (taiexData[taiexData.length - 2].osc as number) >
-              (taiexData[taiexData.length - 3].osc as number) &&
-            (taiexData[taiexData.length - 1].macd as number) >
-              (taiexData[taiexData.length - 2].macd as number) &&
-            (taiexData[taiexData.length - 2].macd as number) >
-              (taiexData[taiexData.length - 3].macd as number) &&
-            '多方動能漸強'}
-        </Typography>
-        <Typography variant="body2" component="span" color="success.main">
-          {taiexData &&
-            (taiexData[taiexData.length - 1].osc as number) >
-              (taiexData[taiexData.length - 2].osc as number) &&
-            (taiexData[taiexData.length - 2].osc as number) >
-              (taiexData[taiexData.length - 3].osc as number) &&
-            (taiexData[taiexData.length - 1].macd as number) <
-              (taiexData[taiexData.length - 2].macd as number) &&
-            (taiexData[taiexData.length - 2].macd as number) <
-              (taiexData[taiexData.length - 3].macd as number) &&
-            '負背離(多)'}
-        </Typography>
-        <Typography variant="body2" component="span" color="error">
-          {taiexData &&
-            (taiexData[taiexData.length - 1].osc as number) <
-              (taiexData[taiexData.length - 2].osc as number) &&
-            (taiexData[taiexData.length - 2].osc as number) <
-              (taiexData[taiexData.length - 3].osc as number) &&
-            (taiexData[taiexData.length - 1].macd as number) >
-              (taiexData[taiexData.length - 2].macd as number) &&
-            (taiexData[taiexData.length - 2].macd as number) >
-              (taiexData[taiexData.length - 3].macd as number) &&
-            '正背離(空)'}
-        </Typography>
-        <Typography variant="body2" component="span" color="error">
-          {taiexData &&
-            (taiexData[taiexData.length - 1].osc as number) <
-              (taiexData[taiexData.length - 2].osc as number) &&
-            (taiexData[taiexData.length - 2].osc as number) <
-              (taiexData[taiexData.length - 3].osc as number) &&
-            (taiexData[taiexData.length - 1].macd as number) <
-              (taiexData[taiexData.length - 2].macd as number) &&
-            (taiexData[taiexData.length - 2].macd as number) <
-              (taiexData[taiexData.length - 3].macd as number) &&
-            '空方動能漸強'}
-        </Typography>
+        {isMacdMomentumBuildUp(taiexData, 0) ? (
+          <Typography variant="body2" component="span" color="success.main">
+            {isMacdMomentumBuildUp(taiexData, 0)}
+          </Typography>
+        ) : isMacdMomentumBuildDown(taiexData, 0) ? (
+          <Typography variant="body2" component="span" color="error">
+            {isMacdMomentumBuildDown(taiexData, 0)}
+          </Typography>
+        ) : (
+          <Typography variant="body2" component="span">
+            趨勢不明
+          </Typography>
+        )}
+        {isMacdPositiveDivergence(taiexData, 0) ? (
+          <Typography variant="body2" component="span" color="success.main">
+            {isMacdPositiveDivergence(taiexData, 0)}
+          </Typography>
+        ) : (
+          <Typography variant="body2" component="span" color="success.main">
+            {isMacdNegativeDivergence(taiexData, 0)}
+          </Typography>
+        )}
       </Box>
     </Box>
   );

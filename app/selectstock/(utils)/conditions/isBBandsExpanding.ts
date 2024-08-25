@@ -1,8 +1,8 @@
-import { StockData } from '../../types';
+import { StockData, TaxieData } from '../../types';
 import { MaType } from './types';
 
 export default function isBBandsExpanding(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date = 0,
 ) {
   let length = datas.length - 1;

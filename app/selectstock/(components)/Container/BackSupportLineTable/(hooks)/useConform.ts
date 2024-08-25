@@ -1,5 +1,4 @@
 import {
-  isBearishEngulfing,
   isMovingAveragesPositiveOrder,
   isPriceDroppedAndRecoveredAboveMA,
   isSufficientTradingVolume,

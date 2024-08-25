@@ -24,7 +24,7 @@ export default function useConform(
       ]) &&
       isBBandsExpanding(stockData, rollback_date) &&
       // K棒未跳高
-      isKbarSmallDeviationFromMA(stockData, rollback_date, MaType.MA5, 1) 
+      isKbarSmallDeviationFromMA(stockData, rollback_date, MaType.MA5, 1)
     ) {
       return true;
     }

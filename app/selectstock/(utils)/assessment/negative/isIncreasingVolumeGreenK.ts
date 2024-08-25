@@ -1,7 +1,7 @@
-import { StockData } from '@/app/selectstock/types';
+import { StockData, TaxieData } from '@/app/selectstock/types';
 
 export default function isIncreasingVolumeGreenK(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
   let length = datas.length - 1;
@@ -13,7 +13,9 @@ export default function isIncreasingVolumeGreenK(
   const [index1, index2] = indices;
 
   if (
-    datas[index1].v > datas[index2].v &&
+    (datas[index1] as StockData).v !== undefined &&
+    (datas[index2] as StockData).v !== undefined &&
+    (datas[index1] as StockData).v > (datas[index2] as StockData).v &&
     datas[index1].c < datas[index2].o &&
     datas[index1].c < datas[index2].c
   ) {

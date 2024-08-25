@@ -1,7 +1,7 @@
-import { StockData } from '@/app/selectstock/types';
+import { StockData, TaxieData } from '@/app/selectstock/types';
 
 export default function isMaPositiveOrder(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
   let length = datas.length - 1;
@@ -18,7 +18,7 @@ export default function isMaPositiveOrder(
     datas[index1].ma10 !== null &&
     datas[index1].ma20 !== undefined &&
     datas[index1].ma20 !== null &&
-    <number>datas[index1].ma5 > (datas[index1].ma10 as number)&&
+    <number>datas[index1].ma5 > (datas[index1].ma10 as number) &&
     <number>datas[index1].ma10 > (datas[index1].ma20 as number)
   ) {
     return '均線多頭排列';

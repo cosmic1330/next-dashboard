@@ -1,7 +1,7 @@
-import { StockData } from '@/app/selectstock/types';
+import { StockData, TaxieData } from '@/app/selectstock/types';
 
 export default function isKdDeathCross(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
   let length = datas.length - 1;
@@ -20,8 +20,8 @@ export default function isKdDeathCross(
     datas[index2].k !== undefined &&
     datas[index2].d !== null &&
     datas[index2].d !== undefined &&
-    (<number>datas[index1].k) < (<number>datas[index1].d) &&
-    (<number>datas[index2].k) > (<number>datas[index2].d)
+    <number>datas[index1].k < <number>datas[index1].d &&
+    <number>datas[index2].k > <number>datas[index2].d
   ) {
     return 'KD死亡交叉';
   }

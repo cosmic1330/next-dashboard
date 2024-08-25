@@ -34,6 +34,5 @@ export type YahooDailyDealResponseRow = {
   }[];
 };
 
-export type PrismaDailyDealResponseResponse = PrismaDailyDealResponseRow[];
-export type YahooDailyDealResponseResponse = YahooDailyDealResponseRow[];
-
+export type PrismaDailyDealResponse = PrismaDailyDealResponseRow[];
+export type YahooDailyDealResponse = YahooDailyDealResponseRow[];

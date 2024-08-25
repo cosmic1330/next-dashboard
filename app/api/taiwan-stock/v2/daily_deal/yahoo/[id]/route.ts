@@ -1,6 +1,6 @@
 import formateIsoDate from '@/utils/formateIsoDate';
 import { NextResponse } from 'next/server';
-import { YahooDailyDealResponseResponse } from '../../types';
+import { YahooDailyDealResponse } from '../../types';
 
 type TaType = {
   t: number;
@@ -27,7 +27,7 @@ export const GET = async (req: Request) => {
     let ta: TaType[] = parse.ta;
 
     // unable to fetch data from DB, return data from Yahoo
-    const arr: YahooDailyDealResponseResponse = ta.map((item, index) => {
+    const arr: YahooDailyDealResponse = ta.map((item, index) => {
       return {
         transaction_date: formateIsoDate(item.t) + 'T00:00:00.000Z',
         stock_id: parse.mem.id,

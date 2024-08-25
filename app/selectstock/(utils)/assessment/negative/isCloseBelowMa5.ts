@@ -1,7 +1,7 @@
-import { StockData } from '@/app/selectstock/types';
+import { StockData, TaxieData } from '@/app/selectstock/types';
 
 export default function isCloseBelowMa5(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
   let length = datas.length - 1;
@@ -14,7 +14,7 @@ export default function isCloseBelowMa5(
   if (
     datas[index1].ma5 !== undefined &&
     datas[index1].ma5 !== null &&
-    datas[index1].c < (<number>datas[index1].ma5)
+    datas[index1].c < <number>datas[index1].ma5
   ) {
     return '5日線下';
   }

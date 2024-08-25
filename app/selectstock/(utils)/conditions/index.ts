@@ -40,4 +40,5 @@ export { default as isNoBreakBelowBullishCandleMidpoint } from './isNoBreakBelow
 export { default as isSlowStepwiseIncrease } from './isSlowStepwiseIncrease';
 // Not Break Below the Moving Average「下跌未破均線」
 export { default as isNotBreakBelowMovingAverage } from './isNotBreakBelowMovingAverage';
-
+// Gold Plated Silver「金包銀」(大跌後->撐竿跳->金包銀)
+export { default as isGoldPlatedSilver } from './isGoldPlatedSilver';

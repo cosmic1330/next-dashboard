@@ -49,7 +49,7 @@ export default function TrackingForm() {
   };
 
   return (
-    <Stack mb={2} direction={'row'} gap={2} alignItems={'center'}>
+    <Stack direction={'row'} spacing={2}>
       <Autocomplete
         onChange={(event: any, newValue: V2StocksMinimalResponseRow | null) => {
           setValue(newValue);

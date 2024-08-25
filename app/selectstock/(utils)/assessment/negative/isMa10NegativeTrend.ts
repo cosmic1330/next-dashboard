@@ -1,7 +1,7 @@
-import { StockData } from '@/app/selectstock/types';
+import { StockData, TaxieData } from '@/app/selectstock/types';
 
 export default function isMa10NegativeTrend(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
   let length = datas.length - 1;
@@ -22,8 +22,8 @@ export default function isMa10NegativeTrend(
     datas[index2].ma10 !== null &&
     datas[index3].ma10 !== undefined &&
     datas[index3].ma10 !== null &&
-    <number>datas[index1].ma10 < (<number>datas[index2].ma10) &&
-    <number>datas[index2].ma10 < (<number>datas[index3].ma10)
+    <number>datas[index1].ma10 < <number>datas[index2].ma10 &&
+    <number>datas[index2].ma10 < <number>datas[index3].ma10
   ) {
     return '10日均線向下';
   }

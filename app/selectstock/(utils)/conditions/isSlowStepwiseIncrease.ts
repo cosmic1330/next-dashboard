@@ -1,7 +1,7 @@
-import { StockData } from '../../types';
+import { StockData, TaxieData } from '../../types';
 
 export default function isSlowStepwiseIncrease(
-  datas: StockData[],
+  datas: StockData[] | TaxieData[],
   rollback_date = 0,
   days: number = 10,
 ) {
