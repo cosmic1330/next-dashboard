@@ -10,8 +10,8 @@ export default function useConform(
 ) {
   const conform = useMemo(() => {
     if (
+      isGoldPlatedSilver(stockData, rollback_date, MaType.MA60, MaType.MA20) ||
       isGoldPlatedSilver(stockData, rollback_date, MaType.MA120, MaType.MA20) ||
-      isGoldPlatedSilver(stockData, rollback_date, MaType.MA240, MaType.MA20) ||
       isGoldPlatedSilver(stockData, rollback_date, MaType.MA120, MaType.MA60) ||
       isGoldPlatedSilver(stockData, rollback_date, MaType.MA240, MaType.MA60)
     ) {

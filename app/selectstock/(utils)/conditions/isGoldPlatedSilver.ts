@@ -4,7 +4,7 @@ import { MaType } from './types';
 export default function isGoldPlatedSilver(
   datas: StockData[] | TaxieData[],
   rollback_date = 0,
-  pressure: MaType.MA120 | MaType.MA240,
+  pressure: MaType.MA120 | MaType.MA240 | MaType.MA60 = MaType.MA60,
   steady: MaType.MA20 | MaType.MA60 = MaType.MA60,
 ) {
   let length = datas.length - 1;
@@ -30,28 +30,24 @@ export default function isGoldPlatedSilver(
     datas[index3][pressure] !== undefined
   )
     return steady === MaType.MA60
-      ? <number>datas[index1].ma5 > <number>datas[index1].ma60 &&
-          <number>datas[index1].ma10 > <number>datas[index1].ma60 &&
-          <number>datas[index1].ma20 > <number>datas[index1].ma60 &&
+      ? <number>datas[index1].ma5 > <number>datas[index1][steady] &&
+          <number>datas[index1].ma10 > <number>datas[index1][steady] &&
+          <number>datas[index1].ma20 > <number>datas[index1][steady] &&
           <number>datas[index1][pressure] > <number>datas[index1].ma5 &&
           <number>datas[index1][pressure] > <number>datas[index1].ma10 &&
           <number>datas[index1][pressure] > <number>datas[index1].ma20 &&
-          <number>datas[index1][pressure] > <number>datas[index1].ma60 &&
-          <number>datas[index1].ma20 > <number>datas[index2].ma20 &&
-          <number>datas[index2].ma20 > <number>datas[index3].ma20 &&
-          <number>datas[index1].ma60 > <number>datas[index2].ma60 &&
-          <number>datas[index2].ma60 > <number>datas[index3].ma60 &&
+          <number>datas[index1][pressure] > <number>datas[index1][steady] &&
+          <number>datas[index1][steady] > <number>datas[index2][steady] &&
+          <number>datas[index2][steady] > <number>datas[index3][steady] &&
           <number>datas[index2][pressure] > <number>datas[index1][pressure] &&
           <number>datas[index3][pressure] > <number>datas[index2][pressure]
-      : <number>datas[index1].ma5 > <number>datas[index1].ma20 &&
-          <number>datas[index1].ma10 > <number>datas[index1].ma20 &&
+      : <number>datas[index1].ma5 > <number>datas[index1][steady] &&
+          <number>datas[index1].ma10 > <number>datas[index1][steady] &&
           <number>datas[index1][pressure] > <number>datas[index1].ma5 &&
           <number>datas[index1][pressure] > <number>datas[index1].ma10 &&
-          <number>datas[index1][pressure] > <number>datas[index1].ma20 &&
-          <number>datas[index1].ma10 > <number>datas[index2].ma10 &&
-          <number>datas[index2].ma10 > <number>datas[index3].ma10 &&
-          <number>datas[index1].ma20 > <number>datas[index2].ma20 &&
-          <number>datas[index2].ma20 > <number>datas[index3].ma20 &&
+          <number>datas[index1][pressure] > <number>datas[index1][steady] &&
+          <number>datas[index1][steady] > <number>datas[index2][steady] &&
+          <number>datas[index2][steady] > <number>datas[index3][steady] &&
           <number>datas[index2][pressure] > <number>datas[index1][pressure] &&
           <number>datas[index3][pressure] > <number>datas[index2][pressure];
   return false;
