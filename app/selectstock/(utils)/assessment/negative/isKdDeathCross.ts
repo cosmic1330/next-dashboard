@@ -20,7 +20,7 @@ export default function isKdDeathCross(
     datas[index2].k !== undefined &&
     datas[index2].d !== null &&
     datas[index2].d !== undefined &&
-    <number>datas[index1].k < <number>datas[index1].d &&
+    <number>datas[index1].d > <number>datas[index1].k &&
     <number>datas[index2].k > <number>datas[index2].d
   ) {
     return 'KD死亡交叉';

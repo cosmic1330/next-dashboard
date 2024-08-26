@@ -34,6 +34,7 @@ export default function TableBodyRow({
   const current = stockData[stockData.length - 1 - rollback_date];
   const before1 = stockData[stockData.length - 2 - rollback_date];
   const { add, list } = useTrackingList();
+  const williasm14 = stockData[stockData.length - 1].williams14 as number;
 
   const handleAdd = () => {
     if (list.has(stock.stock_id)) {
@@ -130,20 +131,19 @@ export default function TableBodyRow({
         ))}
       </TableCell>
       <TableCell align="center">
-        <Typography align="left">超強勢 : {gold.superStrong}</Typography>
-        <Typography align="left">---強勢 : {gold.strong}</Typography>
-        <Typography align="left">---中度 : {gold.middle}</Typography>
-        <Typography align="left">---弱勢 : {gold.weak}</Typography>
-        <Typography align="left">超弱勢 : {gold.superWeak}</Typography>
-        <Typography align="left">
-          前高:
-          <br />
-          {gold.highestPointDate} {gold.highestPoint}
-        </Typography>
-        <Typography align="left">
-          前低:
-          <br />
-          {gold.lowestPointDate} {gold.lowestPoint}
+        <Typography
+          align="left"
+          color={
+            williasm14 > -20
+              ? 'success.light'
+              : williasm14 > -50
+                ? 'success.dark'
+                : williasm14 > -80
+                  ? 'error.dark'
+                  : 'error.light'
+          }
+        >
+          {williasm14}
         </Typography>
       </TableCell>
       <TableCell align="center">

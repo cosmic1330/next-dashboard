@@ -19,6 +19,7 @@ export default function TableBodyRow({
 }) {
   const { id, date, listed, plan, name, c } = data;
   const { stockData, positives, negatives } = useQueryPrice(id);
+  const williasm14 = stockData[stockData.length - 1]?.williams14 as number;
   const { remove } = useTrackingList();
 
   const handleRemove = () => {
@@ -100,6 +101,21 @@ export default function TableBodyRow({
         </Typography>
         <Divider />
         <ExclusionValue stockData={stockData} rollback_date={0} />
+        <Typography
+          align="center"
+          variant="body2"
+          color={
+            williasm14 > -20
+              ? 'success.light'
+              : williasm14 > -50
+                ? 'success.dark'
+                : williasm14 > -80
+                  ? 'error.dark'
+                  : 'error.light'
+          }
+        >
+          威廉溫度計:{williasm14}
+        </Typography>
       </TableCell>
 
       <TableCell align="center">

@@ -22,9 +22,8 @@ export default function isKdNegativeTrend(
     datas[index1].rsv !== null &&
     datas[index2].rsv !== undefined &&
     datas[index2].rsv !== null &&
-    <number>datas[index1].k < <number>datas[index1].d &&
-    <number>datas[index1].k < <number>datas[index2].k &&
-    <number>datas[index1].rsv < <number>datas[index2].rsv
+    <number>datas[index1].d > <number>datas[index1].k &&
+    <number>datas[index2].k > <number>datas[index1].k
   ) {
     return 'KD趨勢向下';
   }
