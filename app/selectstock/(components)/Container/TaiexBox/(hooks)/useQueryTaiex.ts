@@ -10,7 +10,8 @@ import Ma60Generate from '@/app/selectstock/(utils)/indicator/classes/ma60';
 import MacdGenerate from '@/app/selectstock/(utils)/indicator/classes/macd';
 import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
 import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
-import Williams14Generate from '@/app/selectstock/(utils)/indicator/classes/williams14';
+import williams8Generate from '@/app/selectstock/(utils)/indicator/classes/williams8';
+import williams18Generate from '@/app/selectstock/(utils)/indicator/classes/williams18';
 import formatTaiexdata from '@/app/selectstock/(utils)/indicator/formatTaiexdata';
 import { useMemo } from 'react';
 import useSwrFetchTaiex from './useSwrFetchTaiex';
@@ -37,7 +38,8 @@ export default function useQueryTaiex() {
           Obv10Generate,
           KdGenerate,
           BollGenerate,
-          Williams14Generate,
+          williams8Generate,
+          williams18Generate,
         ],
         baseData,
       ),

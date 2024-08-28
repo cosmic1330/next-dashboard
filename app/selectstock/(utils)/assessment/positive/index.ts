@@ -15,3 +15,4 @@ export { default as isMaPositiveOrder } from './isMaPositiveOrder';
 export { default as isObvGoldenCross } from './isObvGoldenCross';
 export { default as isObvPositiveOrder } from './isObvPositiveOrder';
 export { default as isPositiveEngulfing } from './isPositiveEngulfing';
+export { default as isWilliams8PositiveTrend } from './isWilliams8PositiveTrend';

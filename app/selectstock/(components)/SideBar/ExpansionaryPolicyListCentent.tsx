@@ -1,8 +1,8 @@
 import { useSelectPlan } from '@/store/zustand';
+import AllOutIcon from '@mui/icons-material/AllOut';
 import MultilineChartRounded from '@mui/icons-material/MultilineChartRounded';
-import ScienceIcon from '@mui/icons-material/Science';
 import PresentToAll from '@mui/icons-material/PresentToAll';
-import WifiCalling3 from '@mui/icons-material/WifiCalling3';
+import ScienceIcon from '@mui/icons-material/Science';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -22,8 +22,8 @@ const li = [
     text: 'Muti Condition Plan',
   },
   {
-    icon: WifiCalling3,
-    text: 'Williams Plan',
+    icon: AllOutIcon,
+    text: 'Generalized Golden Cross Plan',
   },
 ];
 

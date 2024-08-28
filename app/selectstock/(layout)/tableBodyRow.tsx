@@ -34,7 +34,7 @@ export default function TableBodyRow({
   const current = stockData[stockData.length - 1 - rollback_date];
   const before1 = stockData[stockData.length - 2 - rollback_date];
   const { add, list } = useTrackingList();
-  const williasm14 = stockData[stockData.length - 1].williams14 as number;
+  const williasm8 = current.williams8 as number;
 
   const handleAdd = () => {
     if (list.has(stock.stock_id)) {
@@ -134,16 +134,16 @@ export default function TableBodyRow({
         <Typography
           align="left"
           color={
-            williasm14 > -20
+            williasm8 > -20
               ? 'success.light'
-              : williasm14 > -50
+              : williasm8 > -50
                 ? 'success.dark'
-                : williasm14 > -80
+                : williasm8 > -80
                   ? 'error.dark'
                   : 'error.light'
           }
         >
-          {williasm14}
+          {williasm8}
         </Typography>
       </TableCell>
       <TableCell align="center">

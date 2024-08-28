@@ -50,7 +50,8 @@ export type IndicatorsType = {
   obv?: number;
   obv5Ma?: number;
   obv10Ma?: number;
-  williams14?: number;
+  williams8?: number;
+  williams18?: number;
 };
 
 export type BaseTaxieData = {
@@ -59,9 +60,9 @@ export type BaseTaxieData = {
   h: number;
   l: number;
   o: number;
-}
+};
 
-export type TaxieData = BaseTaxieData & IndicatorsType
+export type TaxieData = BaseTaxieData & IndicatorsType;
 
 export type BaseStockData = {
   id: string;

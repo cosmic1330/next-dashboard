@@ -10,13 +10,13 @@ import { Fragment, Suspense, lazy } from 'react';
 import useQueryStock from '../../../../../hooks/useQueryStock';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
-export default function WilliamsTable() {
+export default function GeneralizedGoldenCrossTable() {
   const { data: stocks, mutate } = useQueryStock();
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        威廉指標策略
+        廣義黃金交叉策略
       </Typography>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data

@@ -10,7 +10,6 @@ export default function useConform(
   const conform = useMemo(() => {
     let length = stockData.length - 1;
     if (
-      // 成交量大於1000張
       isSufficientTradingVolume(stockData, rollback_date, 300) &&
       <number>stockData[length - rollback_date]?.c >
         <number>stockData[length - (rollback_date + 1)]?.ma5 &&

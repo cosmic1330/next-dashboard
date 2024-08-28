@@ -15,7 +15,8 @@ import Ma60Generate from './classes/ma60';
 import MacdGenerate from './classes/macd';
 import Obv10Generate from './classes/obv10';
 import Obv5Generate from './classes/obv5';
-import Williams14Generate from './classes/williams14';
+import williams18Generate from './classes/williams18';
+import williams8Generate from './classes/williams8';
 
 type ClassKey =
   | typeof BollGenerate
@@ -29,7 +30,8 @@ type ClassKey =
   | typeof Obv5Generate
   | typeof Obv10Generate
   | typeof KdGenerate
-  | typeof Williams14Generate;
+  | typeof williams8Generate
+  | typeof williams18Generate;
 
 export default function createSelectedIndicators<
   T extends BaseStockData | BaseTaxieData,
@@ -55,5 +57,7 @@ export default function createSelectedIndicators<
     });
     return;
   });
-  return finallyData as unknown as T extends BaseStockData ? StockData[] : TaxieData[];
+  return finallyData as unknown as T extends BaseStockData
+    ? StockData[]
+    : TaxieData[];
 }

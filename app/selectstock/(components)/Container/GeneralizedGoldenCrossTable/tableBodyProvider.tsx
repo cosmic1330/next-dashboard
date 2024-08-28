@@ -27,7 +27,7 @@ export default function TableBodyRowProvider({
         conform,
         rollback_date,
       }}
-      plan="Experiment Plan"
+      plan="Generalized Golden Cross Plan"
     />
   );
 }

@@ -1,7 +1,7 @@
 import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
 import { Williams } from '@ch20026103/anysis';
 
-export default class Williams14Generate {
+export default class williams18Generate {
   williams: Williams;
 
   pre: any | undefined;
@@ -9,7 +9,7 @@ export default class Williams14Generate {
   data:
     | undefined
     | {
-        williams14: number;
+        williams18: number;
       };
 
   constructor() {
@@ -20,12 +20,12 @@ export default class Williams14Generate {
 
   generate(value: BaseStockData | BaseTaxieData) {
     if (this.data === undefined) {
-      this.pre = this.williams.init(value, 14);
+      this.pre = this.williams.init(value, 18);
     } else {
-      this.pre = this.williams.next(value, this.pre, 14);
+      this.pre = this.williams.next(value, this.pre, 18);
     }
     this.data = {
-      williams14: this.pre.williams,
+      williams18: this.pre.williams,
     };
     return this.data;
   }

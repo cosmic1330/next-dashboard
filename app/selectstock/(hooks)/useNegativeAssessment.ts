@@ -19,6 +19,7 @@ import {
   isNegativeEngulfing,
   isObvDeathCross,
   isObvNegativeOrder,
+  isWilliams8NegativeTrend,
 } from '@/app/selectstock/(utils)/assessment/negative';
 
 export default function useNegativeAssessment(
@@ -44,6 +45,7 @@ export default function useNegativeAssessment(
       isBreaksPreviousLowWithoutNewHigh,
       isIncreasingVolumeGreenK,
       isLongGreenK,
+      isWilliams8NegativeTrend,
     ];
     const res = AssessmentArray.map((fn) => fn(datas, rollback_date)).filter(
       (item) => item !== false,

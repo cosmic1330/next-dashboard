@@ -18,7 +18,7 @@ import formatStockdata from '@/app/selectstock/(utils)/indicator/formatStockdata
 import { ResGoldType } from '@/app/selectstock/types';
 import { Gold } from '@ch20026103/anysis';
 import { useContext, useMemo } from 'react';
-import Williams14Generate from '../(utils)/indicator/classes/williams14';
+import williams8Generate from '../(utils)/indicator/classes/williams8';
 
 export default function useQueryDeal(stock_id: string) {
   const { rollback_date } = useContext(SelectStockContext);
@@ -29,21 +29,26 @@ export default function useQueryDeal(stock_id: string) {
   }, [fetchData, stock_id]);
 
   const gold: ResGoldType = useMemo(() => {
-    if (baseData.length === 0)
-      return {
-        superStrong: 0,
-        strong: 0,
-        middle: 0,
-        weak: 0,
-        superWeak: 0,
-        highestPointDate: 0,
-        highestPoint: 0,
-        lowestPointDate: 0,
-        lowestPoint: 0,
-      };
-    else {
-      const cls = new Gold();
-      return cls.getGold(baseData);
+    let res = {
+      superStrong: 0,
+      strong: 0,
+      middle: 0,
+      weak: 0,
+      superWeak: 0,
+      highestPointDate: 0,
+      highestPoint: 0,
+      lowestPointDate: 0,
+      lowestPoint: 0,
+    };
+    try {
+      if (baseData.length === 0) return res;
+      else {
+        const cls = new Gold();
+        return cls.getGold(baseData);
+      }
+    } catch (error) {
+      console.log(error)
+      return res;
     }
   }, [baseData]);
 
@@ -62,7 +67,7 @@ export default function useQueryDeal(stock_id: string) {
           Obv10Generate,
           KdGenerate,
           BollGenerate,
-          Williams14Generate,
+          williams8Generate,
         ],
         baseData,
       ),

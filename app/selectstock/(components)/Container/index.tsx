@@ -21,7 +21,8 @@ import TwoRedSoldierTable from './TwoRedSoldierTable';
 import UptrendContinuationTable from './UptrendContinuationTable';
 import V1PlansTable from './V1PlansTable';
 import GoldPlatedSilverTable from './GoldPlatedSilverTable';
-import WilliamsTable from './WilliamsTable';
+import GeneralizedGoldenCrossTable from './GeneralizedGoldenCrossTable';
+import WilliamsNegativeTrendTable from './WilliamsNegativeTrendTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -61,11 +62,12 @@ export default function Container() {
       {plan === 101 && <MacdTrendReversalTable />}
       {plan === 102 && <UptrendContinuationTable />}
       {plan === 103 && <HeldSupportLineTable />}
+      {plan === 104 && <WilliamsNegativeTrendTable />}
 
       {plan === 201 && <V1PlansTable />}
       {plan === 202 && <ExperimentTable />}
       {plan === 203 && <MutiConditionTable />}
-      {plan === 204 && <WilliamsTable />}
+      {plan === 204 && <GeneralizedGoldenCrossTable />}
 
       {plan === 301 && <TrackingTable />}
       <Fab

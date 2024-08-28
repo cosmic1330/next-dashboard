@@ -1,12 +1,13 @@
 import { useSelectPlan } from '@/store/zustand';
+import AirlineStopsIcon from '@mui/icons-material/AirlineStops';
+import DeblurIcon from '@mui/icons-material/Deblur';
 import MoreTimeIcon from '@mui/icons-material/MoreTime';
+import Upcoming from '@mui/icons-material/Upcoming';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
-import DeblurIcon from '@mui/icons-material/Deblur';
-import Upcoming from '@mui/icons-material/Upcoming';
 
 const li = [
   {
@@ -20,6 +21,10 @@ const li = [
   {
     icon: Upcoming,
     text: 'Held Support Line Plan',
+  },
+  {
+    icon: AirlineStopsIcon,
+    text: 'Williams Negative Trend Plan',
   },
 ];
 

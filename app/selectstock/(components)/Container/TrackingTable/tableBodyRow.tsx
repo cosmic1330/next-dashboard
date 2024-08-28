@@ -9,7 +9,6 @@ import { Divider, IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import { Fragment } from 'react';
 import useQueryPrice from './(hooks)/useQueryPrice';
 
 export default function TableBodyRow({
@@ -19,14 +18,61 @@ export default function TableBodyRow({
 }) {
   const { id, date, listed, plan, name, c } = data;
   const { stockData, positives, negatives } = useQueryPrice(id);
-  const williasm14 = stockData[stockData.length - 1]?.williams14 as number;
+  const williams8 = stockData[stockData.length - 1]?.williams8 as number;
   const { remove } = useTrackingList();
 
   const handleRemove = () => {
     remove(id);
   };
 
-  if (stockData.length === 0) return <Fragment />;
+  if (stockData.length === 0)
+    return (
+      <TableRow hover>
+        <TableCell align="left">
+          <Typography variant="body2">Plan: {plan}</Typography>
+          <Typography variant="body2">Add Date: {date}</Typography>
+        </TableCell>
+        <TableCell>
+          <Typography align="center">
+            <Link
+              target="_blank"
+              rel="noreferrer"
+              href={`https://pchome.megatime.com.tw/stock/sto0/ock1/sid${id}.html`}
+            >
+              {id}
+            </Link>
+
+            {'('}
+            <Link
+              target="_blank"
+              rel="noreferrer"
+              href={`https://tw.stock.yahoo.com/q/ta?s=${id}`}
+            >
+              {name}
+            </Link>
+            {')'}
+          </Typography>
+          <Typography align="center">
+            <Link
+              target="_blank"
+              rel="noreferrer"
+              href={
+                listed
+                  ? `https://tw.tradingview.com/chart/8TP8jY00/?symbol=TWSE%3A${id}`
+                  : `https://tw.tradingview.com/chart/8TP8jY00/?symbol=TPEX%3A${id}`
+              }
+            >
+              TrandView
+            </Link>
+          </Typography>
+        </TableCell>
+        <TableCell align="center">
+          <IconButton color="success" onClick={handleRemove}>
+            <CancelIcon />
+          </IconButton>
+        </TableCell>
+      </TableRow>
+    );
 
   return (
     <TableRow hover>
@@ -34,6 +80,7 @@ export default function TableBodyRow({
         <Typography variant="body2">Plan: {plan}</Typography>
         <Typography variant="body2">Add Date: {date}</Typography>
       </TableCell>
+
       <TableCell>
         <Typography align="center">
           {stockData[stockData.length - 1].c >
@@ -105,16 +152,16 @@ export default function TableBodyRow({
           align="center"
           variant="body2"
           color={
-            williasm14 > -20
+            williams8 > -20
               ? 'success.light'
-              : williasm14 > -50
+              : williams8 > -50
                 ? 'success.dark'
-                : williasm14 > -80
+                : williams8 > -80
                   ? 'error.dark'
                   : 'error.light'
           }
         >
-          威廉溫度計:{williasm14}
+          威廉溫度計:{williams8}
         </Typography>
       </TableCell>
 

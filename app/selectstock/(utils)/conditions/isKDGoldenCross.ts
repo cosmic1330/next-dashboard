@@ -27,14 +27,11 @@ export default function isKDGoldenCross(
     datas[index1].k !== undefined &&
     datas[index1].d !== undefined &&
     datas[index2].k !== undefined &&
-    datas[index2].d !== undefined &&
-    datas[index3].k !== undefined &&
-    datas[index3].d !== undefined
+    datas[index2].d !== undefined
   ) {
     return (
       <number>datas[index1].k > <number>datas[index1].d &&
-      <number>datas[index2].k < (datas[index2].d as number) &&
-      <number>datas[index3].k < (datas[index3].d as number)
+      <number>datas[index2].k < (datas[index2].d as number)
     );
   }
 

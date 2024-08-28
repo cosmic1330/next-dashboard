@@ -17,11 +17,6 @@ export default function isSlowStepwiseIncrease(
   }
   const [index1, index2, index3] = indices;
 
-  const daysIndices = Array.from(
-    { length: days },
-    (_, i) => length - rollback_date - i,
-  ).reverse();
-
   if (
     datas[index1].ma5 !== undefined &&
     datas[index1].ma10 !== undefined &&

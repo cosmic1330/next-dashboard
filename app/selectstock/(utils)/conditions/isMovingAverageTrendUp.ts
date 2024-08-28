@@ -8,27 +8,29 @@ export default function isMovingAverageTrendUp(
   datas: DataPoint[],
   rollback_date = 0,
   type: MaType = MaType.MA5,
+  days: number = 3,
 ) {
   let length = datas.length - 1;
 
-  const indices = [
-    length - rollback_date,
-    length - (rollback_date + 1),
-    length - (rollback_date + 2),
-  ];
-  if (indices.some((index) => index < 0 || index >= datas.length)) {
+  if (days < 2 || days >= datas.length) {
     return false;
   }
-  const [index1, index2, index3] = indices;
+  const daysIndices = Array.from(
+    { length: days },
+    (_, i) => length - rollback_date - i,
+  ).reverse();
 
-  if (
-    datas[index1][type] !== undefined &&
-    datas[index2][type] !== undefined &&
-    datas[index3][type] !== undefined
-  )
-    return (
-      <number>datas[index1][type] > <number>datas[index2][type] &&
-      <number>datas[index2][type] > <number>datas[index3][type]
-    );
-  return false;
+  const ma = daysIndices.map((index) => datas[index][type]);
+
+  for (let i = 0; i < ma.length - 1; i++) {
+    const pre = ma[i];
+    const next = ma[i + 1];
+    if (pre === undefined || next === undefined) {
+      return false;
+    }
+    if (pre > next) {
+      return false;
+    }
+  }
+  return true;
 }

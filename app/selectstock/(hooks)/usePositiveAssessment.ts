@@ -19,6 +19,7 @@ import {
   isObvGoldenCross,
   isObvPositiveOrder,
   isPositiveEngulfing,
+  isWilliams8PositiveTrend,
 } from '@/app/selectstock/(utils)/assessment/positive';
 
 export default function usePositiveAssessment(
@@ -44,6 +45,7 @@ export default function usePositiveAssessment(
       isHoldsPreviousLowAndMakesNewHigh,
       isIncreasingVolumeRedK,
       isLongRedK,
+      isWilliams8PositiveTrend,
     ];
     const res = AssessmentArray.map((fn) => fn(datas, rollback_date)).filter(
       (item) => item !== false,
