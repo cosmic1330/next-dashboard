@@ -1,5 +1,4 @@
 import { useSelectPlan } from '@/store/zustand';
-import AllOutIcon from '@mui/icons-material/AllOut';
 import MultilineChartRounded from '@mui/icons-material/MultilineChartRounded';
 import PresentToAll from '@mui/icons-material/PresentToAll';
 import ScienceIcon from '@mui/icons-material/Science';
@@ -20,10 +19,6 @@ const li = [
   {
     icon: MultilineChartRounded,
     text: 'Muti Condition Plan',
-  },
-  {
-    icon: AllOutIcon,
-    text: 'Generalized Golden Cross Plan',
   },
 ];
 

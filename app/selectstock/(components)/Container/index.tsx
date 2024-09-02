@@ -8,7 +8,6 @@ import BreakthroughPressureTable from './BreakthroughPressureTable';
 import ExperimentTable from './ExperimentTable';
 import HeldSupportLineTable from './HeldSupportLineTable';
 import KdGoldenCrossTable from './KdGoldenCrossTable';
-import MacdTrendReversalTable from './MacdTrendReversalTable';
 import MutiConditionTable from './MutiConditionTable';
 import OpenBollingTable from './OpenBollingTable';
 import Range from './range';
@@ -21,8 +20,8 @@ import TwoRedSoldierTable from './TwoRedSoldierTable';
 import UptrendContinuationTable from './UptrendContinuationTable';
 import V1PlansTable from './V1PlansTable';
 import GoldPlatedSilverTable from './GoldPlatedSilverTable';
-import GeneralizedGoldenCrossTable from './GeneralizedGoldenCrossTable';
 import WilliamsNegativeTrendTable from './WilliamsNegativeTrendTable';
+import GeneralizedPlansTable from './GeneralizedPlansTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -59,7 +58,7 @@ export default function Container() {
       {plan === 7 && <SteadyGradualRiseTable />}
       {plan === 8 && <GoldPlatedSilverTable />}
 
-      {plan === 101 && <MacdTrendReversalTable />}
+      {plan === 101 && <GeneralizedPlansTable />}
       {plan === 102 && <UptrendContinuationTable />}
       {plan === 103 && <HeldSupportLineTable />}
       {plan === 104 && <WilliamsNegativeTrendTable />}
@@ -67,7 +66,6 @@ export default function Container() {
       {plan === 201 && <V1PlansTable />}
       {plan === 202 && <ExperimentTable />}
       {plan === 203 && <MutiConditionTable />}
-      {plan === 204 && <GeneralizedGoldenCrossTable />}
 
       {plan === 301 && <TrackingTable />}
       <Fab

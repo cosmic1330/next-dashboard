@@ -14,7 +14,7 @@ export default function isCloseAboveMa5(
   if (
     datas[index1].ma5 !== undefined &&
     datas[index1].ma5 !== null &&
-    datas[index1].c > (datas[index1].ma5 as number)
+    datas[index1].c >= (datas[index1].ma5 as number)
   ) {
     return '5日線上';
   }

@@ -6,24 +6,24 @@ import {
   RadioGroup,
 } from '@mui/material';
 import { Dispatch, SetStateAction } from 'react';
-import { V1Plans } from './types';
+import { GeneralizedPlans } from './types';
 
 export default function Radios({
   plan,
   setPlan,
 }: {
-  plan: V1Plans;
-  setPlan: Dispatch<SetStateAction<V1Plans>>;
+  plan: GeneralizedPlans;
+  setPlan: Dispatch<SetStateAction<GeneralizedPlans>>;
 }) {
   const handleRadioChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setPlan((event.target as HTMLInputElement).value as V1Plans);
+    setPlan((event.target as HTMLInputElement).value as GeneralizedPlans);
   };
 
   return (
     <FormControl>
-      <FormLabel>V1 Plans</FormLabel>
+      <FormLabel>Generalized Plans</FormLabel>
       <RadioGroup row onChange={handleRadioChange} value={plan}>
-        {Object.entries(V1Plans).map(([key, value]) => (
+        {Object.entries(GeneralizedPlans).map(([key, value]) => (
           <FormControlLabel
             key={key}
             value={value}

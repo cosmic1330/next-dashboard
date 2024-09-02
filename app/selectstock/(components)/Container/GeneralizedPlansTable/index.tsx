@@ -1,23 +1,29 @@
 'use client';
-import { Button, Typography } from '@mui/material';
+import useQueryStock from '@/hooks/useQueryStock';
+import { Button, Stack, Typography } from '@mui/material';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { Fragment, Suspense, lazy } from 'react';
-import useQueryStock from '../../../../../hooks/useQueryStock';
+import { Fragment, Suspense, lazy, useState } from 'react';
+import Radios from './radio';
+import { GeneralizedPlans } from './types';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
-export default function GeneralizedGoldenCrossTable() {
+export default function GeneralizedPlansTable() {
   const { data: stocks, mutate } = useQueryStock();
+  const [plan, setPlan] = useState(GeneralizedPlans.GoldenCross);
 
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        廣義黃金交叉策略
+        大範圍的標的
       </Typography>
+      <Stack direction="column">
+        <Radios {...{ plan, setPlan }} />
+      </Stack>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data
       </Button>
@@ -45,7 +51,7 @@ export default function GeneralizedGoldenCrossTable() {
             {stocks &&
               stocks.map((stock, index) => (
                 <Suspense fallback={<></>} key={index}>
-                  <TableBodyProvider {...{ stock }} />
+                  <TableBodyProvider {...{ stock, plan }} />
                 </Suspense>
               ))}
           </TableBody>

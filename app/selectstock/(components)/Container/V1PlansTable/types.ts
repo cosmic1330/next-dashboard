@@ -1,4 +1,4 @@
-export enum Plans {
+export enum V1Plans {
   Forward = 'forward',
   ObvLong = 'obvlong',
   BreakPressure = 'breakpressure',

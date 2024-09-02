@@ -9,12 +9,12 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import { Fragment, Suspense, lazy, useState } from 'react';
 import Radios from './radio';
-import { Plans } from './types';
+import { V1Plans } from './types';
 
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
 export default function V1PlansTable() {
   const { data: stocks, mutate } = useQueryStock();
-  const [plan, setPlan] = useState(Plans.ObvLong);
+  const [plan, setPlan] = useState(V1Plans.ObvLong);
 
   return (
     <Fragment>

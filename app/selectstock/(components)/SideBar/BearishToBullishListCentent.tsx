@@ -8,11 +8,12 @@ import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
+import AllOutIcon from '@mui/icons-material/AllOut';
 
 const li = [
   {
-    icon: MoreTimeIcon,
-    text: 'Macd Trend Reversal Plan',
+    icon: AllOutIcon,
+    text: 'Generalized Plan',
   },
   {
     icon: DeblurIcon,

@@ -4,16 +4,19 @@ import useQueryDeal from '@/app/selectstock/(hooks)/useQueryDeal';
 import TableBodyRow from '@/app/selectstock/(layout)/tableBodyRow';
 import { Fragment } from 'react';
 import useConform from './(hooks)/useConform';
+import { GeneralizedPlans } from './types';
 
 export default function TableBodyRowProvider({
   stock,
+  plan,
 }: {
   stock: V2StocksResponseRow;
+  plan: GeneralizedPlans;
 }) {
   const { gold, stockData, positives, rollback_date, negatives } = useQueryDeal(
     stock.stock_id,
   );
-  const conform = useConform(stockData, rollback_date);
+  const conform = useConform(stockData, rollback_date, plan);
   return !conform ? (
     <Fragment />
   ) : (
@@ -27,7 +30,7 @@ export default function TableBodyRowProvider({
         conform,
         rollback_date,
       }}
-      plan="Kd Divergence Plan"
+      plan={`GeneralizedPlans_${plan}`}
     />
   );
 }

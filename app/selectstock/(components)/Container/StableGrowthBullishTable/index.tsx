@@ -16,7 +16,7 @@ export default function StableGrowthBullishTable() {
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        多頭排列穩定成長標的
+        嚴謹小碎步標的
       </Typography>
       <Button variant="outlined" onClick={() => mutate()}>
         Query Data
