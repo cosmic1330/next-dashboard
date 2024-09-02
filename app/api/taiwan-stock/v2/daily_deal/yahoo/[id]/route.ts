@@ -16,22 +16,29 @@ export const GET = async (req: Request) => {
     const id = req.url.split('/')[req.url.split('/').length - 1];
 
     // fetch fresh data from the DB
-    let res1 = await fetch(
+    let response = await fetch(
       `https://tw.quote.finance.yahoo.net/quote/q?type=ta&perd=d&mkt=10&sym=${id}&v=1&callback=`,
       {
         cache: 'no-store',
       },
-    ).then((res1) => res1.text());
-    res1 = res1.replace(/^\(|\);$/g, '');
-    let parse = JSON.parse(res1);
+    ).then((res) => res.text());
+
+    let ta_index = response.indexOf('"ta":');
+    let json_ta = '{' + response.slice(ta_index).replace(');', '');
+    let parse = JSON.parse(json_ta);
     let ta: TaType[] = parse.ta;
+
+    let idMatch = response.slice(0,ta_index).match(/"id":"(\d+)"/);
+    let nameMatch = response.slice(0,ta_index).match(/"name":"([^"]+)"/);
+    let stock_id = idMatch ? idMatch[1] : null;
+    let stock_name = nameMatch ? nameMatch[1] : null;
 
     // unable to fetch data from DB, return data from Yahoo
     const arr: YahooDailyDealResponse = ta.map((item, index) => {
       return {
         transaction_date: formateIsoDate(item.t) + 'T00:00:00.000Z',
-        stock_id: parse.mem.id,
-        stock_name: parse.mem.name,
+        stock_id,
+        stock_name,
         volume: item.v,
         open_price: item.o,
         close_price: item.c,
@@ -53,7 +60,7 @@ export const GET = async (req: Request) => {
   } catch (error) {
     console.log(error);
     return NextResponse.json(
-      { error: 'Internal Server Error' },
+      { error: 'Internal Server Error', message: error },
       { status: 500 },
     );
   }
