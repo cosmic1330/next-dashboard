@@ -148,6 +148,9 @@ export default function TableBodyRow({
       </TableCell>
       <TableCell align="center">
         <Typography align="left">
+          量: {current.v}
+        </Typography>
+        <Typography align="left">
           外資: {Math.floor(current.foreign_investors / 1000) || 0}
         </Typography>
         <Typography align="left">

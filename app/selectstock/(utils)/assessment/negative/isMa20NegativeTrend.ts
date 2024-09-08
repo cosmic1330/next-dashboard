@@ -22,8 +22,8 @@ export default function isMa20NegativeTrend(
     datas[index2].ma20 !== null &&
     datas[index3].ma20 !== undefined &&
     datas[index3].ma20 !== null &&
-    <number>datas[index1].ma20 < <number>datas[index2].ma20 &&
-    <number>datas[index2].ma20 < <number>datas[index3].ma20
+    <number>datas[index1].ma20 < (datas[index2].ma20 as number) &&
+    <number>datas[index2].ma20 < (datas[index3].ma20 as number)
   ) {
     return '20日均線向下';
   }
