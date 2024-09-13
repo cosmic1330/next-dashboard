@@ -1,4 +1,5 @@
 import { Box, Typography } from '@mui/material';
+import Link from 'next/link';
 import { Fragment } from 'react';
 import useQueryTaiex from './(hooks)/useQueryTaiex';
 import Date from './Date';
@@ -13,8 +14,20 @@ export default function TaiexBox() {
     <Fragment />
   ) : (
     <Box>
-      <Typography variant="h6">加權指數</Typography>
-      <Date taiexData={taiexData} />
+      <Link
+        target="_blank"
+        rel="noreferrer"
+        href={`https://tw.stock.yahoo.com/quote/%5ETWII`}
+      >
+        <Typography variant="h6">加權指數</Typography>
+      </Link>
+      <Link
+        target="_blank"
+        rel="noreferrer"
+        href={`https://tw.tradingview.com/chart/8TP8jY00/?symbol=INDEX%3ATAIEX`}
+      >
+        <Date taiexData={taiexData} />
+      </Link>
       <OffsetValue taiexData={taiexData} />
       <MovingAverage taiexData={taiexData} />
       <Kd taiexData={taiexData} />

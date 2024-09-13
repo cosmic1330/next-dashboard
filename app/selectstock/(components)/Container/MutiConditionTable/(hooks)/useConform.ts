@@ -74,7 +74,7 @@ export default function useConform(
         rollback_date,
         MaType.MA20,
       ),
-      isMaSlopePositive(stockData, rollback_date),
+      isMaSlopePositive(stockData, rollback_date, MaType.MA5),
       isNoBreakBelowBullishCandleMidpoint(stockData, rollback_date),
       isSlowStepwiseIncrease(stockData, rollback_date),
     ].forEach((item) => {
