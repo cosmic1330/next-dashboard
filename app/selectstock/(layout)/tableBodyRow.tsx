@@ -9,14 +9,14 @@ import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
 import { toast } from 'react-toastify';
-import { ResGoldType, StockData } from '../types';
+import KBar from '../(components)/K_bar';
+import { StockData } from '../types';
 import Eps from './eps';
 import ExclusionValue from './exclusionValue';
 import Monthly from './monthly';
 
 export default function TableBodyRow({
   stock,
-  gold,
   stockData,
   positives,
   negatives,
@@ -24,7 +24,6 @@ export default function TableBodyRow({
   plan,
 }: {
   stock: V2StocksResponseRow;
-  gold: ResGoldType;
   stockData: StockData[];
   positives: string[];
   negatives: string[];
@@ -109,6 +108,17 @@ export default function TableBodyRow({
         </Typography>
       </TableCell>
       <TableCell align="center">
+        <KBar
+          l={current.l}
+          h={current.h}
+          c={current.c}
+          o={current.o}
+          upper={before1.c + before1.c * 0.1}
+          lower={before1.c - before1.c * 0.1}
+          ma5={current.ma5}
+        />
+      </TableCell>
+      <TableCell align="center">
         {current.c}
         <Divider />
         <ExclusionValue stockData={stockData} rollback_date={rollback_date} />
@@ -147,9 +157,7 @@ export default function TableBodyRow({
         </Typography>
       </TableCell>
       <TableCell align="center">
-        <Typography align="left">
-          量: {current.v}
-        </Typography>
+        <Typography align="left">量: {current.v}</Typography>
         <Typography align="left">
           外資: {Math.floor(current.foreign_investors / 1000) || 0}
         </Typography>

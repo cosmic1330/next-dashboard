@@ -1,4 +1,5 @@
 'use client';
+import TableHead from '@/app/selectstock/(layout)/tableHead';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import {
   Accordion,
@@ -10,10 +11,8 @@ import {
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
+
 import { Fragment, Suspense, lazy } from 'react';
 import useQueryStock from '../../../../../hooks/useQueryStock';
 
@@ -50,19 +49,8 @@ export default function GoldPlatedSilverTable() {
               No Data
             </caption>
           )}
-          <TableHead>
-            <TableRow>
-              <TableCell>Date</TableCell>
-              <TableCell align="center">股票</TableCell>
-              <TableCell align="center">股價</TableCell>
-              <TableCell align="center">Action</TableCell>
-              <TableCell align="center">評估</TableCell>
-              <TableCell align="left">威廉溫度計</TableCell>
-              <TableCell align="left" colSpan={2}>
-                其他
-              </TableCell>
-            </TableRow>
-          </TableHead>
+
+          <TableHead />
           <TableBody>
             {stocks &&
               stocks.map((stock, index) => (

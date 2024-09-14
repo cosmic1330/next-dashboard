@@ -9,6 +9,7 @@ import { Divider, IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
+import KBar from '../../K_bar';
 import useQueryPrice from './(hooks)/useQueryPrice';
 
 export default function TableBodyRow({
@@ -129,6 +130,24 @@ export default function TableBodyRow({
             %
           </Link>
         </Typography>
+      </TableCell>
+
+      <TableCell align="center">
+        <KBar
+          l={stockData[stockData.length - 1].l}
+          h={stockData[stockData.length - 1].h}
+          c={stockData[stockData.length - 1].c}
+          o={stockData[stockData.length - 1].o}
+          upper={
+            stockData[stockData.length - 2].c +
+            stockData[stockData.length - 2].c * 0.1
+          }
+          lower={
+            stockData[stockData.length - 2].c -
+            stockData[stockData.length - 2].c * 0.1
+          }
+          ma5={stockData[stockData.length - 1].ma5}
+        />
       </TableCell>
       <TableCell align="center">
         <Typography align="center" variant="body2">

@@ -3,7 +3,6 @@ import { StockData, TaxieData } from '../../types';
 export default function isSlowStepwiseIncrease(
   datas: StockData[] | TaxieData[],
   rollback_date = 0,
-  days: number = 10,
 ) {
   let length = datas.length - 1;
 

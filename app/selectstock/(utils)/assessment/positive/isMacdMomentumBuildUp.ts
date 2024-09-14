@@ -28,6 +28,7 @@ export default function isMacdMomentumBuildUp(
     datas[index2].macd !== null &&
     datas[index3].macd !== undefined &&
     datas[index3].macd !== null &&
+    <number>datas[index1].dif > 0 &&
     <number>datas[index1].osc > (datas[index2].osc as number) &&
     <number>datas[index2].osc > (datas[index3].osc as number) &&
     <number>datas[index1].macd > (datas[index2].macd as number) &&

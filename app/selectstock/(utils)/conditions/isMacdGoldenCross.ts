@@ -32,9 +32,9 @@ export default function isMacdGoldenCross(
     datas[index3].dif !== undefined
   ) {
     return (
-      <number>datas[index1].macd < (datas[index1].dif as number) &&
-      <number>datas[index2].macd > (datas[index2].dif as number) &&
-      <number>datas[index3].macd > (datas[index3].dif as number)
+      0 < (datas[index1].dif as number) &&
+      0 > (datas[index2].dif as number) &&
+      0 >(datas[index3].dif as number)
     );
   }
 

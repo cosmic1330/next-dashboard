@@ -16,7 +16,7 @@ export { default as isObvPositiveOrder } from './isObvPositiveOrder';
 export { default as isObvGoldenCross } from './isObvGoldenCross';
 // Bearish Engulfing「陽棒吞噬陰棒」√
 export { default as isBearishEngulfing } from './isBearishEngulfing';
-// MACD Golden Cross「MACD 黃金交叉」√
+// MACD Golden Cross「MACD 黃金交叉」P:僅代表多方發動還要觀察後續走勢 √
 export { default as isMacdGoldenCross } from './isMacdGoldenCross';
 // MACD OSC Histogram Turns Positive「MACD OSC 柱狀圖轉正」√
 export { default as isOscHistogramTurningPositive } from './isOscHistogramTurningPositive';

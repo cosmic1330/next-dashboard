@@ -40,13 +40,15 @@ export default function Container() {
 
   return (
     <StyledContainer ref={ref} maxWidth="xl">
-      <Grid container spacing={3} mb={3}>
-        <Grid item xs={6}>
+      <Grid container spacing={1} mb={3}>
+        <Grid item xs={4}>
           <TaiexBox />
         </Grid>
-        <Grid item xs={6}>
+        <Grid item xs={4}>
           <Range />
           <Switch />
+        </Grid>
+        <Grid item xs={4}>
         </Grid>
       </Grid>
       {plan === 1 && <TwoRedSoldierTable />}

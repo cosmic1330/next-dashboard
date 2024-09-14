@@ -25,10 +25,7 @@ export default function isMovingAverageTrendUp(
   for (let i = 0; i < ma.length - 1; i++) {
     const pre = ma[i];
     const next = ma[i + 1];
-    if (pre === undefined || next === undefined) {
-      return false;
-    }
-    if (pre > next) {
+    if (pre === undefined || next === undefined || pre > next) {
       return false;
     }
   }

@@ -28,12 +28,14 @@ export default function isMacdPositiveDivergence(
     datas[index2].macd !== null &&
     datas[index3].macd !== undefined &&
     datas[index3].macd !== null &&
+    <number>datas[index1].dif > 0 &&
+    <number>datas[index1].h > (datas[index2].h as number) &&
     <number>datas[index1].osc > (datas[index2].osc as number) &&
     <number>datas[index2].osc > (datas[index3].osc as number) &&
     <number>datas[index1].macd < (datas[index2].macd as number) &&
     <number>datas[index2].macd < (datas[index3].macd as number)
   ) {
-    return 'Macd正背離(適用股價下跌段、下降通道末端)';
+    return 'Macd正背離(OSC縮腳止跌)';
   }
 
   return false;

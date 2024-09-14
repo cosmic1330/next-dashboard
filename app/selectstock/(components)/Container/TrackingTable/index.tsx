@@ -4,11 +4,12 @@ import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
+
 import TableRow from '@mui/material/TableRow';
 import { Fragment, useEffect } from 'react';
 import TrackingForm from './form';
 import TableBodyRow from './tableBodyRow';
+import { TableHead } from '@mui/material';
 
 export default function TrackingTable() {
   const { list, init } = useTrackingList();
@@ -23,6 +24,7 @@ export default function TrackingTable() {
             <TableRow>
               <TableCell>Plan</TableCell>
               <TableCell align="center">股票</TableCell>
+              <TableCell align="center">K</TableCell>
               <TableCell align="center">股價</TableCell>
               <TableCell align="center">Action</TableCell>
               <TableCell align="center">評估</TableCell>

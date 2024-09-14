@@ -15,13 +15,13 @@ export default function Range() {
   };
   return (
     <Grid container>
-      <Grid item xs={6}>
+      <Grid item xs={12}>
         <Typography variant="h6">回測天數</Typography>
         <Button variant="outlined" onClick={add}>
           {rollback_date}
         </Button>
       </Grid>
-      <Grid item xs={6}>
+      <Grid item xs={8}>
         <Stack mt={'20px'}>
           <Slider
             getAriaValueText={(value: number) => {
