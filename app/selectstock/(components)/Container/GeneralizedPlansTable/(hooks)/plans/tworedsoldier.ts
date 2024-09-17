@@ -1,5 +1,5 @@
 import { isCloseAboveMa5 } from '@/app/selectstock/(utils)/assessment/positive';
-import { isMovingAverageTrendUp } from '@/app/selectstock/(utils)/conditions';
+import { isMovingAverageTrendUp, isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
 import { StockData } from '@/app/selectstock/types';
 
@@ -19,6 +19,7 @@ export default function tworedsoldier(
   }
   const [index1, index2, index3] = indices;
   if (
+    isSufficientTradingVolume(stockData, rollback_date, 300) &&
     stockData[index1].c > stockData[index2].h &&
     stockData[index1].h > stockData[index2].h &&
     stockData[index1].h > stockData[index3].h &&

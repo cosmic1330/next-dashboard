@@ -6,7 +6,7 @@ export default function isMaSlopePositive(
   rollback_date = 0,
   ma: MaType,
   threshold = 0,
-  days = 4,
+  days = 3,
 ) {
   let length = datas.length - 1;
   

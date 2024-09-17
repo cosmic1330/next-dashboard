@@ -5,6 +5,9 @@ import {
   TaxieData,
 } from '../../types';
 import BollGenerate from './classes/boll';
+import Ema10Generate from './classes/ema10';
+import Ema20Generate from './classes/ema20';
+import Ema5Generate from './classes/ema5';
 import KdGenerate from './classes/kd';
 import Ma10Generate from './classes/ma10';
 import Ma120Generate from './classes/ma120';
@@ -20,6 +23,9 @@ import williams8Generate from './classes/williams8';
 
 type ClassKey =
   | typeof BollGenerate
+  | typeof Ema5Generate
+  | typeof Ema10Generate
+  | typeof Ema20Generate
   | typeof Ma5Generate
   | typeof Ma10Generate
   | typeof Ma20Generate

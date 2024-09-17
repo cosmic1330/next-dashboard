@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 
+import { isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
 import { StockData } from '@/app/selectstock/types';
 
 export default function useConform(
@@ -20,6 +21,7 @@ export default function useConform(
     const h = Math.max(...indices.map((index) => stockData[index].h));
 
     if (
+      isSufficientTradingVolume(stockData, rollback_date, 300) &&
       (<number>stockData[current]?.williams8 === -100 ||
         <number>stockData[current]?.williams18 === -100) &&
       h > stockData[current].l &&

@@ -2,6 +2,7 @@ import {
   BreakResistanceAverageLine,
   isMovingAverageTrendUp,
   isNotBreakBelowMovingAverage,
+  isSufficientTradingVolume,
 } from '@/app/selectstock/(utils)/conditions';
 import { useMemo } from 'react';
 
@@ -14,6 +15,7 @@ export default function useConform(
 ) {
   const conform = useMemo(() => {
     if (
+      isSufficientTradingVolume(stockData, rollback_date, 300) &&
       isMovingAverageTrendUp(stockData, rollback_date, MaType.MA5) &&
       isMovingAverageTrendUp(stockData, rollback_date, MaType.MA20) &&
       (BreakResistanceAverageLine(stockData, rollback_date, MaType.MA20) ||

@@ -15,20 +15,20 @@ export default function useConform(
   rollback_date: number,
 ) {
   const conform = useMemo(() => {
-    if (
-      isSufficientTradingVolume(stockData, rollback_date, 300) &&
-      isMovingAveragesPositiveOrder(stockData, rollback_date, [
-        MaType.MA5,
-        MaType.MA10,
-        MaType.MA20,
-        MaType.MA60,
-      ]) &&
-      isBearishEngulfing(stockData, rollback_date) &&
-      isOscHistogramTurningPositive(stockData, rollback_date) &&
-      isMovingAverageTrendUp(stockData, rollback_date, MaType.MA5)
-    ) {
-      return true;
-    }
+    // if (
+    //   isSufficientTradingVolume(stockData, rollback_date, 300) &&
+    //   isMovingAveragesPositiveOrder(stockData, rollback_date, [
+    //     MaType.MA5,
+    //     MaType.MA10,
+    //     MaType.MA20,
+    //     MaType.MA60,
+    //   ]) &&
+    //   isBearishEngulfing(stockData, rollback_date) &&
+    //   isOscHistogramTurningPositive(stockData, rollback_date) &&
+    //   isMovingAverageTrendUp(stockData, rollback_date, MaType.MA5)
+    // ) {
+    //   return true;
+    // }
     return false;
   }, [rollback_date, stockData]);
 

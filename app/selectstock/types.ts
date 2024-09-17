@@ -78,15 +78,3 @@ export type BaseStockData = {
 };
 
 export type StockData = BaseStockData & IndicatorsType;
-
-export type ResGoldType = {
-  superStrong: number;
-  strong: number;
-  middle: number;
-  weak: number;
-  superWeak: number;
-  highestPointDate: number;
-  highestPoint: number;
-  lowestPointDate: number;
-  lowestPoint: number;
-};

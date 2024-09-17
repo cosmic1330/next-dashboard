@@ -15,6 +15,9 @@ import williams18Generate from '@/app/selectstock/(utils)/indicator/classes/will
 import formatTaiexdata from '@/app/selectstock/(utils)/indicator/formatTaiexdata';
 import { useMemo } from 'react';
 import useSwrFetchTaiex from './useSwrFetchTaiex';
+import Ema5Generate from '@/app/selectstock/(utils)/indicator/classes/ema5';
+import Ema10Generate from '@/app/selectstock/(utils)/indicator/classes/ema10';
+import Ema20Generate from '@/app/selectstock/(utils)/indicator/classes/ema20';
 
 export default function useQueryTaiex() {
   const fetchData = useSwrFetchTaiex();
@@ -27,6 +30,9 @@ export default function useQueryTaiex() {
     () =>
       createSelectedIndicators(
         [
+          Ema5Generate,
+          Ema10Generate,
+          Ema20Generate,
           Ma5Generate,
           Ma10Generate,
           Ma20Generate,

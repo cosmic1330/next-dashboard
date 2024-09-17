@@ -13,7 +13,7 @@ export default function TableBodyRowProvider({
   stock: V2StocksResponseRow;
   plan: GeneralizedPlans;
 }) {
-  const { gold, stockData, positives, rollback_date, negatives } = useQueryDeal(
+  const { stockData, positives, rollback_date, negatives } = useQueryDeal(
     stock.stock_id,
   );
   const conform = useConform(stockData, rollback_date, plan);
@@ -23,7 +23,6 @@ export default function TableBodyRowProvider({
     <TableBodyRow
       {...{
         stock,
-        gold,
         stockData,
         positives,
         negatives,

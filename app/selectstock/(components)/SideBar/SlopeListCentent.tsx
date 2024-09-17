@@ -18,24 +18,12 @@ const li = [
     text: 'Two Red Soldier Plan',
   },
   {
-    icon: InsightsIcon,
-    text: 'Stable Growth Bullish Plan',
-  },
-  {
     icon: CallMissedOutgoingIcon,
     text: 'Back Support Line Table',
   },
   {
-    icon: AdsClickIcon,
-    text: 'KD Golden Cross Table',
-  },
-  {
     icon: FileUploadIcon,
     text: 'Breakthrough Pressure Table',
-  },
-  {
-    icon: UnfoldMoreDoubleIcon,
-    text: 'Open Bolling Table',
   },
   {
     icon: WidthWideIcon,

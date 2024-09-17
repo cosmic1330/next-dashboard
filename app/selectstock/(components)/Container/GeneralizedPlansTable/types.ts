@@ -1,5 +1,5 @@
 export enum GeneralizedPlans {
-  GoldenCross = 'golden_cross',
-  BelowMa20 = 'below_ma20',
-  TwoRedSoldier = 'two_red_soldier',
+  GoldenCross = 'KD黃金交叉',
+  BelowMa20 = '不破低且月線以上',
+  TwoRedSoldier = '紅二兵',
 }

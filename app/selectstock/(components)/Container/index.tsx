@@ -6,12 +6,11 @@ import { useRef } from 'react';
 import BackSupportLineTable from './BackSupportLineTable';
 import BreakthroughPressureTable from './BreakthroughPressureTable';
 import ExperimentTable from './ExperimentTable';
+import GeneralizedPlansTable from './GeneralizedPlansTable';
+import GoldPlatedSilverTable from './GoldPlatedSilverTable';
 import HeldSupportLineTable from './HeldSupportLineTable';
-import KdGoldenCrossTable from './KdGoldenCrossTable';
 import MutiConditionTable from './MutiConditionTable';
-import OpenBollingTable from './OpenBollingTable';
 import Range from './range';
-import StableGrowthBullishTable from './StableGrowthBullishTable';
 import SteadyGradualRiseTable from './SteadyGradualRiseTable';
 import Switch from './switch';
 import TaiexBox from './TaiexBox';
@@ -19,9 +18,7 @@ import TrackingTable from './TrackingTable';
 import TwoRedSoldierTable from './TwoRedSoldierTable';
 import UptrendContinuationTable from './UptrendContinuationTable';
 import V1PlansTable from './V1PlansTable';
-import GoldPlatedSilverTable from './GoldPlatedSilverTable';
 import WilliamsNegativeTrendTable from './WilliamsNegativeTrendTable';
-import GeneralizedPlansTable from './GeneralizedPlansTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -48,17 +45,13 @@ export default function Container() {
           <Range />
           <Switch />
         </Grid>
-        <Grid item xs={4}>
-        </Grid>
+        <Grid item xs={4}></Grid>
       </Grid>
       {plan === 1 && <TwoRedSoldierTable />}
-      {plan === 2 && <StableGrowthBullishTable />}
-      {plan === 3 && <BackSupportLineTable />}
-      {plan === 4 && <KdGoldenCrossTable />}
-      {plan === 5 && <BreakthroughPressureTable />}
-      {plan === 6 && <OpenBollingTable />}
-      {plan === 7 && <SteadyGradualRiseTable />}
-      {plan === 8 && <GoldPlatedSilverTable />}
+      {plan === 2 && <BackSupportLineTable />}
+      {plan === 3 && <BreakthroughPressureTable />}
+      {plan === 4 && <SteadyGradualRiseTable />}
+      {plan === 5 && <GoldPlatedSilverTable />}
 
       {plan === 101 && <GeneralizedPlansTable />}
       {plan === 102 && <UptrendContinuationTable />}

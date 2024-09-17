@@ -20,6 +20,9 @@ export default function GeneralizedPlansTable() {
       <Typography variant="h4" align="center">
         大範圍的標的
       </Typography>
+      <Typography variant="subtitle1" align="center">
+        {plan}
+      </Typography>
       <Stack direction="column">
         <Radios {...{ plan, setPlan }} />
       </Stack>

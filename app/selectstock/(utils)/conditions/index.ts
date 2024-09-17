@@ -26,8 +26,6 @@ export { default as isMacdPositiveWithDecreasingGreenBars } from './isMacdPositi
 export { default as isPriceDroppedAndRecoveredAboveMA } from './isPriceDroppedAndRecoveredAboveMA';
 // Break Through the Resistance Moving Average「 突破壓力均線」
 export { default as BreakResistanceAverageLine } from './isBreakResistanceAverageLine';
-// Bollinger Bands Expansion After Moving Averages Convergence「開布林」√
-export { default as isBBandsExpanding } from './isBBandsExpanding';
 // Moving Averages Convergence「均線糾結」√
 export { default as isMovingAveragesConverging } from './isMovingAveragesConverging';
 // Three Consecutive Days Above 5-Day MA「連續三天站上均線」√

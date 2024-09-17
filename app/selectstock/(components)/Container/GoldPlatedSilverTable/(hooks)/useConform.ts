@@ -1,4 +1,4 @@
-import { isGoldPlatedSilver } from '@/app/selectstock/(utils)/conditions';
+import { isGoldPlatedSilver, isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
 import { useMemo } from 'react';
 
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
@@ -10,6 +10,7 @@ export default function useConform(
 ) {
   const conform = useMemo(() => {
     if (
+      isSufficientTradingVolume(stockData, rollback_date, 300) &&
       isGoldPlatedSilver(stockData, rollback_date, MaType.MA60, MaType.MA20) ||
       isGoldPlatedSilver(stockData, rollback_date, MaType.MA120, MaType.MA20) ||
       isGoldPlatedSilver(stockData, rollback_date, MaType.MA120, MaType.MA60) ||

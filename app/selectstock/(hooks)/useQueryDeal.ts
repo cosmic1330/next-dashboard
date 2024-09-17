@@ -15,10 +15,11 @@ import MacdGenerate from '@/app/selectstock/(utils)/indicator/classes/macd';
 import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
 import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
 import formatStockdata from '@/app/selectstock/(utils)/indicator/formatStockdata';
-import { ResGoldType } from '@/app/selectstock/types';
-import { Gold } from '@ch20026103/anysis';
 import { useContext, useMemo } from 'react';
 import williams8Generate from '../(utils)/indicator/classes/williams8';
+import Ema5Generate from '../(utils)/indicator/classes/ema5';
+import Ema10Generate from '../(utils)/indicator/classes/ema10';
+import Ema20Generate from '../(utils)/indicator/classes/ema20';
 
 export default function useQueryDeal(stock_id: string) {
   const { rollback_date } = useContext(SelectStockContext);
@@ -28,34 +29,13 @@ export default function useQueryDeal(stock_id: string) {
     return formatStockdata(fetchData, stock_id);
   }, [fetchData, stock_id]);
 
-  const gold: ResGoldType = useMemo(() => {
-    let res = {
-      superStrong: 0,
-      strong: 0,
-      middle: 0,
-      weak: 0,
-      superWeak: 0,
-      highestPointDate: 0,
-      highestPoint: 0,
-      lowestPointDate: 0,
-      lowestPoint: 0,
-    };
-    try {
-      if (baseData.length === 0) return res;
-      else {
-        const cls = new Gold();
-        return cls.getGold(baseData);
-      }
-    } catch (error) {
-      console.log(error)
-      return res;
-    }
-  }, [baseData]);
-
   const stockData = useMemo(
     () =>
       createSelectedIndicators(
         [
+          Ema5Generate,
+          Ema10Generate,
+          Ema20Generate,
           Ma5Generate,
           Ma10Generate,
           Ma20Generate,
@@ -77,5 +57,5 @@ export default function useQueryDeal(stock_id: string) {
   const positives = usePositiveAssessment(stockData, rollback_date);
   const negatives = useNegativeAssessment(stockData, rollback_date);
 
-  return { gold, stockData, positives, negatives, rollback_date };
+  return { stockData, positives, negatives, rollback_date };
 }

@@ -1,4 +1,4 @@
-import { isMovingAverageTrendUp } from '@/app/selectstock/(utils)/conditions';
+import { isMovingAverageTrendUp, isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
 import { StockData } from '@/app/selectstock/types';
 
 import {
@@ -11,6 +11,7 @@ export default function goldencross(
   rollback_date: number,
 ) {
   if (
+    isSufficientTradingVolume(stockData, rollback_date, 300) &&
     isMovingAverageTrendUp(stockData, rollback_date, MaType.MA5) &&
     isCloseAboveMa5(stockData, rollback_date) &&
     isKdGoldenCross(stockData, rollback_date)

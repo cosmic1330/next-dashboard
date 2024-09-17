@@ -1,7 +1,7 @@
 import { StockData } from '@/app/selectstock/types';
 
 import { isCloseAboveMa20 } from '@/app/selectstock/(utils)/assessment/positive';
-import { isMovingAverageTrendUp } from '@/app/selectstock/(utils)/conditions';
+import { isMovingAverageTrendUp, isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
 export default function belowma20(
   stockData: StockData[],
@@ -15,6 +15,7 @@ export default function belowma20(
   }
   const [index1, index2] = indices;
   if (
+    isSufficientTradingVolume(stockData, rollback_date, 300) &&
     stockData[index1]?.l > stockData[index2]?.l &&
     isCloseAboveMa20(stockData, rollback_date) &&
     isMovingAverageTrendUp(stockData, rollback_date, MaType.MA20)

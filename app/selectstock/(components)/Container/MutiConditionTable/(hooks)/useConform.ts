@@ -1,6 +1,5 @@
 import {
   BreakResistanceAverageLine,
-  isBBandsExpanding,
   isBearishEngulfing,
   isKbarSmallDeviationFromMA,
   isKDGoldenCross,
@@ -57,7 +56,6 @@ export default function useConform(
       isPriceDroppedAndRecoveredAboveMA(stockData, rollback_date, MaType.MA20),
       isPriceDroppedAndRecoveredAboveMA(stockData, rollback_date, MaType.MA60),
       BreakResistanceAverageLine(stockData, rollback_date),
-      isBBandsExpanding(stockData, rollback_date),
       isMovingAveragesConverging(stockData, rollback_date),
       isThreeConsecutiveDaysAboveMovingAverage(
         stockData,

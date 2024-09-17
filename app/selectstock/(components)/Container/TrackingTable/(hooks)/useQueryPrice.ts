@@ -18,6 +18,9 @@ import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
 import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
 import williams18Generate from '@/app/selectstock/(utils)/indicator/classes/williams18';
 import williams8Generate from '@/app/selectstock/(utils)/indicator/classes/williams8';
+import Ema5Generate from '@/app/selectstock/(utils)/indicator/classes/ema5';
+import Ema10Generate from '@/app/selectstock/(utils)/indicator/classes/ema10';
+import Ema20Generate from '@/app/selectstock/(utils)/indicator/classes/ema20';
 
 export default function useQueryPrice(stock_id: string) {
   const fetchData = useTrackingFetchDeal(stock_id);
@@ -31,6 +34,9 @@ export default function useQueryPrice(stock_id: string) {
     () =>
       createSelectedIndicators(
         [
+          Ema5Generate,
+          Ema10Generate,
+          Ema20Generate,
           Ma5Generate,
           Ma10Generate,
           Ma20Generate,
