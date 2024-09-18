@@ -1,4 +1,4 @@
-import { isMovingAverageTrendUp } from '@/app/selectstock/(utils)/conditions';
+import { isMaSlopePositive } from '@/app/selectstock/(utils)/conditions';
 import { useMemo } from 'react';
 
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
@@ -9,7 +9,11 @@ export default function useConform(
   rollback_date: number,
 ) {
   const conform = useMemo(() => {
-    if (isMovingAverageTrendUp(stockData, rollback_date, MaType.MA5, 5)) {
+    if (
+      isMaSlopePositive(stockData, rollback_date, MaType.MA5) &&
+      isMaSlopePositive(stockData, rollback_date, MaType.MA10) &&
+      isMaSlopePositive(stockData, rollback_date, MaType.MA20)
+    ) {
       return true;
     }
     return false;

@@ -1,37 +1,36 @@
 import { useSelectPlan } from '@/store/zustand';
-import AdsClickIcon from '@mui/icons-material/AdsClick';
+// import AdsClickIcon from '@mui/icons-material/AdsClick';
 import CallMissedOutgoingIcon from '@mui/icons-material/CallMissedOutgoing';
-import FileUploadIcon from '@mui/icons-material/FileUpload';
-import InsightsIcon from '@mui/icons-material/Insights';
+// import FileUploadIcon from '@mui/icons-material/FileUpload';
+// import InsightsIcon from '@mui/icons-material/Insights';
 import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
-import UnfoldMoreDoubleIcon from '@mui/icons-material/UnfoldMoreDouble';
-import WidthWideIcon from '@mui/icons-material/WidthWide';
-import MoneyIcon from '@mui/icons-material/Money';
+// import UnfoldMoreDoubleIcon from '@mui/icons-material/UnfoldMoreDouble';
+// import WidthWideIcon from '@mui/icons-material/WidthWide';
+// import MoneyIcon from '@mui/icons-material/Money';
+import AllOutIcon from '@mui/icons-material/AllOut';
+import PresentToAll from '@mui/icons-material/PresentToAll';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import { ListItemButton } from './styles';
+
 const li = [
   {
+    icon: AllOutIcon,
+    text: 'Generalized Plan',
+  },
+  {
+    icon: PresentToAll,
+    text: 'V1 Plans',
+  },
+  {
     icon: LibraryAddCheckIcon,
-    text: 'Two Red Soldier Plan',
+    text: 'V2 Plans',
   },
   {
     icon: CallMissedOutgoingIcon,
-    text: 'Back Support Line Table',
-  },
-  {
-    icon: FileUploadIcon,
-    text: 'Breakthrough Pressure Table',
-  },
-  {
-    icon: WidthWideIcon,
-    text: 'Steady Gradual Rise Plan',
-  },
-  {
-    icon: MoneyIcon,
-    text: 'Gold Plated Silver Plan',
+    text: 'Sara Plans',
   },
 ];
 

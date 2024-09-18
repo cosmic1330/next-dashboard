@@ -4,16 +4,19 @@ import useQueryDeal from '@/app/selectstock/(hooks)/useQueryDeal';
 import TableBodyRow from '@/app/selectstock/(layout)/tableBodyRow';
 import { Fragment } from 'react';
 import useConform from './(hooks)/useConform';
+import { SaraPlans } from './types';
 
 export default function TableBodyRowProvider({
   stock,
+  plan,
 }: {
   stock: V2StocksResponseRow;
+  plan: SaraPlans;
 }) {
   const { stockData, positives, rollback_date, negatives } = useQueryDeal(
     stock.stock_id,
   );
-  const conform = useConform(stockData, rollback_date);
+  const conform = useConform(stockData, rollback_date, plan);
   return !conform ? (
     <Fragment />
   ) : (
@@ -26,7 +29,7 @@ export default function TableBodyRowProvider({
         conform,
         rollback_date,
       }}
-      plan="Gold Plated Silver Plan"
+      plan={`SaraPlans_${plan}`}
     />
   );
 }

@@ -3,21 +3,16 @@ import { useSelectPlan } from '@/store/zustand';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Fab, Grid, Container as MuiContainer, styled } from '@mui/material';
 import { useRef } from 'react';
-import BackSupportLineTable from './BackSupportLineTable';
-import BreakthroughPressureTable from './BreakthroughPressureTable';
 import ExperimentTable from './ExperimentTable';
 import GeneralizedPlansTable from './GeneralizedPlansTable';
-import GoldPlatedSilverTable from './GoldPlatedSilverTable';
-import HeldSupportLineTable from './HeldSupportLineTable';
 import MutiConditionTable from './MutiConditionTable';
 import Range from './range';
-import SteadyGradualRiseTable from './SteadyGradualRiseTable';
+import SaraPlansTable from './SaraPlansTable';
 import Switch from './switch';
 import TaiexBox from './TaiexBox';
 import TrackingTable from './TrackingTable';
-import TwoRedSoldierTable from './TwoRedSoldierTable';
-import UptrendContinuationTable from './UptrendContinuationTable';
 import V1PlansTable from './V1PlansTable';
+import V2PlansTable from './V2PlansTable';
 import WilliamsNegativeTrendTable from './WilliamsNegativeTrendTable';
 
 const StyledContainer = styled(MuiContainer)`
@@ -47,20 +42,15 @@ export default function Container() {
         </Grid>
         <Grid item xs={4}></Grid>
       </Grid>
-      {plan === 1 && <TwoRedSoldierTable />}
-      {plan === 2 && <BackSupportLineTable />}
-      {plan === 3 && <BreakthroughPressureTable />}
-      {plan === 4 && <SteadyGradualRiseTable />}
-      {plan === 5 && <GoldPlatedSilverTable />}
+      {plan === 1 && <GeneralizedPlansTable />}
+      {plan === 2 && <V1PlansTable />}
+      {plan === 3 && <V2PlansTable />}
+      {plan === 4 && <SaraPlansTable />}
 
-      {plan === 101 && <GeneralizedPlansTable />}
-      {plan === 102 && <UptrendContinuationTable />}
-      {plan === 103 && <HeldSupportLineTable />}
-      {plan === 104 && <WilliamsNegativeTrendTable />}
+      {plan === 101 && <WilliamsNegativeTrendTable />}
 
-      {plan === 201 && <V1PlansTable />}
-      {plan === 202 && <ExperimentTable />}
-      {plan === 203 && <MutiConditionTable />}
+      {plan === 201 && <ExperimentTable />}
+      {plan === 202 && <MutiConditionTable />}
 
       {plan === 301 && <TrackingTable />}
       <Fab
