@@ -42,11 +42,14 @@ export type IndicatorsType = {
     d: number;
     'd-1': number;
   };
+  ema5?: number | null;
+  ema10?: number | null;
+  ema20?: number | null;
   ema12?: number | null;
   ema26?: number | null;
   macd?: number | null;
   osc?: number | null;
-  dif?: number;
+  dif: number;
   obv?: number;
   obv5Ma?: number;
   obv10Ma?: number;

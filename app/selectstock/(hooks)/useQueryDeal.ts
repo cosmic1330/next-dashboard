@@ -22,7 +22,7 @@ import Ema10Generate from '../(utils)/indicator/classes/ema10';
 import Ema20Generate from '../(utils)/indicator/classes/ema20';
 
 export default function useQueryDeal(stock_id: string) {
-  const { rollback_date } = useContext(SelectStockContext);
+  const { rollback_date, volume } = useContext(SelectStockContext);
   const fetchData = useSwrFetchDeal(stock_id);
   const baseData = useMemo(() => {
     if (!fetchData) return [];
@@ -57,5 +57,5 @@ export default function useQueryDeal(stock_id: string) {
   const positives = usePositiveAssessment(stockData, rollback_date);
   const negatives = useNegativeAssessment(stockData, rollback_date);
 
-  return { stockData, positives, negatives, rollback_date };
+  return { stockData, positives, negatives, rollback_date, volume };
 }

@@ -30,8 +30,21 @@ export default function Macd({ taiexData }: { taiexData: TaxieData[] }) {
             {isMacdPositiveDivergence(taiexData, 0)}
           </Typography>
         ) : (
-          <Typography variant="caption" color="success.main">
+          <Typography variant="caption" color="error">
             {isMacdNegativeDivergence(taiexData, 0)}
+          </Typography>
+        )}
+      </Stack>
+      <Stack>
+        {taiexData[taiexData.length - 1].dif !== null &&
+        taiexData[taiexData.length - 1].dif !== undefined &&
+        taiexData[taiexData.length - 1].dif > 0 ? (
+          <Typography variant="caption" color="success.main">
+            位於多方動能區
+          </Typography>
+        ) : (
+          <Typography variant="caption" color="error">
+            位於空方動能區
           </Typography>
         )}
       </Stack>

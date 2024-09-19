@@ -30,11 +30,9 @@ export default function isMacdMomentumBuildUp(
     datas[index3].macd !== null &&
     <number>datas[index1].dif > 0 &&
     <number>datas[index1].osc > (datas[index2].osc as number) &&
-    <number>datas[index2].osc > (datas[index3].osc as number) &&
-    <number>datas[index1].macd > (datas[index2].macd as number) &&
-    <number>datas[index2].macd > (datas[index3].macd as number)
+    <number>datas[index2].osc > (datas[index3].osc as number)
   ) {
-    return 'Macd多方動能漸強';
+    return 'Macd動能偏多漸強';
   }
 
   return false;

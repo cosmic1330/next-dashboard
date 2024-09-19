@@ -13,23 +13,23 @@ export default function TableBodyRowProvider({
   stock: V2StocksResponseRow;
   plan: GeneralizedPlans;
 }) {
-  const { stockData, positives, rollback_date, negatives } = useQueryDeal(
-    stock.stock_id,
-  );
+  const { stockData, positives, rollback_date, negatives, volume } =
+    useQueryDeal(stock.stock_id);
   const conform = useConform(stockData, rollback_date, plan);
-  return !conform ? (
-    <Fragment />
-  ) : (
+  return conform && stockData[stockData.length - 1]?.v > volume ? (
     <TableBodyRow
-      {...{
-        stock,
-        stockData,
-        positives,
-        negatives,
-        conform,
-        rollback_date,
-      }}
-      plan={`GeneralizedPlans_${plan}`}
+    {...{
+      volume,
+      stock,
+      stockData,
+      positives,
+      negatives,
+      conform,
+      rollback_date,
+    }}
+    plan={`GeneralizedPlans_${plan}`}
     />
+  ) : (
+    <Fragment />
   );
 }
