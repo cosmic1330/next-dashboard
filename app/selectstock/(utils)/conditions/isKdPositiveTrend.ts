@@ -1,6 +1,6 @@
 import { StockData, TaxieData } from '@/app/selectstock/types';
 
-export default function isKdNegativeTrend(
+export default function isKdPositiveTrend(
   datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
@@ -17,11 +17,12 @@ export default function isKdNegativeTrend(
     datas[index1].d !== undefined &&
     datas[index1].d !== null &&
     datas[index2].k !== undefined &&
-    datas[index2].k !== null &&
-    <number>datas[index1].d > <number>datas[index1].k &&
-    <number>datas[index2].k > <number>datas[index1].k
+    datas[index2].k !== null
   ) {
-    return 'KD趨勢向下';
+    return (
+      <number>datas[index1].k > <number>datas[index1].d &&
+      <number>datas[index1].k > <number>datas[index2].k
+    );
   }
   return false;
 }

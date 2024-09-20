@@ -37,13 +37,13 @@ export default function SideBar() {
       </Box>
       <Box textAlign="left">
         <Typography variant="caption" px={2}>
-          Bearish to Bullish 趨勢空轉多
+          Bottom Guess 猜底
         </Typography>
         <LongTermObservationListCentent />
       </Box>
       <Box textAlign="left">
         <Typography variant="caption" px={2}>
-          Expansionary Policy 寬鬆政策
+          Under Development Policy 開發中政策
         </Typography>
         <ExpansionaryPolicyListCentent />
       </Box>

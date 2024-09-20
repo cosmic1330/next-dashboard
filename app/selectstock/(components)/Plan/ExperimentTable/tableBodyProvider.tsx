@@ -10,10 +10,12 @@ export default function TableBodyRowProvider({
 }: {
   stock: V2StocksResponseRow;
 }) {
-  const { volume, stockData, positives, rollback_date, negatives } =
+  const { stockData, positives, rollback_date, negatives, volume } =
     useQueryDeal(stock.stock_id);
   const conform = useConform(stockData, rollback_date);
-  return conform && stockData[stockData.length - 1]?.v > volume ? (
+  return conform &&
+    stockData[stockData.length - 1]?.v > volume &&
+    parseInt(stock.eps[0]?.eps_data) > 0 ? (
     <TableBodyRow
       {...{
         volume,
@@ -24,7 +26,7 @@ export default function TableBodyRowProvider({
         conform,
         rollback_date,
       }}
-      plan="Williams Negative Trend Plan"
+      plan="Experiment Plan"
     />
   ) : (
     <Fragment />

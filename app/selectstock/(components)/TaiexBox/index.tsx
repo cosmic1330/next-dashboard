@@ -7,6 +7,7 @@ import Kd from './Kd';
 import Macd from './Macd';
 import MovingAverage from './MovingAverage';
 import OffsetValue from './OffsetValue';
+import Rsi from './Rsi';
 
 export default function TaiexBox() {
   const taiexData = useQueryTaiex();
@@ -32,6 +33,7 @@ export default function TaiexBox() {
       <MovingAverage taiexData={taiexData} />
       <Kd taiexData={taiexData} />
       <Macd taiexData={taiexData} />
+      <Rsi taiexData={taiexData} />
     </Box>
   );
 }

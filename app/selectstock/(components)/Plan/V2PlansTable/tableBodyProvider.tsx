@@ -16,7 +16,8 @@ export default function TableBodyRowProvider({
   const { volume, stockData, positives, rollback_date, negatives } =
     useQueryDeal(stock.stock_id);
   const conform = useConform(stockData, rollback_date, plan);
-  return conform && stockData[stockData.length - 1]?.v > volume ? (
+  return conform && stockData[stockData.length - 1]?.v > volume &&
+  parseInt(stock.eps[0]?.eps_data) > 0 ? (
     <TableBodyRow
       {...{
         volume,

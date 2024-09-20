@@ -11,7 +11,7 @@ import { ListItemButton } from './styles';
 const li = [
   {
     icon: AirlineStopsIcon,
-    text: 'Williams Negative Trend Plan',
+    text: 'GoLong Against Trend Plan',
   },
 ];
 

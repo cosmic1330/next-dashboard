@@ -8,6 +8,8 @@ export { default as isSufficientTradingVolume } from './isSufficientTradingVolum
 export { default as isKbarSmallDeviationFromMA } from './isKbarSmallDeviationFromMA';
 // KD Golden Cross「KD 黃金交叉」√
 export { default as isKDGoldenCross } from './isKDGoldenCross';
+// KD Positive Trend「KD 趨勢向上」√
+export { default as isKdPositiveTrend } from './isKdPositiveTrend';
 // Two Consecutive Bullish Candlesticks with Higher Lows「紅二兵底底高」√
 export { default as isTwoRedSoldiersHigherLows } from './isTwoRedSoldiersHigherLows';
 // Obv Averages in Positive Order「Obv正向排列」√

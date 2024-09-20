@@ -18,11 +18,15 @@ import Ma60Generate from './classes/ma60';
 import MacdGenerate from './classes/macd';
 import Obv10Generate from './classes/obv10';
 import Obv5Generate from './classes/obv5';
-import williams18Generate from './classes/williams18';
-import williams8Generate from './classes/williams8';
+import Williams18Generate from './classes/williams18';
+import Williams8Generate from './classes/williams8';
+import Rsi5Generate from './classes/rsi5';
+import Rsi10Generate from './classes/rsi10';
 
 type ClassKey =
   | typeof BollGenerate
+  | typeof Rsi5Generate
+  | typeof Rsi10Generate
   | typeof Ema5Generate
   | typeof Ema10Generate
   | typeof Ema20Generate
@@ -36,8 +40,8 @@ type ClassKey =
   | typeof Obv5Generate
   | typeof Obv10Generate
   | typeof KdGenerate
-  | typeof williams8Generate
-  | typeof williams18Generate;
+  | typeof Williams8Generate
+  | typeof Williams18Generate;
 
 export default function createSelectedIndicators<
   T extends BaseStockData | BaseTaxieData,

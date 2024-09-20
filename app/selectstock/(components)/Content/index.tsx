@@ -3,17 +3,17 @@ import { useSelectPlan } from '@/store/zustand';
 import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
 import { Fab, Grid, Container as MuiContainer, styled } from '@mui/material';
 import { useRef } from 'react';
-import ExperimentTable from './ExperimentTable';
-import GeneralizedPlansTable from './GeneralizedPlansTable';
-import MutiConditionTable from './MutiConditionTable';
+import ExperimentTable from '../Plan/ExperimentTable';
+import GeneralizedPlansTable from '../Plan/GeneralizedPlansTable';
+import GoLongAgainstTrendPlansTable from '../Plan/GoLongAgainstTrendPlansTable';
+import MutiConditionTable from '../Plan/MutiConditionTable';
+import SaraPlansTable from '../Plan/SaraPlansTable';
+import V1PlansTable from '../Plan/V1PlansTable';
+import V2PlansTable from '../Plan/V2PlansTable';
+import TaiexBox from '../TaiexBox';
+import TrackingTable from '../TrackingTable';
 import Range from './range';
-import SaraPlansTable from './SaraPlansTable';
 import Switch from './switch';
-import TaiexBox from './TaiexBox';
-import TrackingTable from './TrackingTable';
-import V1PlansTable from './V1PlansTable';
-import V2PlansTable from './V2PlansTable';
-import WilliamsNegativeTrendTable from './WilliamsNegativeTrendTable';
 
 const StyledContainer = styled(MuiContainer)`
   padding: 10px 0;
@@ -47,7 +47,7 @@ export default function Container() {
       {plan === 3 && <V2PlansTable />}
       {plan === 4 && <SaraPlansTable />}
 
-      {plan === 101 && <WilliamsNegativeTrendTable />}
+      {plan === 101 && <GoLongAgainstTrendPlansTable />}
 
       {plan === 201 && <ExperimentTable />}
       {plan === 202 && <MutiConditionTable />}

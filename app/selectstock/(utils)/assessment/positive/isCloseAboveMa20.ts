@@ -16,7 +16,7 @@ export default function isCloseAboveMa20(
     datas[index1].ma20 !== null &&
     datas[index1].c >= (datas[index1].ma20 as number)
   ) {
-    return '20日線上';
+    return '收盤價20日線上';
   }
 
   return false;

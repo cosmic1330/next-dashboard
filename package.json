@@ -11,7 +11,7 @@
     "turbo": "next dev --turbo --port 3000"
   },
   "dependencies": {
-    "@ch20026103/anysis": "0.0.14-alpha",
+    "@ch20026103/anysis": "0.0.15-alpha",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.18",

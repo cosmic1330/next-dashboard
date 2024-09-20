@@ -1,31 +1,31 @@
 import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
-import { Williams } from '@ch20026103/anysis';
+import { Rsi } from '@ch20026103/anysis';
 
-export default class Williams8Generate {
-  williams: Williams;
+export default class Rsi5Generate {
+  rsi: Rsi;
 
   pre: any | undefined;
 
   data:
     | undefined
     | {
-        williams8: number;
+      rsi5: number;
       };
 
   constructor() {
-    this.williams = new Williams();
+    this.rsi = new Rsi();
     this.pre = undefined;
     this.data = undefined;
   }
 
   generate(value: BaseStockData | BaseTaxieData) {
     if (this.data === undefined) {
-      this.pre = this.williams.init(value, 8);
+      this.pre = this.rsi.init(value, 5);
     } else {
-      this.pre = this.williams.next(value, this.pre, 8);
+      this.pre = this.rsi.next(value, this.pre, 5);
     }
     this.data = {
-      williams8: this.pre.williams,
+      rsi5: this.pre.rsi,
     };
     return this.data;
   }

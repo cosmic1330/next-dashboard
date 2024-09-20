@@ -18,6 +18,8 @@ import useSwrFetchTaiex from './useSwrFetchTaiex';
 import Ema5Generate from '@/app/selectstock/(utils)/indicator/classes/ema5';
 import Ema10Generate from '@/app/selectstock/(utils)/indicator/classes/ema10';
 import Ema20Generate from '@/app/selectstock/(utils)/indicator/classes/ema20';
+import Rsi5Generate from '@/app/selectstock/(utils)/indicator/classes/rsi5';
+import Rsi10Generate from '@/app/selectstock/(utils)/indicator/classes/rsi10';
 
 export default function useQueryTaiex() {
   const fetchData = useSwrFetchTaiex();
@@ -30,6 +32,8 @@ export default function useQueryTaiex() {
     () =>
       createSelectedIndicators(
         [
+          Rsi5Generate,
+          Rsi10Generate,
           Ema5Generate,
           Ema10Generate,
           Ema20Generate,

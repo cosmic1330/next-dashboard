@@ -1,6 +1,6 @@
 import { StockData, TaxieData } from '@/app/selectstock/types';
 
-export default function isCloseAboveMa5(
+export default function isLowerAboveMa5(
   datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
@@ -14,9 +14,9 @@ export default function isCloseAboveMa5(
   if (
     datas[index1].ma5 !== undefined &&
     datas[index1].ma5 !== null &&
-    datas[index1].c >= (datas[index1].ma5 as number)
+    datas[index1].l >= (datas[index1].ma5 as number)
   ) {
-    return '收盤價5日線上';
+    return '最低價5日線上';
   }
 
   return false;

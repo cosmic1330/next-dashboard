@@ -1,4 +1,6 @@
 export type IndicatorsType = {
+  rsi5?: number;
+  rsi10?: number;
   rsv?: number | null;
   k?: number | null;
   d?: number | null;

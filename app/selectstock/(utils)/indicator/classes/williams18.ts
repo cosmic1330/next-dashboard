@@ -1,7 +1,7 @@
 import { BaseStockData, BaseTaxieData } from '@/app/selectstock/types';
 import { Williams } from '@ch20026103/anysis';
 
-export default class williams18Generate {
+export default class Williams18Generate {
   williams: Williams;
 
   pre: any | undefined;
