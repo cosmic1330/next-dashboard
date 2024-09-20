@@ -17,9 +17,10 @@ import {
   isMacdNegativeDivergence,
   isMaNegativeOrder,
   isNegativeEngulfing,
-  isObvDeathCross,
   isObvNegativeOrder,
   isWilliams8NegativeTrend,
+  isRsiDeathCross,
+  isRsiNegativeTrend,
 } from '@/app/selectstock/(utils)/assessment/negative';
 
 export default function useNegativeAssessment(
@@ -28,6 +29,8 @@ export default function useNegativeAssessment(
 ) {
   const stringArray = useMemo(() => {
     const AssessmentArray = [
+      isRsiDeathCross,
+      isRsiNegativeTrend,
       isCloseBelowMa10,
       isCloseBelowMa20,
       isCloseBelowMa5,
@@ -40,7 +43,6 @@ export default function useNegativeAssessment(
       isMacdNegativeDivergence,
       isMaNegativeOrder,
       isNegativeEngulfing,
-      isObvDeathCross,
       isObvNegativeOrder,
       isBreaksPreviousLowWithoutNewHigh,
       isIncreasingVolumeGreenK,

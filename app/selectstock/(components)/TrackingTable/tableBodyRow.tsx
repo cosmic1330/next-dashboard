@@ -9,7 +9,7 @@ import { Divider, IconButton, Typography } from '@mui/material';
 import Link from '@mui/material/Link';
 import TableCell from '@mui/material/TableCell';
 import TableRow from '@mui/material/TableRow';
-import KBar from '../../K_bar';
+import KBar from '../K_bar';
 import useQueryPrice from './(hooks)/useQueryPrice';
 
 export default function TableBodyRow({

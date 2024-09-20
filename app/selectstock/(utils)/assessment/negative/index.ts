@@ -13,7 +13,6 @@ export { default as isMacdMomentumBuildDown } from './isMacdMomentumBuildDown';
 export { default as isMacdNegativeDivergence } from './isMacdNegativeDivergence';
 export { default as isMaNegativeOrder } from './isMaNegativeOrder';
 export { default as isNegativeEngulfing } from './isNegativeEngulfing';
-export { default as isObvDeathCross } from './isObvDeathCross';
 export { default as isObvNegativeOrder } from './isObvNegativeOrder';
 export { default as isWilliams8NegativeTrend } from './isWilliams8NegativeTrend';
 export { default as isRsiNegativeTrend } from './isRsiNegativeTrend';

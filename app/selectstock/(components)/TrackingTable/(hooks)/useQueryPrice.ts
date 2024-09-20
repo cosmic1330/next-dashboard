@@ -16,11 +16,13 @@ import Ma60Generate from '@/app/selectstock/(utils)/indicator/classes/ma60';
 import MacdGenerate from '@/app/selectstock/(utils)/indicator/classes/macd';
 import Obv10Generate from '@/app/selectstock/(utils)/indicator/classes/obv10';
 import Obv5Generate from '@/app/selectstock/(utils)/indicator/classes/obv5';
-import williams18Generate from '@/app/selectstock/(utils)/indicator/classes/williams18';
-import williams8Generate from '@/app/selectstock/(utils)/indicator/classes/williams8';
+import Williams18Generate from '@/app/selectstock/(utils)/indicator/classes/williams18';
+import Williams8Generate from '@/app/selectstock/(utils)/indicator/classes/williams8';
 import Ema5Generate from '@/app/selectstock/(utils)/indicator/classes/ema5';
 import Ema10Generate from '@/app/selectstock/(utils)/indicator/classes/ema10';
 import Ema20Generate from '@/app/selectstock/(utils)/indicator/classes/ema20';
+import Rsi5Generate from '@/app/selectstock/(utils)/indicator/classes/rsi5';
+import Rsi10Generate from '@/app/selectstock/(utils)/indicator/classes/rsi10';
 
 export default function useQueryPrice(stock_id: string) {
   const fetchData = useTrackingFetchDeal(stock_id);
@@ -34,6 +36,8 @@ export default function useQueryPrice(stock_id: string) {
     () =>
       createSelectedIndicators(
         [
+          Rsi5Generate,
+          Rsi10Generate,
           Ema5Generate,
           Ema10Generate,
           Ema20Generate,
@@ -48,8 +52,8 @@ export default function useQueryPrice(stock_id: string) {
           Obv10Generate,
           KdGenerate,
           BollGenerate,
-          williams8Generate,
-          williams18Generate,
+          Williams8Generate,
+          Williams18Generate,
         ],
         baseData,
       ),
