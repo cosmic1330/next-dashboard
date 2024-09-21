@@ -1,11 +1,14 @@
 import {
   isMacdMomentumBuildDown,
-  isMacdNegativeDivergence,
+  isMacdPositiveDivergence,
+  isOscContractionSignalsTopping,
 } from '@/app/selectstock/(utils)/assessment/negative';
 import {
   isMacdMomentumBuildUp,
-  isMacdPositiveDivergence,
+  isMacdNegativeDivergence,
+  isOscContractionSignalsBottoming
 } from '@/app/selectstock/(utils)/assessment/positive';
+
 import { TaxieData } from '@/app/selectstock/types';
 import { Stack, Typography } from '@mui/material';
 
@@ -26,13 +29,26 @@ export default function Macd({ taiexData }: { taiexData: TaxieData[] }) {
           <Typography variant="caption">Macd 趨勢不明</Typography>
         )}
         {isMacdPositiveDivergence(taiexData, 0) ? (
-          <Typography variant="caption" color="success.main">
+          <Typography variant="caption" color="error">
             {isMacdPositiveDivergence(taiexData, 0)}
           </Typography>
         ) : (
-          <Typography variant="caption" color="error">
-            {isMacdNegativeDivergence(taiexData, 0)}
+          isMacdNegativeDivergence(taiexData, 0) && (
+            <Typography variant="caption" color="success.main">
+              {isMacdNegativeDivergence(taiexData, 0)}
+            </Typography>
+          )
+        )}
+        {isOscContractionSignalsTopping(taiexData, 0) ? (
+          <Typography variant="caption" color="success.main">
+            {isOscContractionSignalsTopping(taiexData, 0)}
           </Typography>
+        ) : isOscContractionSignalsBottoming(taiexData, 0) ? (
+          <Typography variant="caption" color="error">
+            {isOscContractionSignalsBottoming(taiexData, 0)}
+          </Typography>
+        ) : (
+          <Typography variant="caption">Macd 趨勢不明</Typography>
         )}
       </Stack>
       <Stack>

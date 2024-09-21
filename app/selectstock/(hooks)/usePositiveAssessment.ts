@@ -17,7 +17,7 @@ import {
   isMa20PositiveTrend,
   isMa5PositiveTrend,
   isMacdMomentumBuildUp,
-  isMacdPositiveDivergence,
+  isMacdNegativeDivergence,
   isMaPositiveOrder,
   isObvRisingHighs,
   isObvRisingLows,
@@ -25,6 +25,8 @@ import {
   isRsiGoldenCross,
   isRsiPositiveTrend,
   isWilliams8PositiveTrend,
+  isKdNegativeDivergence,
+  isOscContractionSignalsBottoming,
 } from '@/app/selectstock/(utils)/assessment/positive';
 
 export default function usePositiveAssessment(
@@ -33,6 +35,8 @@ export default function usePositiveAssessment(
 ) {
   const stringArray = useMemo(() => {
     const AssessmentArray = [
+      isKdNegativeDivergence,
+      isOscContractionSignalsBottoming,
       isObvRisingLows,
       isObvRisingHighs,
       isRsiGoldenCross,
@@ -49,7 +53,7 @@ export default function usePositiveAssessment(
       isMa20PositiveTrend,
       isMa5PositiveTrend,
       isMacdMomentumBuildUp,
-      isMacdPositiveDivergence,
+      isMacdNegativeDivergence,
       isMaPositiveOrder,
       isPositiveEngulfing,
       isHoldsPreviousLowAndMakesNewHigh,

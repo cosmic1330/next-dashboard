@@ -8,18 +8,18 @@ export default function isObvRisingLows(
   const index1 = length - rollback_date;
 
   const obvData = datas.map((data) => data.obv as number);
-  const peak = findTroughByGradient(obvData, 1);
-  const peak1Index = peak[peak.length - 1];
-  const peak2Index = peak[peak.length - 2];
+  const trough = findTroughByGradient(obvData, 1);
+  const trough1Index = trough[trough.length - 1];
+  const trough2Index = trough[trough.length - 2];
   if (
     datas[index1]?.obv !== undefined &&
     datas[index1]?.obv !== null &&
-    datas[peak1Index]?.obv !== undefined &&
-    datas[peak1Index]?.obv !== null &&
-    datas[peak2Index]?.obv !== undefined &&
-    datas[peak2Index]?.obv !== null &&
-    datas[index1]?.obv > datas[peak2Index]?.obv &&
-    datas[peak1Index]?.obv > datas[peak2Index]?.obv
+    datas[trough1Index]?.obv !== undefined &&
+    datas[trough1Index]?.obv !== null &&
+    datas[trough2Index]?.obv !== undefined &&
+    datas[trough2Index]?.obv !== null &&
+    datas[index1]?.obv > datas[trough2Index]?.obv &&
+    datas[trough1Index]?.obv > datas[trough2Index]?.obv
   ) {
     return 'Obv底底高';
   }

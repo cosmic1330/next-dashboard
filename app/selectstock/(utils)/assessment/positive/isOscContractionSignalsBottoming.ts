@@ -1,6 +1,6 @@
 import { StockData, TaxieData } from '@/app/selectstock/types';
 
-export default function isMacdPositiveDivergence(
+export default function isOscContractionSignalsBottoming(
   datas: StockData[] | TaxieData[],
   rollback_date: number,
 ) {
@@ -35,7 +35,7 @@ export default function isMacdPositiveDivergence(
     <number>datas[index1].macd < (datas[index2].macd as number) &&
     <number>datas[index2].macd < (datas[index3].macd as number)
   ) {
-    return 'Macd正背離(OSC縮腳止跌)';
+    return 'OSC縮腳止跌';
   }
 
   return false;
