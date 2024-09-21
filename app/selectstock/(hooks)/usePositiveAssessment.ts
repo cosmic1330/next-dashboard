@@ -27,6 +27,7 @@ import {
   isWilliams8PositiveTrend,
   isKdNegativeDivergence,
   isOscContractionSignalsBottoming,
+  isMacdInBullishZone,
 } from '@/app/selectstock/(utils)/assessment/positive';
 
 export default function usePositiveAssessment(
@@ -35,6 +36,7 @@ export default function usePositiveAssessment(
 ) {
   const stringArray = useMemo(() => {
     const AssessmentArray = [
+      isMacdInBullishZone,
       isKdNegativeDivergence,
       isOscContractionSignalsBottoming,
       isObvRisingLows,

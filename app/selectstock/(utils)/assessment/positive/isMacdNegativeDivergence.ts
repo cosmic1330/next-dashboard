@@ -21,7 +21,7 @@ export default function isMacdNegativeDivergence(
     datas[trough2Index]?.dif !== null &&
     datas[index1]?.dif > datas[trough1Index]?.dif &&
     datas[trough1Index]?.dif > datas[trough2Index]?.dif &&
-    datas[trough1Index]?.c < datas[trough2Index]?.c
+    datas[trough1Index]?.l < datas[trough2Index]?.l
   ) {
     return 'Macd負背離';
   }

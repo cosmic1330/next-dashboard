@@ -21,3 +21,4 @@ export { default as isRsiNegativeTrend } from './isRsiNegativeTrend';
 export { default as isRsiDeathCross } from './isRsiDeathCross';
 export { default as isOscContractionSignalsTopping } from './isOscContractionSignalsTopping';
 export { default as isKdPositiveDivergence } from './isKdPositiveDivergence';
+export { default as isMacdInBearishZone } from './isMacdInBearishZone';

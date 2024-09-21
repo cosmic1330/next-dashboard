@@ -20,7 +20,7 @@ export default function isKdPositiveDivergence(
     datas[peak2Index]?.k !== null &&
     datas[index1]?.k < datas[peak1Index]?.k &&
     datas[peak1Index]?.k < datas[peak2Index]?.k &&
-    datas[peak1Index]?.c > datas[peak2Index]?.c
+    datas[peak1Index]?.h > datas[peak2Index]?.h
   ) {
     return 'Kd正背離';
   }

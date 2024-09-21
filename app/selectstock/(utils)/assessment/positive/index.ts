@@ -23,3 +23,4 @@ export { default as isRsiGoldenCross } from './isRsiGoldenCross';
 export { default as isRsiPositiveTrend } from './isRsiPositiveTrend';
 export { default as isOscContractionSignalsBottoming } from './isOscContractionSignalsBottoming';
 export { default as isKdNegativeDivergence } from './isKdNegativeDivergence';
+export { default as isMacdInBullishZone } from './isMacdInBullishZone';

@@ -20,7 +20,7 @@ export default function isKdNegativeDivergence(
     datas[trough2Index]?.k !== null &&
     datas[index1]?.k > datas[trough1Index]?.k &&
     datas[trough1Index]?.k > datas[trough2Index]?.k &&
-    datas[trough1Index]?.c < datas[trough2Index]?.c
+    datas[trough1Index]?.l < datas[trough2Index]?.l
   ) {
     return 'Kd負背離';
   }

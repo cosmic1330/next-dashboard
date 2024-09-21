@@ -1,12 +1,14 @@
 import {
+  isMacdInBearishZone,
   isMacdMomentumBuildDown,
   isMacdPositiveDivergence,
   isOscContractionSignalsTopping,
 } from '@/app/selectstock/(utils)/assessment/negative';
 import {
+  isMacdInBullishZone,
   isMacdMomentumBuildUp,
   isMacdNegativeDivergence,
-  isOscContractionSignalsBottoming
+  isOscContractionSignalsBottoming,
 } from '@/app/selectstock/(utils)/assessment/positive';
 
 import { TaxieData } from '@/app/selectstock/types';
@@ -52,16 +54,16 @@ export default function Macd({ taiexData }: { taiexData: TaxieData[] }) {
         )}
       </Stack>
       <Stack>
-        {taiexData[taiexData.length - 1].dif !== null &&
-        taiexData[taiexData.length - 1].dif !== undefined &&
-        taiexData[taiexData.length - 1].dif > 0 ? (
+        {isMacdInBullishZone(taiexData, 0) ? (
           <Typography variant="caption" color="success.main">
-            位於多方動能區
+            {isMacdInBullishZone(taiexData, 0)}
           </Typography>
         ) : (
-          <Typography variant="caption" color="error">
-            位於空方動能區
-          </Typography>
+          isMacdInBearishZone(taiexData, 0) && (
+            <Typography variant="caption" color="error">
+              {isMacdInBearishZone(taiexData, 0)}
+            </Typography>
+          )
         )}
       </Stack>
     </Stack>

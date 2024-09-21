@@ -21,7 +21,7 @@ export default function isMacdPositiveDivergence(
     datas[peak2Index]?.dif !== null &&
     datas[index1]?.dif < datas[peak1Index]?.dif &&
     datas[peak1Index]?.dif < datas[peak2Index]?.dif &&
-    datas[peak1Index]?.c > datas[peak2Index]?.c
+    datas[peak1Index]?.h > datas[peak2Index]?.h
   ) {
     return 'Macd正背離';
   }
