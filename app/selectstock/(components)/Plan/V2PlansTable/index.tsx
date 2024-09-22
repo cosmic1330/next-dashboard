@@ -13,7 +13,7 @@ import { V2Plans } from './types';
 const TableBodyProvider = lazy(() => import('./tableBodyProvider'));
 export default function V2PlansTable() {
   const { data: stocks, mutate } = useQueryStock();
-  const [plan, setPlan] = useState(V2Plans.BackSupportLine);
+  const [plan, setPlan] = useState(V2Plans.BullishCrossover);
 
   return (
     <Fragment>

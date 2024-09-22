@@ -18,7 +18,6 @@ export default function backsupportline(
       MaType.MA5,
       MaType.MA10,
       MaType.MA20,
-      MaType.MA60,
     ]) &&
     // 股價下跌不跌破均線
     (isPriceDroppedAndRecoveredAboveMA(stockData, rollback_date, MaType.MA5) ||

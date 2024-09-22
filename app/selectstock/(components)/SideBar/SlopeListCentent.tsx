@@ -8,7 +8,6 @@ import LibraryAddCheckIcon from '@mui/icons-material/LibraryAddCheck';
 // import WidthWideIcon from '@mui/icons-material/WidthWide';
 // import MoneyIcon from '@mui/icons-material/Money';
 import AllOutIcon from '@mui/icons-material/AllOut';
-import PresentToAll from '@mui/icons-material/PresentToAll';
 import { Box } from '@mui/material';
 import List from '@mui/material/List';
 import ListItemIcon from '@mui/material/ListItemIcon';
@@ -19,10 +18,6 @@ const li = [
   {
     icon: AllOutIcon,
     text: 'Generalized Plan',
-  },
-  {
-    icon: PresentToAll,
-    text: 'V1 Plans',
   },
   {
     icon: LibraryAddCheckIcon,

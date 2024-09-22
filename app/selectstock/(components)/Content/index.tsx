@@ -8,7 +8,6 @@ import GeneralizedPlansTable from '../Plan/GeneralizedPlansTable';
 import GoLongAgainstTrendPlansTable from '../Plan/GoLongAgainstTrendPlansTable';
 import MutiConditionTable from '../Plan/MutiConditionTable';
 import SaraPlansTable from '../Plan/SaraPlansTable';
-import V1PlansTable from '../Plan/V1PlansTable';
 import V2PlansTable from '../Plan/V2PlansTable';
 import TaiexBox from '../TaiexBox';
 import TrackingTable from '../TrackingTable';
@@ -43,9 +42,8 @@ export default function Container() {
         <Grid item xs={4}></Grid>
       </Grid>
       {plan === 1 && <GeneralizedPlansTable />}
-      {plan === 2 && <V1PlansTable />}
-      {plan === 3 && <V2PlansTable />}
-      {plan === 4 && <SaraPlansTable />}
+      {plan === 2 && <V2PlansTable />}
+      {plan === 3 && <SaraPlansTable />}
 
       {plan === 101 && <GoLongAgainstTrendPlansTable />}
 

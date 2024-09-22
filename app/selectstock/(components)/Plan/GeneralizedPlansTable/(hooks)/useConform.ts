@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { GeneralizedPlans } from '../types';
 import belowma20 from './plans/belowma20';
 import goldencross from './plans/goldencross';
+import slopepositive from './plans/slopepositive';
 import tworedsoldier from './plans/tworedsoldier';
 
 export default function useConform(
@@ -17,7 +18,9 @@ export default function useConform(
       (plan === GeneralizedPlans.BelowMa20 &&
         belowma20(stockData, rollback_date)) ||
       (plan === GeneralizedPlans.TwoRedSoldier &&
-        tworedsoldier(stockData, rollback_date))
+        tworedsoldier(stockData, rollback_date)) ||
+      (plan === GeneralizedPlans.SlopePositive &&
+        slopepositive(stockData, rollback_date))
     );
   }, [plan, rollback_date, stockData]);
 

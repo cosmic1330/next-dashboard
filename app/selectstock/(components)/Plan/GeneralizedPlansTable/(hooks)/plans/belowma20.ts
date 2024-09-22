@@ -1,7 +1,15 @@
 import { StockData } from '@/app/selectstock/types';
 
-import { isCloseAboveMa20, isLowerAboveMa20 } from '@/app/selectstock/(utils)/assessment/positive';
-import { isMovingAverageTrendUp, isSufficientTradingVolume } from '@/app/selectstock/(utils)/conditions';
+import {
+  isCloseAboveMa20,
+  isLowerAboveMa20,
+  isMacdInBullishZone,
+  isMaPositiveOrder,
+} from '@/app/selectstock/(utils)/assessment/positive';
+import {
+  isMovingAverageTrendUp,
+  isSufficientTradingVolume,
+} from '@/app/selectstock/(utils)/conditions';
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
 export default function belowma20(
   stockData: StockData[],
@@ -19,7 +27,8 @@ export default function belowma20(
     stockData[index1]?.l > stockData[index2]?.l &&
     isCloseAboveMa20(stockData, rollback_date) &&
     isLowerAboveMa20(stockData, rollback_date) &&
-    isMovingAverageTrendUp(stockData, rollback_date, MaType.MA20)
+    isMovingAverageTrendUp(stockData, rollback_date, MaType.MA20) &&
+    isMacdInBullishZone(stockData, rollback_date)
   ) {
     return true;
   }
