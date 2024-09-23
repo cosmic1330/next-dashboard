@@ -14,9 +14,8 @@ import {
   isObvPositiveOrder,
   isOscHistogramTurningPositive,
   isPriceDroppedAndRecoveredAboveMA,
-  isSlowStepwiseIncrease,
   isSufficientTradingVolume,
-  isThreeConsecutiveDaysAboveMovingAverage,
+  isMutiConsecutiveDaysAboveMovingAverage,
   isTwoRedSoldiersHigherLows,
 } from '@/app/selectstock/(utils)/conditions';
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
@@ -57,24 +56,23 @@ export default function useConform(
       isPriceDroppedAndRecoveredAboveMA(stockData, rollback_date, MaType.MA60),
       BreakResistanceAverageLine(stockData, rollback_date),
       isMovingAveragesConverging(stockData, rollback_date),
-      isThreeConsecutiveDaysAboveMovingAverage(
+      isMutiConsecutiveDaysAboveMovingAverage(
         stockData,
         rollback_date,
         MaType.MA5,
       ),
-      isThreeConsecutiveDaysAboveMovingAverage(
+      isMutiConsecutiveDaysAboveMovingAverage(
         stockData,
         rollback_date,
         MaType.MA10,
       ),
-      isThreeConsecutiveDaysAboveMovingAverage(
+      isMutiConsecutiveDaysAboveMovingAverage(
         stockData,
         rollback_date,
         MaType.MA20,
       ),
       isMaSlopePositive(stockData, rollback_date, MaType.MA5),
       isNoBreakBelowBullishCandleMidpoint(stockData, rollback_date),
-      isSlowStepwiseIncrease(stockData, rollback_date),
     ].forEach((item) => {
       if (item) count++;
     });

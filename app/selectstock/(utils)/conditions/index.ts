@@ -30,14 +30,12 @@ export { default as isPriceDroppedAndRecoveredAboveMA } from './isPriceDroppedAn
 export { default as BreakResistanceAverageLine } from './isBreakResistanceAverageLine';
 // Moving Averages Convergence「均線糾結」√
 export { default as isMovingAveragesConverging } from './isMovingAveragesConverging';
-// Three Consecutive Days Above 5-Day MA「連續三天站上均線」√
-export { default as isThreeConsecutiveDaysAboveMovingAverage } from './isThreeConsecutiveDaysAboveMovingAverage';
+// Three Consecutive Days Above MA「連續多天站上均線」√
+export { default as isMutiConsecutiveDaysAboveMovingAverage } from './isMutiConsecutiveDaysAboveMovingAverage';
 // Positive Slope of Moving Average 「均線斜率正向」√
 export { default as isMaSlopePositive } from './isMaSlopePositive';
 // Next Day Holds Above Long Bullish Candle Midpoint「隔日未跌破長紅中點」
 export { default as isNoBreakBelowBullishCandleMidpoint } from './isNoBreakBelowBullishCandleMidpoint';
-// Steady Gradual Rise「小碎步上升」
-export { default as isSlowStepwiseIncrease } from './isSlowStepwiseIncrease';
 // Not Break Below the Moving Average「下跌未破均線」
 export { default as isNotBreakBelowMovingAverage } from './isNotBreakBelowMovingAverage';
 // Gold Plated Silver「金包銀」(大跌後->撐竿跳->金包銀)
