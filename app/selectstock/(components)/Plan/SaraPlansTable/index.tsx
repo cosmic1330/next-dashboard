@@ -18,7 +18,7 @@ export default function SaraPlansTable() {
   return (
     <Fragment>
       <Typography variant="h4" align="center">
-        V2版本的標的
+        新式形態學的標的
       </Typography>
       <Typography variant="subtitle1" align="center">
         {plan}

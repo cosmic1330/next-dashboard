@@ -42,3 +42,5 @@ export { default as isSlowStepwiseIncrease } from './isSlowStepwiseIncrease';
 export { default as isNotBreakBelowMovingAverage } from './isNotBreakBelowMovingAverage';
 // Gold Plated Silver「金包銀」(大跌後->撐竿跳->金包銀)
 export { default as isGoldPlatedSilver } from './isGoldPlatedSilver';
+// Bounce Off The Lower Bollinger Band布林下軌回彈
+export { default as isBounceOffTheLowerBollingerBand } from './isBounceOffTheLowerBollingerBand';
