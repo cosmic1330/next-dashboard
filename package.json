@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@ch20026103/anysis": "0.0.15-alpha",
+    "@ch20026103/backtest": "0.0.3-beta1",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.11.0",
     "@heroicons/react": "^2.0.18",

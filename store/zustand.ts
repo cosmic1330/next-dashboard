@@ -1,12 +1,21 @@
+import { Context } from '@ch20026103/backtest';
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
-import { LocalStorageValueType, Task, TaskStore } from './types';
+import { BackTestType, LocalStorageValueType, SelectPlanType, TaskStoreType, TrackingListType } from './types';
 
 /*******************
  *  Tomato's Task  *
  *******************/
-
-export const useTaskStore = create<TaskStore>((set) => ({
+export type Task = {
+  name: String;
+  description: String;
+  finish: Boolean;
+  workTime: number;
+  relaxTime: number;
+  id: String;
+};
+export type CurrentTask = Task | undefined;
+export const useTaskStore = create<TaskStoreType>((set) => ({
   loop: 0,
   tasks: [
     {
@@ -47,11 +56,7 @@ export const useTaskStore = create<TaskStore>((set) => ({
 /************************
  *  SelectStock's Plan  *
  ************************/
-type Plan = {
-  plan: number;
-  change: (plan: number) => void;
-};
-export const useSelectPlan = create<Plan>((set) => ({
+export const useSelectPlan = create<SelectPlanType>((set) => ({
   plan: 301,
   change: (plan: number) => set(() => ({ plan })),
 }));
@@ -60,14 +65,9 @@ export const useSelectPlan = create<Plan>((set) => ({
  *  SelectStock's Tracking Table  *
  **********************************/
 const localStorageKey = 'nextdashboard.selectstock.tracking.v2';
-type Tracking = {
-  list: Map<string, LocalStorageValueType>;
-  init: () => void;
-  add: ({ id, plan, listed, date, name, c }: LocalStorageValueType) => void;
-  remove: (id: string) => void;
-};
-export type TrackingJsonType = [string, LocalStorageValueType];
-export const useTrackingList = create<Tracking>((set) => ({
+
+type TrackingJsonType = [string, LocalStorageValueType];
+export const useTrackingList = create<TrackingListType>((set) => ({
   list: new Map(),
   init: () =>
     set(() => {
@@ -99,4 +99,15 @@ export const useTrackingList = create<Tracking>((set) => ({
       window.localStorage.setItem(localStorageKey, JSON.stringify(mapArray));
       return { list: state.list };
     }),
+}));
+
+
+/************************
+ *  Backtest's Plan  *
+ ************************/
+export const useBackTest = create<BackTestType>((set) => ({
+  context: undefined,
+  dataStatus: false,
+  setContext: (context: Context) => set((state) => ({ ...state, context })),
+  setDataStatus: (status: boolean) => set((state) => ({ ...state, dataStatus: status })),
 }));
