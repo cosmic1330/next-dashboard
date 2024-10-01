@@ -1,15 +1,17 @@
-import redis from '@/lib/redis/helper';
+import redis from '@/lib/redis';
 import { NextResponse } from 'next/server';
 import { StocksType } from './types';
 
 export type V1StocksResponse = StocksType[];
 export const GET = async (req: Request) => {
-  const key = `stocks`;
+  const key = `v1:stocks:ids`;
+
   try {
     if (redis) {
       let cached = await redis?.get(key);
       if (cached) {
         cached = JSON.parse(cached);
+        console.log('cache');
         return NextResponse.json(cached, {
           headers: { 'x-cache': 'HIT' },
         });
@@ -20,14 +22,13 @@ export const GET = async (req: Request) => {
   }
 
   let res = await fetch(
-    `https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_d?response=json&_=1688900750130`,
+    `https://www.twse.com.tw/rwd/zh/afterTrading/BWIBBU_d?response=json`,
   );
   res = await res.json();
 
   try {
     if (redis) {
-      await redis?.set(key, JSON.stringify(res));
-      await redis?.expire(key, 60 * 30);
+      await redis?.set(key, JSON.stringify(res), 'EX', 5);
     }
   } catch (error) {
     console.error('Error setting to Redis:', error);

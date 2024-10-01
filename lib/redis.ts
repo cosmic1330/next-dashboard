@@ -19,24 +19,13 @@ function getRedisConfigurationOptions(host: string, port: number) {
   };
   return options;
 }
-class RedisHelper {
-  redis: Redis | null;
-
-  constructor(options: RedisOptions) {
-    this.redis = new Redis(options);
-    this.redis.on('error', (error: unknown) => {
-      console.warn('[Redis] Error connecting', error);
-    });
-  }
-}
 
 let redis: Redis | null = null;
-const host = process.env.REDIS_HOST as string;
-const port = parseInt(process.env.REDIS_PORT as string, 10);
-if (host && port) {
+if (process.env.REDIS_HOST && process.env.REDIS_PORT) {
+  const host = process.env.REDIS_HOST;
+  const port = parseInt(process.env.REDIS_PORT, 10);
   const options = getRedisConfigurationOptions(host, port);
-  const redisHelper = new RedisHelper(options);
-  redis = redisHelper.redis;
+  redis = new Redis(options);
 }
 
 export default redis;

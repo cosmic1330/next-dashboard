@@ -1,3 +1,4 @@
+import redis from '@/lib/redis';
 import { dateFormat } from '@ch20026103/anysis';
 import { Mode } from '@ch20026103/anysis/dist/esm/stockSkills/utils/dateFormat';
 import { PrismaClient } from '@prisma/client';
@@ -9,12 +10,29 @@ export const GET = async (
   { params }: { params: { id: string } },
 ) => {
   try {
+    const id = params.id;
     const url = new URL(req.url);
     let start = url.searchParams.get('start');
     let end = url.searchParams.get('end');
     if (!start) throw new Error('start is required');
     if (!end) throw new Error('end is required');
 
+    let page = url.searchParams.get('page');
+    if (!page) {
+      page = '1';
+    }
+    const pageNumber = parseInt(page, 10);
+
+    const key = `stock:${id}:range:${start}-${end}:page:${pageNumber}:pageSize:200`;
+    if (redis) {
+      let cached = await redis?.get(key);
+      if (cached) {
+        cached = JSON.parse(cached);
+        return NextResponse.json(cached, {
+          headers: { 'x-cache': 'HIT' },
+        });
+      }
+    }
     // 驗證並轉換日期
     const startDate = new Date(
       dateFormat(parseInt(start, 10), Mode.NumberToTimeStamp),
@@ -23,9 +41,7 @@ export const GET = async (
       dateFormat(parseInt(end, 10), Mode.NumberToTimeStamp),
     );
 
-    const id = params.id;
     const prisma = new PrismaClient();
-
     const res: PrismaDailyDealResponse = await prisma.daily_deal.findMany({
       where: {
         stock_id: id,
@@ -44,8 +60,14 @@ export const GET = async (
           },
         },
       },
+      skip: (pageNumber - 1) * 200,
+      take: 200,
     });
     await prisma.$disconnect();
+
+    if (redis) {
+      await redis?.set(key, JSON.stringify(res), 'EX', 30 * 24 * 60 * 60); // 30天
+    }
     // return data to client
     return NextResponse.json(res, {
       headers: { 'x-cache': 'MISS' },

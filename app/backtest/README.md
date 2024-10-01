@@ -18,7 +18,8 @@
    - 後端Redis 用於緩存數據
    - 前端批量處理數據
    - 使用Nginx Load Balancing
-   - 前端使用Caching
+   - 前端使用SWR Caching
+   - 後端分頁處理
 
 2. 自定義策略实现
    - 支持多种交易策略(如均线交叉、动量策略等)
