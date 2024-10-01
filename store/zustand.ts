@@ -64,14 +64,14 @@ export const useSelectPlan = create<SelectPlanType>((set) => ({
 /**********************************
  *  SelectStock's Tracking Table  *
  **********************************/
-const localStorageKey = 'nextdashboard.selectstock.tracking.v2';
+const trackingLocalStorageKey = 'nextdashboard.selectstock.tracking.v2';
 
 type TrackingJsonType = [string, LocalStorageValueType];
 export const useTrackingList = create<TrackingListType>((set) => ({
   list: new Map(),
   init: () =>
     set(() => {
-      const str = window.localStorage.getItem(localStorageKey);
+      const str = window.localStorage.getItem(trackingLocalStorageKey);
       if (str !== null) {
         const arr: TrackingJsonType[] = JSON.parse(str);
         const dataMap = new Map();
@@ -88,7 +88,7 @@ export const useTrackingList = create<TrackingListType>((set) => ({
       const { id } = data;
       state.list.set(id, data);
       const mapArray = Array.from(state.list.entries());
-      window.localStorage.setItem(localStorageKey, JSON.stringify(mapArray));
+      window.localStorage.setItem(trackingLocalStorageKey, JSON.stringify(mapArray));
       return { list: state.list };
     });
   },
@@ -96,7 +96,7 @@ export const useTrackingList = create<TrackingListType>((set) => ({
     set((state) => {
       state.list.delete(id);
       const mapArray = Array.from(state.list.entries());
-      window.localStorage.setItem(localStorageKey, JSON.stringify(mapArray));
+      window.localStorage.setItem(trackingLocalStorageKey, JSON.stringify(mapArray));
       return { list: state.list };
     }),
 }));
@@ -105,9 +105,20 @@ export const useTrackingList = create<TrackingListType>((set) => ({
 /************************
  *  Backtest's Plan  *
  ************************/
+const backtestLocalStorageKey = 'nextdashboard.backtest.';
 export const useBackTest = create<BackTestType>((set) => ({
   context: undefined,
   dataStatus: false,
+  startDate: window.localStorage.getItem(backtestLocalStorageKey+'startDate') || '20231101',
+  endDate: window.localStorage.getItem(backtestLocalStorageKey+'endDate') || '20240927',
   setContext: (context: Context) => set((state) => ({ ...state, context })),
   setDataStatus: (status: boolean) => set((state) => ({ ...state, dataStatus: status })),
+  setStartDate: (startDate: string) => {
+    window.localStorage.setItem(backtestLocalStorageKey+'startDate', startDate);
+    set((state) => ({ ...state, startDate }));
+  },
+  setEndDate: (endDate: string) => {
+    window.localStorage.setItem(backtestLocalStorageKey+'endDate', endDate);
+    set((state) => ({ ...state, endDate }));
+  },
 }));

@@ -5,8 +5,9 @@ const sellMethod = (stockData: any) => {
   };
   try {
     if (
-      stockData[stockData.length - 1].l < stockData[stockData.length - 2].l &&
-      stockData[stockData.length - 1].v > stockData[stockData.length - 2].v
+      stockData[stockData.length - 1].k < stockData[stockData.length - 2].k &&
+      stockData[stockData.length - 1].d > stockData[stockData.length - 2].d &&
+      stockData[stockData.length - 1].k > stockData[stockData.length - 1].d
     ) {
       res.status = true;
     }

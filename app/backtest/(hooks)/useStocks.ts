@@ -7,48 +7,18 @@ import formatStockdata from '@/app/selectstock/(utils)/indicator/formatStockdata
 import useCancelToken from '@/hooks/useCancelToken';
 import { useBackTest } from '@/store/zustand';
 import { Context } from '@ch20026103/backtest';
-import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import useSWR from 'swr';
 
-const fetchDetails = async (stock: V2StocksResponseRow) => {
-  const res = await fetch(
-    `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock.stock_id}`,
-  );
-  return res.json();
-};
-
-const fetchBatchDetails = async (batch: V2StocksResponseRow[]) => {
-  const results = [];
-  for (let i = 0; i < batch.length; i++) {
-    const stock = batch[i];
-    results.push(fetchDetails(stock));
-  }
-  return Promise.all(results);
-};
-
-const fetchAllBatch = async (
-  batchSize: number,
-  stocks: V2StocksResponseRow[],
-  context: Context,
-  setSuccess: Dispatch<SetStateAction<number>>,
-) => {
-  for (let i = 0; i < stocks.length; i += batchSize) {
-    const batch = stocks.slice(i, i + batchSize);
-    const res = await fetchBatchDetails(batch);
-    res.forEach((stockData, index) => {
-      context.bind(
-        stockData[0].stock_id,
-        stockData[0].stock_name,
-        formatStockdata(stockData, stockData[0].stock_id),
-      );
-    });
-    setSuccess((pre) => pre + batch.length);
-  }
-  return false;
-};
-
 export default function useStocks() {
-  const { context, setDataStatus } = useBackTest();
+  const { context, setDataStatus, startDate, endDate } = useBackTest();
   const { newCancelToken, isAbortError, handleCancel } = useCancelToken();
   const [isLoading, setIsLoading] = useState(false);
   const [success, setSuccess] = useState(0);
@@ -63,6 +33,54 @@ export default function useStocks() {
     },
   );
 
+  const fetchDetails = useCallback(
+    async (stock: V2StocksResponseRow) => {
+      const res = await fetch(
+        `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock.stock_id}/date?start=${startDate}&end=${endDate}`,
+      );
+      return res.json();
+    },
+    [startDate, endDate],
+  );
+
+  const fetchBatchDetails = useCallback(
+    async (batch: V2StocksResponseRow[]) => {
+      const results = [];
+      for (let i = 0; i < batch.length; i++) {
+        const stock = batch[i];
+        results.push(fetchDetails(stock));
+      }
+      return Promise.all(results);
+    },
+    [fetchDetails],
+  );
+
+  const fetchAllBatch = useCallback(
+    async (
+      batchSize: number,
+      stocks: V2StocksResponseRow[],
+      context: Context,
+      setSuccess: Dispatch<SetStateAction<number>>,
+    ) => {
+      for (let i = 0; i < stocks.length; i += batchSize) {
+        const batch = stocks.slice(i, i + batchSize);
+        const res = await fetchBatchDetails(batch);
+        res.forEach((stockData, index) => {
+          if (stockData.length > 0) {
+            context.bind(
+              stockData[0].stock_id,
+              stockData[0].stock_name,
+              formatStockdata(stockData, stockData[0].stock_id),
+            );
+          }
+        });
+        setSuccess((pre) => pre + batch.length);
+      }
+      return false;
+    },
+    [fetchBatchDetails],
+  );
+
   useEffect(() => {
     setSuccess(0);
     setIsLoading(true);
@@ -73,7 +91,7 @@ export default function useStocks() {
         setDataStatus(true);
       });
     }
-  }, [context, data, setDataStatus, setSuccess]);
+  }, [context, data, fetchAllBatch, setDataStatus, setSuccess]);
 
   const progress = useMemo(() => {
     if (data) {

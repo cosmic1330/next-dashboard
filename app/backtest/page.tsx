@@ -1,24 +1,18 @@
 'use client';
 
-import { useState } from 'react';
-import Stocks from './(components)/Stocks';
-import useBacktestContext from './(hooks)/useBacktestContext';
-import { Button } from '@mui/material';
-import Detail from './(components)/Control/detail';
-import Control from './(components)/Control';
+import { CssBaseline } from '@mui/material';
+import Content from './(components)/Content';
+import Header from './(components)/Header';
+import SideBar from './(components)/SideBar';
 import { Main } from './styles';
 
 export default function Page() {
-  const { refresh } = useBacktestContext();
-  const [id, setId] = useState('5434');
-
   return (
     <Main>
-      <Button size="small" variant="outlined" onClick={() => refresh()}>
-        Get New Context
-      </Button>
-      <Stocks />
-      <Control />
+      <CssBaseline />
+      <Header />
+      <SideBar />
+      <Content />
     </Main>
   );
 }

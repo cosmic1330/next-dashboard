@@ -1,9 +1,9 @@
 import { useBackTest } from '@/store/zustand';
 import { useState } from 'react';
-import { DetailRef } from '../(components)/Control/detail';
+import { DetailRef } from '../(components)/Cards/Control/detail';
 
 export default function useControl(detailRef: React.RefObject<DetailRef>) {
-  const { context, setContext } = useBackTest();
+  const { context } = useBackTest();
   const [intervalId, setIntervalID] = useState<ReturnType<
     typeof setInterval
   > | null>(null);
@@ -24,5 +24,5 @@ export default function useControl(detailRef: React.RefObject<DetailRef>) {
     setIntervalID(interval);
   };
 
-  return { context, handleRun, handleStop };
+  return { context, handleRun, handleStop, intervalId };
 }

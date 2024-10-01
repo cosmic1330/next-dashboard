@@ -35,6 +35,10 @@ export type TrackingListType = {
 export type BackTestType = {
   context: undefined | Context;
   dataStatus: boolean;
+  startDate: number;
+  endDate: number;
   setContext: (context: Context) => void;
   setDataStatus: (status: boolean) => void;
+  setStartDate: (date: number) => void;
+  setEndDate: (date: number) => void;
 };

@@ -14,9 +14,12 @@ export type V2DailyDealResponseRow = {
 
 export type V2DailyDealResponse = V2DailyDealResponseRow[];
 
-export const GET = async (req: Request) => {
+export const GET = async (
+  req: Request,
+  { params }: { params: { id: string } },
+) => {
   try {
-    const id = req.url.split('/')[req.url.split('/').length - 1];
+    const id = params.id;
     const prisma = new PrismaClient();
     // last
     const res = await prisma.daily_deal.findFirst({

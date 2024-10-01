@@ -11,9 +11,12 @@ type TaType = {
   v: number;
 };
 
-export const GET = async (req: Request) => {
+export const GET = async (
+  req: Request,
+  { params }: { params: { id: string } },
+) => {
   try {
-    const id = req.url.split('/')[req.url.split('/').length - 1];
+    const id = params.id;
 
     // fetch fresh data from the DB
     let response = await fetch(
@@ -28,8 +31,8 @@ export const GET = async (req: Request) => {
     let parse = JSON.parse(json_ta);
     let ta: TaType[] = parse.ta;
 
-    let idMatch = response.slice(0,ta_index).match(/"id":"(\d+)"/);
-    let nameMatch = response.slice(0,ta_index).match(/"name":"([^"]+)"/);
+    let idMatch = response.slice(0, ta_index).match(/"id":"(\d+)"/);
+    let nameMatch = response.slice(0, ta_index).match(/"name":"([^"]+)"/);
     let stock_id = idMatch ? idMatch[1] : null;
     let stock_name = nameMatch ? nameMatch[1] : null;
 

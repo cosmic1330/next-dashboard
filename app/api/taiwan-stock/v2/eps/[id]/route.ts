@@ -1,9 +1,10 @@
 import { PrismaClient } from '@prisma/client';
 import { NextResponse } from 'next/server';
 
-export const GET = async (req: Request) => {
+export const GET = async (req: Request,
+  { params }: { params: { id: string } }) => {
   try {
-    const id = req.url.split('/')[req.url.split('/').length - 1];
+    const id = params.id;
     const prisma = new PrismaClient();
     // last
     const res = await prisma.eps.findFirst({
