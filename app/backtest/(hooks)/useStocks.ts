@@ -35,10 +35,27 @@ export default function useStocks() {
 
   const fetchDetails = useCallback(
     async (stock: V2StocksResponseRow) => {
+      let page = 1;
       const res = await fetch(
-        `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock.stock_id}/date?start=${startDate}&end=${endDate}`,
+        `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock.stock_id}/date?start=${startDate}&end=${endDate}&page=${page}`,
       );
-      return res.json();
+      let data = await res.json();
+      if (data.length < 200) {
+        return data;
+      } else {
+        let newRes = [...data];
+        let count = data.length;
+        while (count === 200) {
+          page += 1;
+          const res = await fetch(
+            `http://localhost:3000/api/taiwan-stock/v2/daily_deal/${stock.stock_id}/date?start=${startDate}&end=${endDate}&page=${page}`,
+          );
+          data = await res.json();
+          count = data.length;
+          newRes = [...newRes, ...data];
+        }
+        return newRes;
+      }
     },
     [startDate, endDate],
   );
@@ -86,7 +103,7 @@ export default function useStocks() {
     setIsLoading(true);
     setDataStatus(false);
     if (data && context) {
-      fetchAllBatch(50, data, context, setSuccess).then((status) => {
+      fetchAllBatch(10, data, context, setSuccess).then((status) => {
         setIsLoading(status);
         setDataStatus(true);
       });

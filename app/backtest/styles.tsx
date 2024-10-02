@@ -31,12 +31,10 @@ export const Sidebar = styled('div')`
 `;
 
 export const Content = styled('div')`
-  grid-area: content;
   display: grid;
   grid-auto-flow: row dense;
   grid-gap: 10px;
   padding: 20px;
-  grid-auto-rows: min-content;
   grid-template-columns: 1fr;
 
   /* 手機裝置 (螢幕寬度 480px 至 767px) */
@@ -44,7 +42,7 @@ export const Content = styled('div')`
     grid-template-columns: 1fr 1fr;
   }
   /* 平板裝置 (豎向模式，螢幕寬度 768px 至 1023px) */
-  @media screen and (min-width: 768px) and (max-width: 1023px){
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
     grid-template-columns: 1fr 1fr 1fr;
   }
   /* 平板裝置 (橫向模式，螢幕寬度 1024px 至 1199px) */
@@ -53,6 +51,6 @@ export const Content = styled('div')`
   }
   /* 桌機裝置 (螢幕寬度 1200px 以上) */
   @media screen and (min-width: 1200px) {
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
   }
 `;

@@ -14,13 +14,11 @@ export const GET = async (
     const url = new URL(req.url);
     let start = url.searchParams.get('start');
     let end = url.searchParams.get('end');
+    let page = url.searchParams.get('page');
     if (!start) throw new Error('start is required');
     if (!end) throw new Error('end is required');
+    if (!page) throw new Error('page is required');
 
-    let page = url.searchParams.get('page');
-    if (!page) {
-      page = '1';
-    }
     const pageNumber = parseInt(page, 10);
 
     const key = `stock:${id}:range:${start}-${end}:page:${pageNumber}:pageSize:200`;

@@ -1,7 +1,8 @@
 'use client';
+import { StatusContext } from '@/app/backtest/(context)/status';
 import { Context } from '@ch20026103/backtest';
 import { Box, Grid, Typography } from '@mui/material';
-import { forwardRef, useImperativeHandle, useState } from 'react';
+import { forwardRef, useContext, useImperativeHandle } from 'react';
 
 export interface DetailRef {
   update: () => void;
@@ -12,10 +13,9 @@ interface DetailProps {
 }
 
 const Detail = forwardRef<DetailRef, DetailProps>(({ context }, ref) => {
-  const [, setUpdateTrigger] = useState(0);
-
+  const { setUpdateTrigger } = useContext(StatusContext);
   useImperativeHandle(ref, () => ({
-    update: () => setUpdateTrigger((prev) => prev + 1),
+    update: () => setUpdateTrigger && setUpdateTrigger((prev) => prev + 1),
   }));
 
   return (
@@ -95,10 +95,10 @@ const Detail = forwardRef<DetailRef, DetailProps>(({ context }, ref) => {
         <Typography variant="caption" color="ActiveBorder">
           當前库存:
         </Typography>
-        <Box sx={{ height:'100px', maxHeight: '100px', overflowY: 'auto' }}>
+        <Box sx={{ height: '100px', maxHeight: '100px', overflowY: 'auto' }}>
           {Object.values(context.record.inventory).map((item: any, index) => (
             <Typography variant="body2" color="ActiveBorder" key={index}>
-              {`${index+1}. [${item.id}] price:${item.buyPrice} c:${item.c}`}
+              {`${index + 1}. [${item.id}] price:${item.buyPrice} c:${item.c}`}
             </Typography>
           ))}
         </Box>

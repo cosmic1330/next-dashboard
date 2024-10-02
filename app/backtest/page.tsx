@@ -5,14 +5,17 @@ import Content from './(components)/Content';
 import Header from './(components)/Header';
 import SideBar from './(components)/SideBar';
 import { Main } from './styles';
+import { StatusContextProvider } from './(context)/status';
 
 export default function Page() {
   return (
-    <Main>
-      <CssBaseline />
-      <Header />
-      <SideBar />
-      <Content />
-    </Main>
+    <StatusContextProvider>
+      <Main>
+        <CssBaseline />
+        <Header />
+        <SideBar />
+        <Content />
+      </Main>
+    </StatusContextProvider>
   );
 }
