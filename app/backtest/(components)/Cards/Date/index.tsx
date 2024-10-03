@@ -2,7 +2,7 @@
 import { useBackTest } from '@/store/zustand';
 import { dateFormat } from '@ch20026103/anysis';
 import { Mode } from '@ch20026103/anysis/dist/esm/stockSkills/utils/dateFormat';
-import { Box, Card, CardContent, Typography } from '@mui/material';
+import { Stack, Card, CardContent, Typography } from '@mui/material';
 
 export default function Setting() {
   const { startDate, endDate, setStartDate, setEndDate } = useBackTest();
@@ -21,10 +21,10 @@ export default function Setting() {
     <Card>
       <CardContent>
         <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
-          Setting
+          Date
         </Typography>
-        <Typography variant="body2">Date</Typography>
-        <Box>
+        <Typography variant="body2">Range</Typography>
+        <Stack spacing={1}>
           <input
             type="date"
             onChange={handleStartDateChange}
@@ -38,7 +38,7 @@ export default function Setting() {
             value={dateFormat(endDate, Mode.NumberToString)}
             // style={{ position: 'absolute', opacity: 0 }}
           />
-        </Box>
+        </Stack>
       </CardContent>
     </Card>
   );

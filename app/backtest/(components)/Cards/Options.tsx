@@ -46,7 +46,7 @@ export default function Options() {
     <Card>
       <CardContent>
         <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
-          Custom Options
+          Options
         </Typography>
         <Grid container spacing={1}>
           <Grid item xs={6} sm={4}>

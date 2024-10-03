@@ -3,18 +3,32 @@ import { styled } from '@mui/system';
 export const Main = styled('main')`
   display: grid;
   min-height: 100vh;
-  grid-template-areas:
-    'sidebar header'
-    'sidebar content';
-  grid-template-columns: 60px 1fr;
-  grid-template-rows: auto 1fr;
   ::before {
     content: '';
     z-index: -1;
     position: fixed;
-    width: 100vw;
-    height: 100vh;
+    width: 100%;
+    height: 100%;
+    min-width: 100vw;
+    min-height: 100vh;
     background: linear-gradient(to bottom, #bce0fa 0%, #e6e6e6 100%) fixed;
+  }
+
+  /* 手機裝置 (螢幕寬度 480px 至 767px) */
+  @media screen and (max-width: 767px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: min-content 1fr;
+    grid-template-areas:
+      'header header'
+      'content content';
+  }
+  /* 平板裝置 (豎向模式，螢幕寬度 768px 至 1023px) */
+  @media screen and (min-width: 768px) {
+    grid-template-columns: 60px 1fr;
+    grid-template-rows: auto 1fr;
+    grid-template-areas:
+      'sidebar header'
+      'sidebar content';
   }
 `;
 
@@ -28,6 +42,10 @@ export const Sidebar = styled('div')`
   grid-area: sidebar;
   display: grid;
   grid-auto-rows: 60px;
+  /* 手機裝置 (螢幕寬度 480px 至 767px) */
+  @media screen and (max-width: 767px) {
+    display: none;
+  }
 `;
 
 export const Content = styled('div')`

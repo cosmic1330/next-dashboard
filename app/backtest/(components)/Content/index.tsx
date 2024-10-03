@@ -5,21 +5,25 @@ import DataStatus from '../Cards/DataStatus';
 import Detail from '../Cards/Detai';
 import Inventory from '../Cards/Inventory';
 import Options from '../Cards/Options';
+import History from '../Cards/History';
+import Condition from '../Cards/Condition';
 import ProfitLineChart from '../Cards/ProfitLineChart';
-import Setting from '../Cards/Setting';
+import Date from '../Cards/Date';
 import UnsoldprofitLineChart from '../Cards/UnsoldprofitLineChart';
 export default function Content() {
   return (
     <StyleContent>
-      <Setting />
+      <Date />
       <DataStatus />
       <Control />
       <Detail />
       <CaptionLineChart />
       <ProfitLineChart />
       <UnsoldprofitLineChart />
-      <Inventory />
       <Options />
+      <Condition />
+      <Inventory />
+      <History />
     </StyleContent>
   );
 }
