@@ -1,9 +1,5 @@
-import {
-  isCloseAboveMa5,
-  isKdGoldenCross,
-} from '../../selectstock/(utils)/assessment/positive';
-import { isMovingAverageTrendUp, isSufficientTradingVolume } from '../../selectstock/(utils)/conditions';
-import { MaType } from '../../selectstock/(utils)/conditions/types';
+import slopepositive from '@/app/selectstock/(components)/Plan/GeneralizedPlansTable/(hooks)/plans/slopepositive';
+import tworedsoldier from '@/app/selectstock/(components)/Plan/V2PlansTable/(hooks)/plans/tworedsoldier';
 
 const buyMethod = (stockData: any) => {
   const res = {
@@ -11,12 +7,7 @@ const buyMethod = (stockData: any) => {
     detail: 'buy',
   };
   try {
-    if (
-      isSufficientTradingVolume(stockData, 0, 300) &&
-      isMovingAverageTrendUp(stockData, 0, MaType.MA5) &&
-      isCloseAboveMa5(stockData, 0) &&
-      isKdGoldenCross(stockData, 0)
-    ) {
+    if (slopepositive(stockData, 0)) {
       res.status = true;
     }
   } catch (error) {

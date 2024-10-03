@@ -19,7 +19,7 @@ const Detail = forwardRef<DetailRef, DetailProps>(({ context }, ref) => {
   }));
 
   return (
-    <Grid container spacing={1} p={2}>
+    <Grid container spacing={1}>
       <Grid item xs={4}>
         <Typography variant="caption" color="ActiveBorder">
           当前日期:
@@ -40,68 +40,11 @@ const Detail = forwardRef<DetailRef, DetailProps>(({ context }, ref) => {
 
       <Grid item xs={4}>
         <Typography variant="caption" color="ActiveBorder">
-          资本:
+          執行日期數:
         </Typography>
         <Typography variant="body2" color="ActiveBorder">
-          {context.capital}
+          {context.dateSequence.historyDates.length}
         </Typography>
-      </Grid>
-
-      <Grid item xs={4}>
-        <Typography variant="caption" color="ActiveBorder">
-          资本:
-        </Typography>
-        <Typography variant="body2" color="ActiveBorder">
-          $ {context.capital}
-        </Typography>
-      </Grid>
-
-      <Grid item xs={4}>
-        <Typography variant="caption" color="ActiveBorder">
-          利润:
-        </Typography>
-        <Typography variant="body2" color="ActiveBorder">
-          $ {context.record.profit}
-        </Typography>
-      </Grid>
-
-      <Grid item xs={4}>
-        <Typography variant="caption" color="ActiveBorder">
-          盈利數:
-        </Typography>
-        <Typography variant="body2" color="ActiveBorder">
-          {context.record.win}
-        </Typography>
-      </Grid>
-      <Grid item xs={4}>
-        <Typography variant="caption" color="ActiveBorder">
-          亏损數:
-        </Typography>
-        <Typography variant="body2" color="ActiveBorder">
-          {context.record.lose}
-        </Typography>
-      </Grid>
-
-      <Grid item xs={4}>
-        <Typography variant="caption" color="ActiveBorder">
-          未实现利润:
-        </Typography>
-        <Typography variant="body2" color="ActiveBorder">
-          $ {context.unSoldProfit}
-        </Typography>
-      </Grid>
-
-      <Grid item xs={12}>
-        <Typography variant="caption" color="ActiveBorder">
-          當前库存:
-        </Typography>
-        <Box sx={{ height: '100px', maxHeight: '100px', overflowY: 'auto' }}>
-          {Object.values(context.record.inventory).map((item: any, index) => (
-            <Typography variant="body2" color="ActiveBorder" key={index}>
-              {`${index + 1}. [${item.id}] price:${item.buyPrice} c:${item.c}`}
-            </Typography>
-          ))}
-        </Box>
       </Grid>
     </Grid>
   );

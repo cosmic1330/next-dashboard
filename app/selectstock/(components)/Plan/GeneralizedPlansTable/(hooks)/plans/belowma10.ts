@@ -12,7 +12,7 @@ import {
   isSufficientTradingVolume,
 } from '@/app/selectstock/(utils)/conditions';
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
-export default function belowma20(
+export default function belowma10(
   stockData: StockData[],
   rollback_date: number,
 ) {

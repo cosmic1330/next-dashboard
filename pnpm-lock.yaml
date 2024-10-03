@@ -9,8 +9,8 @@ dependencies:
     specifier: 0.0.16-beta1
     version: 0.0.16-beta1
   '@ch20026103/backtest':
-    specifier: 0.0.4-alpha
-    version: 0.0.4-alpha
+    specifier: 0.0.5-beta
+    version: 0.0.5-beta
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.13.3(@types/react@18.2.21)(react@18.2.0)
@@ -59,6 +59,9 @@ dependencies:
   canvas-confetti:
     specifier: ^1.9.2
     version: 1.9.3
+  chart.js:
+    specifier: ^4.4.4
+    version: 4.4.4
   clsx:
     specifier: ^2.0.0
     version: 2.1.1
@@ -80,6 +83,9 @@ dependencies:
   react:
     specifier: 18.2.0
     version: 18.2.0
+  react-chartjs-2:
+    specifier: ^5.2.0
+    version: 5.2.0(chart.js@4.4.4)(react@18.2.0)
   react-dom:
     specifier: 18.2.0
     version: 18.2.0(react@18.2.0)
@@ -360,8 +366,8 @@ packages:
     resolution: {integrity: sha512-VxVtan+An0BZTXXxgqJ5ZWKdx30Ixq4QKPfKls9RJWt1g20d4rbW8qTdVKTr872A+1mQmjbTv96bebE/z8OMAg==}
     dev: false
 
-  /@ch20026103/backtest@0.0.4-alpha:
-    resolution: {integrity: sha512-w1tuEs4RLk2/N6BBRIJYI5RY8RizJEZltnf5bqqw6BzSQeHHiiyNLR7Y128pMpawxTQWMeBUT1PvqFjnkB2W0g==}
+  /@ch20026103/backtest@0.0.5-beta:
+    resolution: {integrity: sha512-qluaO15AHacsfy1FXKxs8/Udix6ixAX42rTv2q1QLZ/Q+EqMHsv8EcFeqJqoayOP1PIypONmDON8G3agDK2idg==}
     dependencies:
       '@ch20026103/anysis': 0.0.16-beta1
       express: 4.21.0
@@ -626,6 +632,10 @@ packages:
     dependencies:
       '@jridgewell/resolve-uri': 3.1.2
       '@jridgewell/sourcemap-codec': 1.5.0
+
+  /@kurkle/color@0.3.2:
+    resolution: {integrity: sha512-fuscdXJ9G1qb7W8VdHi+IwRqij3lBkosAm4ydQtEmbY58OzHXqQhvlxqEkoz0yssNVn38bcpRWgA9PP+OGoisw==}
+    dev: false
 
   /@mapbox/node-pre-gyp@1.0.11:
     resolution: {integrity: sha512-Yhlar6v9WQgUp/He7BdgzOz8lqMQ8sU+jkCq7Wx8Myc5YFJLbEe7lgui/V7G1qB1DJykHSGwreceSaD60Y0PUQ==}
@@ -1869,6 +1879,13 @@ packages:
       ansi-styles: 4.3.0
       supports-color: 7.2.0
     dev: true
+
+  /chart.js@4.4.4:
+    resolution: {integrity: sha512-emICKGBABnxhMjUjlYRR12PmOXhJ2eJjEHL2/dZlWjxRAZT1D8xplLFq5M0tMQK8ja+wBS/tuVEJB5C6r7VxJA==}
+    engines: {pnpm: '>=8'}
+    dependencies:
+      '@kurkle/color': 0.3.2
+    dev: false
 
   /chokidar@3.6.0:
     resolution: {integrity: sha512-7VT13fmjotKpGipCW9JEQAusEPE+Ei8nl6/g4FBAmIm0GOOLMua9NDDo/DWp0ZAxCr3cPq5ZpBqmPAQgDda2Pw==}
@@ -4586,6 +4603,16 @@ packages:
       http-errors: 2.0.0
       iconv-lite: 0.4.24
       unpipe: 1.0.0
+    dev: false
+
+  /react-chartjs-2@5.2.0(chart.js@4.4.4)(react@18.2.0):
+    resolution: {integrity: sha512-98iN5aguJyVSxp5U3CblRLH67J8gkfyGNbiK3c+l1QI/G4irHMPQw44aEPmjVag+YKTyQ260NcF82GTQ3bdscA==}
+    peerDependencies:
+      chart.js: ^4.1.1
+      react: ^16.8.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      chart.js: 4.4.4
+      react: 18.2.0
     dev: false
 
   /react-dom@18.2.0(react@18.2.0):

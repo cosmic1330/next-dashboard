@@ -20,7 +20,7 @@ export default function Setting() {
   return (
     <Card>
       <CardContent>
-        <Typography variant="subtitle1" color="ActiveBorder">
+        <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
           Setting
         </Typography>
         <Typography variant="body2">Date</Typography>

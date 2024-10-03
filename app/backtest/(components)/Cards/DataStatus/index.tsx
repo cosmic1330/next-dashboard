@@ -8,7 +8,8 @@ import {
   Stack,
   Typography,
 } from '@mui/material';
-import useStocks from '../../(hooks)/useStocks';
+import useStocks from '../../../(hooks)/useStocks';
+import Init from './init';
 
 export default function DataStatus() {
   const { isLoading, progress, success } = useStocks();
@@ -20,7 +21,7 @@ export default function DataStatus() {
           Data Status
         </Typography>
         <Grid container spacing={1}>
-          <Grid item>
+          <Grid item xs={12}>
             {isLoading ? (
               <Typography variant="body2">Loding... {progress}%</Typography>
             ) : (
@@ -43,13 +44,7 @@ export default function DataStatus() {
               >
                 Console
               </Button>
-              <Button
-                onClick={() => context?.init()}
-                variant="outlined"
-                size="small"
-              >
-                Init
-              </Button>
+              <Init />
             </Stack>
           </Grid>
         </Grid>

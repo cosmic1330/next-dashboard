@@ -33,10 +33,16 @@ export type TrackingListType = {
 };
 
 export type BackTestType = {
+  lowStockPrice: undefined | number,
+  hightStockPrice: undefined | number,
+  capital: undefined | number,
+  buyPrice: undefined | string,
+  sellPrice: undefined | string,
   context: undefined | Context;
   dataStatus: boolean;
   startDate: number;
   endDate: number;
+  setOptions:(key:string, value: any) => void;
   setContext: (context: Context) => void;
   setDataStatus: (status: boolean) => void;
   setStartDate: (date: number) => void;

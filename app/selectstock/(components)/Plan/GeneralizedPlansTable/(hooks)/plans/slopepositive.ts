@@ -7,7 +7,7 @@ import {
 import { MaType } from '@/app/selectstock/(utils)/conditions/types';
 import { StockData } from '@/app/selectstock/types';
 
-export default function goldencross(
+export default function slopepositive(
   stockData: StockData[],
   rollback_date: number,
 ) {
