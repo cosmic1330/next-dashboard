@@ -127,16 +127,16 @@ const lowStockPrice = window.localStorage.getItem(
   backtestLocalStorageKey + 'lowStockPrice',
 );
 const hightStockPrice = window.localStorage.getItem(
-  backtestLocalStorageKey + 'lowStockPrice',
+  backtestLocalStorageKey + 'hightStockPrice',
 );
 const capital = window.localStorage.getItem(
-  backtestLocalStorageKey + 'lowStockPrice',
+  backtestLocalStorageKey + 'capital',
 );
 const buyPrice = window.localStorage.getItem(
-  backtestLocalStorageKey + 'lowStockPrice',
+  backtestLocalStorageKey + 'buyPrice',
 );
 const sellPrice = window.localStorage.getItem(
-  backtestLocalStorageKey + 'lowStockPrice',
+  backtestLocalStorageKey + 'sellPrice',
 );
 export const useBackTest = create<BackTestType>((set) => ({
   lowStockPrice: lowStockPrice ? parseInt(lowStockPrice) : undefined,

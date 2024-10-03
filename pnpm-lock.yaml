@@ -9,8 +9,8 @@ dependencies:
     specifier: 0.0.16-beta1
     version: 0.0.16-beta1
   '@ch20026103/backtest':
-    specifier: 0.0.5-beta
-    version: 0.0.5-beta
+    specifier: 0.0.6-alpha
+    version: 0.0.6-alpha
   '@emotion/react':
     specifier: ^11.11.3
     version: 11.13.3(@types/react@18.2.21)(react@18.2.0)
@@ -366,8 +366,8 @@ packages:
     resolution: {integrity: sha512-VxVtan+An0BZTXXxgqJ5ZWKdx30Ixq4QKPfKls9RJWt1g20d4rbW8qTdVKTr872A+1mQmjbTv96bebE/z8OMAg==}
     dev: false
 
-  /@ch20026103/backtest@0.0.5-beta:
-    resolution: {integrity: sha512-qluaO15AHacsfy1FXKxs8/Udix6ixAX42rTv2q1QLZ/Q+EqMHsv8EcFeqJqoayOP1PIypONmDON8G3agDK2idg==}
+  /@ch20026103/backtest@0.0.6-alpha:
+    resolution: {integrity: sha512-oU+UoonV6wRH2QJprdjQwtLejZUwoW4ADEXqQqedlFmpvL3/CRbstjFo8CGBeJUCQ5MwfrGBToe1JolVK00g5w==}
     dependencies:
       '@ch20026103/anysis': 0.0.16-beta1
       express: 4.21.0
