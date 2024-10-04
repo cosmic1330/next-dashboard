@@ -10,6 +10,7 @@ import {
 } from '@mui/material';
 import useStocks from '../../../(hooks)/useStocks';
 import Init from './init';
+import Csv from './csv';
 
 export default function DataStatus() {
   const { isLoading, progress, success } = useStocks();
@@ -45,6 +46,7 @@ export default function DataStatus() {
                 Console
               </Button>
               <Init />
+              <Csv />
             </Stack>
           </Grid>
         </Grid>

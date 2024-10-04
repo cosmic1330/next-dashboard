@@ -35,62 +35,95 @@ export default function Inventory() {
     <Card>
       <CardContent>
         <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
-          Inventory
+          Inventory 當前库存
         </Typography>
-        <Grid item xs={12}>
-          <Typography variant="caption" color="ActiveBorder">
-            當前库存:
-          </Typography>
-          <Box sx={{ height: '150px', maxHeight: '150px', overflowY: 'auto' }}>
-            {Object.values(context?.record.inventory || {}).map(
-              (item: any, index) => (
-                <Grid container key={index} spacing={1}>
-                  <Grid item xs={0.5}>
-                    {index + 1}.
-                  </Grid>
-                  <Grid item xs={3.5}>
-                    <Typography variant="body2">
-                      <Link
-                        target="_blank"
-                        rel="noreferrer"
-                        href={`https://tw.stock.yahoo.com/q/ta?s=${item.id}`}
-                      >
-                        {`${dateFormat(item.t, Mode.NumberToString)}`}
-                      </Link>
-
-                      <Link
-                        target="_blank"
-                        rel="noreferrer"
-                        href={`https://pchome.megatime.com.tw/stock/sto0/ock1/sid${item.id}.html`}
-                      >
-                        {`[${item.id} ${context?.stocks[item.id].name}]`}
-                      </Link>
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography variant="body1" color="primary" mr={2}>
-                      {`Buy Price: $${item.c}`}
-                    </Typography>
-                  </Grid>
-                  <Grid item xs={4}>
-                    <Typography
-                      variant="body1"
-                      color={
-                        context?.stocks[item.id]?.currentData?.c &&
-                        (context?.stocks[item.id]?.currentData?.c as number) >
-                          item.c
-                          ? 'success.main'
-                          : 'error'
-                      }
-                    >
-                      {`Cur Price: $${context?.stocks[item.id]?.currentData?.c}`}
-                    </Typography>
-                  </Grid>
-                </Grid>
-              ),
-            )}
-          </Box>
+        <Grid container>
+          <Grid item xs={0.5}>
+            <Typography variant="caption" color="ActiveBorder"></Typography>
+          </Grid>
+          <Grid item xs={2.5}>
+            <Typography variant="caption" color="ActiveBorder">
+              Date
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="caption" color="ActiveBorder">
+              Stock Id
+            </Typography>
+          </Grid>
+          <Grid item xs={2}>
+            <Typography variant="caption" color="ActiveBorder">
+              Stock Name
+            </Typography>
+          </Grid>
+          <Grid item xs={2.5}>
+            <Typography variant="caption" color="ActiveBorder">
+              Buy Price
+            </Typography>
+          </Grid>
+          <Grid item xs={2.5}>
+            <Typography variant="caption" color="ActiveBorder">
+              Cur Price
+            </Typography>
+          </Grid>
         </Grid>
+        <Box sx={{ height: '150px', maxHeight: '150px', overflowY: 'auto' }}>
+          {Object.values(context?.record.inventory || {}).map(
+            (item: any, index) => (
+              <Grid container key={index} spacing={1}>
+                <Grid item xs={0.5}>
+                  {index + 1}.
+                </Grid>
+                <Grid item xs={2.5}>
+                  <Typography variant="body2">
+                    {dateFormat(item.t, Mode.NumberToString)}
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography variant="body2" color="primary" align="center">
+                    <Link
+                      target="_blank"
+                      rel="noreferrer"
+                      href={`https://tw.stock.yahoo.com/q/ta?s=${item.id}`}
+                    >
+                      {`${item.id}`}
+                    </Link>
+                  </Typography>
+                </Grid>
+                <Grid item xs={2}>
+                  <Typography variant="body2" color="primary" align="center">
+                    <Link
+                      target="_blank"
+                      rel="noreferrer"
+                      href={`https://pchome.megatime.com.tw/stock/sto0/ock1/sid${item.id}.html`}
+                    >
+                      {`${context?.stocks[item.id].name}`}
+                    </Link>
+                  </Typography>
+                </Grid>
+                <Grid item xs={2.5}>
+                  <Typography variant="body2" color="primary" align='center'>
+                    {`$${item.c}`}
+                  </Typography>
+                </Grid>
+                <Grid item xs={2.5}>
+                  <Typography
+                    variant="body2"
+                    color={
+                      context?.stocks[item.id]?.currentData?.c &&
+                      (context?.stocks[item.id]?.currentData?.c as number) >
+                        item.c
+                        ? 'success.main'
+                        : 'error'
+                    }
+                  >
+                    {`$${context?.stocks[item.id]?.currentData?.c}`}
+                  </Typography>
+                </Grid>
+              </Grid>
+            ),
+          )}
+        </Box>
       </CardContent>
     </Card>
   );

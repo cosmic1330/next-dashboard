@@ -1,10 +1,12 @@
 'use client';
 import {
+  Button,
   CardContent,
   Card as MuiCard,
   Typography,
   styled,
 } from '@mui/material';
+import Detail from './detail';
 
 export const Card = styled(MuiCard)`
   /* 手機裝置 (螢幕寬度 480px 至 767px) */
@@ -26,11 +28,12 @@ export default function Condition() {
     <Card>
       <CardContent>
         <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
-        Condition
+          Condition
         </Typography>
-        <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
-          {`[ToDo]`}
-        </Typography>
+        <Button variant="outlined" size='small' color="primary">
+          Setting
+        </Button>
+        <Detail />
       </CardContent>
     </Card>
   );
