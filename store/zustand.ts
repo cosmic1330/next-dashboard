@@ -192,6 +192,8 @@ export interface ConditionValue {
   value_rollback: number;
 }
 export enum ConditionKey {
+  Sell = 'sell',
+  Buy = 'buy',
   MarketSentiment = 'marketSentiment',
   ReviewPurchaseList = 'reviewPurchaseList',
   ReviewSellList = 'reviewSellList',
@@ -201,18 +203,26 @@ const marketSentiment = window.localStorage.getItem(
   conditionLocalStorageKey + 'marketSentiment',
 );
 const reviewPurchaseList = window.localStorage.getItem(
-  conditionLocalStorageKey + 'reviewPurchaseListMethod',
+  conditionLocalStorageKey + 'reviewPurchaseList',
 );
 const reviewSellList = window.localStorage.getItem(
-  conditionLocalStorageKey + 'reviewSellListMethod',
+  conditionLocalStorageKey + 'reviewSellList',
+);
+const sell = window.localStorage.getItem(
+  conditionLocalStorageKey + 'sell',
+);
+const buy = window.localStorage.getItem(
+  conditionLocalStorageKey + 'buy',
 );
 export const useCondition = create<ConditionType>((set) => ({
-  dialogStatus: true,
+  dialogStatus: false,
   marketSentiment: marketSentiment ? JSON.parse(marketSentiment) : undefined,
   reviewPurchaseList: reviewPurchaseList
     ? JSON.parse(reviewPurchaseList)
     : undefined,
   reviewSellList: reviewSellList ? JSON.parse(reviewSellList) : undefined,
+  sell: sell ? JSON.parse(sell) : undefined,
+  buy: buy ? JSON.parse(buy) : undefined,
   setDialogStatus: (status: boolean) =>
     set((state) => ({ ...state, dialogStatus: status })),
   setConditionKeyValue: (value: ConditionValue, key: ConditionKey) => {

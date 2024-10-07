@@ -10,6 +10,7 @@ import {
   Typography,
 } from '@mui/material';
 import useStocks from '../../../(hooks)/useStocks';
+import Clear from './clear';
 import Csv from './csv';
 import Init from './init';
 
@@ -28,14 +29,20 @@ export default function DataStatus() {
             {isTaiexLoading ? (
               <Typography variant="body2">Taiex Loding...</Typography>
             ) : (
-              <Typography variant="body2">Taiex Data Lenght:{taiexData?.length}</Typography>
+              <Typography variant="body2">
+                Taiex Data Lenght:{taiexData?.length}
+              </Typography>
             )}
           </Grid>
           <Grid item xs={12}>
             {isLoading ? (
-              <Typography variant="body2">Stock Loding... {progress}%</Typography>
+              <Typography variant="body2">
+                Stock Loding... {progress}%
+              </Typography>
             ) : (
-              <Typography variant="body2">Stock Data Lenght:{success}</Typography>
+              <Typography variant="body2">
+                Stock Data Lenght:{success}
+              </Typography>
             )}
           </Grid>
 
@@ -56,6 +63,7 @@ export default function DataStatus() {
               </Button>
               <Init />
               <Csv />
+              <Clear />
             </Stack>
           </Grid>
         </Grid>

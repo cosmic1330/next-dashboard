@@ -54,6 +54,8 @@ export type ConditionType = {
   marketSentiment: undefined | ConditionValue[];
   reviewPurchaseList: undefined | ConditionValue[];
   reviewSellList: undefined | ConditionValue[];
+  sell: undefined | ConditionValue[];
+  buy: undefined | ConditionValue[];
   setDialogStatus: (status: boolean) => void;
   setConditionKeyValue: (value: ConditionValue, key: ConditionKey) => void;
   removeConditionKeyValue: (index: number, key: ConditionKey) => void;

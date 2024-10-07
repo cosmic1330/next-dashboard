@@ -3,11 +3,11 @@ import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import { Box, Divider, Grid, IconButton } from '@mui/material';
 import { Stack } from '@mui/system';
 import Form from './form';
-export default function MarketSentiment() {
-  const { marketSentiment, removeConditionKeyValue } = useCondition();
+export default function Buy() {
+  const { buy, removeConditionKeyValue } = useCondition();
   return (
     <Box>
-      <Form keyType={ConditionKey.MarketSentiment} />
+      <Form keyType={ConditionKey.Buy} />
       <Stack my={2}>
         <Divider />
       </Stack>
@@ -68,7 +68,7 @@ export default function MarketSentiment() {
             Action
           </Grid>
         </Grid>
-        {marketSentiment?.map((item, index) => (
+        {buy?.map((item, index) => (
           <Grid container key={index}>
             <Grid
               item
@@ -128,7 +128,7 @@ export default function MarketSentiment() {
             >
               <IconButton
                 onClick={() =>
-                  removeConditionKeyValue(index, ConditionKey.MarketSentiment)
+                  removeConditionKeyValue(index, ConditionKey.Buy)
                 }
               >
                 <DeleteOutlineIcon />

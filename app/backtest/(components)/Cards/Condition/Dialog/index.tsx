@@ -12,6 +12,8 @@ import { ReactNode, SyntheticEvent, useState } from 'react';
 import MarketSentiment from './marketSentiment';
 import { default as ReviewPurchaseList } from './reviewPurchaseList';
 import ReviewSellList from './reviewSellList';
+import Sell from './sell';
+import Buy from './buy';
 
 interface TabPanelProps {
   children: ReactNode;
@@ -41,7 +43,7 @@ export default function ConditionDialog() {
   };
 
   return (
-    <Dialog open={dialogStatus} onClose={handleClose} maxWidth={'xl'}>
+    <Dialog open={dialogStatus} onClose={handleClose} maxWidth="xl">
       <Box>
         <Tabs
           value={value}
@@ -49,6 +51,8 @@ export default function ConditionDialog() {
           variant="scrollable"
           scrollButtons
         >
+          <Tab label="Sell" />
+          <Tab label="Buy" />
           <Tab label="Market Sentiment" />
           <Tab label="Review Purchase List" />
           <Tab label="review Sell List" />
@@ -56,12 +60,18 @@ export default function ConditionDialog() {
       </Box>
       <DialogContent>
         <CustomTabPanel value={value} index={0}>
-          <MarketSentiment />
+          <Sell />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={1}>
-          <ReviewPurchaseList />
+          <Buy />
         </CustomTabPanel>
         <CustomTabPanel value={value} index={2}>
+          <MarketSentiment />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={3}>
+          <ReviewPurchaseList />
+        </CustomTabPanel>
+        <CustomTabPanel value={value} index={4}>
           <ReviewSellList />
         </CustomTabPanel>
       </DialogContent>

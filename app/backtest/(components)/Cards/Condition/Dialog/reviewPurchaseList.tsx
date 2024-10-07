@@ -6,7 +6,7 @@ import Form from './form';
 
 export default function ReviewPurchaseList() {
   
-  const { marketSentiment, removeConditionKeyValue } = useCondition();
+  const { reviewPurchaseList, removeConditionKeyValue } = useCondition();
   return (
     <Box>
       <Form keyType={ConditionKey.ReviewPurchaseList} />
@@ -70,7 +70,7 @@ export default function ReviewPurchaseList() {
             Action
           </Grid>
         </Grid>
-        {marketSentiment?.map((item, index) => (
+        {reviewPurchaseList?.map((item, index) => (
           <Grid container key={index}>
             <Grid
               item
@@ -130,7 +130,7 @@ export default function ReviewPurchaseList() {
             >
               <IconButton
                 onClick={() =>
-                  removeConditionKeyValue(index, ConditionKey.MarketSentiment)
+                  removeConditionKeyValue(index, ConditionKey.ReviewPurchaseList)
                 }
               >
                 <DeleteOutlineIcon />
