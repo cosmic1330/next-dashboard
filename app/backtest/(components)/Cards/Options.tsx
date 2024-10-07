@@ -48,25 +48,10 @@ export default function Options() {
         <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
           Options
         </Typography>
-        <Grid container spacing={1}>
-          <Grid item xs={6} sm={4}>
+        <Grid container spacing={2}>
+          <Grid item xs={6}>
             <TextField
-              variant="outlined"
-              required
-              label="Capital"
-              defaultValue={capital}
-              InputLabelProps={{ shrink: true }}
-              onBlur={(e) => {
-                if (e.target.value) {
-                  context?.updateOptions({ capital: parseInt(e.target.value) });
-                  setOptions('capital', parseInt(e.target.value));
-                }
-              }}
-            />
-          </Grid>
-          <Grid item xs={6} sm={4}>
-            <TextField
-              required
+              size="small"
               label="HightStockPrice"
               defaultValue={hightStockPrice}
               InputLabelProps={{ shrink: true }}
@@ -80,9 +65,9 @@ export default function Options() {
               }}
             />
           </Grid>
-          <Grid item xs={6} sm={4}>
+          <Grid item xs={6}>
             <TextField
-              required
+              size="small"
               type="number"
               label="LowStockPrice"
               defaultValue={lowStockPrice}
@@ -102,8 +87,9 @@ export default function Options() {
             <FormControl fullWidth>
               <InputLabel id="buy-price">Buy Price</InputLabel>
               <Select
+                size="small"
                 labelId="buy-price"
-                defaultValue={buyPrice}
+                defaultValue={buyPrice || BuyPrice.OPEN}
                 label="Buy Price"
                 onBlur={(e) => {
                   if (e.target.value) {
@@ -113,9 +99,6 @@ export default function Options() {
                   }
                 }}
               >
-                <MenuItem disabled value={undefined}>
-                  未選擇
-                </MenuItem>
                 <MenuItem value={BuyPrice.CLOSE}>收盤價</MenuItem>
                 <MenuItem value={BuyPrice.HIGHT}>最高價</MenuItem>
                 <MenuItem value={BuyPrice.LOW}>最低價</MenuItem>
@@ -128,8 +111,9 @@ export default function Options() {
             <FormControl fullWidth>
               <InputLabel id="sell-price">Sell Price</InputLabel>
               <Select
+                size="small"
                 labelId="sell-price"
-                defaultValue={sellPrice}
+                defaultValue={sellPrice || SellPrice.LOW}
                 label="Sell Price"
                 onChange={(e) => {
                   if (e.target.value) {
@@ -139,15 +123,46 @@ export default function Options() {
                   }
                 }}
               >
-                <MenuItem disabled value={undefined}>
-                  未選擇
-                </MenuItem>
                 <MenuItem value={SellPrice.CLOSE}>收盤價</MenuItem>
                 <MenuItem value={SellPrice.HIGHT}>最高價</MenuItem>
                 <MenuItem value={SellPrice.LOW}>最低價</MenuItem>
                 <MenuItem value={SellPrice.OPEN}>開盤價</MenuItem>
               </Select>
             </FormControl>
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              size="small"
+              variant="outlined"
+              label="Capital"
+              defaultValue={capital || 300000}
+              InputLabelProps={{ shrink: true }}
+              onBlur={(e) => {
+                if (e.target.value) {
+                  context?.updateOptions({ capital: parseInt(e.target.value) });
+                  setOptions('capital', parseInt(e.target.value));
+                }
+              }}
+            />
+          </Grid>
+          <Grid item xs={6}>
+            <TextField
+              size="small"
+              fullWidth
+              variant="outlined"
+              label="Hight Loss(%)"
+              placeholder="15"
+              defaultValue={''}
+              InputLabelProps={{ shrink: true }}
+              onBlur={(e) => {
+                if (e.target.value) {
+                  const value = parseInt(e.target.value) / 100;
+                  context?.updateOptions({
+                    hightLoss: value,
+                  });
+                }
+              }}
+            />
           </Grid>
         </Grid>
       </CardContent>

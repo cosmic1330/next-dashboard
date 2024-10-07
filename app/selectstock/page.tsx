@@ -1,4 +1,4 @@
-import { Paper, Stack } from '@mui/material';
+import { CssBaseline, Paper, Stack } from '@mui/material';
 import { ThemeProvider } from '@mui/material/styles';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -10,6 +10,7 @@ import { SelectStockContextProvider } from './(context)/selectStockContext';
 export default function Page() {
   return (
     <ThemeProvider theme={theme}>
+      <CssBaseline />
       <Paper>
         <SelectStockContextProvider>
           <Stack direction="row">

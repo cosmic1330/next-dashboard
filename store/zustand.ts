@@ -1,8 +1,16 @@
+import {
+  FormFieldType,
+  FormOperatorFieldType,
+} from '@/app/backtest/(components)/Cards/Condition/Dialog/types';
+import uniqueObjects from '@/utils/uniqueObjects';
+import { dateFormat } from '@ch20026103/anysis';
+import { Mode } from '@ch20026103/anysis/dist/esm/stockSkills/utils/dateFormat';
 import { Context } from '@ch20026103/backtest';
 import { v4 as uuidv4 } from 'uuid';
 import { create } from 'zustand';
 import {
   BackTestType,
+  ConditionType,
   LocalStorageValueType,
   SelectPlanType,
   TaskStoreType,
@@ -147,7 +155,9 @@ export const useBackTest = create<BackTestType>((set) => ({
   context: undefined,
   dataStatus: false,
   startDate: startDate ? parseInt(startDate) : 20231101,
-  endDate: endDate ? parseInt(endDate) : 20240927,
+  endDate: endDate
+    ? parseInt(endDate)
+    : dateFormat(Date.now(), Mode.TimeStampToNumber),
   setOptions: (key: string, value: unknown) => {
     set((state) => ({ ...state, [key]: value }));
     window.localStorage.setItem(backtestLocalStorageKey + key, `${value}`);
@@ -168,5 +178,69 @@ export const useBackTest = create<BackTestType>((set) => ({
       `${endDate}`,
     );
     set((state) => ({ ...state, endDate }));
+  },
+}));
+
+/************************
+ *  Condition's Plan  *
+ ************************/
+export interface ConditionValue {
+  parameter: FormFieldType;
+  operator: FormOperatorFieldType;
+  value: FormFieldType | number;
+  parameter_rollback: number;
+  value_rollback: number;
+}
+export enum ConditionKey {
+  MarketSentiment = 'marketSentiment',
+  ReviewPurchaseList = 'reviewPurchaseList',
+  ReviewSellList = 'reviewSellList',
+}
+const conditionLocalStorageKey = 'nextdashboard.condition.';
+const marketSentiment = window.localStorage.getItem(
+  conditionLocalStorageKey + 'marketSentiment',
+);
+const reviewPurchaseList = window.localStorage.getItem(
+  conditionLocalStorageKey + 'reviewPurchaseListMethod',
+);
+const reviewSellList = window.localStorage.getItem(
+  conditionLocalStorageKey + 'reviewSellListMethod',
+);
+export const useCondition = create<ConditionType>((set) => ({
+  dialogStatus: true,
+  marketSentiment: marketSentiment ? JSON.parse(marketSentiment) : undefined,
+  reviewPurchaseList: reviewPurchaseList
+    ? JSON.parse(reviewPurchaseList)
+    : undefined,
+  reviewSellList: reviewSellList ? JSON.parse(reviewSellList) : undefined,
+  setDialogStatus: (status: boolean) =>
+    set((state) => ({ ...state, dialogStatus: status })),
+  setConditionKeyValue: (value: ConditionValue, key: ConditionKey) => {
+    set((state) => {
+      const temp = state[key] ? [value, ...state[key]] : [value];
+      const res = uniqueObjects(temp);
+      window.localStorage.setItem(
+        conditionLocalStorageKey + key,
+        JSON.stringify(res),
+      );
+      return {
+        ...state,
+        [key]: res,
+      };
+    });
+  },
+  removeConditionKeyValue: (index: number, key: ConditionKey) => {
+    set((state) => {
+      const temp = state[key] ? [...state[key]] : [];
+      temp.splice(index, 1);
+      window.localStorage.setItem(
+        conditionLocalStorageKey + key,
+        JSON.stringify(temp),
+      );
+      return {
+        ...state,
+        [key]: temp,
+      };
+    });
   },
 }));

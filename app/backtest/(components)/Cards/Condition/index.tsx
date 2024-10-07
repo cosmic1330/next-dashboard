@@ -1,4 +1,5 @@
 'use client';
+import { useCondition } from '@/store/zustand';
 import {
   Button,
   CardContent,
@@ -7,6 +8,7 @@ import {
   styled,
 } from '@mui/material';
 import Detail from './detail';
+import ConditionDialog from './Dialog';
 
 export const Card = styled(MuiCard)`
   /* 手機裝置 (螢幕寬度 480px 至 767px) */
@@ -24,16 +26,28 @@ export const Card = styled(MuiCard)`
 `;
 
 export default function Condition() {
+  const { setDialogStatus } = useCondition();
+
+  const handleClick = () => {
+    setDialogStatus(true);
+  };
+
   return (
     <Card>
       <CardContent>
         <Typography variant="subtitle1" color="ActiveBorder" gutterBottom>
           Condition
         </Typography>
-        <Button variant="outlined" size='small' color="primary">
+        <Button
+          variant="outlined"
+          size="small"
+          color="primary"
+          onClick={handleClick}
+        >
           Setting
         </Button>
         <Detail />
+        <ConditionDialog />
       </CardContent>
     </Card>
   );

@@ -64,7 +64,7 @@ export const GET = async (
     await prisma.$disconnect();
 
     if (redis) {
-      await redis?.set(key, JSON.stringify(res), 'EX', 30 * 24 * 60 * 60); // 30天
+      await redis?.set(key, JSON.stringify(res), 'EX', 8 * 60 * 60); // 8小時
     }
     // return data to client
     return NextResponse.json(res, {

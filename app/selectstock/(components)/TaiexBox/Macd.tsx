@@ -42,12 +42,12 @@ export default function Macd({ taiexData }: { taiexData: TaxieData[] }) {
           )
         )}
         {isOscContractionSignalsTopping(taiexData, 0) ? (
-          <Typography variant="caption" color="success.main">
+          <Typography variant="caption" color="error">
             {isOscContractionSignalsTopping(taiexData, 0)}
           </Typography>
         ) : (
           isOscContractionSignalsBottoming(taiexData, 0) && (
-            <Typography variant="caption" color="error">
+            <Typography variant="caption" color="success.main">
               {isOscContractionSignalsBottoming(taiexData, 0)}
             </Typography>
           )

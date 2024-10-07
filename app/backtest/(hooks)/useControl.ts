@@ -1,6 +1,6 @@
 import { useBackTest } from '@/store/zustand';
 import { useState } from 'react';
-import { DetailRef } from '../(components)/Cards/Control/detail';
+import { DetailRef } from '../(components)/Cards/Action/detail';
 
 export default function useControl(detailRef: React.RefObject<DetailRef>) {
   const { context } = useBackTest();
@@ -14,12 +14,18 @@ export default function useControl(detailRef: React.RefObject<DetailRef>) {
       setIntervalID(null);
     }
   };
+
   const handleRun = () => {
-    const interval = setInterval(() => {
+    let interval: ReturnType<typeof setInterval> | null = null;
+    interval = setInterval(() => {
       if (!context) return;
       const res = context.run();
+      console.log(res);
       detailRef.current?.update();
-      if (!res && intervalId) clearInterval(intervalId);
+      if (!res && interval) {
+        clearInterval(interval);
+        setIntervalID(null);
+      }
     }, 300);
     setIntervalID(interval);
   };

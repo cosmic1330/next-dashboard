@@ -1,5 +1,10 @@
-import slopepositive from '@/app/selectstock/(components)/Plan/GeneralizedPlansTable/(hooks)/plans/slopepositive';
-import tworedsoldier from '@/app/selectstock/(components)/Plan/V2PlansTable/(hooks)/plans/tworedsoldier';
+/* *****************
+ 1. V2PlansTable/tworedsoldier (ok)
+ 2. GeneralizedPlansTable/slopepositive (ok)
+ 3. SaraPlansTable/bullishpolevault (ok)
+***************** */
+
+import bullishpolevault from "@/app/selectstock/(components)/Plan/SaraPlansTable/(hooks)/plans/bullishpolevault";
 
 const buyMethod = (stockData: any) => {
   const res = {
@@ -7,7 +12,7 @@ const buyMethod = (stockData: any) => {
     detail: 'buy',
   };
   try {
-    if (slopepositive(stockData, 0)) {
+    if (bullishpolevault(stockData, 0)) {
       res.status = true;
     }
   } catch (error) {

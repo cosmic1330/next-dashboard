@@ -40,7 +40,7 @@ export default function History() {
           History 交易紀錄
         </Typography>
         <Grid container spacing={1}>
-          <Grid item xs={3}>
+          <Grid item xs={2.5}>
             <Typography variant="caption" color="ActiveBorder">
               Date
             </Typography>
@@ -65,7 +65,7 @@ export default function History() {
               Profit
             </Typography>
           </Grid>
-          <Grid item xs={1.5}>
+          <Grid item xs={2}>
             <Typography variant="caption" color="ActiveBorder">
               Cause
             </Typography>
@@ -76,7 +76,7 @@ export default function History() {
             (item: any, index) => (
               <Box key={index}>
                 <Grid container spacing={1}>
-                  <Grid item xs={3}>
+                  <Grid item xs={2.5}>
                     <Typography variant="body2">
                       {dateFormat(item.buy.t, Mode.NumberToString)}
                     </Typography>
@@ -127,9 +127,9 @@ export default function History() {
                       {`$${item.buy.buyPrice - item.sell.sellPrice}`}
                     </Typography>
                   </Grid>
-                  <Grid item xs={1.5}>
+                  <Grid item xs={2}>
                     <Typography variant="body2" color="primary">
-                      {`${item.sell.detail}`}
+                      {`${item.buy.detail}/${item.sell.detail}`}
                     </Typography>
                   </Grid>
                 </Grid>

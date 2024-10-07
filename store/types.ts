@@ -1,5 +1,5 @@
 import { Context } from '@ch20026103/backtest';
-import { CurrentTask, Task } from './zustand';
+import { ConditionKey, ConditionValue, CurrentTask, Task } from './zustand';
 
 export type TaskStoreType = {
   loop: number;
@@ -33,18 +33,28 @@ export type TrackingListType = {
 };
 
 export type BackTestType = {
-  lowStockPrice: undefined | number,
-  hightStockPrice: undefined | number,
-  capital: undefined | number,
-  buyPrice: undefined | string,
-  sellPrice: undefined | string,
+  lowStockPrice: undefined | number;
+  hightStockPrice: undefined | number;
+  capital: undefined | number;
+  buyPrice: undefined | string;
+  sellPrice: undefined | string;
   context: undefined | Context;
   dataStatus: boolean;
   startDate: number;
   endDate: number;
-  setOptions:(key:string, value: any) => void;
+  setOptions: (key: string, value: any) => void;
   setContext: (context: Context) => void;
   setDataStatus: (status: boolean) => void;
   setStartDate: (date: number) => void;
   setEndDate: (date: number) => void;
+};
+
+export type ConditionType = {
+  dialogStatus: boolean;
+  marketSentiment: undefined | ConditionValue[];
+  reviewPurchaseList: undefined | ConditionValue[];
+  reviewSellList: undefined | ConditionValue[];
+  setDialogStatus: (status: boolean) => void;
+  setConditionKeyValue: (value: ConditionValue, key: ConditionKey) => void;
+  removeConditionKeyValue: (index: number, key: ConditionKey) => void;
 };

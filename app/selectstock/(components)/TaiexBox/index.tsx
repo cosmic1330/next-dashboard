@@ -20,7 +20,7 @@ export default function TaiexBox() {
         rel="noreferrer"
         href={`https://tw.stock.yahoo.com/quote/%5ETWII`}
       >
-        <Typography variant="h6">加權指數</Typography>
+        <Typography variant="h6" color="white">加權指數</Typography>
       </Link>
       <Link
         target="_blank"

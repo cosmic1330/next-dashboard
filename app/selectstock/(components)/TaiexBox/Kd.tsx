@@ -1,13 +1,14 @@
 import {
   isKdDeathCross,
   isKdNegativeTrend,
+  isKdTurnBearish,
 } from '@/app/selectstock/(utils)/assessment/negative';
 import {
   isKdGoldenCross,
   isKdPositiveTrend,
 } from '@/app/selectstock/(utils)/assessment/positive';
 import { TaxieData } from '@/app/selectstock/types';
-import { Box, Stack, Typography } from '@mui/material';
+import { Stack, Typography } from '@mui/material';
 
 export default function Kd({ taiexData }: { taiexData: TaxieData[] }) {
   return (
@@ -30,6 +31,9 @@ export default function Kd({ taiexData }: { taiexData: TaxieData[] }) {
         </Typography>
         <Typography variant="caption" color="error">
           {isKdDeathCross(taiexData, 0)}
+        </Typography>
+        <Typography variant="caption" color="errorfish">
+          {isKdTurnBearish(taiexData, 0)}
         </Typography>
       </Stack>
     </Stack>

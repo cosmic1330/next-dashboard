@@ -1,21 +1,21 @@
 import { Content as StyleContent } from '../../styles';
+import Action from '../Cards/Action';
 import CaptionLineChart from '../Cards/CaptionLineChart';
-import Control from '../Cards/Control';
+import Condition from '../Cards/Condition';
 import DataStatus from '../Cards/DataStatus';
+import Date from '../Cards/Date';
 import Detail from '../Cards/Detai';
+import History from '../Cards/History';
 import Inventory from '../Cards/Inventory';
 import Options from '../Cards/Options';
-import History from '../Cards/History';
-import Condition from '../Cards/Condition';
 import ProfitLineChart from '../Cards/ProfitLineChart';
-import Date from '../Cards/Date';
 import UnsoldprofitLineChart from '../Cards/UnsoldprofitLineChart';
 export default function Content() {
   return (
     <StyleContent>
       <Date />
       <DataStatus />
-      <Control />
+      <Action />
       <Detail />
       <CaptionLineChart />
       <ProfitLineChart />

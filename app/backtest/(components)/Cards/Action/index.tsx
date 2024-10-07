@@ -4,7 +4,7 @@ import { Button, Card, CardContent, Typography } from '@mui/material';
 import { useRef } from 'react';
 import Detail, { DetailRef } from './detail';
 
-export default function Control() {
+export default function Action() {
   const detailRef = useRef<DetailRef>(null);
 
   const { context, handleRun, handleStop, intervalId } = useControl(detailRef);

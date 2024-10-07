@@ -1,4 +1,5 @@
 'use client';
+import useTaiex from '@/app/backtest/(hooks)/useTaiex';
 import { useBackTest } from '@/store/zustand';
 import {
   Button,
@@ -9,10 +10,11 @@ import {
   Typography,
 } from '@mui/material';
 import useStocks from '../../../(hooks)/useStocks';
-import Init from './init';
 import Csv from './csv';
+import Init from './init';
 
 export default function DataStatus() {
+  const { data: taiexData, isLoading: isTaiexLoading } = useTaiex();
   const { isLoading, progress, success } = useStocks();
   const { context } = useBackTest();
   return (
@@ -23,10 +25,17 @@ export default function DataStatus() {
         </Typography>
         <Grid container spacing={1}>
           <Grid item xs={12}>
-            {isLoading ? (
-              <Typography variant="body2">Loding... {progress}%</Typography>
+            {isTaiexLoading ? (
+              <Typography variant="body2">Taiex Loding...</Typography>
             ) : (
-              <Typography variant="body2">Data Lenght:{success}</Typography>
+              <Typography variant="body2">Taiex Data Lenght:{taiexData?.length}</Typography>
+            )}
+          </Grid>
+          <Grid item xs={12}>
+            {isLoading ? (
+              <Typography variant="body2">Stock Loding... {progress}%</Typography>
+            ) : (
+              <Typography variant="body2">Stock Data Lenght:{success}</Typography>
             )}
           </Grid>
 

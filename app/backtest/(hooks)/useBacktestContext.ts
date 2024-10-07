@@ -73,6 +73,7 @@ export default function useBacktestContext() {
       options,
     });
     setContext(ctx);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data, setContext]);
 
   useEffect(() => {
